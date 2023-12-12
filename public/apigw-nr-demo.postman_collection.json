@@ -1,0 +1,1304 @@
+{
+	"info": {
+		"_postman_id": "c22a3fb1-04db-42ae-96b2-925363c3d7a6",
+		"name": "NR API Demo",
+		"description": "Requests to demonstrate the Name Requests API for PRO Data account users. The requests use a test consumer API key and account ID.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create NRs",
+			"item": [
+				{
+					"name": "Create a name request for a new BC corp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/CR"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestTypeCd\": \"CR\",\n  \"natureBusinessInfo\": \"Window cleaning.\",\n  \"applicant\": {\n    \"lastName\": \"Smith\",\n    \"firstName\": \"John\",\n    \"addrLine1\": \"1213 Dallas Rd.\",\n    \"city\": \"Victoria\",\n    \"stateProvinceCd\": \"BC\",\n    \"countryCd\": \"CA\",\n    \"postalCd\": \"V8S1R6\",\n    \"phoneNumber\": \"250-217-1234\",\n    \"clientFirstName\": \"Jane\",\n    \"clientLastName\": \"Brown\"\n  },\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACME WINDOW CLEANING\",\n      \"designation\": \"LTD.\"\n    },\n    {\n      \"choice\": 2,\n      \"name\": \"ACME MIRACLE WINDOW CLEANING\",\n      \"designation\": \"LIMITED\"\n    },\n    {\n      \"choice\": 3,\n      \"name\": \"ACME MAGICAL WINDOW CLEANING\",\n      \"designation\": \"CORP.\"\n    }\n  ],\n  \"clientReferenceId\": \"A00991234\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests"
+							]
+						},
+						"description": "Example of a submitting a name request for a new BC company."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a name request for an EP corp name change",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/XCCR"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestTypeCd\": \"XCCR\",\n  \"natureBusinessInfo\": \"Dry cleaning.\",\n  \"corpNum\": \"A0067000\",\n  \"applicant\": {\n    \"lastName\": \"Smith\",\n    \"firstName\": \"John\",\n    \"addrLine1\": \"1213 Dallas Rd.\",\n    \"city\": \"Victoria\",\n    \"stateProvinceCd\": \"BC\",\n    \"countryCd\": \"CA\",\n    \"postalCd\": \"V8S1R6\",\n    \"phoneNumber\": \"250-217-1234\",\n    \"clientFirstName\": \"Jane\",\n    \"clientLastName\": \"Brown\"\n  },\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACME ONE HOUR DRY CLEANING LTD.\",\n      \"nameStateCd\": \"NE\"\n    }\n  ],\n  \"clientReferenceId\": \"B-991000\",\n  \"priorityFlag\": false,\n  \"nrNum\": \"NR1389300\",\n  \"stateCd\": \"D\",\n  \"createDateTime\": \"2021-01-30T14:26:20Z\",\n  \"estimatedDelay\": 5,\n  \"payment\": {\n    \"invoiceId\": \"3208700\",\n    \"receipt\": \"/pay/api/v1/payment-requests/3208700/receipts\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests"
+							]
+						},
+						"description": "Example of a submitting a name request to change an extraprovincial company name."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a name request for a BC corp name change",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/CCR"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestTypeCd\": \"CCR\",\n  \"natureBusinessInfo\": \"Hospital laundry cleaning services.\",\n  \"corpNum\": \"BC0752600\",\n  \"applicant\": {\n    \"lastName\": \"Smith\",\n    \"firstName\": \"John\",\n    \"addrLine1\": \"1213 Dallas Rd.\",\n    \"city\": \"Victoria\",\n    \"stateProvinceCd\": \"BC\",\n    \"countryCd\": \"CA\",\n    \"postalCd\": \"V8S1R6\",\n    \"phoneNumber\": \"250-217-1234\",\n    \"clientFirstName\": \"Jane\",\n    \"clientLastName\": \"Brown\"\n  },\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACME HOSPITAL LAUNDRY CLEANING\",\n      \"designation\": \"LTD.\"\n    },\n    {\n      \"choice\": 2,\n      \"name\": \"ACME HOSPITAL LAUNDRY SERVICES\",\n      \"designation\": \"LTD.\"\n    }\n  ],\n  \"clientReferenceId\": \"AC-201234\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests"
+							]
+						},
+						"description": "Example of a submitting a name request to change a BC company name."
+					},
+					"response": []
+				},
+				{
+					"name": "Resubmit expired name request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1333000/resubmit"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"R-0991236\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1333000/resubmit?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1333000",
+								"resubmit"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Resubmit Name request example where the NR is in approved and expired."
+					},
+					"response": []
+				}
+			],
+			"description": "Example requests to create BC Registries name requests are included here.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2c118d52-5b88-4f3b-816f-3a604b49ef80",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "565b3189-6233-4c08-9f32-38215fb9de75",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Retrieve NR Info",
+			"item": [
+				{
+					"name": "Get Draft name request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Prefer",
+								"value": "example=/api/v1/namerequests/NR1230000",
+								"description": "Prism only local  mock server header.",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1230000?phoneNumber=250-217-1234",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1230000"
+							],
+							"query": [
+								{
+									"key": "phoneNumber",
+									"value": "250-217-1234",
+									"description": "Applicant phone number"
+								}
+							]
+						},
+						"description": "Get name request example where the request has not been processed - it is in a Draft/not examined state."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Approved first choice name request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1230001"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1230001?phoneNumber=250-217-1234",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1230001"
+							],
+							"query": [
+								{
+									"key": "phoneNumber",
+									"value": "250-217-1234",
+									"description": "Applicant phone number"
+								}
+							]
+						},
+						"description": "Get name request example where the request has been processed and the first name choice is approved."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Approved third choice name request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1230002"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1230002?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1230002"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Get name request example where the request has been processed and the third name choice is approved."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rejected one choice name request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1230003"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1230003?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1230003"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Get name request example where the request has been processed and there is one name choice and it is rejected."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Consumed name request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1230004"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1230004?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1230004"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Get name request example where the name has been used/consumed."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Research Name Choices",
+			"item": [
+				{
+					"name": "Research name too generic",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Prefer",
+								"value": "example=/api/v1/namerequests/research/ORACLE",
+								"description": "Prism only local  mock server header.",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"researchName\": \"Oracle\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/research",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"research"
+							]
+						},
+						"description": "Submit a name research request that is too generic."
+					},
+					"response": []
+				},
+				{
+					"name": "Research name partly distinctive",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/research/CRAZY"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"researchName\": \"Crazy Otto's Used Autos\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/research",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"research"
+							]
+						},
+						"description": "Submit a name research request that is distinctive with common descriptive words."
+					},
+					"response": []
+				},
+				{
+					"name": "Research name unique",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/research/MOULIN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"researchName\": \"Moulin Rouge Perfumery\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/research",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"research"
+							]
+						},
+						"description": "Submit a name research request that contains unique words."
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d7a42e54-40f8-472f-880c-4324013d6392",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2520c315-5571-402a-8b4a-4e7454b9d7b8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Change NRs",
+			"item": [
+				{
+					"name": "Cancel name request duplicate reason",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Prefer",
+								"value": "example=/api/v1/namerequests/NR1200001",
+								"description": "Prism only local  mock server header.",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1200001?emailAddress=jasmith@gmail.com&cancelReason=DUPLICATE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1200001"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com"
+								},
+								{
+									"key": "cancelReason",
+									"value": "DUPLICATE"
+								}
+							]
+						},
+						"description": "Cancel name request example where the NR is cancelled because it is a duplicate."
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade name request priority",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Prefer",
+								"value": "example=/api/v1/namerequests/NR1389123/priority",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clientReferenceId\": \"A00991235\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1389123/priority?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1389123",
+								"priority"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Name request upgrade priority example where the NR is in a Draft state."
+					},
+					"response": []
+				},
+				{
+					"name": "Change name request name choice 1",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1377101/names"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"A00993000\",\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACMEX WINDOW CLEANING\",\n      \"designation\": \"LTD.\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1377101/names?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1377101",
+								"names"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Change Name request example where the NR is in a Draft state, there is only one name choice, and the first name choice is updated."
+					},
+					"response": []
+				},
+				{
+					"name": "Change name request name choice 2",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1377102/names"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"X-993000\",\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACME WINDOW CLEANING\",\n      \"designation\": \"LTD.\"\n    },\n    {\n      \"choice\": 2,\n      \"name\": \"ACME 30 MINUTE WINDOW CLEANING\",\n      \"designation\": \"LTD.\"\n    },\n    {\n      \"choice\": 3,\n      \"name\": \"ACME MAGICAL WINDOW CLEANING\",\n      \"designation\": \"CORP.\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1377102/names?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1377102",
+								"names"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Change Name request example where the NR is in a Draft state, there are 3 name choices, and the second name choice is updated."
+					},
+					"response": []
+				},
+				{
+					"name": "Change name request add name choice 3",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1377103/names"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"X-994000\",\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACME WINDOW CLEANING\",\n      \"designation\": \"LTD.\"\n    },\n    {\n      \"choice\": 2,\n      \"name\": \"ACME 30 MINUTE WINDOW CLEANING\",\n      \"designation\": \"LTD.\"\n    },\n    {\n      \"choice\": 3,\n      \"name\": \"ACME SPARKLING WINDOW CLEANING\",\n      \"designation\": \"LIMITED\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1377103/names?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1377103",
+								"names"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Change Name request example where the NR is in a Draft state, there are 2 name choices, and a third name choice is added."
+					},
+					"response": []
+				},
+				{
+					"name": "Change name request remove name choice 2",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1377104/names"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"X-995000\",\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACME WINDOW CLEANING\",\n      \"designation\": \"LTD.\"\n    },\n    {\n      \"choice\": 2,\n      \"name\": \"ACME SPARKLING WINDOW CLEANING\",\n      \"designation\": \"LIMITED\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1377104/names?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1377104",
+								"names"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Change Name request example where the NR is in a Draft state, there are 3 name choices, and the second name choice is deleted."
+					},
+					"response": []
+				},
+				{
+					"name": "Change name request applicant",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1377101/applicant"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"A00992000\",\n  \"applicant\": {\n    \"lastName\": \"Smith\",\n    \"firstName\": \"John\",\n    \"addrLine1\": \"1213 Dallas Rd.\",\n    \"city\": \"Victoria\",\n    \"stateProvinceCd\": \"BC\",\n    \"countryCd\": \"CA\",\n    \"postalCd\": \"V8S1R6\",\n    \"phoneNumber\": \"250-217-5234\",\n    \"clientFirstName\": \"Janet\",\n    \"clientLastName\": \"Brown\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1377101/applicant?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1377101",
+								"applicant"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Change Name request example where the NR is in a Draft state and the Applicant information is updated."
+					},
+					"response": []
+				},
+				{
+					"name": "Change name request nature of business",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1377102/request"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"A00994000\",\n  \"natureBusinessInfo\": \"Commercial exterior window cleaning.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1377102/request?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1377102",
+								"request"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Change Name request example where the NR is in a Draft state and the request nature of business is updated."
+					},
+					"response": []
+				},
+				{
+					"name": "Change name request request type CR to XCR",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1377103/request"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"A00994001\",\n  \"requestTypeCd\": \"XCR\",\n  \"homeJurisdictionNum\": \"ON00123659\",\n  \"xproJurisdiction\": \"ON\",\n  \"names\": [\n    {\n      \"choice\": 1,\n      \"name\": \"ACME DRY CLEANING LTD.\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1377103/request?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1377103",
+								"request"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Change Name request example where the NR is in a Draft state and the request type, home jurisdiction number, and name are modified."
+					},
+					"response": []
+				},
+				{
+					"name": "Reapply soon to expire name request",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Account-Id",
+								"type": "text",
+								"value": "{{account_id}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Prism only local  mock server header.",
+								"key": "Prefer",
+								"type": "text",
+								"value": "example=/api/v1/namerequests/NR1332900/reapply"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientReferenceId\": \"R-0991000\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/namerequests/NR1332900/reapply?emailAddress=jasmith@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"namerequests",
+								"NR1332900",
+								"reapply"
+							],
+							"query": [
+								{
+									"key": "emailAddress",
+									"value": "jasmith@gmail.com",
+									"description": "Applicant email address"
+								}
+							]
+						},
+						"description": "Reapply an approved, soon to expire Name request example to extend the expiry date."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{apikey}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-apikey",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c529ee32-a5f4-4fc8-8b0b-4c6110649789",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ce518eb6-c4f2-487d-8952-fe7861f513ee",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "fa7fb9a1-b779-4f8a-82b1-80efa79007b3",
+			"key": "apikey",
+			"value": "PROVIDE"
+		},
+		{
+			"id": "547e9b62-af73-4f16-b2d4-d139c3785dc5",
+			"key": "account_id",
+			"value": "PROVIDE"
+		},
+		{
+			"id": "b51d256e-440c-454c-a9bf-7409e8edfc2a",
+			"key": "base_url_prism",
+			"value": "http://127.0.0.1:4010/nr"
+		},
+		{
+			"id": "584b4161-1f80-455d-a9ca-e013e2db39a1",
+			"key": "base_url",
+			"value": "bcregistry-sandbox.apigee.net/nr"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
