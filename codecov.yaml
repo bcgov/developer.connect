@@ -1,0 +1,38 @@
+codecov:
+  require_ci_to_pass: true
+  branch: main
+  max_report_age: false
+
+coverage:
+  precision: 2
+  round: down
+  range: "50...100"
+  status:
+    patch: false
+    project:
+      default: false
+      apigw:
+        target: 50%
+        flags:
+          - apigw
+ignore:
+  - "^/tests/**/*" # ignore test harness code
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: true
+      loop: true
+      method: false
+      macro: false
+
+comment:
+  layout: "diff,flags,tree"
+  behavior: default
+  require_changes: true
+
+flags:
+  apigw:
+    paths:
+      - web/site
+    carryforward: true
