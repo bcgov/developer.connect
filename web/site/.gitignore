@@ -1,3 +1,11 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
 # Logs
 logs
 *.log
@@ -86,10 +94,6 @@ web_modules/
 # Next.js build output
 .next
 out
-
-# Nuxt.js build / generate output
-.nuxt
-dist
 
 # Gatsby files
 .cache/
