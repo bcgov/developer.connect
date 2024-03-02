@@ -9,7 +9,7 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: .web/site
+    working-directory: ./web/site
 
 jobs:
   setup-job:
