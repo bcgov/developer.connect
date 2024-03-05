@@ -146,7 +146,7 @@ View the definition and select a path to try it out. To submit a request you wil
 
 ## Additional Resources
 
-Download a <a href="../apigw-pay-demo.postman_collection.json" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+Download a <a href="apigw-pay-demo.postman_collection.json.zip" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
 
 ## Page History
 
