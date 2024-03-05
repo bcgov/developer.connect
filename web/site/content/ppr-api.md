@@ -636,9 +636,9 @@ All API responses represent date-time values in the UTC timezone.
 ## Additional Resources
 
 - Refer to the <a href="https://www2.gov.bc.ca/" target="_blank">BC Gov site</a> to answer any PPR business rule related questions including <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/managing-a-business/permits-licences/businesses-incorporated-companies/forms-corporate-registry" target="_blank">Fees</a>.
-- Download a <a href="../apigw-ppr-demo.postman_collection.json" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
-- Download a <a href="../ppr-api-glosssary.pdf" download="PPR-Glossary-of-Terms.pdf" target="_blank">Glossary of Terms</a>
-- View the <a href="../ppr-api-property-lengths.pdf" target="_blank">API specification property lengths</a> by model/schema name. _Note that the definitions are not final_.
+- Download a <a href="apigw-ppr-demo.postman_collection.json.zip" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+- Download a <a href="ppr-api-glosssary.pdf" download="PPR-Glossary-of-Terms.pdf" target="_blank">Glossary of Terms</a>
+- View the <a href="ppr-api-property-lengths.pdf" target="_blank">API specification property lengths</a> by model/schema name. _Note that the definitions are not final_.
 
 ---
 
