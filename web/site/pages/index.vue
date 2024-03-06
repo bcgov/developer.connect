@@ -19,7 +19,7 @@ definePageMeta({
     <div class="flex items-center justify-center gap-4">
       <UButton
         :label="$t('btn.getStarted')"
-        :to="localePath('/get-started/account-setup')"
+        :to="localePath('/products/get-started/account-setup')"
       />
       <UButton
         :label="$t('btn.allProducts')"
