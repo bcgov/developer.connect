@@ -17,14 +17,14 @@ export default defineNuxtConfig({
         iso: 'en-CA',
         dir: 'ltr',
         file: 'en-CA.ts'
-      },
-      {
-        name: 'Français',
-        code: 'fr-CA',
-        iso: 'fr-CA',
-        dir: 'ltr',
-        file: 'fr-CA.ts'
       }
+      // {
+      //   name: 'Français',
+      //   code: 'fr-CA',
+      //   iso: 'fr-CA',
+      //   dir: 'ltr',
+      //   file: 'fr-CA.ts'
+      // }
     ],
     strategy: 'prefix',
     lazy: true,
@@ -34,7 +34,10 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts'
   },
   content: {
-    locales: ['en-CA', 'fr-CA'],
+    locales: [
+      'en-CA'
+      // 'fr-CA'
+    ],
     contentHead: false
   },
   colorMode: {
