@@ -1,0 +1,8 @@
+# Used to populate product card components
+name: Product Name Here
+description: Product Description Here
+badge: NEW | BETA etc
+bulletPoints: 
+  - bullet point 1
+  - bullet point 2
+extLink: Link to external site  

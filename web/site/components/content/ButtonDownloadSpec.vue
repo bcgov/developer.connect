@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  defineProps<{
-    href: string
-  }>()
+defineProps<{
+  href: string
+}>()
 </script>
 <template>
-  <a
-    class="bg-BCgovBlue5 text-white text-lg font-semibold no-underline p-4 mt-4 rounded"
-    :href="href"
-  >
-    Download the specification
-  </a>
+  <UButton
+    :label="$t('btn.downloadSpec')"
+    :to="href"
+    size="xl"
+    class="tracking-wide no-underline"
+  />
 </template>
