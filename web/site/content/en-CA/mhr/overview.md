@@ -1,3 +1,8 @@
+---
+title: 'Overview'
+description: 'Manufactured Home Registry Overview'
+---
+
 # Manufactured Home Registry API
 
 ---
@@ -22,7 +27,7 @@ The Manufactured Home Registry (MHR) is a centralised, electronic register where
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
 <a href="https://bcregistry-demo.apigee.io/docs/mhrproxy/1/overview" target="_blank">> View the API</a>
 
@@ -168,8 +173,8 @@ All API responses represent date-time values in the UTC timezone.
 
 ## Additional Resources
 
-- Download a <a href="apigw-mhr-demo.postman_collection.json.zip" download="apigw-mhr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
-- Download and view the <a href="mhr-api-property-lengths.csv" target="_blank">API specification property lengths</a> by model/schema name. _Note that the definitions are not final_.
+- Download a <a href="mhr/apigw-mhr-demo.postman_collection.json.zip" download="apigw-mhr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+- Download and view the <a href="mhr/mhr-api-property-lengths.csv" target="_blank">API specification property lengths</a> by model/schema name. _Note that the definitions are not final_.
 
 ---
 

@@ -1,3 +1,8 @@
+---
+title: 'Overview'
+description: 'Personal Property Registry Overview'
+---
+
 # Personal Property Registry API
 
 ---
@@ -28,7 +33,7 @@ With this API you can submit the following transactions:
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
 <a href="https://bcregistry-demo.apigee.io/docs/pprproxy/1/overview" target="_blank">> View the API</a>
 
@@ -72,7 +77,6 @@ or with a subsequent API GET request. In the latter case, if the queued report i
 
 ## API Quick Reference
 
-<!-- left as regular <table> for readability-->
 <table>
   <tr>
     <th>Endpoint Path</th>
@@ -636,9 +640,9 @@ All API responses represent date-time values in the UTC timezone.
 ## Additional Resources
 
 - Refer to the <a href="https://www2.gov.bc.ca/" target="_blank">BC Gov site</a> to answer any PPR business rule related questions including <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/managing-a-business/permits-licences/businesses-incorporated-companies/forms-corporate-registry" target="_blank">Fees</a>.
-- Download a <a href="apigw-ppr-demo.postman_collection.json.zip" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
-- Download a <a href="ppr-api-glosssary.pdf" download="PPR-Glossary-of-Terms.pdf" target="_blank">Glossary of Terms</a>
-- View the <a href="ppr-api-property-lengths.pdf" target="_blank">API specification property lengths</a> by model/schema name. _Note that the definitions are not final_.
+- Download a <a href="ppr/apigw-ppr-demo.postman_collection.json.zip" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+- Download a <a href="ppr/ppr-api-glosssary.pdf" download="PPR-Glossary-of-Terms.pdf" target="_blank">Glossary of Terms</a>
+- View the <a href="ppr/ppr-api-property-lengths.pdf" target="_blank">API specification property lengths</a> by model/schema name. _Note that the definitions are not final_.
 
 ---
 

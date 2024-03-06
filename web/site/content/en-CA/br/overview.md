@@ -1,14 +1,20 @@
-# Registry Search API
+---
+title: 'Overview'
+description: 'Business Registry Overview'
+---
+
+# Business Registry API
 
 ---
 
 ## Overview
 
-The Registry Search provides a Google like search into the business registry of the Province of BC. The API provides a real-time, secure, direct link between your business systems and the Registry Search service.
+The Business Registry is a centralised, electronic register of business of various legal types operating in the Province of BC. The Business API provides a real-time, secure, direct link between
+your business systems and the Business Registry.
 
 <br>
 
-::ButtonDownloadSpec{href="https://bcregistry-demo.apigee.io/portals/api/sites/bcregistry-demo/liveportal/apis/regsearchproxy/download_spec"}
+::ButtonDownloadSpec{href="https://bcregistry-demo.apigee.io/portals/api/sites/bcregistry-demo/liveportal/apis/businessproxy/download_spec"}
 ::
 
 <br>
@@ -20,9 +26,9 @@ The Registry Search provides a Google like search into the business registry of 
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
-<a href="https://bcregistry-demo.apigee.io/docs/regsearchproxy/1/overview" target="_blank">> View the API</a>
+<a href="https://bcregistry-demo.apigee.io/docs/businessproxy/1/overview" target="_blank">> View the API</a>
 
 ---
 

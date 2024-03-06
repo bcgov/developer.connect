@@ -1,3 +1,8 @@
+---
+title: 'Overview'
+description: 'Pay API Overview'
+---
+
 # Pay API
 
 ---
@@ -29,7 +34,7 @@ With this API you can submit the following transactions:
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
 <a href="https://bcregistry-demo.apigee.io/docs/payment-proxy/1/overview" target="_blank">> View the API</a>
 
@@ -146,7 +151,7 @@ View the definition and select a path to try it out. To submit a request you wil
 
 ## Additional Resources
 
-Download a <a href="apigw-pay-demo.postman_collection.json.zip" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+Download a <a href="pay/apigw-pay-demo.postman_collection.json.zip" download="apigw-ppr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
 
 ## Page History
 
