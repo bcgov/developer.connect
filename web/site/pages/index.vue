@@ -16,9 +16,15 @@ definePageMeta({
     <p class="text-lg text-bcGovColor-lightGray dark:text-white">
       {{ $t('page.home.intro') }}
     </p>
-    <UButton
-      :label="$t('btn.getStarted')"
-      :to="localePath('/get-started/account-setup')"
-    />
+    <div class="flex items-center justify-center gap-4">
+      <UButton
+        :label="$t('btn.getStarted')"
+        :to="localePath('/products/get-started/account-setup')"
+      />
+      <UButton
+        :label="$t('btn.allProducts')"
+        :to="localePath('/products')"
+      />
+    </div>
   </div>
 </template>

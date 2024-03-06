@@ -3,7 +3,8 @@ export default {
     getStarted: 'Commencer',
     goHome: 'Accueil',
     goBack: 'Retourner',
-    downloadSpec: 'Téléchargez la spécification'
+    downloadSpec: 'Téléchargez la spécification',
+    allProducts: 'Voir tous'
   },
   page: {
     notFound: {
@@ -13,6 +14,10 @@ export default {
       title: 'Accueil',
       h1: 'Passerelle API des registres de la Colombie-Britannique',
       intro: "Bienvenue sur la passerelle API des registres de la Colombie-Britannique! Accédez aux informations de l'API pour tous Services des registres de la Colombie-Britannique ici."
+    },
+    products: {
+      title: 'Produits',
+      h1: 'Produits'
     }
   },
   SbcHeader: {
