@@ -12,21 +12,6 @@ useHead({
   }
 })
 
-// const { data: ymlFiles } = await useAsyncData(
-//   'meta-files',
-//   () => {
-//     return queryContent()
-//       .where({ _locale: locale.value, _extension: { $eq: 'yml' } })
-//       .sort({ _dir: 1 })
-//       .find()
-//   },
-//   {
-//     watch: [locale]
-//   }
-// )
-
-// console.log(ymlFiles.value)
-
 // const { data: navigation } = await useAsyncData(
 //   'content-navigation',
 //   () => {

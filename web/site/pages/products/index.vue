@@ -13,5 +13,6 @@ definePageMeta({
     <h1 class="text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
       {{ $t('page.products.h1') }}
     </h1>
+    <SbcProductCard />
   </div>
 </template>
