@@ -3,4 +3,8 @@ title: 'Overview'
 description: 'Business Number Overview'
 ---
 
-# Overview
+# Business Names API
+
+---
+
+## Overview
