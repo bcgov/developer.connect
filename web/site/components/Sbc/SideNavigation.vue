@@ -6,14 +6,14 @@ const { locale, t } = useI18n()
 const { data: navigation } = await useAsyncData(
   'navigation',
   () => fetchContentNavigation(
-    queryContent() // pass custom query to fetchContentNavigation
+    queryContent('products') // pass custom query to fetchContentNavigation
       .where({ _locale: locale.value, _extension: { $eq: 'md' } }) // only return md files that match current locale
       .sort({ _dir: 1 }) // sort alphabetically
   ), {
     watch: [locale] // fetch new values whenever the locale changes
   })
 
-// console.log(navigation.value)
+// console.log(navigation.value.children)
 
 function handleAccordianLabel (title: string) {
   if (title === 'Get Started') { // required to return correct fr translation for 'Get Started' accordian title
@@ -24,22 +24,25 @@ function handleAccordianLabel (title: string) {
   }
 }
 
-// build usable objects for UAccordian and UVerticalNavigation
+// build usable objects for UAccordian and UVerticalNavigation props
 // will update whenever locale changes
 const computedItems = computed(() => {
-  return navigation.value?.map((item) => {
-    return { // create parent array for each UAccordian
-      label: handleAccordianLabel(item.title), // return full string instead of 'bn', 'rs', etc
-      defaultOpen: true, // accordians all open by default
-      children: item.children?.map((child) => { // create children array for each UVerticalNavigation
-        return {
-          label: child.title,
-          to: localePath(child._path) // localize path
-        }
-      })
-    }
+  return navigation.value?.flatMap((nav) => {
+    return nav.children?.map((firstChild) => {
+      return { // create parent array for each UAccordian
+        label: handleAccordianLabel(firstChild.title), // return full string instead of 'bn', 'rs', etc
+        defaultOpen: true, // accordians all open by default
+        children: firstChild.children?.map((secondChild) => { // create children array for each UVerticalNavigation
+          return {
+            label: secondChild.title,
+            to: localePath(secondChild._path) // localize path
+          }
+        })
+      }
+    })
   })
 })
+// console.log(computedItems.value)
 </script>
 <template>
   <div class="min-w-fit flex-1 overflow-y-auto border-r border-bcGovGray-500 bg-bcGovColor-gray1 px-2 py-4 dark:bg-bcGovGray-900">
