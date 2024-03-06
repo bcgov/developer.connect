@@ -1,6 +1,6 @@
 <template>
   <div class="w-full overflow-x-auto">
-    <table class="border-separate overflow-x-hidden w-full">
+    <table class="w-full min-w-[50rem] border-collapse overflow-x-hidden">
       <slot />
     </table>
   </div>

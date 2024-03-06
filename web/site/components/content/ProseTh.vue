@@ -1,6 +1,6 @@
 <template>
   <th
-    class="bg-BCgovBlue4 text-white font-semibold text-lg p-4 whitespace-nowrap"
+    class="whitespace-nowrap border border-bcGovGray-100 bg-bcGovBlue-600 p-4 text-lg font-semibold text-white dark:bg-bcGovGray-900"
   >
     <slot />
   </th>

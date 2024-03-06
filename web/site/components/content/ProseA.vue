@@ -1,23 +1,39 @@
+<script setup lang="ts">
+const localePath = useLocalePath()
+const props = defineProps({
+  href: {
+    type: String,
+    required: true
+  },
+  target: {
+    type: String,
+    default: '_self',
+    required: false
+  },
+  download: {
+    type: String,
+    default: undefined,
+    required: false
+  }
+})
+
+const resolvePath = computed(() => {
+  if (props.target === '_blank' || props.download !== undefined) {
+    return props.href
+  } else {
+    return localePath(props.href)
+  }
+})
+</script>
+
 <template>
-  <NuxtLink
-    :href="href"
-    :target="target"
-    class="text-BCgovLink underline"
+  <UButton
+    :to="resolvePath"
+    :target
+    :download
+    variant="link"
+    class="-m-2"
   >
     <slot />
-  </NuxtLink>
+  </UButton>
 </template>
-
-<script setup lang="ts">
-  defineProps({
-    href: {
-      type: String,
-      default: ''
-    },
-    target: {
-      type: String,
-      default: undefined,
-      required: false
-    }
-  })
-</script>
