@@ -16,7 +16,7 @@ const { data: navigation } = await useAsyncData(
 
 function handleAccordianLabel (title: string) {
   if (title === 'Get Started') {
-    return t('getStarted')
+    return t('btn.getStarted')
   } else {
     const key = title.toUpperCase() as keyof typeof ProductNames
     return ProductNames[key]
@@ -74,13 +74,3 @@ const computedItems = computed(() => {
     </aside>
   </div>
 </template>
-<i18n lang="json">
-  {
-    "en-CA": {
-      "getStarted": "Get Started"
-    },
-    "fr-CA": {
-      "getStarted": "Commencer"
-    }
-  }
-</i18n>

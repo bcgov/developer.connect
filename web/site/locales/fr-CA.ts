@@ -2,7 +2,8 @@ export default {
   btn: {
     getStarted: 'Commencer',
     goHome: 'Accueil',
-    goBack: 'Retourner'
+    goBack: 'Retourner',
+    downloadSpec: 'Téléchargez la spécification'
   },
   page: {
     notFound: {
