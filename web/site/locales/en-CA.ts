@@ -16,8 +16,8 @@ export default {
       intro: 'Welcome to the BC Registries API Gateway! Access API information for all BC Registries services here.'
     },
     products: {
-      title: 'Products',
-      h1: 'Products'
+      title: 'All Products',
+      h1: 'All Products'
     }
   },
   SbcHeader: {

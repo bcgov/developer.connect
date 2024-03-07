@@ -16,8 +16,8 @@ export default {
       intro: "Bienvenue sur la passerelle API des registres de la Colombie-Britannique! Accédez aux informations de l'API pour tous Services des registres de la Colombie-Britannique ici."
     },
     products: {
-      title: 'Produits',
-      h1: 'Produits'
+      title: 'Tous les Produits',
+      h1: 'Tous les Produits'
     }
   },
   SbcHeader: {

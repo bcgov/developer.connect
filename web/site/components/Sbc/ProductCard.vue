@@ -14,10 +14,10 @@ async function goToProduct () {
 </script>
 <template>
   <li
-    class="flex h-[420px] w-[390px] cursor-pointer flex-col overflow-hidden rounded bg-white shadow-md transition focus-within:-translate-y-1 focus-within:ring-2 focus-within:ring-inset focus-within:ring-bcGovGray-500 hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-inset hover:ring-bcGovGray-500"
+    class="flex h-[420px] w-[390px] cursor-pointer flex-col overflow-hidden rounded bg-white shadow-md transition-transform focus-within:-translate-y-1 focus-within:ring-2 focus-within:ring-bcGovGray-500 hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-bcGovGray-500 dark:bg-gray-800 dark:focus-within:ring-1 dark:focus-within:ring-bcGovGray-100 dark:hover:ring-1 dark:hover:ring-bcGovGray-100"
     @click="goToProduct"
   >
-    <div class="relative flex h-[60px] items-center bg-bcGovBlue-350 px-7 py-3.5 font-semibold tracking-wide">
+    <div class="relative flex h-[60px] items-center bg-bcGovBlue-350 px-7 py-3.5 font-semibold tracking-wide dark:border-b-[1px] dark:border-bcGovGray-100 dark:bg-gray-800">
       <a
         :href="localePath(`/products/${directory}/overview`)"
         class="text-white focus:outline-none"
@@ -26,18 +26,18 @@ async function goToProduct () {
       </a>
       <span v-if="badge" class="absolute right-7 top-0 rounded-b bg-bcGovColor-navDivider px-2 py-1 text-sm text-bcGovBlue-600">{{ badge }}</span>
     </div>
-    <div class="grow self-start px-7 pt-7 text-left text-bcGovColor-midGray">
+    <div class="grow self-start px-7 pt-7 text-left text-bcGovColor-midGray dark:text-white">
       <p class="mb-2">
         {{ description }}
       </p>
-      <ul v-if="bulletPoints" class="list-[square] pl-4 font-semibold marker:text-bcGovGray-400">
+      <ul v-if="bulletPoints" class="list-[square] pl-4 font-semibold text-bcGovColor-midGray marker:text-bcGovGray-400 dark:text-white">
         <li v-for="item in bulletPoints" :key="item">
           {{ item }}
         </li>
       </ul>
     </div>
     <div class="px-7 pb-7 text-left">
-      <span class="flex flex-wrap items-center font-semibold text-[#1a5a96] underline">
+      <span class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] underline dark:text-white">
         <span>
           {{ $t('SbcProductCard.goTo') }} {{ name }}
           <span class="inline-flex align-middle">
