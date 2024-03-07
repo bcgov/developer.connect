@@ -4,7 +4,10 @@ export default {
     goHome: 'Go Home',
     goBack: 'Go Back',
     downloadSpec: 'Download the specification',
-    allProducts: 'View all products'
+    allProducts: 'View all products',
+    products: 'Products',
+    dashboard: 'Dashboard',
+    sbcConnect: 'Service BC Connect'
   },
   page: {
     notFound: {
@@ -22,7 +25,8 @@ export default {
   },
   SbcHeader: {
     title: 'Service BC Connect',
-    logoBtnLabel: 'Home' // <img> link aria-label
+    logoBtnLabel: 'Home', // <img> link aria-label
+    navLabel: 'Main Navigation' // <nav> aria-label
   },
   SbcFooter: {
     navLabel: 'Useful Links', // <nav> aria-label
