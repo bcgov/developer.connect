@@ -17,6 +17,7 @@ onClickOutside(sideNavRef, () => {
     sideNavOpen.value = false
   }
 }, { ignore: [ignoreElRef] })
+
 </script>
 
 <template>
@@ -24,25 +25,7 @@ onClickOutside(sideNavRef, () => {
     class="flex min-h-screen flex-col bg-bcGovColor-gray1 dark:bg-bcGovGray-900"
   >
     <SbcHeaderMain />
-    <div
-      v-if="width < 1024"
-      class="h-10 w-full border-b border-bcGovGray-500 bg-white p-2 sm:px-4 dark:bg-bcGovGray-900"
-    >
-      <div class="m-auto flex h-full max-w-[1360px] items-center">
-        <UButton
-          ref="ignoreElRef"
-          :padded="false"
-          :aria-label="sideNavOpen ? 'Close Navigation' : 'Open Navigation'"
-          aria-haspopup="true"
-          :aria-expanded="sideNavOpen"
-          variant="link"
-          color="gray"
-          icon="i-mdi-menu"
-          class="ml-2 scale-150"
-          @click="sideNavOpen = !sideNavOpen"
-        />
-      </div>
-    </div>
+    <SbcDashboardSubHeader />
     <main class="relative mx-auto flex w-full max-w-[1360px] grow flex-col lg:grid lg:grid-cols-12">
       <SbcSideNavigation
         ref="sideNavRef"
