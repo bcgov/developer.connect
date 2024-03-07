@@ -44,5 +44,8 @@ export default {
   LocaleSelect: {
     // aria-label
     label: 'Sélectionnez une langue, Français, langue actuelle.'
+  },
+  SbcProductCard: {
+    goTo: 'Aller au'
   }
 }
