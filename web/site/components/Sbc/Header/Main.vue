@@ -25,7 +25,7 @@ const mainLinks = [
       class="m-auto flex w-full max-w-[1360px] items-center justify-between"
       :aria-label="$t('SbcHeader.navLabel')"
     >
-      <div class="flex items-center">
+      <div class="flex items-center gap-1">
         <NuxtLinkLocale
           to="/"
           tabindex="-1"
