@@ -21,6 +21,14 @@ export default {
     products: {
       title: 'Tous les Produits',
       h1: 'Tous les Produits'
+    },
+    dashboard: {
+      sandboxMode: {
+        infoText: 'Le mode Sandbox est activé. Ne pas utiliser pour la production.',
+        btnActive: 'Désactiver le mode Sandbox',
+        btnInactive: 'Activer le mode Sandbox',
+        text: 'Le Mode Sandbox'
+      }
     }
   },
   SbcHeader: {
