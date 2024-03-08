@@ -20,8 +20,6 @@ from flask import current_app
 from requests.exceptions import HTTPError
 
 from auth_api.exceptions import BusinessException, Error
-from auth_api.models.org import Org as OrgModel
-from auth_api.services.authorization import check_auth
 from auth_api.services.keycloak import KeycloakService
 from auth_api.services.rest_service import RestService
 from auth_api.utils.api_gateway import generate_client_representation
@@ -30,7 +28,6 @@ from auth_api.utils.constants import (
     GROUP_API_GW_SANDBOX_USERS,
     GROUP_API_GW_USERS,
 )
-from auth_api.utils.roles import ADMIN, STAFF
 from auth_api.utils.user_context import UserContext, user_context
 
 
@@ -52,7 +49,6 @@ class ApiGateway:
         current_app.logger.debug("<create_key ")
         env = request_json.get("environment", "sandbox")
         name = request_json.get("keyName")
-        # org: OrgModel = OrgModel.find_by_id(org_id)
         org_details = cls._get_org_details(org_id)
         # first find if there is a consumer created for this account.
         consumer_endpoint: str = cls._get_api_consumer_endpoint(env)
@@ -66,8 +62,6 @@ class ApiGateway:
                 cls._create_payment_account(org_details)
             cls._create_consumer(name, org_details, env=env)
             cls._update_org_api_access(org_id)
-            # org.has_api_access = True
-            # org.save()
             response = cls.get_api_keys(org_id)
         else:
             # Create additional API Key if a consumer exists
@@ -78,7 +72,6 @@ class ApiGateway:
                 generate_token=False,
             )
             response = api_key_response.json()
-        response = {"consumer": {"consumerKey": []}}
         return response
 
     @classmethod
@@ -280,13 +273,15 @@ class ApiGateway:
     @classmethod
     @user_context
     def _update_org_api_access(cls, org_id, **kwargs):
-        current_app.logger.info("Update Org Api Access Payload")
+        current_app.logger.info("Update Org Api Access")
         user: UserContext = kwargs["user_context"]
         org_endpoint = f"{current_app.config.get('AUTH_API_URL')}/orgs/{org_id}"
-        RestService.post(
+        RestService.patch(
             endpoint=org_endpoint,
             token=user.bearer_token,
-            data=pay_request,
+            data={
+                'hasApiAccess': True,
+                'action': PatchActions.UPDATE_API_ACCESS.value},
             raise_for_status=True,
         )
 
