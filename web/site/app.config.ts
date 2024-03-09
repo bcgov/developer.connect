@@ -34,6 +34,9 @@ export default defineAppConfig({
         outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-[#E0E7ED] hover:bg-{color}-50 disabled:bg-transparent dark:hover:bg-[#E0E7ED]/25 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-white'
       }
     },
+    card: {
+      ring: 'ring-1 ring-gray-200 dark:ring-[#d1d5db]'
+    },
     verticalNavigation: {
       wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
       base: 'group block border-s -ms-px leading-6 before:hidden focus-visible:rounded',
@@ -50,6 +53,16 @@ export default defineAppConfig({
       ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-white',
       container: {
         base: 'pointer-events-none relative inline-block rounded-full bg-white dark:bg-white shadow transform ring-0 transition ease-in-out duration-200'
+      }
+    },
+    table: {
+      divide: 'divide-y divide-gray-300 dark:divide-[#94A3B8]',
+      tbody: 'divide-y divide-gray-200 dark:divide-[#94A3B8]',
+      th: {
+        color: 'text-bcGovColor-darkGray dark:text-white'
+      },
+      td: {
+        color: 'text-bcGovColor-midGray dark:text-[#d1d5db]'
       }
     }
   }

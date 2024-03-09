@@ -29,11 +29,11 @@ const items = [
       Manage account information and view account activity
     </p>
     <UTabs :items="items" class="mt-8 w-full">
-      <template #profile="{ item }">
+      <template #profile>
         <SbcDashboardProfileCard />
       </template>
 
-      <template #apiKeys="{ item }">
+      <template #apiKeys>
         <SbcDashboardTableApiKeys />
       </template>
 

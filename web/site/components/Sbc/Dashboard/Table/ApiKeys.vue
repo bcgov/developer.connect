@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { FormError, FormSubmitEvent } from '#ui/types'
 const columns = [{
   key: 'name',
   label: 'Name'
@@ -47,36 +48,76 @@ const people = [{
 
 const page = ref(1)
 const pageItems = ref(Array(11))
+const modalOpen = ref(false)
+
+const state = reactive({
+  name: undefined
+})
+
+const validate = (state: any): FormError[] => {
+  const errors = []
+  if (!state.name) {
+    errors.push({ path: 'name', message: 'Required' })
+  }
+  return errors
+}
+
+function onSubmit (event: FormSubmitEvent<any>) {
+  // Do something with data
+  console.log(event.data)
+}
 </script>
 <template>
-  <UCard class="mt-8">
-    <div class="flex flex-col">
-      <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
-        Developer Access
-      </h3>
-      <p class="mt-1 text-bcGovColor-midGray dark:text-[#d1d5db]">
-        Enabling developer access would allow you to integrate the BC Registries API services to your system.
-      </p>
-      <span class="-mt-1 mb-2 text-bcGovColor-midGray dark:text-[#d1d5db]">
-        Learn more in the <UButton label="API documentation" variant="link" class="-mx-2 underline" to="/" />
-      </span>
-      <UButton
-        label="Create Key"
-        icon="i-mdi-plus"
-        class="w-min whitespace-nowrap"
-      />
-    </div>
-
-    <UTable :rows="people" :columns="columns">
-      <template #actions-data="{ row }">
-        <UButton variant="outline" label="Revoke" />
-      </template>
-    </UTable>
-
-    <template #footer>
-      <div class="flex">
-        <UPagination v-model="page" :page-count="5" :total="pageItems.length" class="ml-auto" />
+  <div>
+    <UCard class="mt-8">
+      <div class="flex flex-col">
+        <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
+          Developer Access
+        </h3>
+        <p class="mt-1 text-bcGovColor-midGray dark:text-[#d1d5db]">
+          Enabling developer access would allow you to integrate the BC Registries API services to your system.
+        </p>
+        <span class="-mt-1 mb-2 text-bcGovColor-midGray dark:text-[#d1d5db]">
+          Learn more in the <UButton label="API documentation" variant="link" class="-mx-2 underline" to="/" />
+        </span>
+        <UButton
+          label="Create Key"
+          icon="i-mdi-plus"
+          class="w-min whitespace-nowrap"
+          @click="modalOpen = true"
+        />
       </div>
-    </template>
-  </UCard>
+
+      <UTable :rows="people" :columns="columns">
+        <template #actions-data="{ row }">
+          <UButton variant="outline" label="Revoke" />
+        </template>
+      </UTable>
+
+      <template #footer>
+        <div class="flex">
+          <UPagination v-model="page" :page-count="5" :total="pageItems.length" class="ml-auto" />
+        </div>
+      </template>
+    </UCard>
+    <UModal v-model="modalOpen">
+      <UCard>
+        <template #header>
+          <div class="flex flex-col">
+            <span class="text-lg font-semibold text-bcGovColor-darkGray dark:text-white">Create a New Api Key</span>
+            <span class="text-bcGovColor-midGray dark:text-[#d1d5db]">A name is required to create a new key. Please enter a unique name.</span>
+          </div>
+        </template>
+        <UForm :validate="validate" :state="state" class="space-y-4" autocomplete="off" @submit="onSubmit">
+          <UFormGroup label="Name" name="name">
+            <UInput v-model="state.name" />
+          </UFormGroup>
+
+          <UButton type="submit">
+            Submit
+          </UButton>
+        </UForm>
+      </UCard>
+    </UModal>
+  </div>
 </template>
