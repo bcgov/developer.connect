@@ -279,9 +279,7 @@ class ApiGateway:
         RestService.patch(
             endpoint=org_endpoint,
             token=user.bearer_token,
-            data={
-                'hasApiAccess': True,
-                'action': PatchActions.UPDATE_API_ACCESS.value},
+            data={"hasApiAccess": True, "action": PatchActions.UPDATE_API_ACCESS.value},
             raise_for_status=True,
         )
 
