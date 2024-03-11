@@ -24,7 +24,8 @@ export default defineAppConfig({
     button: {
       color: {
         white: {
-          link: 'text-white text-base font-semibold tracking-wide dark:text-white hover:bg-white/[0.1] dark:bg-gray-900 dark:hover:bg-gray-800/75 focus-visible:ring-2 focus-visible:ring-white dark:focus-visible:ring-white transition-colors duration-300 ease-in-out'
+          link: 'text-white text-base font-semibold tracking-wide dark:text-white hover:bg-white/[0.1] dark:bg-gray-900 dark:hover:bg-gray-800/75 focus-visible:ring-2 focus-visible:ring-white dark:focus-visible:ring-white transition-colors duration-300 ease-in-out',
+          solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-white'
         }
       },
       variant: {
@@ -37,6 +38,40 @@ export default defineAppConfig({
     card: {
       ring: 'ring-1 ring-gray-200 dark:ring-gray-300/50',
       divide: 'divide-y divide-gray-200 dark:divide-gray-300/50'
+    },
+    pagination: {
+      wrapper: 'flex items-center -space-x-px',
+      base: '',
+      rounded: 'first:rounded-s-md last:rounded-e-md',
+      default: {
+        size: 'sm',
+        activeButton: {
+          color: 'primary'
+        },
+        inactiveButton: {
+          color: 'white'
+        },
+        firstButton: {
+          color: 'white',
+          class: 'rtl:[&_span:first-child]:rotate-180',
+          icon: 'i-heroicons-chevron-double-left-20-solid'
+        },
+        lastButton: {
+          color: 'white',
+          class: 'rtl:[&_span:last-child]:rotate-180',
+          icon: 'i-heroicons-chevron-double-right-20-solid'
+        },
+        prevButton: {
+          color: 'white',
+          class: 'rtl:[&_span:first-child]:rotate-180',
+          icon: 'i-heroicons-chevron-left-20-solid'
+        },
+        nextButton: {
+          color: 'white',
+          class: 'rtl:[&_span:last-child]:rotate-180',
+          icon: 'i-heroicons-chevron-right-20-solid'
+        }
+      }
     },
     table: {
       divide: 'divide-y divide-gray-300 dark:divide-gray-300/50',
