@@ -38,24 +38,6 @@ export default defineAppConfig({
       ring: 'ring-1 ring-gray-200 dark:ring-gray-300/50',
       divide: 'divide-y divide-gray-200 dark:divide-gray-300/50'
     },
-    verticalNavigation: {
-      wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
-      base: 'group block border-s -ms-px leading-6 before:hidden focus-visible:rounded',
-      padding: 'p-0 ps-4',
-      rounded: '',
-      font: '',
-      ring: 'focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-white',
-      active: 'text-primary-500 dark:text-[#7BB5EF] border-[#94A3B8] dark:border-[#7BB5EF] font-semibold',
-      inactive: 'border-transparent hover:border-gray-900 dark:hover:border-white text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
-    },
-    toggle: {
-      active: 'bg-{color}-500 dark:bg-{color}-500',
-      inactive: 'bg-gray-200 dark:bg-gray-700',
-      ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-white',
-      container: {
-        base: 'pointer-events-none relative inline-block rounded-full bg-white dark:bg-white shadow transform ring-0 transition ease-in-out duration-200'
-      }
-    },
     table: {
       divide: 'divide-y divide-gray-300 dark:divide-gray-300/50',
       tbody: 'divide-y divide-gray-200 dark:divide-gray-300/50',
@@ -65,11 +47,57 @@ export default defineAppConfig({
       td: {
         color: 'text-bcGovColor-midGray dark:text-gray-300'
       }
+    },
+    tabs: {
+      wrapper: 'relative space-y-2',
+      container: 'relative w-full',
+      base: 'focus:outline-none',
+      list: {
+        base: 'relative',
+        background: 'bg-gray-200 dark:bg-gray-800',
+        rounded: 'rounded-lg',
+        shadow: '',
+        padding: 'p-1',
+        height: 'h-10',
+        width: 'w-full',
+        marker: {
+          wrapper: 'absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none',
+          base: 'w-full h-full',
+          background: 'bg-white dark:bg-gray-900',
+          rounded: 'rounded-md',
+          shadow: 'shadow-sm'
+        },
+        tab: {
+          base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-white not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+          background: '',
+          active: 'text-bcGovColor-activeBlue font-semibold dark:text-white',
+          inactive: 'text-bcGovColor-darkGray dark:text-gray-300',
+          height: 'h-8',
+          padding: 'px-3',
+          size: 'text-sm',
+          font: 'font-medium',
+          rounded: 'rounded-md',
+          shadow: ''
+        }
+      }
+    },
+    toggle: {
+      active: 'bg-{color}-500 dark:bg-{color}-500',
+      inactive: 'bg-gray-200 dark:bg-gray-700',
+      ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-white',
+      container: {
+        base: 'pointer-events-none relative inline-block rounded-full bg-white dark:bg-white shadow transform ring-0 transition ease-in-out duration-200'
+      }
+    },
+    verticalNavigation: {
+      wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
+      base: 'group block border-s -ms-px leading-6 before:hidden focus-visible:rounded',
+      padding: 'p-0 ps-4',
+      rounded: '',
+      font: '',
+      ring: 'focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-white',
+      active: 'text-primary-500 dark:text-[#7BB5EF] border-[#94A3B8] dark:border-[#7BB5EF] font-semibold',
+      inactive: 'border-transparent hover:border-gray-900 dark:hover:border-white text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
     }
   }
 })
-
-// declare module '@nuxt/schema' {
-//   interface AppConfigInput {
-//   }
-// }
