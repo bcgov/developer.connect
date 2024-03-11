@@ -4,20 +4,28 @@ import type {
   FormSubmitEvent
 } from '#ui/types'
 const { text, copy, copied, isSupported } = useClipboard()
+const { t } = useI18n()
 
-const columns = [{
-  key: 'name',
-  label: 'Name'
-}, {
-  key: 'environment',
-  label: 'Environment'
-}, {
-  key: 'apiKey',
-  label: 'API Key'
-}, {
-  key: 'actions',
-  label: 'Actions'
-}]
+const columns = computed(() => {
+  return [
+    {
+      key: 'name',
+      label: t('SbcDashboardTableApiKeys.cols.name')
+    },
+    {
+      key: 'environment',
+      label: t('SbcDashboardTableApiKeys.cols.env')
+    },
+    {
+      key: 'apiKey',
+      label: t('SbcDashboardTableApiKeys.cols.apiKey')
+    },
+    {
+      key: 'actions',
+      label: t('SbcDashboardTableApiKeys.cols.actions')
+    }
+  ]
+})
 
 const people = [{
   id: 1,
@@ -86,16 +94,16 @@ function initRevokeKey (id: string | number, name: string) {
     <UCard>
       <div class="flex flex-col">
         <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
-          Developer Access
+          {{ $t('SbcDashboardTableApiKeys.title') }}
         </h3>
         <p class="mt-1 text-bcGovColor-midGray dark:text-[#d1d5db]">
-          Enabling developer access would allow you to integrate the BC Registries API services to your system.
+          {{ $t('SbcDashboardTableApiKeys.description.main') }}
         </p>
         <span class="-mt-1 mb-2 text-bcGovColor-midGray dark:text-[#d1d5db]">
-          Learn more in the <UButton label="API documentation" variant="link" class="-mx-2 underline" to="/" />
+          {{ $t('SbcDashboardTableApiKeys.description.sec') }} <UButton :label="$t('btn.apiDoc')" variant="link" class="-mx-2 underline" to="/" />
         </span>
         <UButton
-          label="Create Key"
+          :label="$t('btn.createKey')"
           icon="i-mdi-plus"
           class="w-min whitespace-nowrap"
           @click="createKeyModal = true"
@@ -108,6 +116,7 @@ function initRevokeKey (id: string | number, name: string) {
           <button
             v-else
             class="flex flex-wrap items-center rounded-md border-2 border-transparent px-2.5 py-1.5 text-sm text-bcGovColor-midGray hover:text-bcGovColor-activeBlue hover:underline focus:outline-none focus-visible:border-2 focus-visible:border-bcGovBlue-500 focus-visible:outline-0 dark:text-gray-300 dark:hover:text-white dark:focus-visible:border-white"
+            :aria-label="`${$t('btn.copy')}, row.apiKey`"
             @click="copy(row.apiKey)"
           >
             <span class="relative">
@@ -119,7 +128,7 @@ function initRevokeKey (id: string | number, name: string) {
                 v-if="copied && text === row.apiKey"
                 class="absolute -top-4 left-full text-sm text-bcGovColor-darkGray dark:text-gray-300"
               >
-                Copied!
+                {{ $t('btn.copied') }}
               </span>
             </span>
           </button>
@@ -127,7 +136,7 @@ function initRevokeKey (id: string | number, name: string) {
         <template #actions-data="{ row }">
           <UButton
             variant="outline"
-            label="Revoke"
+            :label="$t('btn.revoke')"
             @click="initRevokeKey(row.id, row.name)"
           />
         </template>
@@ -135,7 +144,12 @@ function initRevokeKey (id: string | number, name: string) {
 
       <template #footer>
         <div class="flex">
-          <UPagination v-model="page" :page-count="5" :total="pageItems.length" class="ml-auto" />
+          <UPagination
+            v-model="page"
+            :page-count="5"
+            :total="pageItems.length"
+            class="ml-auto"
+          />
         </div>
       </template>
     </UCard>
@@ -157,18 +171,18 @@ function initRevokeKey (id: string | number, name: string) {
       <UCard>
         <template #header>
           <div class="flex flex-col">
-            <span class="text-lg font-semibold text-bcGovColor-darkGray dark:text-white">Create Key</span>
+            <span class="text-lg font-semibold text-bcGovColor-darkGray dark:text-white">{{ $t('modal.createKey.title') }}</span>
           </div>
         </template>
-        <span class="text-bcGovColor-midGray dark:text-[#d1d5db]">A name is required to create a new key. Please enter a unique name below.</span>
+        <span class="text-bcGovColor-midGray dark:text-[#d1d5db]">{{ $t('modal.createKey.content') }}</span>
         <template #footer>
           <UForm :state="state" class="space-y-4" autocomplete="off" @submit="onSubmit">
-            <UFormGroup label="Name" name="name">
+            <UFormGroup :label="$t('modal.createKey.formLabel')" name="name">
               <UInput v-model="state.name" />
             </UFormGroup>
 
             <UButton type="submit">
-              Submit
+              {{ $t('btn.submit') }}
             </UButton>
           </UForm>
         </template>
@@ -178,18 +192,18 @@ function initRevokeKey (id: string | number, name: string) {
       <UCard>
         <template #header>
           <div class="flex flex-col">
-            <span class="text-lg font-semibold text-bcGovColor-darkGray dark:text-white">Revoke Key - {{ revokeData.name }}</span>
+            <span class="text-lg font-semibold text-bcGovColor-darkGray dark:text-white">{{ $t('modal.revokeKey.title', { key: revokeData.name }) }}</span>
           </div>
         </template>
-        <span class="text-bcGovColor-midGray dark:text-[#d1d5db]">Are you sure you want to revoke this API key? This will permanently remove access to the key, current projects using this key may be affected.</span>
+        <span class="text-bcGovColor-midGray dark:text-[#d1d5db]">{{ $t('modal.revokeKey.content') }}</span>
         <template #footer>
           <UForm :state="state" class="space-y-4" autocomplete="off" @submit="onSubmit">
-            <UFormGroup :label="`Enter '${revokeData.name}' to confirm.`" name="name">
+            <UFormGroup :label="$t('modal.revokeKey.formLabel', { key: revokeData.name })" name="name">
               <UInput v-model="state.name" />
             </UFormGroup>
 
             <UButton type="submit">
-              Revoke
+              {{ $t('btn.revoke') }}
             </UButton>
           </UForm>
         </template>

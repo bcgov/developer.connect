@@ -1,23 +1,30 @@
 <script setup lang="ts">
+const { t } = useI18n()
 definePageMeta({
   layout: 'dashboard'
 })
 
-const items = [
-  {
-    slot: 'profile',
-    label: 'Profile'
-  },
-  {
-    slot: 'apiKeys',
-    label: 'API Keys'
-  }
+useHead({
+  title: t('page.dashboard.title')
+})
+
+const items = computed(() => {
+  return [
+    {
+      slot: 'profile',
+      label: t('page.dashboard.tabs.profile')
+    },
+    {
+      slot: 'apiKeys',
+      label: t('page.dashboard.tabs.apiKeys')
+    }
   // not priority
   // {
   //   slot: 'transactions',
   //   label: 'Transactions'
   // }
-]
+  ]
+})
 
 </script>
 <template>
@@ -26,7 +33,7 @@ const items = [
       Some Account
     </h1>
     <p class="text-bcGovColor-midGray dark:text-[#d1d5db]">
-      Manage account information and view account activity
+      {{ $t('page.dashboard.description') }}
     </p>
     <UTabs :items="items" class="mt-8 w-full">
       <template #profile>
