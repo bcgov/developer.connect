@@ -71,7 +71,7 @@ function onSubmit (event: FormSubmitEvent<any>) {
 </script>
 <template>
   <div>
-    <UCard class="mt-8">
+    <UCard>
       <div class="flex flex-col">
         <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
           Developer Access

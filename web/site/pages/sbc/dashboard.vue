@@ -30,11 +30,11 @@ const items = [
     </p>
     <UTabs :items="items" class="mt-8 w-full">
       <template #profile>
-        <SbcDashboardProfileCard />
+        <SbcDashboardProfileCard class="mt-8" />
       </template>
 
       <template #apiKeys>
-        <SbcDashboardTableApiKeys />
+        <SbcDashboardTableApiKeys class="mt-8" />
       </template>
 
       <!-- leaving out for now, not priority -->
