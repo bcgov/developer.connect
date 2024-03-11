@@ -35,7 +35,8 @@ export default defineAppConfig({
       }
     },
     card: {
-      ring: 'ring-1 ring-gray-200 dark:ring-[#d1d5db]'
+      ring: 'ring-1 ring-gray-200 dark:ring-gray-300/50',
+      divide: 'divide-y divide-gray-200 dark:divide-gray-300/50'
     },
     verticalNavigation: {
       wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
@@ -56,13 +57,13 @@ export default defineAppConfig({
       }
     },
     table: {
-      divide: 'divide-y divide-gray-300 dark:divide-[#94A3B8]',
-      tbody: 'divide-y divide-gray-200 dark:divide-[#94A3B8]',
+      divide: 'divide-y divide-gray-300 dark:divide-gray-300/50',
+      tbody: 'divide-y divide-gray-200 dark:divide-gray-300/50',
       th: {
         color: 'text-bcGovColor-darkGray dark:text-white'
       },
       td: {
-        color: 'text-bcGovColor-midGray dark:text-[#d1d5db]'
+        color: 'text-bcGovColor-midGray dark:text-gray-300'
       }
     }
   }
