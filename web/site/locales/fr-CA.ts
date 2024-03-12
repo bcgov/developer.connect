@@ -15,7 +15,9 @@ export default {
     copied: 'Copié!',
     submit: 'Soumettre',
     next: 'Suivant',
-    previous: 'Précédent'
+    previous: 'Précédent',
+    openMainNav: 'Ouvrir le menu de navigation principal',
+    closeMainNav: 'Fermer le menu de navigation principal'
   },
   page: {
     notFound: {

@@ -15,7 +15,9 @@ export default {
     copied: 'Copied!',
     submit: 'Submit',
     next: 'Next',
-    previous: 'Previous'
+    previous: 'Previous',
+    openMainNav: 'Open Main Navigation Menu',
+    closeMainNav: 'Close Main Navigation Menu'
   },
   page: {
     notFound: {
