@@ -1,3 +1,4 @@
+// returns full string of product name from product/folder title
 export function handleAccordianLabel (title: string) {
   const { t } = useI18n()
   if (title === 'Get Started') { // required to return correct fr translation for 'Get Started' accordian title

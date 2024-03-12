@@ -1,18 +1,14 @@
 <script setup lang="ts">
-type AccordianNav = {
-  label: string,
-  defaultOpen: boolean,
-  children: Array<{label: string, to: string}>
-}
 defineProps<{
-  navItems: AccordianNav | undefined
+  navItems: AccordianNavItem[] | undefined
 }>()
+
 </script>
 <template>
   <div class="flex flex-col">
-    <!-- creates an accordian for each object in computed items -->
+    <!-- creates an accordian for each object in navItems array -->
     <UAccordion
-      :items="navItems"
+      :items="navItems || []"
       multiple
     >
       <!-- default slot is the accordian button itself, so we use a custom button variant here to match theme -->
