@@ -39,6 +39,11 @@ export default defineAppConfig({
       ring: 'ring-1 ring-gray-200 dark:ring-gray-300/50',
       divide: 'divide-y divide-gray-200 dark:divide-gray-300/50'
     },
+    divider: {
+      border: {
+        base: 'flex border-bcGovGray-500 dark:border-gray-300/50'
+      }
+    },
     pagination: {
       wrapper: 'flex items-center -space-x-px',
       base: '',

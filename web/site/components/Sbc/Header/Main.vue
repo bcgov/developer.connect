@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineProps<{
+  accordianItems?: AccordianNavItem[] | undefined
+}>()
+
 const localePath = useLocalePath()
 const { t } = useI18n()
 const mobileNav = ref(false)
@@ -121,7 +125,9 @@ const mainLinks = [
             </div>
           </div>
         </template>
-        <div class="h-full" />
+        <UVerticalNavigation :links="mainLinks" />
+        <UDivider class="my-4" />
+        <SbcAccordianNavigation :nav-items="accordianItems" />
       </UCard>
     </UModal>
   </div>
