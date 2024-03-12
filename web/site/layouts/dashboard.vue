@@ -1,23 +1,22 @@
 <script setup lang="ts">
-const { width } = useWindowSize()
-const sideNavOpen = ref(false)
-watch(
-  width,
-  () => {
-    sideNavOpen.value = width.value >= 1024
-  },
-  { immediate: true }
-)
-
-const sideNavRef = ref(null)
-const ignoreElRef = ref(null)
-
-onClickOutside(sideNavRef, () => {
-  if (sideNavOpen && width.value < 1024) {
-    sideNavOpen.value = false
+const localePath = useLocalePath()
+// temp items for dashboard - different than docs
+const tempItems = [
+  {
+    label: 'Dashboard Nav Item',
+    defaultOpen: true,
+    children: [
+      {
+        label: 'Child 1',
+        to: localePath('/sbc/dashboard')
+      },
+      {
+        label: 'Child 2',
+        to: localePath('/sbc/dashboard')
+      }
+    ]
   }
-}, { ignore: [ignoreElRef] })
-
+]
 </script>
 
 <template>
@@ -27,11 +26,11 @@ onClickOutside(sideNavRef, () => {
     <SbcHeaderMain />
     <SbcDashboardSubHeader />
     <main class="relative mx-auto flex w-full max-w-[1360px] grow flex-col lg:grid lg:grid-cols-12">
-      <SbcSideNavigation
-        ref="sideNavRef"
-        class="absolute h-full -translate-x-full transition-transform duration-200 ease-in lg:static lg:col-start-1 lg:col-end-3"
-        :class="sideNavOpen ? 'translate-x-0' : '-translate-x-full'"
-      />
+      <aside class="absolute hidden h-full min-w-fit flex-1 overflow-y-auto border-r border-bcGovGray-500 bg-bcGovColor-gray1 px-2 py-4 lg:static lg:col-start-1 lg:col-end-3 lg:block dark:bg-bcGovGray-900">
+        <nav>
+          <SbcAccordianNavigation :nav-items="tempItems" />
+        </nav>
+      </aside>
       <div class="w-full lg:col-span-full lg:col-start-4 xl:-ml-10">
         <slot />
       </div>
