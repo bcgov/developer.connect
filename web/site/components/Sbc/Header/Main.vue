@@ -9,22 +9,27 @@ const mobileNav = ref(false)
 
 const mainLinks = [
   {
+    icon: 'i-mdi-home',
     label: t('btn.sbcConnect'),
     to: localePath('/')
   },
   {
+    icon: 'i-mdi-database',
     label: t('btn.products'),
     to: localePath('/products')
   },
   {
+    icon: 'i-mdi-account',
     label: t('btn.dashboard'),
     to: localePath('/sbc/dashboard')
   },
   {
+    icon: 'i-mdi-book-open-variant',
     label: 'Docs',
     to: localePath('/products/get-started/account-setup')
   }
 ]
+
 </script>
 <template>
   <div>
@@ -125,9 +130,9 @@ const mainLinks = [
             </div>
           </div>
         </template>
-        <UVerticalNavigation :links="mainLinks" />
+        <UVerticalNavigation :links="mainLinks" @click="mobileNav = false" />
         <UDivider class="my-4" />
-        <SbcAccordianNavigation :nav-items="accordianItems" />
+        <SbcAccordianNavigation :nav-items="accordianItems" @click="mobileNav = false" />
       </UCard>
     </UModal>
   </div>

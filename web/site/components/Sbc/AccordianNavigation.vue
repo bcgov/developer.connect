@@ -32,6 +32,16 @@ defineProps<{
         <UVerticalNavigation
           class="mx-2"
           :links="item.children"
+          :ui="{
+            wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
+            base: 'group block border-s -ms-px leading-6 before:hidden focus-visible:rounded',
+            padding: 'p-0 ps-4',
+            rounded: '',
+            font: '',
+            ring: 'focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-white',
+            active: 'text-primary-500 dark:text-[#7BB5EF] border-[#94A3B8] dark:border-[#7BB5EF] font-semibold',
+            inactive: 'border-transparent hover:border-gray-900 dark:hover:border-white text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+          }"
         />
       </template>
     </UAccordion>
