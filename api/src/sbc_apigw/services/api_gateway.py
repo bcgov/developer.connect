@@ -19,6 +19,7 @@ from typing import Dict, List
 from flask import current_app
 from requests.exceptions import HTTPError
 
+from auth_api.utils.enums import PatchActions
 from auth_api.exceptions import BusinessException, Error
 from auth_api.services.keycloak import KeycloakService
 from auth_api.services.rest_service import RestService
