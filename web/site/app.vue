@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// const { locale } = useI18n()
+const { locale } = useI18n()
 const i18nHead = useLocaleHead({
   addDirAttribute: true,
   addSeoAttributes: true
@@ -12,20 +12,21 @@ useHead({
   }
 })
 
-// const { data: navigation } = await useAsyncData(
-//   'content-navigation',
-//   () => {
-//     return queryContent()
-//       .where({ _locale: locale.value, _extension: { $eq: 'md' } })
-//       .sort({ _dir: 1 })
-//       .find()
-//   },
-//   {
-//     watch: [locale]
-//   }
-// )
+// fetch content files using composable from nuxt-content https://content.nuxt.com/composables/fetch-content-navigation
+const { data: navigation } = await useAsyncData(
+  'content-navigation',
+  () => fetchContentNavigation(
+    queryContent('products') // pass custom query to fetchContentNavigation
+      .where({ _locale: locale.value, _extension: { $eq: 'md' } }) // only return md files that match current locale
+      .sort({ _dir: 1 }) // sort alphabetically
+  ), {
+    watch: [locale] // fetch new values whenever the locale changes
+  }
+)
 
-// console.log(navigation.value)
+// const navKey = Symbol('content-nav') as InjectionKey<string>
+
+provide('navKey', navigation)
 </script>
 <template>
   <NuxtLayout>

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'docs'
+})
+
 const { locale } = useI18n()
 const route = useRoute()
 const localePath = useLocalePath()
