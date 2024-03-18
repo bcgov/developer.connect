@@ -35,7 +35,7 @@ const mainLinks = [
   <div>
     <header
       id="bcros-main-header"
-      class="relative border-b-2 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b-[1px] dark:bg-bcGovColor-darkGray"
+      class="relative border-b-2 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
     >
       <nav
         class="m-auto flex w-full max-w-[1360px] items-center justify-between"
