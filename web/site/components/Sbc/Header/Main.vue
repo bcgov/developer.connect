@@ -30,6 +30,13 @@ const mainLinks = [
   }
 ]
 
+// delay mobile menu closing for smoother feel
+async function closeMobileNav () {
+  await nextTick()
+  setTimeout(() => {
+    mobileNav.value = false
+  }, 150)
+}
 </script>
 <template>
   <div>
@@ -130,9 +137,9 @@ const mainLinks = [
             </div>
           </div>
         </template>
-        <UVerticalNavigation :links="mainLinks" @click="mobileNav = false" />
+        <UVerticalNavigation :links="mainLinks" @click="closeMobileNav" />
         <UDivider class="my-4" />
-        <SbcAccordianNavigation :nav-items="accordianItems" @click="mobileNav = false" />
+        <SbcAccordianNavigation :nav-items="accordianItems" @click="closeMobileNav" />
       </UCard>
     </UModal>
   </div>

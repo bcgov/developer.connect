@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content/dist/runtime/types'
-const navigation = inject<Ref<NavItem[]>>('navKey')
+defineProps<{
+  navItems: AccordianNavItem[] | undefined
+}>()
 </script>
 <template>
-  <div class="min-w-fit flex-1 overflow-y-auto border-r border-bcGovGray-500 bg-bcGovColor-gray1 px-2 py-4 dark:bg-bcGovGray-900">
-    <aside>
-      <nav>
-        <SbcAccordianNavigation :nav-items="createContentNav(navigation)" />
-      </nav>
-    </aside>
-  </div>
+  <aside class="absolute hidden h-full min-w-fit flex-1 overflow-y-auto border-r border-bcGovGray-500 bg-bcGovColor-gray1 px-2 py-4 lg:static lg:col-start-1 lg:col-end-3 lg:block dark:bg-bcGovGray-900">
+    <nav>
+      <SbcAccordianNavigation :nav-items="navItems" />
+    </nav>
+  </aside>
 </template>
