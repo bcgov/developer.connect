@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { locale } = useI18n()
+const localePath = useLocalePath()
 const i18nHead = useLocaleHead({
   addDirAttribute: true,
   addSeoAttributes: true
@@ -13,7 +14,7 @@ useHead({
 })
 
 // fetch content files using composable from nuxt-content https://content.nuxt.com/composables/fetch-content-navigation
-const { data: navigation } = await useAsyncData(
+const { data: docNavItems } = await useAsyncData(
   'content-navigation',
   () => fetchContentNavigation(
     queryContent('products') // pass custom query to fetchContentNavigation
@@ -26,10 +27,41 @@ const { data: navigation } = await useAsyncData(
 
 // const navKey = Symbol('content-nav') as InjectionKey<string>
 
-provide('navKey', navigation)
+// dashboard page sub nav items
+const dashboardNavItems = [
+  {
+    label: 'Dashboard Nav Item',
+    defaultOpen: true,
+    children: [
+      {
+        label: 'Child 1',
+        to: localePath('/sbc/dashboard')
+      },
+      {
+        label: 'Child 2',
+        to: localePath('/sbc/dashboard')
+      }
+    ]
+  }
+]
+
+provide('docNavItems', docNavItems)
+provide('dashNavItems', dashboardNavItems)
 </script>
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div
+    class="flex min-h-screen flex-col bg-bcGovColor-gray1 dark:bg-bcGovGray-900"
+  >
+    <SbcHeaderMain
+      :accordian-items="
+        $route.path.includes('products') ? createContentNav(docNavItems!) :
+        $route.path.includes('dashboard') ? dashboardNavItems : undefined
+      "
+    />
+    <SbcDashboardSubHeader v-if="$route.path.includes('dashboard')" />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    <SbcFooter />
+  </div>
 </template>
