@@ -2,7 +2,7 @@
 
 
 # Application Name
-Names Code Challenge
+SBC API Gateway
 
 
 ## Technology Stack Used
