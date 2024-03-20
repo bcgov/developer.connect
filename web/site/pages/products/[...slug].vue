@@ -12,7 +12,7 @@ const routeWithoutLocale = route.path.replace(/^\/[a-zA-Z]{2}-[a-zA-Z]{2}\//, '/
 
 // fetch current page data
 const { data } = await useAsyncData(
-  'page-head',
+  'current-doc-page-data',
   () => {
     return queryContent(routeWithoutLocale).where({ _locale: locale.value }).findOne()
   },
@@ -24,7 +24,7 @@ const { data } = await useAsyncData(
 // console.log(data.value)
 
 // build page header string based off "'directory' - 'page title'"
-const createPageHead = computed(() => {
+const pageHead = computed(() => {
   const page = data.value
   if (page) {
     if (page._dir === 'get-started') {
@@ -40,7 +40,7 @@ const createPageHead = computed(() => {
 })
 
 useHead({
-  title: createPageHead.value
+  title: pageHead.value
 })
 // console.log(data.value.body?.toc?.links)
 
@@ -53,14 +53,11 @@ useHead({
 
 </script>
 <template>
-  <ContentDoc
+  <ContentRenderer
     class="prose prose-bcGov dark:prose-invert min-w-full p-8"
-    :query="{
-      path: routeWithoutLocale,
-      where: { _locale: locale }
-    }"
+    :value="data"
   >
-    <template #not-found>
+    <template #empty>
       <div class="flex h-full flex-col items-center justify-center space-y-4">
         <h1 class="text-2xl font-semibold">
           {{ $t('page.notFound.h1') }}
@@ -78,7 +75,7 @@ useHead({
         </div>
       </div>
     </template>
-  </ContentDoc>
+  </ContentRenderer>
   <!-- <UButton
         :label="prev !== null ? prev.title : 'Alternate Label'"
         :to="prev !== null ? localePath(prev._path) : ''"
