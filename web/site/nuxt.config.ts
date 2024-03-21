@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
+  nitro: {
+    prerender: {
+      routes: ['/en-CA/sbc/tos']
+    }
+  },
   modules: ['@nuxtjs/eslint-module'],
   extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {

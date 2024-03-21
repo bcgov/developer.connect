@@ -3,8 +3,6 @@ useHead({
   title: 'Service BC - API Terms of Use'
 })
 
-const { data } = await useAsyncData('sbc-tos', () => queryContent('/sbc/tos').findOne())
-
 const agreeToTerms = ref(false)
 const hasReachedBottom = ref(false)
 const submitWithoutCheckbox = ref(false)
@@ -16,7 +14,9 @@ function handleWindowScroll () {
   }
 }
 
-window.addEventListener('scroll', handleWindowScroll)
+onMounted(() => {
+  window.addEventListener('scroll', handleWindowScroll)
+})
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleWindowScroll)
@@ -49,7 +49,13 @@ function submitTermsOfUse () {
         You must scroll to the bottom and accept the API Terms of Use
       </div>
     </div>
-    <ContentRenderer :value="data" class="" />
+    <ContentDoc
+      class="prose prose-bcGov dark:prose-invert min-w-full p-8"
+      :query="{
+        path: '/sbc/tos',
+        where: { _locale: $i18n.locale }
+      }"
+    />
     <div class="sticky bottom-0 flex w-full flex-col border-t border-gray-500 bg-bcGovColor-gray1 pb-8 pt-4 md:w-[700px] dark:bg-bcGovColor-darkGray">
       <UCheckbox
         v-model="agreeToTerms"
