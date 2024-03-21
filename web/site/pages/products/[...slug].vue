@@ -2,46 +2,6 @@
 definePageMeta({
   layout: 'docs'
 })
-
-const { locale } = useI18n()
-const route = useRoute()
-const localePath = useLocalePath()
-
-// filter locale from route
-const routeWithoutLocale = route.path.replace(/^\/[a-zA-Z]{2}-[a-zA-Z]{2}\//, '/')
-
-// fetch current page data
-const { data } = await useAsyncData(
-  'current-doc-page-data',
-  () => {
-    return queryContent(routeWithoutLocale).where({ _locale: locale.value }).findOne()
-  },
-  {
-    watch: [locale, route]
-  }
-)
-
-// console.log(data.value)
-
-// build page header string based off "'directory' - 'page title'"
-const pageHead = computed(() => {
-  const page = data.value
-  if (page) {
-    if (page._dir === 'get-started') {
-      return `Get Started - ${page.title}`
-    } else if (page._dir === 'connect') {
-      return `SBC Connect - ${page.title}`
-    } else {
-      return `${page._dir.toUpperCase()} - ${page.title}`
-    }
-  } else {
-    return ''
-  }
-})
-
-useHead({
-  title: pageHead.value
-})
 // console.log(data.value.body?.toc?.links)
 
 // const [prev, next] = await queryContent()
@@ -53,11 +13,14 @@ useHead({
 
 </script>
 <template>
-  <ContentRenderer
-    class="prose prose-bcGov dark:prose-invert min-w-full p-8"
-    :value="data"
+  <ContentDoc
+    class="prose prose-bcGov dark:prose-invert min-w-full px-2 py-6"
+    :query="{
+      path: $route.path.replace(/^\/[a-zA-Z]{2}-[a-zA-Z]{2}\//, '/'),
+      where: { _locale: $i18n.locale }
+    }"
   >
-    <template #empty>
+    <template #not-found>
       <div class="flex h-full flex-col items-center justify-center space-y-4">
         <h1 class="text-2xl font-semibold">
           {{ $t('page.notFound.h1') }}
@@ -70,12 +33,12 @@ useHead({
           <UButton
             :label="$t('btn.goHome')"
             variant="outline"
-            :to="localePath('/')"
+            :to="`/${$i18n.locale}`"
           />
         </div>
       </div>
     </template>
-  </ContentRenderer>
+  </ContentDoc>
   <!-- <UButton
         :label="prev !== null ? prev.title : 'Alternate Label'"
         :to="prev !== null ? localePath(prev._path) : ''"

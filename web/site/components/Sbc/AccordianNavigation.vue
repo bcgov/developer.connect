@@ -5,7 +5,7 @@ defineProps<{
 
 </script>
 <template>
-  <div class="flex flex-col">
+  <nav class="flex flex-col">
     <!-- creates an accordian for each object in navItems array -->
     <UAccordion
       :items="navItems || []"
@@ -45,5 +45,5 @@ defineProps<{
         />
       </template>
     </UAccordion>
-  </div>
+  </nav>
 </template>
