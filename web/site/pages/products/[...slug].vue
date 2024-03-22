@@ -2,15 +2,6 @@
 definePageMeta({
   layout: 'docs'
 })
-// console.log(data.value.body?.toc?.links)
-
-// const [prev, next] = await queryContent()
-//   .only(['_path', 'title'])
-//   .where({_locale: locale.value })
-//   .findSurround(routeWithoutLocale)
-
-// console.log(prev, next)
-
 </script>
 <template>
   <ContentDoc
@@ -39,22 +30,4 @@ definePageMeta({
       </div>
     </template>
   </ContentDoc>
-  <!-- <UButton
-        :label="prev !== null ? prev.title : 'Alternate Label'"
-        :to="prev !== null ? localePath(prev._path) : ''"
-        :disabled="prev === null"
-      />
-      <UButton
-        :label="next !== null ? next.title : 'Alternate Label'"
-        :to="next !== null ? localePath(next._path) : ''"
-        :disabled="next === null"
-      /> -->
-  <!-- <div
-      v-else
-      class="flex flex-col items-center justify-center"
-    >
-      Looks like we couldn't find the page you're looking for.
-      Please refresh the page or go back
-      <UButton label="Go Back" @click="$router.back()" />
-    </div> -->
 </template>

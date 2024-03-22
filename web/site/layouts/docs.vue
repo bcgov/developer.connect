@@ -2,8 +2,9 @@
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 const navItems = inject<Ref<NavItem[]>>('docNavItems')
 const { locale } = useI18n()
-// const localePath = useLocalePath()
+const localePath = useLocalePath()
 const routeWithoutLocale = useRouteWithoutLocale()
+const { prevPage, nextPage } = useSurroundPages()
 
 // fetch current page data
 const { data: docPageData } = await useAsyncData(
@@ -15,6 +16,9 @@ const { data: docPageData } = await useAsyncData(
     watch: [locale, routeWithoutLocale]
   }
 )
+
+// return current page data table of contents
+const tocLinks = computed(() => docPageData.value?.body?.toc?.links ?? [])
 
 // create page header based on current doc page directory
 const pageHead = computed(() => {
@@ -34,8 +38,6 @@ const pageHead = computed(() => {
 useHead({
   title: () => pageHead.value
 })
-
-const tocLinks = computed(() => docPageData.value?.body?.toc?.links ?? [])
 </script>
 
 <template>
@@ -49,8 +51,38 @@ const tocLinks = computed(() => docPageData.value?.body?.toc?.links ?? [])
     <div class="w-full lg:col-start-4 lg:col-end-11 xl:-ml-8">
       <slot />
     </div>
-    <div class="relative col-span-full col-start-11 hidden lg:block">
+    <UDivider class="px-2 lg:col-start-4 lg:col-end-11 xl:-ml-8" />
+    <div class="flex w-full flex-col items-center justify-between gap-4 px-2 py-8 sm:flex-row lg:col-start-4 lg:col-end-11 xl:-ml-8">
+      <UButton
+        :label="prevPage?.title"
+        :to="localePath(prevPage?._path || '/')"
+        variant="outline"
+        color="gray"
+        class="w-full sm:w-auto"
+      >
+        <UIcon name="i-mdi-arrow-left-circle" class="size-8" />
+        <div class="flex flex-col">
+          <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '') }}</span>
+          <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ prevPage?.title }}</span>
+        </div>
+      </UButton>
+      <UButton
+        :label="nextPage?.title"
+        :to="localePath(nextPage?._path || '/')"
+        variant="outline"
+        color="gray"
+        class="w-full sm:w-auto"
+      >
+        <div class="ml-auto flex flex-col">
+          <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '') }}</span>
+          <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ nextPage?.title }}</span>
+        </div>
+        <UIcon name="i-mdi-arrow-right-circle" class="size-8" />
+      </UButton>
+    </div>
+    <div class="relative col-span-full col-start-11 row-start-1 hidden lg:block">
       <SbcTableOfContents
+        v-if="tocLinks.length"
         class="sticky top-0"
         :toc-links="tocLinks"
         :current-dir="docPageData?._path"
