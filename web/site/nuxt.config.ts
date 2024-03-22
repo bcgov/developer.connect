@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/eslint-module'],
   extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {
-    dirs: ['stores', 'composables', 'enums', 'interfaces']
+    dirs: ['stores', 'composables', 'enums', 'interfaces', 'types', 'utils']
   },
   routeRules: {
     '/': { redirect: '/en-CA' }

@@ -4,9 +4,6 @@ const { t } = useI18n()
 useHead({
   title: t('page.home.title')
 })
-definePageMeta({
-  layout: 'home'
-})
 </script>
 <template>
   <div class="mx-auto flex flex-col items-center space-y-2 text-center">

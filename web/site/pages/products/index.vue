@@ -3,9 +3,6 @@ const { t, locale } = useI18n()
 useHead({
   title: t('page.products.title')
 })
-definePageMeta({
-  layout: 'home'
-})
 
 const { data: products } = await useAsyncData(
   'product-cards',
