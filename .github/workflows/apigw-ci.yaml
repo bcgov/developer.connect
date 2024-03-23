@@ -13,7 +13,7 @@ defaults:
 
 jobs:
   setup-job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     if: github.repository == 'bcgov/sbc-apigw'
 
@@ -23,7 +23,7 @@ jobs:
 
   linting:
     needs: setup-job
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
@@ -50,7 +50,7 @@ jobs:
 
   testing-coverage:
     needs: setup-job
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
@@ -80,7 +80,7 @@ jobs:
 
   build-check:
     needs: setup-job
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
