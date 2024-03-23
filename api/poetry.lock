@@ -1185,28 +1185,43 @@ format = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validat
 format-nongpl = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3986-validator (>0.1.0)", "uri-template", "webcolors (>=1.11)"]
 
 [[package]]
-name = "launchdarkly-server-sdk"
-version = "8.3.0"
-description = "LaunchDarkly SDK for Python"
+name = "launchdarkly-eventsource"
+version = "1.1.1"
+description = "LaunchDarkly SSE Client"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "launchdarkly_server_sdk-8.3.0-py3-none-any.whl", hash = "sha256:bc59dbf9897fd2d9c70098c13bb073983bef29f58cae9439e70b2463982f1bb5"},
-    {file = "launchdarkly_server_sdk-8.3.0.tar.gz", hash = "sha256:cdb8fadd457e6ae569c0cb0d5de112d7f2a9c84a0ba03167bb7d68710dde7283"},
+    {file = "launchdarkly_eventsource-1.1.1-py3-none-any.whl", hash = "sha256:3d7e5301bc4b4a744ecdaa10de8bce52c2f3c66a97e9aa10ab11ca81b67fb31b"},
+    {file = "launchdarkly_eventsource-1.1.1.tar.gz", hash = "sha256:211791f1267f9b7b0a62a0bb5fc9c5ed1fb4a834440f16be551968dbe772557a"},
+]
+
+[package.dependencies]
+urllib3 = ">=1.26.0,<3"
+
+[[package]]
+name = "launchdarkly-server-sdk"
+version = "9.3.0"
+description = "LaunchDarkly SDK for Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "launchdarkly_server_sdk-9.3.0-py3-none-any.whl", hash = "sha256:1b9580d49755735bd7acccd4e2cecfc17a1669e8e499e96e396a401012dbdae3"},
+    {file = "launchdarkly_server_sdk-9.3.0.tar.gz", hash = "sha256:43f786ee5ea1950072bf8eee0fe95c62f9fcd5f5f0e0495453b3be26fd2d5c23"},
 ]
 
 [package.dependencies]
 certifi = ">=2018.4.16"
 expiringdict = ">=1.1.4"
+launchdarkly-eventsource = ">=1.1.0,<2.0.0"
 pyRFC3339 = ">=1.0"
 semver = ">=2.10.2"
-urllib3 = ">=1.22.0,<3"
+urllib3 = ">=1.26.0,<3"
 
 [package.extras]
 consul = ["python-consul (>=1.0.1)"]
 dynamodb = ["boto3 (>=1.9.71)"]
 redis = ["redis (>=2.10.5)"]
-test-filesource = ["pyyaml (>=3.0,<5.2)", "watchdog (>=0.9,!=0.10.5,<1.0)"]
+test-filesource = ["pyyaml (>=5.3.1)", "watchdog (>=3.0.0)"]
 
 [[package]]
 name = "lovely-pytest-docker"
@@ -2595,4 +2610,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12.2"
-content-hash = "83ec3d28844047a136f0719ba07dd6227b32da34f2e15866e3d774cb1844b7c8"
+content-hash = "fa9bc15cf817510ddb6514d8d3120389fc247507430a56aba7a6d31d836c43ec"
