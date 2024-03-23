@@ -21,7 +21,7 @@ auth-api = {git = "https://github.com/bcgov/sbc-auth.git", rev = "main", subdire
 
 [tool.poetry.group.test.dependencies]
 freezegun = "^1.4.0"
-hypothesis = "^6.99.11"
+hypothesis = "^6.99.12"
 pexpect = "^4.9.0"
 pytest = "^7.4.4"
 pytest-cov = "^4.1.0"
