@@ -1,43 +1,15 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 const navItems = inject<Ref<NavItem[]>>('docNavItems')
-const { locale } = useI18n()
 const localePath = useLocalePath()
-const routeWithoutLocale = useRouteWithoutLocale()
 const { prevPage, nextPage } = useSurroundPages()
-
-// fetch current page data
-const { data: docPageData } = await useAsyncData(
-  'doc-page-data',
-  () => {
-    return queryContent(routeWithoutLocale.value).where({ _locale: locale.value }).findOne()
-  },
-  {
-    watch: [locale, routeWithoutLocale]
-  }
-)
-
-// return current page data table of contents
-const tocLinks = computed(() => docPageData.value?.body?.toc?.links ?? [])
-
-// create page header based on current doc page directory
-const pageHead = computed(() => {
-  if (docPageData.value) {
-    if (docPageData.value._dir === 'get-started') {
-      return `Get Started - ${docPageData.value.title}`
-    } else if (docPageData.value._dir === 'connect') {
-      return `SBC Connect - ${docPageData.value.title}`
-    } else {
-      return `${docPageData.value._dir.toUpperCase()} - ${docPageData.value.title}`
-    }
-  } else {
-    return ''
-  }
-})
+const { docPageData, tocLinks, createPageHead } = useDocPageData()
 
 useHead({
-  title: () => pageHead.value
+  title: () => createPageHead()
 })
+
+const { activeTocId } = useHeadingObserver()
 </script>
 
 <template>
@@ -48,7 +20,7 @@ useHead({
         class="sticky top-0 max-h-[calc(100dvh-2rem)] min-h-dvh overflow-y-auto"
       />
     </div>
-    <div class="w-full lg:col-start-4 lg:col-end-11 xl:-ml-8">
+    <div id="nuxt-content-wrapper" class="w-full lg:col-start-4 lg:col-end-11 xl:-ml-8">
       <slot />
     </div>
     <UDivider class="px-2 lg:col-start-4 lg:col-end-11 xl:-ml-8" />
@@ -82,10 +54,11 @@ useHead({
     </div>
     <div class="relative col-span-full col-start-11 row-start-1 hidden lg:block">
       <SbcTableOfContents
-        v-if="tocLinks.length"
+        v-show="tocLinks.length"
         class="sticky top-0"
         :toc-links="tocLinks"
         :current-dir="docPageData?._path"
+        :active-toc-id="activeTocId"
       />
     </div>
   </main>

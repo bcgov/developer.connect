@@ -13,7 +13,7 @@ export function useSurroundPages () {
   const routeWithoutLocale = useRouteWithoutLocale()
   const { locale } = useI18n()
 
-  // refs for data
+  // refs for return data
   const prevPage = ref<Pick<ParsedContent, '_path' | 'title'>>()
   const nextPage = ref<Pick<ParsedContent, '_path' | 'title'>>()
 
