@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 const navItems = inject<Ref<NavItem[]>>('docNavItems')
+const mainHeaderHeight = inject<Ref<number>>('mainHeaderHeight')
+const footerHeight = inject<Ref<number>>('footerHeight')
 const localePath = useLocalePath()
 const { prevPage, nextPage } = useSurroundPages()
 const { currentDir, tocLinks, createPageHead } = useDocPageData()
@@ -13,10 +15,13 @@ useHead({
 
 <template>
   <main class="relative mx-auto flex w-full max-w-[1360px] grow flex-col lg:grid lg:grid-cols-12">
-    <div class="relative col-start-1 col-end-4 hidden lg:block">
+    <div
+      class="fixed col-start-1 col-end-4 hidden overflow-y-auto py-5 lg:block"
+      :style="{ top: `${mainHeaderHeight}px`, height: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))` }"
+    >
       <SbcSideNavigation
+        class=""
         :nav-items="createContentNav(navItems)"
-        class="sticky top-0 max-h-[calc(100dvh-2rem)] min-h-dvh overflow-y-auto"
       />
     </div>
     <div id="nuxt-content-wrapper" class="w-full lg:col-start-4 lg:col-end-11 xl:-ml-8">
@@ -51,7 +56,10 @@ useHead({
         <UIcon name="i-mdi-arrow-right-circle" class="size-8" />
       </UButton>
     </div>
-    <div class="relative col-span-full col-start-11 row-start-1 hidden lg:block">
+    <div
+      class="fixed col-span-full col-start-11 row-start-1 hidden overflow-y-auto py-5 lg:block"
+      :style="{ top: `${mainHeaderHeight}px`, height: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))` }"
+    >
       <SbcTableOfContents
         v-show="tocLinks.length"
         :hide-label="false"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SbcHeaderMain } from '#components'
+import { SbcHeaderMain, SbcFooter } from '#components'
 const { locale } = useI18n()
 const localePath = useLocalePath()
 const i18nHead = useLocaleHead({
@@ -16,6 +16,9 @@ useHead({
 
 // template ref for header component
 const headerRef = ref<InstanceType<typeof SbcHeaderMain> | null>(null)
+const footerRef = ref<InstanceType<typeof SbcFooter> | null>(null)
+const { height: mainHeaderHeight } = useElementSize(headerRef)
+const { height: footerHeight } = useElementSize(footerRef)
 
 // fetch content files using composable from nuxt-content https://content.nuxt.com/composables/fetch-content-navigation
 const { data: docNavItems } = await useAsyncData(
@@ -47,13 +50,14 @@ const dashboardNavItems = [
   }
 ]
 
-const mainHeaderHeight = computed(() => headerRef.value?.headerRef?.clientHeight)
+// const mainHeaderHeight = computed(() => headerRef.value?.headerRef?.clientHeight)
 
 // provide nav items to use in docs/dashboard layouts
 provide('docNavItems', docNavItems)
 provide('dashNavItems', dashboardNavItems)
-// provide main header height to offset sub headers/asides
+// provide element heights to offset sub headers/asides
 provide('mainHeaderHeight', mainHeaderHeight)
+provide('footerHeight', footerHeight)
 </script>
 <template>
   <div
@@ -69,6 +73,6 @@ provide('mainHeaderHeight', mainHeaderHeight)
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-    <SbcFooter />
+    <SbcFooter ref="footerRef" class="z-50" />
   </div>
 </template>
