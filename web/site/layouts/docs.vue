@@ -17,7 +17,11 @@ useHead({
   <main class="relative mx-auto flex w-full max-w-[1360px] grow flex-col lg:grid lg:grid-cols-12">
     <div
       class="fixed col-start-1 col-end-4 hidden overflow-y-auto py-5 lg:block"
-      :style="{ top: `${mainHeaderHeight}px`, height: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))` }"
+      :style="{
+        top: `${mainHeaderHeight}px`,
+        maxHeight: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))`,
+        minHeight: `calc(100% - ${mainHeaderHeight}px)`
+      }"
     >
       <SbcSideNavigation
         class=""
@@ -58,7 +62,11 @@ useHead({
     </div>
     <div
       class="fixed col-span-full col-start-11 row-start-1 hidden overflow-y-auto py-5 lg:block"
-      :style="{ top: `${mainHeaderHeight}px`, height: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))` }"
+      :style="{
+        top: `${mainHeaderHeight}px`,
+        maxHeight: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))`,
+        minHeight: `calc(100% - ${mainHeaderHeight}px)`
+      }"
     >
       <SbcTableOfContents
         v-show="tocLinks.length"
