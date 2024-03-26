@@ -55,7 +55,7 @@ const dashboardNavItems = [
 // provide nav items to use in docs/dashboard layouts
 provide('docNavItems', docNavItems)
 provide('dashNavItems', dashboardNavItems)
-// provide element heights to offset sub headers/asides
+// provide element heights to offset headers/asides
 provide('mainHeaderHeight', mainHeaderHeight)
 provide('footerHeight', footerHeight)
 </script>
