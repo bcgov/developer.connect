@@ -3,13 +3,12 @@ import type { NavItem } from '@nuxt/content/dist/runtime/types'
 const navItems = inject<Ref<NavItem[]>>('docNavItems')
 const localePath = useLocalePath()
 const { prevPage, nextPage } = useSurroundPages()
-const { docPageData, tocLinks, createPageHead } = useDocPageData()
+const { currentDir, tocLinks, createPageHead } = useDocPageData()
+const { activeTocId } = useHeadingObserver()
 
 useHead({
   title: () => createPageHead()
 })
-
-const { activeTocId } = useHeadingObserver()
 </script>
 
 <template>
@@ -55,9 +54,10 @@ const { activeTocId } = useHeadingObserver()
     <div class="relative col-span-full col-start-11 row-start-1 hidden lg:block">
       <SbcTableOfContents
         v-show="tocLinks.length"
-        class="sticky top-0"
+        :hide-label="false"
+        class="sticky top-0 mt-6"
         :toc-links="tocLinks"
-        :current-dir="docPageData?._path"
+        :current-dir="currentDir"
         :active-toc-id="activeTocId"
       />
     </div>

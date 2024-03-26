@@ -6,29 +6,32 @@ defineProps<{
 const localePath = useLocalePath()
 const { t } = useI18n()
 const mobileNav = ref(false)
+const { currentDir, tocLinks } = useDocPageData()
 
-const mainLinks = [
-  {
-    icon: 'i-mdi-home',
-    label: t('btn.sbcConnect'),
-    to: localePath('/')
-  },
-  {
-    icon: 'i-mdi-database',
-    label: t('btn.products'),
-    to: localePath('/products')
-  },
-  {
-    icon: 'i-mdi-account',
-    label: t('btn.dashboard'),
-    to: localePath('/sbc/dashboard')
-  },
-  {
-    icon: 'i-mdi-book-open-variant',
-    label: 'Docs',
-    to: localePath('/products/get-started/account-setup')
-  }
-]
+const mainLinks = computed(() => {
+  return [
+    {
+      icon: 'i-mdi-home',
+      label: t('btn.sbcConnect'),
+      to: localePath('/')
+    },
+    {
+      icon: 'i-mdi-database',
+      label: t('btn.products'),
+      to: localePath('/products')
+    },
+    {
+      icon: 'i-mdi-account',
+      label: t('btn.dashboard'),
+      to: localePath('/sbc/dashboard')
+    },
+    {
+      icon: 'i-mdi-book-open-variant',
+      label: 'Docs',
+      to: localePath('/products/get-started/account-setup')
+    }
+  ]
+})
 
 // delay mobile menu closing for smoother feel
 async function closeMobileNav () {
@@ -138,8 +141,37 @@ async function closeMobileNav () {
           </div>
         </template>
         <UVerticalNavigation :links="mainLinks" @click="closeMobileNav" />
+        <UDivider v-show="tocLinks.length && $route.path.includes('products')" class="my-4" />
+        <UAccordion v-show="tocLinks.length && $route.path.includes('products')" :items="[{label: 'Table of Contents', defaultOpen: true}]">
+          <!-- default slot is the accordian button itself, so we use a custom button variant here to match theme -->
+          <template #default="{ open }">
+            <UButton
+              variant="accordian_trigger"
+            >
+              <span class="truncate">Table of Contents</span>
+
+              <template #trailing>
+                <UIcon
+                  name="i-mdi-menu-up"
+                  class="ms-auto size-7 transition-transform duration-200"
+                  :class="[!open && 'rotate-180']"
+                />
+              </template>
+            </UButton>
+          </template>
+          <!-- item slot is the content inside each accordian, pass toc component into item slot of accordian -->
+          <template #item>
+            <SbcTableOfContents
+              class="-mt-2 ml-4"
+              :hide-label="true"
+              :toc-links="tocLinks"
+              :current-dir="currentDir"
+              @click="closeMobileNav"
+            />
+          </template>
+        </UAccordion>
         <UDivider class="my-4" />
-        <SbcAccordianNavigation :nav-items="accordianItems" @click="closeMobileNav" />
+        <SbcAccordianNavigation :nav-items="accordianItems" @close-mobile="closeMobileNav" />
       </UCard>
     </UModal>
   </div>

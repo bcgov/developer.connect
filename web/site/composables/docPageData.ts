@@ -9,11 +9,13 @@ export function useDocPageData () {
   // fetch current page data
   async function initDocPageData () {
     try {
-      docPageData.value = await queryContent(routeWithoutLocale.value)
-        .where({ _locale: locale.value })
-        .findOne()
+      if (routeWithoutLocale.value.includes('products')) {
+        docPageData.value = await queryContent(routeWithoutLocale.value)
+          .where({ _locale: locale.value })
+          .findOne()
 
-      createPageHead()
+        createPageHead()
+      }
     } catch (error) {
       console.error('Error fetching doc page data:', error)
     }
@@ -42,9 +44,11 @@ export function useDocPageData () {
   // return current page data table of contents
   const tocLinks = computed<TocLink[]>(() => docPageData.value?.body?.toc?.links ?? [])
 
+  const currentDir = computed<string | undefined>(() => docPageData.value?._path)
+
   onMounted(() => {
     initDocPageData()
   })
 
-  return { docPageData, tocLinks, createPageHead }
+  return { docPageData, tocLinks, currentDir, createPageHead }
 }
