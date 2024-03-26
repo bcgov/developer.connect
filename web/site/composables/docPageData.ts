@@ -2,7 +2,7 @@ import type { ParsedContent, TocLink } from '@nuxt/content/dist/runtime/types'
 
 // get current docs page content for page head and table of contents
 export function useDocPageData () {
-  const docPageData = ref<ParsedContent | null>()
+  const docPageData = ref<ParsedContent | null>(null)
   const { locale } = useI18n()
   const routeWithoutLocale = useRouteWithoutLocale()
 
