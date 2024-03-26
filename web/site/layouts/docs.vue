@@ -6,7 +6,8 @@ const footerHeight = inject<Ref<number>>('footerHeight')
 const localePath = useLocalePath()
 const { prevPage, nextPage } = useSurroundPages()
 const { currentDir, tocLinks, createPageHead } = useDocPageData()
-const { activeTocId } = useHeadingObserver()
+const contentWrapper = shallowRef<HTMLDivElement | null>(null)
+const { activeTocId } = useHeadingObserver(contentWrapper.value)
 
 useHead({
   title: () => createPageHead()
@@ -28,7 +29,7 @@ useHead({
         :nav-items="createContentNav(navItems)"
       />
     </div>
-    <div id="nuxt-content-wrapper" class="w-full lg:col-start-4 lg:col-end-11 xl:-ml-8">
+    <div ref="contentWrapper" class="w-full lg:col-start-4 lg:col-end-11 xl:-ml-8">
       <slot />
     </div>
     <UDivider class="px-2 lg:col-start-4 lg:col-end-11 xl:-ml-8" />

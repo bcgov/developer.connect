@@ -1,16 +1,17 @@
 // intersection observer to apply active class to table of contents component
-export function useHeadingObserver () {
+
+const activeTocId = ref<string | null>(null)
+export function useHeadingObserver (rootEl: Element | null) {
   // table of contents intersection observer refs
-  const activeTocId = ref<string | null>(null)
   const observer = shallowRef<IntersectionObserver | null | undefined>(null)
   const { locale } = useI18n()
   const routeWithoutLocale = useRouteWithoutLocale()
 
-  const observerOptions = {
-    root: document.getElementById('nuxt-content-wrapper'),
+  const observerOptions = shallowReactive({
+    root: rootEl,
     threshold: 1,
     rootMargin: '-100px 0px'
-  }
+  })
 
   // only working with setTimeout, ContentDoc fetch need to complete first?
   function observeHeadings () {

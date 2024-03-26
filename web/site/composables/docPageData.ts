@@ -5,11 +5,12 @@ export function useDocPageData () {
   const docPageData = ref<ParsedContent | null>(null)
   const { locale } = useI18n()
   const routeWithoutLocale = useRouteWithoutLocale()
+  const route = useRoute()
 
   // fetch current page data
   async function initDocPageData () {
     try {
-      if (routeWithoutLocale.value.includes('products')) {
+      if (routeWithoutLocale.value.includes('products') && route.meta.layout === 'docs') {
         docPageData.value = await queryContent(routeWithoutLocale.value)
           .where({ _locale: locale.value })
           .findOne()

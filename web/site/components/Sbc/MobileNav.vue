@@ -49,7 +49,6 @@ const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
             <ColorModeSelect />
             <LocaleSelect />
             <UButton
-              class="lg:hidden"
               icon="i-mdi-window-close"
               color="white"
               variant="link"
