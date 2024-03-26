@@ -7,7 +7,7 @@ const { height } = useElementSize(sandboxHeaderRef)
 </script>
 
 <template>
-  <main class="mx-auto w-full max-w-[1360px]">
+  <main class="mx-auto w-full max-w-[1360px] grow">
     <SbcDashboardSubHeader ref="sandboxHeaderRef" class="fixed inset-x-0 z-50" />
     <div class="flex grow flex-col lg:grid lg:grid-cols-12" :style="{ marginTop: `${height}px` }">
       <SbcSideNavigation
