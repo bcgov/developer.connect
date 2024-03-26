@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { SbcHeaderMain } from '#components'
 const { locale } = useI18n()
 const localePath = useLocalePath()
 const i18nHead = useLocaleHead({
@@ -13,6 +14,9 @@ useHead({
   }
 })
 
+// template ref for header component
+const headerRef = ref<InstanceType<typeof SbcHeaderMain> | null>(null)
+
 // fetch content files using composable from nuxt-content https://content.nuxt.com/composables/fetch-content-navigation
 const { data: docNavItems } = await useAsyncData(
   'content-navigation',
@@ -24,8 +28,6 @@ const { data: docNavItems } = await useAsyncData(
     watch: [locale] // fetch new values whenever the locale changes
   }
 )
-
-// const navKey = Symbol('content-nav') as InjectionKey<string>
 
 // dashboard page sub nav items
 const dashboardNavItems = [
@@ -45,21 +47,23 @@ const dashboardNavItems = [
   }
 ]
 
+// provide nav items to use in docs/dashboard layouts
 provide('docNavItems', docNavItems)
 provide('dashNavItems', dashboardNavItems)
 </script>
 <template>
   <div
-    class="flex min-h-screen flex-col bg-bcGovColor-gray1 dark:bg-bcGovGray-900"
+    class="relative flex min-h-screen flex-col bg-bcGovColor-gray1 dark:bg-bcGovGray-900"
   >
-    <SbcHeaderMain
-      :accordian-items="
+    <SbcHeaderMain ref="headerRef" class="fixed inset-x-0 top-0" />
+    <SbcMobileNav
+      :accordian-nav-items="
         $route.path.includes('products') ? createContentNav(docNavItems!) :
         $route.path.includes('dashboard') ? dashboardNavItems : undefined
       "
     />
-    <SbcDashboardSubHeader v-if="$route.path.includes('dashboard')" />
-    <NuxtLayout>
+    <!-- set margin top to height of header component -->
+    <NuxtLayout :class="`mt-[${headerRef?.headerRef?.clientHeight}px]`">
       <NuxtPage />
     </NuxtLayout>
     <SbcFooter />
