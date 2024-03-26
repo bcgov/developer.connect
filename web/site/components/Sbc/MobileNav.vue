@@ -1,49 +1,14 @@
 <script setup lang="ts">
 defineProps<{
-  accordianItems?: AccordianNavItem[] | undefined
+  accordianNavItems?: AccordianNavItem[] | undefined
 }>()
 
-const localePath = useLocalePath()
-const { t } = useI18n()
-const mobileNav = ref(false)
 const { currentDir, tocLinks } = useDocPageData()
-
-const mainLinks = computed(() => {
-  return [
-    {
-      icon: 'i-mdi-home',
-      label: t('btn.sbcConnect'),
-      to: localePath('/')
-    },
-    {
-      icon: 'i-mdi-database',
-      label: t('btn.products'),
-      to: localePath('/products')
-    },
-    {
-      icon: 'i-mdi-account',
-      label: t('btn.dashboard'),
-      to: localePath('/sbc/dashboard')
-    },
-    {
-      icon: 'i-mdi-book-open-variant',
-      label: 'Docs',
-      to: localePath('/products/get-started/account-setup')
-    }
-  ]
-})
-
-// delay mobile menu closing for smoother feel
-async function closeMobileNav () {
-  await nextTick()
-  setTimeout(() => {
-    mobileNav.value = false
-  }, 150)
-}
+const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
 </script>
 <template>
   <UModal
-    v-model="mobileNav"
+    v-model="mobileNavRef"
     fullscreen
     :transition="false"
     :ui="{
@@ -90,7 +55,7 @@ async function closeMobileNav () {
               variant="link"
               size="lg"
               :aria-label="$t('btn.closeMainNav')"
-              @click="mobileNav = false"
+              @click="closeMobileNav"
             />
           </div>
         </div>
@@ -126,7 +91,7 @@ async function closeMobileNav () {
         </template>
       </UAccordion>
       <UDivider class="my-4" />
-      <SbcAccordianNavigation :nav-items="accordianItems" @close-mobile="closeMobileNav" />
+      <SbcAccordianNavigation :nav-items="accordianNavItems" @close-mobile="closeMobileNav" />
     </UCard>
   </UModal>
 </template>
