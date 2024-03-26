@@ -47,23 +47,26 @@ const dashboardNavItems = [
   }
 ]
 
+const mainHeaderHeight = computed(() => headerRef.value?.headerRef?.clientHeight)
+
 // provide nav items to use in docs/dashboard layouts
 provide('docNavItems', docNavItems)
 provide('dashNavItems', dashboardNavItems)
+// provide main header height to offset sub headers/asides
+provide('mainHeaderHeight', mainHeaderHeight)
 </script>
 <template>
   <div
-    class="relative flex min-h-screen flex-col bg-bcGovColor-gray1 dark:bg-bcGovGray-900"
+    class="flex min-h-screen flex-col bg-bcGovColor-gray1 dark:bg-bcGovGray-900"
   >
-    <SbcHeaderMain ref="headerRef" class="fixed inset-x-0 top-0" />
+    <SbcHeaderMain ref="headerRef" class="sticky inset-x-0 top-0 z-50" />
     <SbcMobileNav
       :accordian-nav-items="
         $route.path.includes('products') ? createContentNav(docNavItems!) :
         $route.path.includes('dashboard') ? dashboardNavItems : undefined
       "
     />
-    <!-- set margin top to height of header component -->
-    <NuxtLayout :class="`mt-[${headerRef?.headerRef?.clientHeight}px]`">
+    <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
     <SbcFooter />

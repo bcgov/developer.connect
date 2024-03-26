@@ -12,7 +12,7 @@ defineExpose({
   <header
     id="bcros-main-header"
     ref="headerRef"
-    class="relative border-b-2 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
+    class="border-b-2 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
   >
     <nav
       class="m-auto flex w-full max-w-[1360px] items-center justify-between"
