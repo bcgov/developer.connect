@@ -9,7 +9,7 @@ packages = [{include = "sbc_apigw", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12.2"
-flask = "^1.1.4"
+flask = "^3.0.2"
 launchdarkly-server-sdk = "^8.3.0"
 python-dotenv = "^1.0.1"
 sentry-sdk = "^1.44.0"
