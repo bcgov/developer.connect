@@ -1,15 +1,19 @@
 import { handleContentDirectoryLabel } from '~/utils/handleContentDirectoryLabel'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 
-const mockT = vi.fn((key: string) => {
+function mockGetStartedString (key: string) {
   if (key === 'btn.getStarted') {
     return 'Get Started'
   }
-})
+}
 
 mockNuxtImport('useI18n', () => {
-  return () => ({ t: mockT })
+  return () => (
+    { 
+      t: mockGetStartedString
+    }
+  )
 })
 
 const productNames = [
@@ -37,7 +41,7 @@ describe('handleContentDirectoryLabel', () => {
     expect(handleContentDirectoryLabel(x)).toBe(expected)
   })
 
-  it('returns undefined for unknown title', () => {
+  it('returns arg string for unknown title', () => {
     expect(handleContentDirectoryLabel('unknown')).toBe('unknown')
   })
 })
