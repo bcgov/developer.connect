@@ -21,6 +21,7 @@ async function goToProduct () {
       <a
         :href="localePath(`/products/${directory}/overview`)"
         class="text-white focus:outline-none"
+        :class="{ 'w-3/4': badge }"
       >
         {{ name }}
       </a>
