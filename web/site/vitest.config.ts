@@ -12,13 +12,13 @@ export default defineVitestConfig({
     environmentOptions: {
       nuxt: {
         rootDir: fileURLToPath(new URL('./', import.meta.url)),
-        domEnvironment: 'happy-dom',
+        domEnvironment: 'happy-dom'
         // mock: {
         //   indexedDb: true,
         // },
-      },
+      }
     },
     setupFiles: './tests/setup/i18n.ts',
-    globals: true,
-  },
+    globals: true
+  }
 })

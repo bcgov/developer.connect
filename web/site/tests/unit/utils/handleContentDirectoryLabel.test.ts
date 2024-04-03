@@ -1,6 +1,6 @@
-import { handleContentDirectoryLabel } from '~/utils/handleContentDirectoryLabel'
 import { describe, expect, it } from 'vitest'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
+import { handleContentDirectoryLabel } from '~/utils/handleContentDirectoryLabel'
 
 function mockGetStartedString (key: string) {
   if (key === 'btn.getStarted') {
@@ -10,7 +10,7 @@ function mockGetStartedString (key: string) {
 
 mockNuxtImport('useI18n', () => {
   return () => (
-    { 
+    {
       t: mockGetStartedString
     }
   )
@@ -28,7 +28,6 @@ const productNames = [
 ]
 
 describe('handleContentDirectoryLabel', () => {
-
   it('returns translated string for "Get Started"', () => {
     expect(handleContentDirectoryLabel('Get Started')).toBe('Get Started')
   })
