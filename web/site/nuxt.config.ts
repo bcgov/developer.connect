@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: ['@nuxtjs/eslint-module'],
+  modules: ['@nuxtjs/eslint-module', '@nuxt/test-utils/module'],
   extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {
     dirs: ['stores', 'composables', 'enums', 'interfaces', 'types', 'utils']

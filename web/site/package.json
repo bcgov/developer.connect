@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "sbc-apigw-site",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,17 +11,23 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
     "lint:fix": "pnpm lint --fix",
-    "test": "vitest --passWithNoTests"
+    "test": "vitest --passWithNoTests",
+    "test:unit": "vitest"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/test-utils": "^3.12.0",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@testing-library/vue": "^8.0.3",
     "@typescript-eslint/parser": "^7.5.0",
+    "@vue/test-utils": "^2.4.5",
     "eslint": "^8.57.0",
     "eslint-plugin-tailwindcss": "^3.15.1",
+    "happy-dom": "^13.0.0",
     "nuxt": "^3.11.1",
     "typescript": "^5.4.3",
+    "vitest": "^1.4.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
