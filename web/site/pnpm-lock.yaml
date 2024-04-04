@@ -38,7 +38,7 @@ devDependencies:
     specifier: ^3.15.1
     version: 3.15.1(tailwindcss@3.4.1)
   happy-dom:
-    specifier: ^13.0.0
+    specifier: ^13.10.1
     version: 13.10.1
   nuxt:
     specifier: ^3.11.1
