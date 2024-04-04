@@ -281,8 +281,8 @@ Werkzeug = "<2"
 [package.source]
 type = "git"
 url = "https://github.com/bcgov/sbc-auth.git"
-reference = "main"
-resolved_reference = "e9c08c6fbac4f453e474782290b2bca0f4701368"
+reference = "751a8300207dee40ca2933f1642a424e9b1e665e"
+resolved_reference = "751a8300207dee40ca2933f1642a424e9b1e665e"
 subdirectory = "auth-api"
 
 [[package]]
@@ -2593,4 +2593,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12.2"
-content-hash = "deb685f8bbdecc3eeea2955b7a70b93cdbf6124c0efd41a2c969654492c7dc4e"
+content-hash = "19096547333a291999175b25d14e506537be16b51a6eb13ee2dfdff7491e99f8"
