@@ -1,21 +1,17 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-test.describe('homepage', () => {
+test.describe('docs page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/en-CA')
+    await page.goto('/en-CA/products/get-started#overview')
   })
 
   test('page contents', async ({ page }) => {
     const h1 = await page.textContent('h1')
-    const p = await page.textContent('p')
-    const logo = page.getByAltText('Government of British Columbia Logo')
-    expect(logo).toBeTruthy()
-    expect(h1).toBe('BC Registries API Gateway')
-    expect(p).toBe('Welcome to the BC Registries API Gateway! Access API information for all BC Registries services here.')
+    expect(h1).toBe('Account Setup')
   })
 
-  test('homepage accessibility passes', async ({ page }) => {
+  test('accessibility', async ({ page }) => {
     const a11yResults = await new AxeBuilder({ page })
       .exclude('#locale-select-dropdown') // headless ui dropdown fails the axe check
       .analyze()
