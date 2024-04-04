@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test'
 import type { ConfigOptions } from '@nuxt/test-utils/playwright'
 
 const devicesToTest = [
-  'Desktop Chrome',
+  'Desktop Chrome'
   // Test against other common browser engines.
   // 'Desktop Firefox',
   // 'Desktop Safari',
@@ -13,14 +13,23 @@ const devicesToTest = [
   // Test against branded browsers.
   // { ...devices['Desktop Edge'], channel: 'msedge' },
   // { ...devices['Desktop Chrome'], channel: 'chrome' },
-] satisfies Array<string | typeof devices[string]> 
+] satisfies Array<string | typeof devices[string]>
 
 export default defineConfig<ConfigOptions>({
   testDir: './tests/e2e',
   reporter: 'line',
+  // Fail the build on CI if you accidentally left test.only in the source code.
+  forbidOnly: !!process.env.CI,
+
+  // Retry on CI only.
+  // retries: process.env.CI ? 2 : 0,
+  retries: 3, // a11y tests are flaky
+
+  // Opt out of parallel tests on CI.
+  // workers: process.env.CI ? 1 : undefined,
   use: {
     nuxt: {
-      rootDir: fileURLToPath(new URL('.', import.meta.url)),
+      rootDir: fileURLToPath(new URL('.', import.meta.url))
     },
     actionTimeout: 0,
     baseURL: 'http://localhost:3467',
