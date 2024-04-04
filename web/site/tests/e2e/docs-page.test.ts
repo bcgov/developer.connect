@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright'
 
 test.describe('docs page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/en-CA/products/get-started#overview')
+    await page.goto('/en-CA/products/get-started')
   })
 
   test('page contents', async ({ page }) => {

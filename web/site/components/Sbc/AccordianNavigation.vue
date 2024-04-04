@@ -16,6 +16,7 @@ defineEmits<{(e: 'close-mobile'): void }>()
       <template #default="{ item, open }">
         <UButton
           variant="accordian_trigger"
+          :aria-label="item.label"
         >
           <span class="truncate">{{ item.label }}</span>
 
@@ -31,6 +32,7 @@ defineEmits<{(e: 'close-mobile'): void }>()
       <!-- item slot is the content inside each accordian, so for each accordian item, pass the children array into UVerticalNavigation -->
       <template #item="{ item }">
         <UVerticalNavigation
+          :aria-label="item.label"
           class="mx-2"
           :links="item.children"
           :ui="{
