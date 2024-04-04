@@ -10,7 +10,7 @@ useHead({
     <h1 class="text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
       {{ $t('page.home.h1') }}
     </h1>
-    <p class="text-lg text-bcGovColor-lightGray dark:text-white">
+    <p class="text-lg text-bcGovColor-midGray dark:text-white">
       {{ $t('page.home.intro') }}
     </p>
     <div class="flex items-center justify-center gap-4">
