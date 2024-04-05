@@ -11,9 +11,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
     "lint:fix": "pnpm lint --fix",
-    "test": "vitest --passWithNoTests",
+    "test": "vitest --dir tests/unit --passWithNoTests",
     "test:unit": "vitest --dir tests/unit",
-    "test:e2e:vi": "vitest --dir tests/e2e",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui"
   },

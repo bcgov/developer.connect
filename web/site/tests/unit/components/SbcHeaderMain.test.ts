@@ -22,6 +22,7 @@ const getTranslationByKey = (key: string): any => {
   return value.body.static
 }
 
+// fails without custom query by t function
 mockNuxtImport('useI18n', () => {
   return () => (
     {
@@ -40,7 +41,6 @@ mockNuxtImport('useI18n', () => {
   )
 })
 
-// need to figure out some mocks before testing this
 describe('<SbcHeaderMain/>', () => {
   it('mounts', async () => {
     const component = await renderSuspended(SbcHeaderMain, {
