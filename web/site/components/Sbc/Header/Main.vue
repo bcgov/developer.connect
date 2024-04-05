@@ -10,7 +10,7 @@ defineExpose({
 </script>
 <template>
   <header
-    id="bcros-main-header"
+    id="sbc-main-header"
     ref="headerRef"
     class="border-b-2 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
   >
