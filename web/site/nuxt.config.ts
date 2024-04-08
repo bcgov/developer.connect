@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  ssr: true,
+  ssr: false,
   nitro: {
     prerender: {
       routes: [
@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: ['@nuxtjs/eslint-module', '@nuxt/test-utils/module'],
+  modules: ['@nuxtjs/eslint-module', '@nuxt/test-utils/module', 'nuxt-vuefire'],
   extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {
     dirs: ['stores', 'composables', 'enums', 'interfaces', 'types', 'utils']
@@ -51,5 +51,36 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light',
     fallback: 'light'
+  },
+  vuefire: {
+    emulators: {
+      // uncomment this line to run the application in production mode without emulators during dev
+      enabled: false,
+      auth: {
+        options: {
+          disableWarnings: true
+        }
+      }
+    },
+    auth: {
+      enabled: true,
+      sessionCookie: false
+    },
+
+    // appCheck: {
+    //   provider: 'ReCaptchaV3',
+    //   // site key, NOT secret key
+    //   key: process.env.AUTH_APP_CHECK_KEY,
+    //   isTokenAutoRefreshEnabled: true
+    // },
+    config: {
+      apiKey: process.env.NUXT_AUTH_API_KEY,
+      authDomain: process.env.NUXT_AUTH_DOMAIN,
+      projectId: process.env.NUXT_AUTH_PROJECT_ID,
+      storageBucket: process.env.NUXT_AUTH_STORAGE_BUCKET,
+      messagingSenderId: process.env.NUXT_AUTH_MESSAGING_SENDER_ID,
+      appId: process.env.NUXT_AUTH_APP_ID,
+      measurementId: process.env.NUXT_MEASUREMENT_ID
+    }
   }
 })
