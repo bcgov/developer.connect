@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { mountSuspended, renderSuspended } from '@nuxt/test-utils/runtime'
 import { fireEvent, screen } from '@testing-library/vue'
 import { ColorModeSelect } from '#components'
+import { enI18n } from '~/tests/mocks/i18n'
 
 const $colorModeLight = {
   preference: 'light'
@@ -17,7 +18,8 @@ describe('<ColorModeSelect/>', () => {
       global: {
         mocks: {
           $colorMode: $colorModeLight
-        }
+        },
+        plugins: [enI18n]
       }
     })
 
@@ -30,7 +32,8 @@ describe('<ColorModeSelect/>', () => {
       global: {
         mocks: {
           $colorMode: $colorModeDark
-        }
+        },
+        plugins: [enI18n]
       }
     })
 
@@ -43,7 +46,8 @@ describe('<ColorModeSelect/>', () => {
       global: {
         mocks: {
           $colorMode: $colorModeLight
-        }
+        },
+        plugins: [enI18n]
       }
     })
 

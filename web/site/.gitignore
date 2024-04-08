@@ -136,3 +136,6 @@ out
 .DS_Store
 
 .history
+
+# playwright test results
+test-results

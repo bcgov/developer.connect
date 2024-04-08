@@ -35,7 +35,7 @@ useHead({
     <UDivider class="px-2 lg:col-start-4 lg:col-end-11 xl:-ml-8" />
     <div class="flex w-full flex-col items-center justify-between gap-4 px-2 py-8 sm:flex-row lg:col-start-4 lg:col-end-11 xl:-ml-8">
       <UButton
-        :label="prevPage?.title"
+        :aria-label="`${handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '')}, ${prevPage?.title}`"
         :to="localePath(prevPage?._path || '/')"
         variant="outline"
         color="gray"
@@ -48,7 +48,7 @@ useHead({
         </div>
       </UButton>
       <UButton
-        :label="nextPage?.title"
+        :aria-label="`${handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '')}, ${nextPage?.title}`"
         :to="localePath(nextPage?._path || '/')"
         variant="outline"
         color="gray"
