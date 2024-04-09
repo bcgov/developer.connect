@@ -1,4 +1,5 @@
 import type { DropdownItem } from '#ui/types'
+import { useSbcAuth } from './sbcAuth' // auto import not working
 const mobileNavRef = ref(false)
 
 // handle navigation items and functionality
