@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const { t } = useI18n()
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'require-auth'
 })
 
 useHead({
