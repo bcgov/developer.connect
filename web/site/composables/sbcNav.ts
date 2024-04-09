@@ -5,6 +5,7 @@ export function useSbcNav () {
   const localePath = useLocalePath()
   const { t } = useI18n()
   const router = useRouter()
+  const route = useRoute()
 
   const mainLinks = computed(() => {
     return [
@@ -40,6 +41,13 @@ export function useSbcNav () {
     await nextTick()
     mobileNavRef.value = false
   }
+
+  // close mobile menu when user changes routes
+  watch(() => route.path, (newRoute) => {
+    if (newRoute && mobileNavRef.value === true) {
+      closeMobileNav()
+    }
+  })
 
   return {
     mainLinks,

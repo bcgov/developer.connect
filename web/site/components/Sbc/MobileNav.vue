@@ -1,10 +1,35 @@
 <script setup lang="ts">
+import type { DropdownItem } from '#ui/types'
+import {
+  signOut
+} from 'firebase/auth'
 defineProps<{
   accordianNavItems?: AccordianNavItem[] | undefined
 }>()
-
+const auth = useFirebaseAuth()!
+const user = useCurrentUser()
+const localePath = useLocalePath()
 const { currentDir, tocLinks } = useDocPageData()
 const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
+
+const loggedInMenuOptions = computed<DropdownItem[][]>(() => {
+  return [
+    [
+      {
+        label: 'Account',
+        slot: 'account',
+        disabled: true
+      },
+      {
+        label: 'Log out',
+        // label: t('BcrosHeader.menu.account.logout'),
+        icon: 'i-mdi-logout',
+        click: () => signOut(auth)
+        // to: localePath('/sbc/auth/logout')
+      }
+    ]
+  ]
+})
 </script>
 <template>
   <UModal
@@ -49,6 +74,62 @@ const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
             <ColorModeSelect />
             <LocaleSelect />
             <UButton
+              v-if="!user"
+              label="Log in"
+              :to="localePath('/sbc/auth/login')"
+              color="white"
+              variant="link"
+              active-class="underline"
+              class="scale-90 font-normal"
+            />
+            <UButton
+              v-if="!user"
+              color="white"
+              variant="link"
+              label="Create Account"
+              class="scale-90 font-normal"
+            />
+            <UDropdown
+              v-if="user"
+              :items="loggedInMenuOptions"
+              :popper="{ placement: 'bottom-end' }"
+              :ui="{
+                width: '',
+                padding: 'p-2',
+                item: {
+                  disabled:
+                    'cursor-text select-text text-bcGovGray-900 dark:text-white opacity-100 font-semibold',
+                  icon: {
+                    base: 'flex-shrink-0 h-6 w-6',
+                    active: 'text-gray-500 dark:text-gray-400',
+                    inactive: 'text-bcGovGray-600 dark:text-gray-500'
+                  }
+                }
+              }"
+            >
+              <UButton
+                color="white"
+                variant="link"
+              >
+                <UAvatar
+                  :alt="user?.displayName![0] ?? 'U'"
+                  :ui="{
+                    background: 'bg-bcGovBlue-300 dark:bg-[#E0E7ED]',
+                    text: 'font-semibold leading-none text-white dark:text-bcGovColor-darkGray truncate',
+                    placeholder: 'font-semibold leading-none text-white truncate dark:text-bcGovColor-darkGray text-xl',
+                    rounded: 'rounded-sm'
+                  }"
+                />
+              </UButton>
+
+              <template #account>
+                <SbcHeaderAccountLabel
+                  :username="user?.displayName || 'U'"
+                  account-name=""
+                />
+              </template>
+            </UDropdown>
+            <UButton
               icon="i-mdi-window-close"
               color="white"
               variant="link"
@@ -59,7 +140,7 @@ const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
           </div>
         </div>
       </template>
-      <UVerticalNavigation :links="mainLinks" @click="closeMobileNav" />
+      <UVerticalNavigation :links="mainLinks" />
       <UDivider v-show="tocLinks.length && $route.path.includes('products')" class="my-4" />
       <UAccordion v-show="tocLinks.length && $route.path.includes('products')" :items="[{label: 'Table of Contents', defaultOpen: true}]">
         <!-- default slot is the accordian button itself, so we use a custom button variant here to match theme -->
@@ -90,7 +171,7 @@ const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
         </template>
       </UAccordion>
       <UDivider class="my-4" />
-      <SbcAccordianNavigation :nav-items="accordianNavItems" @close-mobile="closeMobileNav" />
+      <SbcAccordianNavigation :nav-items="accordianNavItems" />
     </UCard>
   </UModal>
 </template>
