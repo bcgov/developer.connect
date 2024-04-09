@@ -12,6 +12,11 @@ test.describe('docs page', () => {
   })
 
   test('accessibility', async ({ page }) => {
+    await page
+      .getByText('Account Setup')
+      .first()
+      .click() // wait for page load before runnign a11y checks? fails without this
+
     const a11yResults = await new AxeBuilder({ page })
       .exclude('#locale-select-dropdown') // headless ui dropdown fails the axe check
       .analyze()

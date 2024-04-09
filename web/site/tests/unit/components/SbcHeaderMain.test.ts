@@ -41,6 +41,14 @@ mockNuxtImport('useI18n', () => {
   )
 })
 
+mockNuxtImport('useCurrentUser', () => {
+  return () => (
+    {
+      displayName: 'Test User'
+    }
+  )
+})
+
 describe('<SbcHeaderMain/>', () => {
   it('mounts', async () => {
     const component = await renderSuspended(SbcHeaderMain, {
