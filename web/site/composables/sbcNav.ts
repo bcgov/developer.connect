@@ -1,7 +1,9 @@
+import type { DropdownItem } from '#ui/types'
 const mobileNavRef = ref(false)
 
 // handle navigation items and functionality
 export function useSbcNav () {
+  const sbcAuth = useSbcAuth()
   const localePath = useLocalePath()
   const { t } = useI18n()
   const router = useRouter()
@@ -32,6 +34,40 @@ export function useSbcNav () {
     ]
   })
 
+  const loggedInUserOptions = computed<DropdownItem[][]>(() => {
+    return [
+      [
+        {
+          label: 'Account',
+          slot: 'account',
+          disabled: true
+        },
+        {
+          label: 'Log out',
+          // label: t('BcrosHeader.menu.account.logout'),
+          icon: 'i-mdi-logout',
+          click: () => sbcAuth.handleUserLogout()
+        }
+      ]
+    ]
+  })
+
+  const loggedOutUserOptions = computed<DropdownItem[][]>(() => {
+    return [
+      [
+        {
+          label: 'Log in',
+          to: localePath('/sbc/auth/login'),
+          icon: 'i-mdi-login'
+        },
+        {
+          label: 'Create Account',
+          icon: 'i-mdi-account-plus'
+        }
+      ]
+    ]
+  })
+
   function openMobileNav () {
     mobileNavRef.value = true
   }
@@ -52,6 +88,8 @@ export function useSbcNav () {
   return {
     mainLinks,
     mobileNavRef,
+    loggedInUserOptions,
+    loggedOutUserOptions,
     openMobileNav,
     closeMobileNav
   }

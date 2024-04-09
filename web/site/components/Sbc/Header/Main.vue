@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import type { DropdownItem } from '#ui/types'
-import {
-  signOut
-} from 'firebase/auth'
-const auth = useFirebaseAuth()! // only exists on client side
-const { mainLinks, openMobileNav } = useSbcNav()
+const { mainLinks, openMobileNav, loggedInUserOptions, loggedOutUserOptions } = useSbcNav()
 // const { t } = useI18n()
 const localePath = useLocalePath()
 const headerRef = ref<HTMLElement | null>(null)
@@ -12,25 +7,6 @@ const user = useCurrentUser()
 // expose template ref to access properties in parent
 defineExpose({
   headerRef
-})
-
-const loggedInMenuOptions = computed<DropdownItem[][]>(() => {
-  return [
-    [
-      {
-        label: 'Account',
-        slot: 'account',
-        disabled: true
-      },
-      {
-        label: 'Log out',
-        // label: t('BcrosHeader.menu.account.logout'),
-        icon: 'i-mdi-logout',
-        click: () => signOut(auth)
-        // to: localePath('/sbc/auth/logout')
-      }
-    ]
-  ]
 })
 </script>
 <template>
@@ -67,6 +43,17 @@ const loggedInMenuOptions = computed<DropdownItem[][]>(() => {
       <div class="flex gap-1">
         <ColorModeSelect />
         <LocaleSelect />
+        <UDropdown
+          v-if="!user"
+          class="lg:hidden"
+          :items="loggedOutUserOptions"
+        >
+          <UButton
+            icon="i-mdi-account"
+            color="white"
+            variant="link"
+          />
+        </UDropdown>
         <UButton
           v-if="!user"
           label="Log in"
@@ -74,30 +61,22 @@ const loggedInMenuOptions = computed<DropdownItem[][]>(() => {
           color="white"
           variant="link"
           active-class="underline"
-          class="scale-90 font-normal"
+          class="hidden scale-90 font-normal lg:block"
         />
         <UButton
           v-if="!user"
           color="white"
           variant="link"
           label="Create Account"
-          class="scale-90 font-normal"
+          class="hidden scale-90 font-normal lg:block"
         />
         <UDropdown
           v-if="user"
-          :items="loggedInMenuOptions"
-          :popper="{ placement: 'bottom-end' }"
+          :items="loggedInUserOptions"
           :ui="{
-            width: '',
-            padding: 'p-2',
             item: {
               disabled:
                 'cursor-text select-text text-bcGovGray-900 dark:text-white opacity-100 font-semibold',
-              icon: {
-                base: 'flex-shrink-0 h-6 w-6',
-                active: 'text-gray-500 dark:text-gray-400',
-                inactive: 'text-bcGovGray-600 dark:text-gray-500'
-              }
             }
           }"
         >
