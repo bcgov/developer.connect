@@ -23,13 +23,11 @@ useHead({
 })
 const user = useCurrentUser()
 
-async function signIn (provider: OAuthProvider) {
+function signIn (provider: OAuthProvider) {
   error.value = null
   signInWithPopup(auth, provider).catch((reason) => {
     error.value = reason
   })
-
-  await navigateTo('/')
 }
 
 // const token = ref()
