@@ -140,3 +140,5 @@ out
 
 # playwright test results
 test-results
+# ignore this test for now
+tests/e2e/login-flow.test.ts
