@@ -74,13 +74,13 @@ export default defineNuxtConfig({
     //   isTokenAutoRefreshEnabled: true
     // },
     config: {
-      apiKey: process.env.NUXT_AUTH_API_KEY,
-      authDomain: process.env.NUXT_AUTH_DOMAIN,
-      projectId: process.env.NUXT_AUTH_PROJECT_ID,
-      storageBucket: process.env.NUXT_AUTH_STORAGE_BUCKET,
-      messagingSenderId: process.env.NUXT_AUTH_MESSAGING_SENDER_ID,
-      appId: process.env.NUXT_AUTH_APP_ID,
-      measurementId: process.env.NUXT_MEASUREMENT_ID
+      apiKey: process.env.AUTH_API_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      projectId: process.env.AUTH_PROJECT_ID,
+      storageBucket: process.env.AUTH_STORAGE_BUCKET,
+      messagingSenderId: process.env.AUTH_MESSAGING_SENDER_ID,
+      appId: process.env.AUTH_APP_ID,
+      measurementId: process.env.MEASUREMENT_ID
     }
   }
 })
