@@ -6,7 +6,7 @@
     "build-check": "nuxt build",
     "build": "nuxt generate",
     "dev": "nuxt dev --dotenv .env.development",
-    "generate": "nuxt generate",
+    "generate": "nuxt generate --dotenv .env.development",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
@@ -39,7 +39,10 @@
   },
   "dependencies": {
     "@daxiom/sbc-nuxt-assets-layer": "^0.2.0",
+    "@firebase/app-types": "^0.9.1",
     "firebase": "^10.10.0",
+    "firebase-admin": "^11.3.0",
+    "firebase-functions": "^4.9.0",
     "vuefire": "^3.1.23"
   }
 }
