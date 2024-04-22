@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  ssr: true,
+  ssr: false,
   nitro: {
     prerender: {
       routes: [
@@ -46,7 +46,13 @@ export default defineNuxtConfig({
       'en-CA'
       // 'fr-CA'
     ],
-    contentHead: false
+    contentHead: false,
+    highlight: {
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark'
+      }
+    }
   },
   colorMode: {
     preference: 'light',
