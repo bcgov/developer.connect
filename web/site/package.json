@@ -5,8 +5,8 @@
   "scripts": {
     "build-check": "nuxt build",
     "build": "nuxt generate",
-    "dev": "nuxt dev --dotenv .env.development",
-    "generate": "nuxt generate --dotenv .env.development",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
