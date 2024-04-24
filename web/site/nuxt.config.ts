@@ -88,5 +88,19 @@ export default defineNuxtConfig({
       appId: process.env.AUTH_APP_ID,
       measurementId: process.env.MEASUREMENT_ID
     }
+  },
+  vite: {
+    vue: {
+      template: {
+        compilerOptions: {
+          // treat all tags starting with 'bcros-' as custom elements
+          isCustomElement: tag => tag.startsWith('bcros-')
+        }
+      }
+    }
+  },
+  runtimeConfig: {
+    xApiKey: '',
+    accountID: ''
   }
 })
