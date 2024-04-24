@@ -1,0 +1,20 @@
+name: APIGW API CI
+
+on:
+  pull_request:
+    paths:
+      - "api/**"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./api
+
+jobs:
+  apigw-api-ci:
+    uses: bcgov/bcregistry-sre/.github/workflows/backend-ci.yaml@main
+    with:
+      app_name: apigw-api"
+      working_directory: "./api"
+      codecov_flag: "apigwapi"
