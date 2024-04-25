@@ -2,9 +2,9 @@
 defineProps<{
   accordianNavItems?: AccordianNavItem[] | undefined
 }>()
-
+const user = useCurrentUser()
 const { currentDir, tocLinks } = useDocPageData()
-const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
+const { mainLinks, mobileNavRef, loggedInUserOptions, loggedOutUserOptions, closeMobileNav } = useSbcNav()
 </script>
 <template>
   <UModal
@@ -48,6 +48,48 @@ const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
           <div class="flex gap-1">
             <ColorModeSelect />
             <LocaleSelect />
+            <UDropdown
+              v-if="!user"
+              :items="loggedOutUserOptions"
+            >
+              <UButton
+                icon="i-mdi-account"
+                color="white"
+                variant="link"
+              />
+            </UDropdown>
+            <UDropdown
+              v-if="user"
+              :items="loggedInUserOptions"
+              :ui="{
+                item: {
+                  disabled:
+                    'cursor-text select-text text-bcGovGray-900 dark:text-white opacity-100 font-semibold',
+                }
+              }"
+            >
+              <UButton
+                color="white"
+                variant="link"
+              >
+                <UAvatar
+                  :alt="user?.displayName![0] ?? 'U'"
+                  :ui="{
+                    background: 'bg-bcGovBlue-300 dark:bg-[#E0E7ED]',
+                    text: 'font-semibold leading-none text-white dark:text-bcGovColor-darkGray truncate',
+                    placeholder: 'font-semibold leading-none text-white truncate dark:text-bcGovColor-darkGray text-xl',
+                    rounded: 'rounded-sm'
+                  }"
+                />
+              </UButton>
+
+              <template #account>
+                <SbcHeaderAccountLabel
+                  :username="user?.displayName || 'U'"
+                  account-name=""
+                />
+              </template>
+            </UDropdown>
             <UButton
               icon="i-mdi-window-close"
               color="white"
@@ -59,7 +101,7 @@ const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
           </div>
         </div>
       </template>
-      <UVerticalNavigation :links="mainLinks" @click="closeMobileNav" />
+      <UVerticalNavigation :links="mainLinks" />
       <UDivider v-show="tocLinks.length && $route.path.includes('products')" class="my-4" />
       <UAccordion v-show="tocLinks.length && $route.path.includes('products')" :items="[{label: 'Table of Contents', defaultOpen: true}]">
         <!-- default slot is the accordian button itself, so we use a custom button variant here to match theme -->
@@ -90,7 +132,7 @@ const { mainLinks, mobileNavRef, closeMobileNav } = useSbcNav()
         </template>
       </UAccordion>
       <UDivider class="my-4" />
-      <SbcAccordianNavigation :nav-items="accordianNavItems" @close-mobile="closeMobileNav" />
+      <SbcAccordianNavigation :nav-items="accordianNavItems" />
     </UCard>
   </UModal>
 </template>

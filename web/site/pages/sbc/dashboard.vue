@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const { t } = useI18n()
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'require-auth'
 })
 
 useHead({
@@ -28,7 +29,7 @@ const items = computed(() => {
 
 </script>
 <template>
-  <div class="mx-auto flex w-full flex-col p-8">
+  <div class="mx-auto flex w-full flex-col px-2 pb-4 pt-6 lg:p-8">
     <h1 class="text-4xl font-semibold text-bcGovColor-darkGray dark:text-white">
       Some Account
     </h1>

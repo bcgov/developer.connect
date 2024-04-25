@@ -29,14 +29,20 @@
     "eslint": "^8.57.0",
     "eslint-plugin-tailwindcss": "^3.15.1",
     "happy-dom": "^13.10.1",
-    "nuxt": "^3.11.2",
-    "playwright-core": "^1.43.1",
-    "typescript": "^5.4.5",
-    "vitest": "^1.5.1",
-    "vue": "^3.4.25",
-    "vue-router": "^4.3.2"
+    "nuxt": "^3.11.1",
+    "nuxt-vuefire": "^1.0.2",
+    "playwright-core": "^1.42.1",
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
   },
   "dependencies": {
-    "@daxiom/sbc-nuxt-assets-layer": "^0.2.0"
+    "@daxiom/sbc-nuxt-assets-layer": "^0.2.0",
+    "@firebase/app-types": "^0.9.1",
+    "firebase": "^10.10.0",
+    "firebase-admin": "^11.3.0",
+    "firebase-functions": "^4.9.0",
+    "vuefire": "^3.1.23"
   }
 }

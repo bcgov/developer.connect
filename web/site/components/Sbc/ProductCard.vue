@@ -18,17 +18,17 @@ async function goToProduct () {
     class="flex h-[420px] w-[390px] cursor-pointer flex-col overflow-hidden rounded bg-white shadow-md transition-transform focus-within:-translate-y-1 focus-within:ring-2 focus-within:ring-bcGovGray-500 hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-bcGovGray-500 dark:border dark:border-gray-300/50 dark:bg-bcGovColor-darkGray dark:focus-within:ring-1 dark:focus-within:ring-bcGovGray-100 dark:hover:ring-1 dark:hover:ring-bcGovGray-100"
     @click="goToProduct"
   >
-    <div class="relative flex h-[60px] items-center bg-bcGovBlue-350 px-7 py-3.5 font-semibold tracking-wide dark:border-b dark:border-gray-300/50 dark:bg-bcGovColor-darkGray">
+    <div class="relative flex h-[60px] items-center bg-bcGovBlue-350 px-4 py-3.5 font-semibold tracking-wide lg:px-7 dark:border-b dark:border-gray-300/50 dark:bg-bcGovColor-darkGray">
       <a
         :href="localePath(`/products/${directory}/overview`)"
         class="text-white focus:outline-none"
-        :class="{ 'w-3/4': badge }"
+        :class="{ 'w-4/5': badge }"
       >
         {{ name }}
       </a>
-      <span v-if="badge" class="absolute right-7 top-0 rounded-b bg-bcGovColor-navDivider px-2 py-1 text-sm text-bcGovBlue-600">{{ badge }}</span>
+      <span v-if="badge" class="absolute right-2 top-0 rounded-b bg-bcGovColor-navDivider px-2 py-1 text-sm text-bcGovBlue-600 sm:right-7">{{ badge }}</span>
     </div>
-    <div class="grow self-start px-7 pt-7 text-left text-bcGovColor-midGray dark:text-white">
+    <div class="grow self-start px-4 py-3.5 text-left text-bcGovColor-midGray sm:p-7 dark:text-white">
       <p class="mb-2">
         {{ description }}
       </p>
@@ -38,7 +38,7 @@ async function goToProduct () {
         </li>
       </ul>
     </div>
-    <div class="px-7 pb-7 text-left">
+    <div class="px-4 pb-3.5 text-left sm:p-7">
       <span class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] underline dark:text-white">
         <span>
           {{ $t('SbcProductCard.goTo') }} {{ name }}

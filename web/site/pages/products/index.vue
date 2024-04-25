@@ -20,7 +20,7 @@ const { data: products } = await useAsyncData(
 // console.log(products.value)
 </script>
 <template>
-  <div class="mx-auto w-full max-w-[1360px] p-8">
+  <div class="mx-auto w-full max-w-[1360px] p-2 sm:p-4 lg:p-8">
     <h1 class="mb-8 text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
       {{ $t('page.products.h1') }}
     </h1>
