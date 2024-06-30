@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/en-CA/sbc/tos'
+        // '/en-CA/sbc/tos'
       ]
     }
   },
