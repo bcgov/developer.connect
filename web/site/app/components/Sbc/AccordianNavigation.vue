@@ -17,12 +17,11 @@ defineProps<{
           variant="accordian_trigger"
           :aria-label="item.label"
         >
-          <span class="truncate">{{ item.label }}</span>
-
+          <span class="flex-1 text-left">{{ item.label }}</span>
           <template #trailing>
             <UIcon
               name="i-mdi-menu-up"
-              class="ms-auto size-7 transition-transform duration-200"
+              class="ms-auto size-7 shrink-0 transition-transform duration-200"
               :class="[!open && 'rotate-180']"
             />
           </template>
