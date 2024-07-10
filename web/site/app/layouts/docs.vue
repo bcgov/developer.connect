@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content/dist/runtime/types'
+import type { NavItem } from '@nuxt/content'
 const navItems = inject<Ref<NavItem[]>>('docNavItems')
 const mainHeaderHeight = inject<Ref<number>>('mainHeaderHeight')
 const footerHeight = inject<Ref<number>>('footerHeight')

@@ -1,4 +1,4 @@
-import type { NavItem, ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { NavItem, ParsedContent } from '@nuxt/content'
 
 // get data for next/previous page buttons
 export function useSurroundPages () {
@@ -7,7 +7,7 @@ export function useSurroundPages () {
   const route = useRoute()
 
   // get the very last item.child.child index, returns -1 if navitems are undefined
-  const lastNavItemIndex = (navItems?.value[0].children?.length ?? 0) - 1
+  const lastNavItemIndex = (navItems?.value[0]?.children?.length ?? 0) - 1
   const lastNavChildIndex = (navItems?.value[0]?.children?.[lastNavItemIndex]?.children?.length ?? 0) - 1
 
   // refs for watch/query, queryContent requires route without locale
@@ -29,9 +29,9 @@ export function useSurroundPages () {
 
       // assign query to refs
       // if query === null, (reached start of files), return last item in content files to 'wrap' the button navigation, fallback to not found
-      prevPage.value = prev ?? navItems?.value[0].children?.[lastNavItemIndex]?.children?.[lastNavChildIndex] ?? { title: 'Not Found', _path: 'Not Found' }
+      prevPage.value = prev ?? navItems?.value[0]?.children?.[lastNavItemIndex]?.children?.[lastNavChildIndex] ?? { title: 'Not Found', _path: 'Not Found' }
       // if query === null, (reached end of files), return first item in content files to 'wrap' the button navigation, fallback to not found
-      nextPage.value = next ?? navItems?.value[0].children?.[0]?.children?.[0] ?? { title: 'Not Found', _path: 'Not Found' }
+      nextPage.value = next ?? navItems?.value[0]?.children?.[0]?.children?.[0] ?? { title: 'Not Found', _path: 'Not Found' }
     }
   }
 
