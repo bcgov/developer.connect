@@ -3,7 +3,6 @@ import type { NavItem } from '@nuxt/content'
 const navItems = inject<Ref<NavItem[]>>('docNavItems')
 const mainHeaderHeight = inject<Ref<number>>('mainHeaderHeight')
 const footerHeight = inject<Ref<number>>('footerHeight')
-const localePath = useLocalePath()
 const { prevPage, nextPage } = useSurroundPages()
 const { currentDir, tocLinks, createPageHead } = useDocPageData()
 const contentWrapper = shallowRef<HTMLDivElement | null>(null)
@@ -13,6 +12,7 @@ useHead({
   title: () => createPageHead()
 })
 
+// styles for nav + toc sticky, for some reason header + footer height are consistently 18px short
 const stickyStyles = computed(() => ({
   top: `${mainHeaderHeight!.value + 18}px`,
   maxHeight: `calc(100vh - (${mainHeaderHeight!.value + footerHeight!.value + 36}px))`,
@@ -26,7 +26,7 @@ const stickyStyles = computed(() => ({
       class="sticky hidden overflow-y-auto overflow-x-hidden py-4 lg:block"
       :style="stickyStyles"
     >
-      <SbcSideNavigation :nav-items="createContentNav(navItems)" />
+      <SbcDocsSideNavigation :nav-items="createContentNav(navItems)" />
     </div>
     <!-- main content -->
     <div class="flex grow flex-col gap-8 py-8">
@@ -35,39 +35,22 @@ const stickyStyles = computed(() => ({
       </div>
       <UDivider />
       <div class="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
-        <UButton
-          :aria-label="`${handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '')}, ${prevPage?.title}`"
-          :to="localePath(prevPage?._path || '/')"
-          variant="outline"
-          color="gray"
-          class="w-full sm:w-auto"
-        >
-          <UIcon name="i-mdi-arrow-left-circle" class="size-8" />
-          <div class="flex flex-col">
-            <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '') }}</span>
-            <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ prevPage?.title }}</span>
-          </div>
-        </UButton>
-        <UButton
-          :aria-label="`${handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '')}, ${nextPage?.title}`"
-          :to="localePath(nextPage?._path || '/')"
-          variant="outline"
-          color="gray"
-          class="w-full sm:w-auto"
-        >
-          <div class="ml-auto flex flex-col">
-            <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '') }}</span>
-            <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ nextPage?.title }}</span>
-          </div>
-          <UIcon name="i-mdi-arrow-right-circle" class="size-8" />
-        </UButton>
+        <SbcDocsNextPrevButton
+          :page="prevPage"
+          direction="prev"
+        />
+        <SbcDocsNextPrevButton
+          :page="nextPage"
+          direction="next"
+        />
       </div>
     </div>
+    <!-- table of contents -->
     <div
       class="sticky hidden overflow-y-auto py-8 lg:block"
       :style="stickyStyles"
     >
-      <SbcTableOfContents
+      <SbcDocsTableOfContents
         v-show="tocLinks.length"
         :hide-label="false"
         class="max-w-48"
