@@ -5,7 +5,7 @@ definePageMeta({
 </script>
 <template>
   <ContentDoc
-    class="prose prose-bcGov dark:prose-invert min-w-full px-2 py-6"
+    class="prose prose-bcGov dark:prose-invert min-w-full"
     :query="{
       path: $route.path.replace(/^\/[a-zA-Z]{2}-[a-zA-Z]{2}\//, '/'),
       where: { _locale: $i18n.locale }

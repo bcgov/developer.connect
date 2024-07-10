@@ -12,67 +12,65 @@ const { activeTocId } = useHeadingObserver(contentWrapper.value)
 useHead({
   title: () => createPageHead()
 })
-</script>
 
+const stickyStyles = computed(() => ({
+  top: `${mainHeaderHeight!.value + 18}px`,
+  maxHeight: `calc(100vh - (${mainHeaderHeight!.value + footerHeight!.value + 36}px))`,
+  minHeight: `calc(100vh - ${mainHeaderHeight!.value + 18}px)`
+}))
+</script>
 <template>
-  <main class="relative mx-auto flex w-full max-w-[1360px] grow flex-col lg:grid lg:grid-cols-12">
+  <main class="relative mx-auto flex w-full max-w-[1360px] grow gap-4 px-2 xl:gap-8 xl:px-0">
+    <!-- side navigation -->
     <div
-      class="fixed col-start-1 col-end-4 hidden overflow-y-auto py-5 lg:block"
-      :style="{
-        top: `${mainHeaderHeight}px`,
-        maxHeight: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))`,
-        minHeight: `calc(100% - ${mainHeaderHeight}px)`
-      }"
+      class="sticky hidden overflow-y-auto overflow-x-hidden py-4 lg:block"
+      :style="stickyStyles"
     >
-      <SbcSideNavigation
-        class=""
-        :nav-items="createContentNav(navItems)"
-      />
+      <SbcSideNavigation :nav-items="createContentNav(navItems)" />
     </div>
-    <div ref="contentWrapper" class="w-full lg:col-start-4 lg:col-end-11 xl:-ml-8">
-      <slot />
-    </div>
-    <UDivider class="px-2 lg:col-start-4 lg:col-end-11 xl:-ml-8" />
-    <div class="flex w-full flex-col items-center justify-between gap-4 px-2 py-8 sm:flex-row lg:col-start-4 lg:col-end-11 xl:-ml-8">
-      <UButton
-        :aria-label="`${handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '')}, ${prevPage?.title}`"
-        :to="localePath(prevPage?._path || '/')"
-        variant="outline"
-        color="gray"
-        class="w-full sm:w-auto"
-      >
-        <UIcon name="i-mdi-arrow-left-circle" class="size-8" />
-        <div class="flex flex-col">
-          <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '') }}</span>
-          <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ prevPage?.title }}</span>
-        </div>
-      </UButton>
-      <UButton
-        :aria-label="`${handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '')}, ${nextPage?.title}`"
-        :to="localePath(nextPage?._path || '/')"
-        variant="outline"
-        color="gray"
-        class="w-full sm:w-auto"
-      >
-        <div class="ml-auto flex flex-col">
-          <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '') }}</span>
-          <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ nextPage?.title }}</span>
-        </div>
-        <UIcon name="i-mdi-arrow-right-circle" class="size-8" />
-      </UButton>
+    <!-- main content -->
+    <div class="flex grow flex-col gap-8 py-8">
+      <div ref="contentWrapper">
+        <slot />
+      </div>
+      <UDivider />
+      <div class="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+        <UButton
+          :aria-label="`${handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '')}, ${prevPage?.title}`"
+          :to="localePath(prevPage?._path || '/')"
+          variant="outline"
+          color="gray"
+          class="w-full sm:w-auto"
+        >
+          <UIcon name="i-mdi-arrow-left-circle" class="size-8" />
+          <div class="flex flex-col">
+            <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(prevPage?._path?.split('/')[2] ?? '') }}</span>
+            <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ prevPage?.title }}</span>
+          </div>
+        </UButton>
+        <UButton
+          :aria-label="`${handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '')}, ${nextPage?.title}`"
+          :to="localePath(nextPage?._path || '/')"
+          variant="outline"
+          color="gray"
+          class="w-full sm:w-auto"
+        >
+          <div class="ml-auto flex flex-col">
+            <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(nextPage?._path?.split('/')[2] ?? '') }}</span>
+            <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ nextPage?.title }}</span>
+          </div>
+          <UIcon name="i-mdi-arrow-right-circle" class="size-8" />
+        </UButton>
+      </div>
     </div>
     <div
-      class="fixed col-span-full col-start-11 row-start-1 hidden overflow-y-auto py-5 lg:block"
-      :style="{
-        top: `${mainHeaderHeight}px`,
-        maxHeight: `calc(100% - (${mainHeaderHeight}px + ${footerHeight}px))`,
-        minHeight: `calc(100% - ${mainHeaderHeight}px)`
-      }"
+      class="sticky hidden overflow-y-auto py-8 lg:block"
+      :style="stickyStyles"
     >
       <SbcTableOfContents
         v-show="tocLinks.length"
         :hide-label="false"
-        class="sticky top-0 mt-6"
+        class="max-w-48"
         :toc-links="tocLinks"
         :current-dir="currentDir"
         :active-toc-id="activeTocId"
