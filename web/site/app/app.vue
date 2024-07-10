@@ -2,9 +2,9 @@
 import { SbcHeaderMain, SbcFooter } from '#components'
 const { locale } = useI18n()
 const localePath = useLocalePath()
-const user = useCurrentUser()
-const router = useRouter()
-const route = useRoute()
+// const user = useCurrentUser()
+// const router = useRouter()
+// const route = useRoute()
 const i18nHead = useLocaleHead({
   addDirAttribute: true,
   addSeoAttributes: true
@@ -60,17 +60,17 @@ provide('dashNavItems', dashboardNavItems)
 provide('mainHeaderHeight', mainHeaderHeight)
 provide('footerHeight', footerHeight)
 
-watch(user, async (currentUser, previousUser) => {
-  // redirect user home if they sign in from the login page without a redirect
-  if (currentUser && !previousUser && route.path.includes('/sbc/auth/login')) {
-    await navigateTo(localePath('/'))
-  }
+// watch(user, async (currentUser, previousUser) => {
+//   // redirect user home if they sign in from the login page without a redirect
+//   if (currentUser && !previousUser && route.path.includes('/sbc/auth/login')) {
+//     await navigateTo(localePath('/'))
+//   }
 
-  // redirect the user if they are logged in but were rejected because the user wasn't ready yet
-  if (currentUser && typeof route.query.redirect === 'string') {
-    return router.push(route.query.redirect)
-  }
-})
+//   // redirect the user if they are logged in but were rejected because the user wasn't ready yet
+//   if (currentUser && typeof route.query.redirect === 'string') {
+//     return router.push(route.query.redirect)
+//   }
+// })
 </script>
 <template>
   <div

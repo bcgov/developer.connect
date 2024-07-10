@@ -3,7 +3,7 @@ import { renderSuspended, mockNuxtImport } from '@nuxt/test-utils/runtime'
 import { screen } from '@testing-library/vue'
 import { SbcHeaderMain } from '#components'
 import { enI18n } from '~/tests/mocks/i18n'
-import en from '~/locales/en-CA'
+import en from '~/app/locales/en-CA'
 
 // Function to access nested properties by dot-separated key
 const getTranslationByKey = (key: string): any => {
