@@ -1,13 +1,13 @@
 import type { DropdownItem } from '#ui/types'
 // import { useSbcAuth } from './sbcAuth' // auto import not working
-import {
-  signOut
-} from 'firebase/auth'
+// import {
+//   signOut
+// } from 'firebase/auth'
 const mobileNavRef = ref(false)
 
 // handle navigation items and functionality
 export function useSbcNav () {
-  const auth = useFirebaseAuth()!
+  // const auth = useFirebaseAuth()!
   // const sbcAuth = useSbcAuth()
   const localePath = useLocalePath()
   const { t } = useI18n()
@@ -53,7 +53,7 @@ export function useSbcNav () {
           // label: t('BcrosHeader.menu.account.logout'),
           icon: 'i-mdi-logout',
           click: () => {
-            signOut(auth)
+            // signOut(auth)
             return navigateTo(localePath('/'))
           }
         }

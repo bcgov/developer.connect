@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
-import { createContentNav } from '~/utils/createContentNav'
+import { createContentNav } from '~/app/utils/createContentNav'
 
 function mockUseLocalePath (path: string) {
   return '/en-CA' + path
