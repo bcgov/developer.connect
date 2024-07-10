@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
-import { handleContentDirectoryLabel } from '~/app/utils/handleContentDirectoryLabel'
+import { handleContentDirectoryLabel } from '~/utils/handleContentDirectoryLabel'
 
 function mockGetStartedString (key: string) {
   if (key === 'btn.getStarted') {
