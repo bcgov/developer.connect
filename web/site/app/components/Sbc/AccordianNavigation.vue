@@ -34,6 +34,7 @@ defineProps<{
           class="mx-2"
           :links="item.children"
           :ui="{
+            label: 'text-ellipsis relative',
             wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
             base: 'group block border-s -ms-px leading-6 before:hidden focus-visible:rounded',
             padding: 'p-0 ps-4',
