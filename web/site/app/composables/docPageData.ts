@@ -1,4 +1,4 @@
-import type { ParsedContent, TocLink } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent, TocLink } from '@nuxt/content'
 
 // get current docs page content for page head and table of contents
 export function useDocPageData () {

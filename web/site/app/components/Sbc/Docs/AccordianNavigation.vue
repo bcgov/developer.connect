@@ -17,12 +17,11 @@ defineProps<{
           variant="accordian_trigger"
           :aria-label="item.label"
         >
-          <span class="truncate">{{ item.label }}</span>
-
+          <span class="flex-1 text-left">{{ item.label }}</span>
           <template #trailing>
             <UIcon
               name="i-mdi-menu-up"
-              class="ms-auto size-7 transition-transform duration-200"
+              class="ms-auto size-7 shrink-0 transition-transform duration-200"
               :class="[!open && 'rotate-180']"
             />
           </template>
@@ -35,6 +34,7 @@ defineProps<{
           class="mx-2"
           :links="item.children"
           :ui="{
+            label: 'text-ellipsis relative',
             wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
             base: 'group block border-s -ms-px leading-6 before:hidden focus-visible:rounded',
             padding: 'p-0 ps-4',

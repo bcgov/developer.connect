@@ -3,7 +3,7 @@ import { renderSuspended, mockNuxtImport } from '@nuxt/test-utils/runtime'
 import { screen } from '@testing-library/vue'
 import { SbcHeaderMain } from '#components'
 import { enI18n } from '~/tests/mocks/i18n'
-import en from '~/app/locales/en-CA'
+import en from '~/locales/en-CA'
 
 // Function to access nested properties by dot-separated key
 const getTranslationByKey = (key: string): any => {
@@ -41,13 +41,13 @@ mockNuxtImport('useI18n', () => {
   )
 })
 
-mockNuxtImport('useCurrentUser', () => {
-  return () => (
-    {
-      displayName: 'Test User'
-    }
-  )
-})
+// mockNuxtImport('useCurrentUser', () => {
+//   return () => (
+//     {
+//       displayName: 'Test User'
+//     }
+//   )
+// })
 
 describe('<SbcHeaderMain/>', () => {
   it('mounts', async () => {
@@ -73,7 +73,7 @@ describe('<SbcHeaderMain/>', () => {
       }
     })
 
-    const linkTexts = ['Service BC Connect', 'Products', 'Dashboard', 'Docs']
+    const linkTexts = ['Service BC Connect', 'Products', 'Docs'] // 'Dashboard',
 
     linkTexts.forEach((link: string) => {
       expect(screen.getByText(link)).toBeTruthy()

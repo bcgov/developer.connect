@@ -129,7 +129,7 @@ const {
         </template>
         <!-- item slot is the content inside each accordian, pass toc component into item slot of accordian -->
         <template #item>
-          <SbcTableOfContents
+          <SbcDocsTableOfContents
             class="-mt-2 ml-4"
             :hide-label="true"
             :toc-links="tocLinks"
@@ -139,7 +139,7 @@ const {
         </template>
       </UAccordion>
       <UDivider class="my-4" />
-      <SbcAccordianNavigation :nav-items="accordianNavItems" />
+      <SbcDocsAccordianNavigation :nav-items="accordianNavItems" />
     </UCard>
   </UModal>
 </template>

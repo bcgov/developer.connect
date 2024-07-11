@@ -2,7 +2,7 @@
   "name": "sbc-apigw-site",
   "private": true,
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "build-check": "nuxt build",
     "build": "nuxt generate",
@@ -12,8 +12,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
     "lint:fix": "pnpm lint --fix",
-    "test": "vitest --dir tests/unit --passWithNoTests",
-    "test:unit": "vitest --dir tests/unit",
+    "test": "vitest --dir app/tests/unit --passWithNoTests",
+    "test:unit": "vitest --dir app/tests/unit",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui"
   },

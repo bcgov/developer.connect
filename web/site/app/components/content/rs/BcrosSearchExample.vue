@@ -36,10 +36,10 @@ const tabs = [
 
 function onChange (index: number) {
   const item = tabs[index]
-  shownTab.value = item.key
+  shownTab.value = item?.key
 }
 
-const shownTab = ref(tabs[0].key)
+const shownTab = ref(tabs[0]?.key)
 
 function handleSelect (event: CustomEvent) {
   selected.value = event.detail
@@ -87,7 +87,7 @@ function handleSelect (event: CustomEvent) {
       </div>
       <template v-if="showCodepen" #footer>
         <div class="flex">
-          <ButtonCodepen class="ml-auto" :link />
+          <SbcDocsButtonCodepen class="ml-auto" :link />
         </div>
       </template>
     </UCard>

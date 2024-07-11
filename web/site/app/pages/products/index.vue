@@ -25,7 +25,7 @@ const { data: products } = await useAsyncData(
       {{ $t('page.products.h1') }}
     </h1>
     <ul class="mx-auto flex flex-wrap justify-center gap-8">
-      <SbcProductCard
+      <SbcDocsProductCard
         v-for="product in products"
         :key="product._dir"
         :name="product.name"
