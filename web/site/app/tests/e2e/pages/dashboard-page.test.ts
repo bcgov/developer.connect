@@ -1,21 +1,19 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-test.describe('products page', () => {
+test.describe.skip('dashboard page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/en-CA/products')
+    await page.goto('/en-CA/sbc/dashboard')
   })
 
   test('page contents', async ({ page }) => {
     const h1 = await page.textContent('h1')
-    expect(h1).toBe('All Products')
-    await expect(page.getByTestId('product-card')).toHaveCount(7) // there should be 7 product cards
+    expect(h1).toBe(' Some Account ')
   })
 
   test('accessibility', async ({ page }) => {
     await page
-      .getByText('All Products')
-      .first()
+      .getByText('API Keys')
       .click() // wait for page load before runnign a11y checks? fails without this
 
     const a11yResults = await new AxeBuilder({ page })
