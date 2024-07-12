@@ -173,8 +173,8 @@ All API responses represent date-time values in the UTC timezone.
 
 ## Additional Resources
 
-- Download a <a href="mhr/apigw-mhr-demo.postman_collection.json.zip" download="apigw-mhr-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
-- Download and view the <a href="mhr/mhr-api-property-lengths.csv" target="_blank">API specification property lengths</a> by model/schema name. _Note that the definitions are not final_.
+- Download a [Demo Postman Collection](mhr/apigw-mhr-demo.postman_collection.json.zip){download="apigw-mhr-demo-postman.json" target="_blank"} to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+- Download and view the [API specification property lengths](mhr/mhr-api-property-lengths.csv){download="mhr-api-property-lengths.csv" target="_blank"} by model/schema name. _Note that the definitions are not final_.
 
 ---
 
