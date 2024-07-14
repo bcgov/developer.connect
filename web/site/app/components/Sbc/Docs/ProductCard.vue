@@ -15,7 +15,7 @@ async function goToProduct () {
 <template>
   <li
     data-testid="product-card"
-    class="flex h-[420px] w-[390px] cursor-pointer flex-col overflow-hidden rounded bg-white shadow-md transition-transform focus-within:-translate-y-1 focus-within:ring-2 focus-within:ring-bcGovGray-500 hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-bcGovGray-500 dark:border dark:border-gray-300/50 dark:bg-bcGovColor-darkGray dark:focus-within:ring-1 dark:focus-within:ring-bcGovGray-100 dark:hover:ring-1 dark:hover:ring-bcGovGray-100"
+    class="flex h-[420px] w-[390px] cursor-pointer flex-col overflow-hidden rounded bg-white shadow-md transition-transform focus-within:-translate-y-1 focus-within:ring-2 focus-within:ring-bcGovBlue-350 hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-bcGovBlue-350 dark:border dark:border-gray-300/50 dark:bg-bcGovColor-darkGray dark:focus-within:ring-1 dark:focus-within:ring-bcGovGray-100 dark:hover:ring-1 dark:hover:ring-bcGovGray-100"
     @click="goToProduct"
   >
     <div class="relative flex h-[60px] items-center bg-bcGovBlue-350 px-4 py-3.5 font-semibold tracking-wide lg:px-7 dark:border-b dark:border-gray-300/50 dark:bg-bcGovColor-darkGray">

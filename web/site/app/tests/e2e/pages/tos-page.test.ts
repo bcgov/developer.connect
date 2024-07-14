@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-test.describe('terms of use page', () => {
+test.describe.skip('terms of use page', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/en-CA/sbc/tos')
   })

@@ -43,7 +43,7 @@ watch(modalOpen, () => {
       </template>
       <span class="text-bcGovColor-midGray dark:text-[#d1d5db]">{{ content }}</span>
       <template #footer>
-        <UForm :state="state" class="space-y-4" autocomplete="off" @submit="submitFn">
+        <UForm :state="state" class="space-y-4" autocomplete="off" @submit="submitFn()">
           <UFormGroup label="Name" name="name">
             <UInput v-model="state.name" />
           </UFormGroup>
