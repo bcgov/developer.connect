@@ -40,16 +40,12 @@ export function useDocPageData () {
   // update data when locale or route changes
   watch([locale, routeWithoutLocale], async () => {
     await initDocPageData()
-  })
+  }, { immediate: true })
 
   // return current page data table of contents
   const tocLinks = computed<TocLink[]>(() => docPageData.value?.body?.toc?.links ?? [])
 
   const currentDir = computed<string | undefined>(() => docPageData.value?._path)
 
-  onMounted(() => {
-    initDocPageData()
-  })
-
-  return { docPageData, tocLinks, currentDir, createPageHead }
+  return { docPageData, tocLinks, currentDir, createPageHead, initDocPageData }
 }

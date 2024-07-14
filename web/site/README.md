@@ -47,7 +47,6 @@ pnpm test:unit
 
 Run Playwright e2e tests in headless mode
 ```bash
-cd sbc-apigw
 pnpm test:e2e
 ```
 

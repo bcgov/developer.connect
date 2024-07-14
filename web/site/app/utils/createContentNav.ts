@@ -1,4 +1,4 @@
-import type { NavItem } from '@nuxt/content/dist/runtime/types'
+import type { NavItem } from '@nuxt/content'
 import { handleContentDirectoryLabel } from './handleContentDirectoryLabel'
 
 // maps nav items returned from fetchContentNavigation into usable array by UAccordian for navigation
