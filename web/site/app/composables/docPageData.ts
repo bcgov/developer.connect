@@ -26,14 +26,14 @@ export function useDocPageData () {
   function createPageHead () {
     if (docPageData.value) {
       if (docPageData.value._dir === 'get-started') {
-        return `Get Started - ${docPageData.value.title}`
+        return `Get Started - ${docPageData.value.title} - Service BC Connect API Gateway`
       } else if (docPageData.value._dir === 'connect') {
-        return `SBC Connect - ${docPageData.value.title}`
+        return `SBC Connect - ${docPageData.value.title} - Service BC Connect API Gateway`
       } else {
-        return `${docPageData.value._dir?.toUpperCase()} - ${docPageData.value.title}`
+        return `${docPageData.value._dir?.toUpperCase()} - ${docPageData.value.title} - Service BC Connect API Gateway`
       }
     } else {
-      return 'Service BC Connect'
+      return 'Service BC Connect API Gateway'
     }
   }
 

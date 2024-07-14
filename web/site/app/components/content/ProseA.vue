@@ -37,7 +37,8 @@ function resolvePath () {
   >
     <span class="flex items-center gap-1">
       <slot />
-      <UIcon v-if="target === '_blank'" name="i-mdi-open-in-new" />
+      <UIcon v-if="download" name="i-mdi-tray-arrow-down" />
+      <UIcon v-else-if="target === '_blank'" name="i-mdi-open-in-new" />
     </span>
   </UButton>
 </template>

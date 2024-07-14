@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
+const { locale } = useI18n()
 const props = defineProps<{
   name: string
   description: string
@@ -8,8 +9,22 @@ const props = defineProps<{
   directory: string
 }>()
 
-async function goToProduct () {
-  await navigateTo(localePath(`/products/${props.directory}/overview`))
+// get the first file in the products list of md files
+const { data } = await useAsyncData(`product-card-link-${props.directory}`, () => {
+  return queryContent()
+    .where({ _locale: locale.value, _extension: { $eq: 'md' }, _path: { $contains: `/products/${props.directory}` } })
+    .findOne()
+})
+
+// return the localized link
+const link = computed(() => {
+  if (data.value?._path) {
+    return localePath(data.value._path)
+  }
+})
+
+function goToProduct () {
+  return navigateTo(link.value)
 }
 </script>
 <template>
@@ -20,7 +35,7 @@ async function goToProduct () {
   >
     <div class="relative flex h-[60px] items-center bg-bcGovBlue-350 px-4 py-3.5 font-semibold tracking-wide lg:px-7 dark:border-b dark:border-gray-300/50 dark:bg-bcGovColor-darkGray">
       <a
-        :href="localePath(`/products/${directory}/overview`)"
+        :href="link"
         class="text-white focus:outline-none"
         :class="{ 'w-4/5': badge }"
       >
