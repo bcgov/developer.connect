@@ -102,7 +102,7 @@ Example:
 
 ## Images and Files
 
-To add images or files to your documentation, place them in the corresponding sub-directory inside the [public](https://github.com/deetz99/sbc-apigw/tree/main/web/site/public) directory.
+To add images or files to your documentation, place them in the corresponding sub-directory inside the [public](https://github.com/bcgov/developer.connect/tree/main/web/site/public) directory.
 
 Refer to the [Nuxt Content documentation on images](https://content.nuxt.com/usage/markdown#images) for details on referencing images in your markdown.
 
