@@ -6,6 +6,21 @@ import { enI18n } from '~/tests/mocks/i18n'
 const { navigateToMock } = vi.hoisted(() => ({ navigateToMock: vi.fn() }))
 mockNuxtImport('navigateTo', () => navigateToMock)
 
+const queryContentMockData = {
+  _path: '/products/test-dir/test-file',
+  _dir: 'get-started',
+  title: 'Test Title',
+  body: { toc: { links: [{ id: '1', text: 'Introduction', href: '#introduction' }] } }
+}
+
+const { queryContentMock } = vi.hoisted(() => ({
+  queryContentMock: vi.fn(() => ({
+    where: vi.fn().mockReturnThis(),
+    findOne: vi.fn(() => Promise.resolve(queryContentMockData))
+  }))
+}))
+mockNuxtImport('queryContent', () => queryContentMock)
+
 describe('SbcDocsProductCard', () => {
   const props = {
     name: 'Test Product',
@@ -40,6 +55,6 @@ describe('SbcDocsProductCard', () => {
     })
 
     await wrapper.trigger('click')
-    expect(navigateTo).toHaveBeenCalledWith('/en-CA/products/test-product/overview')
+    expect(navigateTo).toHaveBeenCalledWith('/en-CA' + queryContentMockData._path)
   })
 })
