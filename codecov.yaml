@@ -11,14 +11,14 @@ coverage:
     patch: false
     project:
       default: false
-      apigwapi:
+      devloperconnectapi:
         target: 80%
         flags:
-          - apigwapi
-      apigwui:
+          - devloperconnectapi
+      devloperconnectui:
         target: 80%
         flags:
-          - apigwui
+          - devloperconnectui
 ignore:
   - "^/tests/**/*" # ignore test harness code
 
@@ -36,11 +36,11 @@ comment:
   require_changes: true
 
 flags:
-  apigwrapi:
+  devloperconnectrapi:
     paths:
       - api
     carryforward: true
-  apigwui:
+  devloperconnectui:
     paths:
       - web/site
     carryforward: true

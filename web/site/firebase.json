@@ -1,7 +1,7 @@
 {
   "hosting":
     {
-      "site": "apigw-dev",
+      "site": "devloper-connect-dev",
       "public": "dist",
       "ignore": ["**/devops/**", "**/.*", "**/node_modules/**"],
       "rewrites": [

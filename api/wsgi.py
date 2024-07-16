@@ -15,7 +15,7 @@
 """
 import os
 
-from sbc_apigw import create_app
+from devloper-connect-api import create_app
 
 app = create_app() # pylint: disable=invalid-name
 

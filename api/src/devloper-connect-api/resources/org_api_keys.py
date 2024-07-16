@@ -17,10 +17,10 @@ from flask import Blueprint, request
 from flask_cors import cross_origin
 
 from http import HTTPStatus
-from sbc_apigw.common.auth import jwt as _jwt
+from devloper-connect-api.common.auth import jwt as _jwt
 from auth_api.exceptions import BusinessException
 from auth_api.schemas import utils as schema_utils
-from sbc_apigw.services.api_gateway import ApiGateway as ApiGatewayService
+from devloper-connect-api.services.api_gateway import ApiGateway as ApiGatewayService
 from auth_api.utils.roles import Role
 
 bp = Blueprint("KEYS", __name__, url_prefix=f"/v1/orgs/<int:org_id>/api-keys")
