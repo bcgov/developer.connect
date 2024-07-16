@@ -1,4 +1,4 @@
-name: APIGW API CI
+name: Developer Connect API CI
 
 on:
   pull_request:
@@ -12,9 +12,9 @@ defaults:
     working-directory: ./api
 
 jobs:
-  apigw-api-ci:
+  devloper-connect-api-ci:
     uses: bcgov/bcregistry-sre/.github/workflows/backend-ci.yaml@main
     with:
-      app_name: apigw-api"
+      app_name: devloper-connect-api"
       working_directory: "./api"
-      codecov_flag: "apigwapi"
+      codecov_flag: "devloperconnectapi"

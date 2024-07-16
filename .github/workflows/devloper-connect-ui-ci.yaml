@@ -1,4 +1,4 @@
-name: APIGW UI CI
+name: Developer Connect UI CI
 
 on:
   pull_request:
@@ -12,9 +12,9 @@ defaults:
     working-directory: ./web/site
 
 jobs:
-  apigw-ui-ci:
+  devloper-connect-ui-ci:
     uses: bcgov/bcregistry-sre/.github/workflows/frontend-ci.yaml@main
     with:
-      app_name: "apigw-ui"
+      app_name: "devloper-connect-ui"
       working_directory: "./web/site"
-      codecov_flag: "apigwui"
+      codecov_flag: "devloperconnectui"
