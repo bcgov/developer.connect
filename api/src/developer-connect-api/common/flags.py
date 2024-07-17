@@ -44,7 +44,7 @@ from flask import current_app
 from flask import has_app_context
 from flask import Flask
 
-import devloper-connect-api
+import developer-connect-api
 
 
 class Flags:
@@ -115,9 +115,9 @@ class Flags:
         return {"key": "anonymous"}
 
     @staticmethod
-    def flag_user(user: devloper-connect-api.models.User, account_id: int = None):
+    def flag_user(user: developer-connect-api.models.User, account_id: int = None):
         """Convert User into a Flag user dict."""
-        if not isinstance(user, devloper-connect-api.models.User):
+        if not isinstance(user, developer-connect-api.models.User):
             return None
 
         _user = {

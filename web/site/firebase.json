@@ -1,7 +1,7 @@
 {
   "hosting":
     {
-      "site": "devloper-connect-dev",
+      "site": "developer-connect-dev",
       "public": "dist",
       "ignore": ["**/devops/**", "**/.*", "**/node_modules/**"],
       "rewrites": [

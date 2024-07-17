@@ -1,11 +1,11 @@
-name: Developer Connect API CD
+name: Developer Connect UI CD
 
 on:
   push:
     branches:
       - main
     paths:
-      - "api/**"
+      - "web/site/**"
   workflow_dispatch:
     inputs:
       target:
@@ -19,12 +19,12 @@ on:
         - prod
 
 jobs:
-  devloper-connect-api-cd:
-    uses: bcgov/bcregistry-sre/.github/workflows/backend-cd.yaml@main
+  developer-connect-ui-cd:
+    uses: bcgov/bcregistry-sre/.github/workflows/frontend-cd.yaml@main
     with:
       target: ${{ inputs.target }}
-      app_name: "devloper-connect-api"
-      working_directory: "./api"
+      app_name: "developer-connect-ui"
+      working_directory: "./web/site"
     secrets:
       WORKLOAD_IDENTIFY_POOLS_PROVIDER: ${{ secrets.WORKLOAD_IDENTIFY_POOLS_PROVIDER }}
       GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
