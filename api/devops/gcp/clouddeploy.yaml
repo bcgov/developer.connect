@@ -15,7 +15,7 @@
 apiVersion: deploy.cloud.google.com/v1
 kind: DeliveryPipeline
 metadata:
- name: devloper-connect-api-pipeline
+ name: developer-connect-api-pipeline
 description: Deployment pipeline
 serialPipeline:
  stages:
@@ -28,8 +28,8 @@ serialPipeline:
    - values:
       deploy-env: "development"
       deploy-project-id: "gtksf3-dev"
-      service-name: "devloper-connect-api-dev"
-      container-name: "devloper-connect-api-dev"
+      service-name: "developer-connect-api-dev"
+      container-name: "developer-connect-api-dev"
       cloudsql-instances: ""
       service-account: "sa-api@gtksf3-dev.iam.gserviceaccount.com"
  - targetId: gtksf3-test
@@ -41,8 +41,8 @@ serialPipeline:
    - values:
       deploy-env: "test"
       deploy-project-id: "gtksf3-test"
-      service-name: "devloper-connect-api-test"
-      container-name: "devloper-connect-api-test"
+      service-name: "developer-connect-api-test"
+      container-name: "developer-connect-api-test"
       app-env: "test"
       cloudsql-instances: ""
       service-account: "sa-api@gtksf3-test.iam.gserviceaccount.com"
@@ -55,8 +55,8 @@ serialPipeline:
    - values:
       deploy-env: "sandbox"
       deploy-project-id: "gtksf3-tools"
-      service-name: "devloper-connect-api-sandbox"
-      container-name: "devloper-connect-api-sandbox"
+      service-name: "developer-connect-api-sandbox"
+      container-name: "developer-connect-api-sandbox"
       cloudsql-instances: ""
       service-account: "sa-api@gtksf3-tools.iam.gserviceaccount.com"
  - targetId: gtksf3-prod
@@ -68,8 +68,8 @@ serialPipeline:
    - values:
       deploy-env: "production"
       deploy-project-id: "gtksf3-prod"
-      service-name: "devloper-connect-api-prod"
-      container-name: "devloper-connect-api-prod"
+      service-name: "developer-connect-api-prod"
+      container-name: "developer-connect-api-prod"
       cloudsql-instances: ""
       service-account: "sa-api@gtksf3-prod.iam.gserviceaccount.com"
       max-scale: "10"

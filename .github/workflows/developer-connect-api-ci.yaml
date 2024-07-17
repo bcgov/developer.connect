@@ -12,9 +12,9 @@ defaults:
     working-directory: ./api
 
 jobs:
-  devloper-connect-api-ci:
+  developer-connect-api-ci:
     uses: bcgov/bcregistry-sre/.github/workflows/backend-ci.yaml@main
     with:
-      app_name: devloper-connect-api"
+      app_name: developer-connect-api"
       working_directory: "./api"
       codecov_flag: "devloperconnectapi"

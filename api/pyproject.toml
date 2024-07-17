@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "devloper-connect-api"
+name = "developer-connect-api"
 version = "1.0.0"
 description = ""
 authors = ["thorwolpert <thor@wolpert.ca>"]
 license = "BSD 3-Clause"
 readme = "README.md"
-packages = [{include = "devloper-connect-api", from = "src"}]
+packages = [{include = "developer-connect-api", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12.4"
