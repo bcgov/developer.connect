@@ -76,7 +76,7 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
 
 - Refer to the <a href="https://www2.gov.bc.ca/" target="_blank">BC Gov site</a> to answer any business rule related questions including <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/managing-a-business/permits-licences/businesses-incorporated-companies/forms-corporate-registry" target="_blank">Fees</a>
 
-- Download a <a href="br/apigw-business-api-demo.postman_collection.json.zip" download="apigw-business-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+- Download a <a href="br/apigw-business-api-demo.postman_collection.json.zip" download="apigw-business-demo-postman.json.zip" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
 
 - Refer to the <a href="https://www.bcregistry.gov.bc.ca/" target="_blank">BC Registry site</a> to open an account and see all the Registry services.
 
