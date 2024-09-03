@@ -31,7 +31,7 @@ requests-mock = "^1.12.1"
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.1"
 faker = "^24.14.1"
-lovely-pytest-docker = "^0.3.1"
+lovely-pytest-docker = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
