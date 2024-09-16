@@ -21,8 +21,8 @@ dependencies:
     specifier: ^11.11.1
     version: 11.11.1
   firebase-functions:
-    specifier: ^4.9.0
-    version: 4.9.0(firebase-admin@11.11.1)
+    specifier: ^6.0.1
+    version: 6.0.1(firebase-admin@11.11.1)
   vuefire:
     specifier: ^3.1.24
     version: 3.1.24(firebase@10.12.3)(vue@3.4.31)
@@ -72,7 +72,7 @@ devDependencies:
     version: 3.12.3(eslint@8.57.0)(rollup@4.18.1)(typescript@5.5.3)(vite@5.3.3)
   nuxt-vuefire:
     specifier: ^1.0.3
-    version: 1.0.3(@firebase/app-types@0.9.2)(firebase-admin@11.11.1)(firebase-functions@4.9.0)(firebase@10.12.3)(rollup@4.18.1)(vuefire@3.1.24)
+    version: 1.0.3(@firebase/app-types@0.9.2)(firebase-admin@11.11.1)(firebase-functions@6.0.1)(firebase@10.12.3)(rollup@4.18.1)(vuefire@3.1.24)
   playwright-core:
     specifier: ^1.45.1
     version: 1.45.1
@@ -6860,12 +6860,12 @@ packages:
       - encoding
       - supports-color
 
-  /firebase-functions@4.9.0(firebase-admin@11.11.1):
-    resolution: {integrity: sha512-IqxOEsVAWGcRv9KRGzWQR5mOFuNsil3vsfkRPPiaV1U/ATC27/jbahh4z8I4rW8Xqa6cQE5xqnw0ueyMH7i7Ag==}
+  /firebase-functions@6.0.1(firebase-admin@11.11.1):
+    resolution: {integrity: sha512-0rIpTU6dnLRvP3IK+okn1FDjoqjzShm0/S+i4OMY7JFu/HJoyJ1JNkrT4KjECy1/mCHK49KsmH8iYE0rzrglHg==}
     engines: {node: '>=14.10.0'}
     hasBin: true
     peerDependencies:
-      firebase-admin: ^10.0.0 || ^11.0.0 || ^12.0.0
+      firebase-admin: ^11.10.0 || ^12.0.0
     dependencies:
       '@types/cors': 2.8.17
       '@types/express': 4.17.3
@@ -9455,7 +9455,7 @@ packages:
       - vue
     dev: false
 
-  /nuxt-vuefire@1.0.3(@firebase/app-types@0.9.2)(firebase-admin@11.11.1)(firebase-functions@4.9.0)(firebase@10.12.3)(rollup@4.18.1)(vuefire@3.1.24):
+  /nuxt-vuefire@1.0.3(@firebase/app-types@0.9.2)(firebase-admin@11.11.1)(firebase-functions@6.0.1)(firebase@10.12.3)(rollup@4.18.1)(vuefire@3.1.24):
     resolution: {integrity: sha512-AunJGkdTiGgdyjOmoDQJC3QP0yblebGHYN8SzgBEpryfHPq+hWCETfzC6AiYvVzGvV8apFBOiUn3CNAtqZS4YA==}
     peerDependencies:
       '@firebase/app-types': '>=0.8.1'
@@ -9476,7 +9476,7 @@ packages:
       '@posva/lru-cache': 10.0.1
       firebase: 10.12.3
       firebase-admin: 11.11.1
-      firebase-functions: 4.9.0(firebase-admin@11.11.1)
+      firebase-functions: 6.0.1(firebase-admin@11.11.1)
       lodash-es: 4.17.21
       strip-json-comments: 5.0.1
       vuefire: 3.1.24(firebase@10.12.3)(vue@3.4.31)
@@ -12597,6 +12597,20 @@ packages:
     resolution: {integrity: sha512-sO9qQ8oC520SW6kqlls0iqDak53gsTVSrYylajgjmkt1c0vcgjsGSy1KzlDrbEx8pm02IEYhlUkU5hCYf8rwtg==}
     dev: true
 
+  /vue-demi@0.14.10(vue@3.4.31):
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.4.31(typescript@5.5.3)
+
   /vue-demi@0.14.8(vue@3.4.31):
     resolution: {integrity: sha512-Uuqnk9YE9SsWeReYqK2alDI5YzciATE0r2SkA6iMAtuXvNTMNACJLJEXNXaEy94ECuBe4Sk6RzRU80kjdbIo1Q==}
     engines: {node: '>=12'}
@@ -12610,6 +12624,7 @@ packages:
         optional: true
     dependencies:
       vue: 3.4.31(typescript@5.5.3)
+    dev: false
 
   /vue-devtools-stub@0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
@@ -12685,7 +12700,7 @@ packages:
     dependencies:
       firebase: 10.12.3
       vue: 3.4.31(typescript@5.5.3)
-      vue-demi: 0.14.8(vue@3.4.31)
+      vue-demi: 0.14.10(vue@3.4.31)
 
   /watchpack@2.4.1:
     resolution: {integrity: sha512-8wrBCMtVhqcXP2Sup1ctSkga6uc2Bx0IIvKyT7yTFier5AXHooSI+QyQQAtTb7+E0IUCCKyTFmXqdqgum2XWGg==}
