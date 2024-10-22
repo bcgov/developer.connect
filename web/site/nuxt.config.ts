@@ -22,7 +22,12 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: '/en-CA' }
   },
-  modules: ['@nuxtjs/eslint-module', '@nuxt/test-utils/module', '@nuxt/image'], // 'nuxt-vuefire'
+  modules: [
+    '@nuxtjs/eslint-module',
+    '@nuxt/test-utils/module',
+    '@nuxt/image',
+    'nuxt-gtag'
+  ], // 'nuxt-vuefire'
   extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {
     dirs: ['stores', 'composables', 'enums', 'interfaces', 'types', 'utils']
@@ -116,5 +121,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     xApiKey: '',
     accountID: ''
+  },
+  gtag: {
+    enabled: process.env.NODE_ENV === 'production'
   }
 })

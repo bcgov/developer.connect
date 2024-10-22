@@ -32,6 +32,7 @@
     "eslint-plugin-tailwindcss": "^3.17.4",
     "happy-dom": "^13.10.1",
     "nuxt": "^3.12.3",
+    "nuxt-gtag": "^3.0.1",
     "nuxt-vuefire": "^1.0.3",
     "playwright-core": "^1.45.1",
     "typescript": "^5.5.3",
@@ -47,5 +48,6 @@
     "firebase-admin": "^11.11.1",
     "firebase-functions": "^4.9.0",
     "vuefire": "^3.1.24"
-  }
+  },
+  "packageManager": "pnpm@8.7.6+sha1.a428b12202bc4f23b17e6dffe730734dae5728e2"
 }
