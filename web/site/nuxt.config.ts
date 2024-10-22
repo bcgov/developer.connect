@@ -124,6 +124,6 @@ export default defineNuxtConfig({
   },
   gtag: {
     // enabled: process.env.NODE_ENV === 'production'
-    id: 'G-GKRC2V8PT4'
+    id: process.env.NUXT_PUBLIC_GTAG_ID
   }
 })
