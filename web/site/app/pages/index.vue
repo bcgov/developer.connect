@@ -102,7 +102,6 @@ useHead({
               <span>
                 {{ $t('SbcMainCard.learnMore') }}
                 <span class="inline-flex align-middle">
-                  <UIcon name="i-mdi-arrow-right-thin scale-150 ml-2" />
                 </span>
               </span>
             </a>
