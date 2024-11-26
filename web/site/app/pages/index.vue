@@ -53,7 +53,9 @@ const localePath = useLocalePath()
               :to="localePath('/products/get-started/account-setup')"
               class="flex cursor-pointer flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] underline dark:text-white"
             >
-              {{ $t('SbcMainCard.learnMore') }}
+              <span>
+                {{ $t('SbcMainCard.learnMore') }}
+              </span>
             </NuxtLink>
           </div>
         </UCard>
