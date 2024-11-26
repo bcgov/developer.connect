@@ -3,6 +3,7 @@ const { t } = useI18n()
 useHead({
   title: t('page.home.title')
 })
+const localePath = useLocalePath()
 
 </script>
 <template>
@@ -51,9 +52,9 @@ useHead({
             </p>
           </div>
           <div class="flex grow items-center justify-center px-4 pb-3.5 text-center sm:p-7">
-            <a
-              href="/products/get-started/account-setup"
-              class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96]  dark:text-white"
+            <NuxtLink
+              :to="localePath('/products/get-started/account-setup')"
+              class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] dark:text-white"
             >
               <span>
                 {{ $t('SbcMainCard.learnMore') }}
@@ -61,7 +62,7 @@ useHead({
                   <UIcon name="i-mdi-arrow-right-thin scale-150 ml-2" />
                 </span>
               </span>
-            </a>
+            </NuxtLink>
           </div>
         </UCard>
       </UContainer>
@@ -95,16 +96,15 @@ useHead({
             </p>
           </div>
           <div class="flex grow items-center justify-center px-4 pb-3.5 text-center sm:p-7">
-            <a
-              href="/products"
-              class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96]  dark:text-white"
+            <NuxtLink
+              :to="localePath('/products')"
+              class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] dark:text-white"
             >
               <span>
                 {{ $t('SbcMainCard.learnMore') }}
-                <span class="inline-flex align-middle">
-                </span>
+                <span class="inline-flex align-middle" />
               </span>
-            </a>
+            </NuxtLink>
           </div>
         </UCard>
       </UContainer>
