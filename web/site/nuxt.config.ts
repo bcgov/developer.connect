@@ -72,7 +72,8 @@ export default defineNuxtConfig({
       'web-component',
       '/sbc/tos',
       '/products/bn',
-      'products/connect'
+      'products/connect',
+      '/products/1.get-started/3.api-access-request'
     ]
   },
   colorMode: {
