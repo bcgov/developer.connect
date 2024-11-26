@@ -70,7 +70,9 @@ export default defineNuxtConfig({
     },
     ignores: [
       'web-component',
-      '/sbc/tos'
+      '/sbc/tos',
+      '/products/bn',
+      '/products/connect'
     ]
   },
   colorMode: {

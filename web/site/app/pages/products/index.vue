@@ -18,7 +18,7 @@ const { data: products } = await useAsyncData(
 )
 // hiding cards till Feb 2025
 const completedProducts = computed(() => {
-  return products.value.filter(product => product.name !== 'Business Number' && product.name !== 'Product Name Here').sort((a, b) => a.name.localeCompare(b.name))
+  return products.value?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
 })
 // console.log(products.value)
 </script>
