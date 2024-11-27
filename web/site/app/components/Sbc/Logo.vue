@@ -16,12 +16,12 @@
   </div>
   <div v-else>
     <img
-      class="hidden h-[60px] scale-125 sm:block"
+      class="hidden max-w-48 h-11 scale-150 sm:block"
       src="BCGovLogoLgEn"
       :alt="$t('SbcLogo.alt')"
     >
     <img
-      class="block h-[64px] scale-150 sm:hidden"
+      class="block w-14 h-11 scale-150 sm:hidden"
       src="BCGovLogoSmEn"
       :alt="$t('SbcLogo.alt')"
     >

@@ -20,23 +20,23 @@ export function useSbcNav () {
         icon: 'i-mdi-home',
         label: t('btn.sbcConnect'),
         to: localePath('/')
-      },
-      {
-        icon: 'i-mdi-database',
-        label: t('btn.products'),
-        to: localePath('/products')
-      },
+      }
+      // {
+      //   icon: 'i-mdi-database',
+      //   label: t('btn.products'),
+      //   to: localePath('/products')
+      // },
       // exclude dashboard link for now
       // {
       //   icon: 'i-mdi-account',
       //   label: t('btn.dashboard'),
       //   to: localePath('/sbc/dashboard')
       // },
-      {
-        icon: 'i-mdi-book-open-variant',
-        label: 'Docs',
-        to: localePath('/products/get-started/account-setup')
-      }
+      // {
+      //   icon: 'i-mdi-book-open-variant',
+      //   label: 'Docs',
+      //   to: localePath('/products/get-started/account-setup')
+      // }
     ]
   })
 

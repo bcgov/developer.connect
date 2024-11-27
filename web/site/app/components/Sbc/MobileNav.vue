@@ -11,6 +11,13 @@ const {
   // loggedOutUserOptions,
   closeMobileNav
 } = useSbcNav()
+
+const transformLabel = (label) => {
+  if (label === 'Service BC Connect') {
+    return '<span class="flex h-7 pt-2 "><span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span></span> <span class="text-white">Connect</span>'
+  }
+  return label; 
+}
 </script>
 <template>
   <UModal
@@ -41,7 +48,8 @@ const {
     >
       <template #header>
         <div class="m-auto flex w-full items-center justify-between">
-          <div class="flex items-center gap-1">
+          <div class="flex gap-3">
+          <div class="flex  ">
             <NuxtLinkLocale
               to="/"
               tabindex="-1"
@@ -51,9 +59,18 @@ const {
               <SbcLogo />
             </NuxtLinkLocale>
           </div>
+          <div
+          v-for="link in mainLinks"
+          :key="link.to"
+          class="flex items-end	lg:block cursor-pointer w-24 h-11 font-sans font-semibold text-sm leading-5 text-left ">
+          <NuxtLinkLocale :to="link.to">
+            <span  v-html="transformLabel(link.label) "></span>
+          </NuxtLinkLocale>
+          </div>
+        </div>
           <div class="flex gap-1">
-            <ColorModeSelect />
-            <LocaleSelect />
+            <!-- <ColorModeSelect />
+            <LocaleSelect /> -->
             <!-- leave out auth options for now -->
             <!-- <UDropdown
               v-if="!user"

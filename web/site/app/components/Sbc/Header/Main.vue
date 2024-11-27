@@ -13,18 +13,25 @@ const headerRef = ref<HTMLElement | null>(null)
 defineExpose({
   headerRef
 })
+const transformLabel = (label) => {
+  if (label === 'Service BC Connect') {
+    return '<span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>'
+  }
+  return label
+}
 </script>
 <template>
   <header
     id="sbc-main-header"
     ref="headerRef"
-    class="border-b-2 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
+    class="2xl h-16 left-1 border-b-[4px] border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
   >
     <nav
-      class="m-auto flex w-full max-w-[1360px] items-center justify-between"
+      class="m-auto flex w-full max-w-[1312px] items-center justify-between"
       :aria-label="$t('SbcHeader.navLabel')"
     >
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-x-8 h-12 min-w-96 min-h-12 pt-2.5 pb-2.5">
+        <div class ="h-12">
         <NuxtLinkLocale
           to="/"
           tabindex="-1"
@@ -33,21 +40,19 @@ defineExpose({
         >
           <SbcLogo />
         </NuxtLinkLocale>
-        <UButton
+      </div>
+        <div
           v-for="link in mainLinks"
           :key="link.to"
-          class="hidden lg:block"
-          :label="link.label"
-          :to="link.to"
-          color="white"
-          variant="link"
-          size="lg"
-          active-class="underline"
-        />
+          class=" flex hidden lg:block cursor-pointer w-60 h-7 font-sans font-bold text-lg leading-7 tracking-[ -0.48px ] text-left ">
+          <NuxtLinkLocale :to="link.to">
+            <span v-html="transformLabel(link.label)"></span>
+          </NuxtLinkLocale>
+      </div>
       </div>
       <div class="flex gap-1">
-        <ColorModeSelect />
-        <LocaleSelect />
+        <!-- <ColorModeSelect /> -->
+        <!-- <LocaleSelect /> -->
         <!-- leaving out auth options for now -->
         <!-- <UDropdown
           v-if="!user"
