@@ -35,7 +35,7 @@ const initialNavItems = [
         children: [
           { title: 'Account Setup', _path: '/products/get-started/account-setup' },
           { title: 'APIs Summary', _path: '/products/get-started/apis-summary' },
-          // { title: 'API Access Request', _path: '/products/get-started/api-access-request' },
+          { title: 'API Access Request', _path: '/products/get-started/api-access-request' },
           { title: 'Analytics Reports', _path: '/products/get-started/analytics-report' },
           { title: 'Message Logging', _path: '/products/get-started/message-logging' },
           { title: 'About', _path: '/products/get-started/about' }
@@ -60,7 +60,7 @@ const formattedNavItems = [
     children: [
       { label: 'Account Setup', to: '/en-CA/products/get-started/account-setup' },
       { label: 'APIs Summary', to: '/en-CA/products/get-started/apis-summary' },
-      // { label: 'API Access Request', to: '/en-CA/products/get-started/api-access-request' },
+      { label: 'API Access Request', to: '/en-CA/products/get-started/api-access-request' },
       { label: 'Analytics Reports', to: '/en-CA/products/get-started/analytics-report' },
       { label: 'Message Logging', to: '/en-CA/products/get-started/message-logging' },
       { label: 'About', to: '/en-CA/products/get-started/about' }

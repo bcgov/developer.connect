@@ -15,8 +15,7 @@ export default defineNuxtConfig({
         '/en-CA/sbc/dashboard',
         '/en-CA/sbc/tos',
         '/en-CA/sbc/auth/login',
-        '/en-CA/sbc/auth/logout',
-        '/en-CA/products/get-started/api-access-request'
+        '/en-CA/sbc/auth/logout'
       ]
     }
   },
@@ -70,7 +69,6 @@ export default defineNuxtConfig({
       }
     },
     ignores: [
-      '/1.get-started/3.api-access-request.md',
       'web-component',
       '/sbc/tos'
     ]
@@ -93,7 +91,7 @@ export default defineNuxtConfig({
   //   enabled: true,
   //   sessionCookie: false
   // },
- 
+
   // appCheck: {
   //   provider: 'ReCaptchaV3',
   //   // site key, NOT secret key
