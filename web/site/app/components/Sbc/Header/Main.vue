@@ -13,42 +13,37 @@ const headerRef = ref<HTMLElement | null>(null)
 defineExpose({
   headerRef
 })
-const transformLabel = (label) => {
-  if (label === 'Service BC Connect') {
-    return '<span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>'
-  }
-  return label
-}
 </script>
 <template>
   <header
     id="sbc-main-header"
     ref="headerRef"
-    class="2xl h-16 left-1 border-b-[4px] border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
+    class="2xl: left-1 h-16 border-b-4 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
   >
     <nav
       class="m-auto flex w-full max-w-[1312px] items-center justify-between"
       :aria-label="$t('SbcHeader.navLabel')"
     >
-      <div class="flex items-center gap-x-8 h-12 min-w-96 min-h-12 pt-2.5 pb-2.5">
-        <div class ="h-12">
-        <NuxtLinkLocale
-          to="/"
-          tabindex="-1"
-          aria-hidden="true"
-          class="mr-2"
-        >
-          <SbcLogo />
-        </NuxtLinkLocale>
-      </div>
+      <div class="flex h-12 min-h-12 min-w-96 items-center gap-x-8 py-2.5">
+        <div class="h-12">
+          <NuxtLinkLocale to="/" tabindex="-1" aria-hidden="true" class="mr-2">
+            <SbcLogo />
+          </NuxtLinkLocale>
+        </div>
         <div
           v-for="link in mainLinks"
           :key="link.to"
-          class=" flex hidden lg:block cursor-pointer w-60 h-7 font-sans font-bold text-lg leading-7 tracking-[ -0.48px ] text-left ">
+          class="flex h-7 w-60 cursor-pointer text-left font-sans text-lg font-bold leading-7 lg:block"
+        >
           <NuxtLinkLocale :to="link.to">
-            <span v-html="transformLabel(link.label)"></span>
+            <span v-if="link.label === 'Service BC Connect'">
+              <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
+            </span>
+            <span v-else class="text-white">
+              {{ link.label }}
+            </span>
           </NuxtLinkLocale>
-      </div>
+        </div>
       </div>
       <div class="flex gap-1">
         <!-- <ColorModeSelect /> -->

@@ -11,13 +11,6 @@ const {
   // loggedOutUserOptions,
   closeMobileNav
 } = useSbcNav()
-
-const transformLabel = (label) => {
-  if (label === 'Service BC Connect') {
-    return '<span class="flex h-7 pt-2 "><span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span></span> <span class="text-white">Connect</span>'
-  }
-  return label; 
-}
 </script>
 <template>
   <UModal
@@ -43,31 +36,39 @@ const transformLabel = (label) => {
           base: 'border-b-2 border-bcGovColor-navDivider dark:border-b-[1px] dark:bg-bcGovColor-darkGray',
           background: 'bg-bcGovColor-header dark:bg-bcGovColor-darkGray',
           padding: 'p-2'
-        }
+        },
       }"
     >
       <template #header>
         <div class="m-auto flex w-full items-center justify-between">
           <div class="flex gap-3">
-          <div class="flex  ">
-            <NuxtLinkLocale
-              to="/"
-              tabindex="-1"
-              aria-hidden="true"
-              class="mr-2"
+            <div class="flex">
+              <NuxtLinkLocale
+                to="/"
+                tabindex="-1"
+                aria-hidden="true"
+                class="mr-2"
+              >
+                <SbcLogo />
+              </NuxtLinkLocale>
+            </div>
+            <div
+              v-for="link in mainLinks"
+              :key="link.to"
+              class="flex h-11 w-24 cursor-pointer items-end text-left font-sans text-sm font-semibold leading-5 lg:block"
             >
-              <SbcLogo />
-            </NuxtLinkLocale>
+              <NuxtLinkLocale :to="link.to">
+                <NuxtLinkLocale :to="link.to">
+                  <span v-if="link.label === 'Service BC Connect'">
+                    <span class="flex h-7 pt-2 "><span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span></span> <span class="text-white">Connect</span>
+                  </span>
+                  <span v-else class="text-white">
+                    {{ link.label }}
+                  </span>
+                </NuxtLinkLocale>
+              </NuxtLinkLocale>
+            </div>
           </div>
-          <div
-          v-for="link in mainLinks"
-          :key="link.to"
-          class="flex items-end	lg:block cursor-pointer w-24 h-11 font-sans font-semibold text-sm leading-5 text-left ">
-          <NuxtLinkLocale :to="link.to">
-            <span  v-html="transformLabel(link.label) "></span>
-          </NuxtLinkLocale>
-          </div>
-        </div>
           <div class="flex gap-1">
             <!-- <ColorModeSelect />
             <LocaleSelect /> -->
@@ -126,13 +127,17 @@ const transformLabel = (label) => {
         </div>
       </template>
       <UVerticalNavigation :links="mainLinks" />
-      <UDivider v-show="tocLinks.length && $route.path.includes('products')" class="my-4" />
-      <UAccordion v-show="tocLinks.length && $route.path.includes('products')" :items="[{label: 'Table of Contents', defaultOpen: true}]">
+      <UDivider
+        v-show="tocLinks.length && $route.path.includes('products')"
+        class="my-4"
+      />
+      <UAccordion
+        v-show="tocLinks.length && $route.path.includes('products')"
+        :items="[{ label: 'Table of Contents', defaultOpen: true }]"
+      >
         <!-- default slot is the accordian button itself, so we use a custom button variant here to match theme -->
         <template #default="{ open }">
-          <UButton
-            variant="accordian_trigger"
-          >
+          <UButton variant="accordian_trigger">
             <span class="truncate">Table of Contents</span>
 
             <template #trailing>
