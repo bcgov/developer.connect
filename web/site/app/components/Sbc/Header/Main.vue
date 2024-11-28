@@ -24,7 +24,9 @@ defineExpose({
       class="m-auto flex w-full max-w-[1312px] items-center justify-between"
       :aria-label="$t('SbcHeader.navLabel')"
     >
-      <div class="flex h-12 min-h-12 min-w-96 items-center gap-x-8 py-2.5">
+      <div
+        class="flex h-12 min-h-12 items-center gap-3 py-2.5 sm:gap-5 md:gap-5 lg:gap-7"
+      >
         <div class="h-12">
           <NuxtLinkLocale to="/" tabindex="-1" aria-hidden="true" class="mr-2">
             <SbcLogo />
@@ -33,15 +35,15 @@ defineExpose({
         <div
           v-for="link in mainLinks"
           :key="link.to"
-          class="flex h-7 w-60 cursor-pointer text-left font-sans text-lg font-bold leading-7 lg:block"
+          class="flex h-11 w-24 cursor-pointer text-left font-sans text-sm font-semibold leading-5 lg:h-7 lg:w-60 lg:text-lg lg:font-bold lg:leading-7"
         >
           <NuxtLinkLocale :to="link.to">
             <span v-if="link.label === 'Service BC Connect'">
               <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
             </span>
-            <span v-else class="text-white">
+            <!-- <span v-else class="text-white">
               {{ link.label }}
-            </span>
+            </span> -->
           </NuxtLinkLocale>
         </div>
       </div>

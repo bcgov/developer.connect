@@ -16,7 +16,7 @@
   </div>
   <div v-else>
     <img
-      class="hidden h-11 max-w-48 scale-150 sm:block"
+      class="hidden h-11 max-w-48 scale-125 sm:block"
       src="BCGovLogoLgEn"
       :alt="$t('SbcLogo.alt')"
     >

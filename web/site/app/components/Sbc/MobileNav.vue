@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  accordianNavItems?: AccordianNavItem[] | undefined
+  accordianNavItems?: AccordianNavItem[] | undefined;
 }>()
 // const user = useCurrentUser()
 const { currentDir, tocLinks } = useDocPageData()
@@ -33,7 +33,7 @@ const {
           padding: 'p-2'
         },
         header: {
-          base: 'border-b-2 border-bcGovColor-navDivider dark:border-b-[1px] dark:bg-bcGovColor-darkGray',
+          base: 'border-b-4 border-bcGovColor-navDivider dark:border-b-[1px] dark:bg-bcGovColor-darkGray',
           background: 'bg-bcGovColor-header dark:bg-bcGovColor-darkGray',
           padding: 'p-2'
         },
@@ -41,7 +41,9 @@ const {
     >
       <template #header>
         <div class="m-auto flex w-full items-center justify-between">
-          <div class="flex gap-3">
+          <div
+            class="flex h-12 min-h-12 items-center gap-3 py-2.5 sm:gap-5 md:gap-5 lg:gap-7"
+          >
             <div class="flex">
               <NuxtLinkLocale
                 to="/"
@@ -55,17 +57,15 @@ const {
             <div
               v-for="link in mainLinks"
               :key="link.to"
-              class="flex h-11 w-24 cursor-pointer items-end text-left font-sans text-sm font-semibold leading-5 lg:block"
+              class="flex h-11 w-24 cursor-pointer text-left font-sans text-sm font-semibold leading-5 lg:h-7 lg:w-60 lg:text-lg lg:font-bold lg:leading-7"
             >
               <NuxtLinkLocale :to="link.to">
-                <NuxtLinkLocale :to="link.to">
-                  <span v-if="link.label === 'Service BC Connect'">
-                    <span class="flex h-7 pt-2 "><span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span></span> <span class="text-white">Connect</span>
-                  </span>
-                  <span v-else class="text-white">
+                <span v-if="link.label === 'Service BC Connect'">
+                  <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
+                </span>
+                <!-- <span v-else class="text-white">
                     {{ link.label }}
-                  </span>
-                </NuxtLinkLocale>
+                  </span> -->
               </NuxtLinkLocale>
             </div>
           </div>

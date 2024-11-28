@@ -43,17 +43,17 @@ describe('useSbcNav', () => {
         icon: 'i-mdi-home',
         label: 'btn.sbcConnect',
         to: '/en-CA/'
+      },
+      {
+        icon: 'i-mdi-database',
+        label: 'btn.products',
+        to: '/en-CA/products'
+      },
+      {
+        icon: 'i-mdi-book-open-variant',
+        label: 'Docs',
+        to: '/en-CA/products/get-started/account-setup'
       }
-      // {
-      //   icon: 'i-mdi-database',
-      //   label: 'btn.products',
-      //   to: '/en-CA/products'
-      // },
-      // {
-      //   icon: 'i-mdi-book-open-variant',
-      //   label: 'Docs',
-      //   to: '/en-CA/products/get-started/account-setup'
-      // }
     ])
   })
 
