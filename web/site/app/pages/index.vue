@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
+import { setBreadcrumbs } from '~/utils/setBreadcrumb'
 const { t } = useI18n()
 useHead({
   title: t('page.home.title')

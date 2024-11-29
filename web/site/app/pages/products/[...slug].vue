@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
+import { setBreadcrumbs } from '~/utils/setBreadcrumb'
 
 definePageMeta({
   layout: 'docs'
