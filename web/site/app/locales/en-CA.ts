@@ -20,6 +20,14 @@ export default {
     openMainNav: 'Open Main Navigation Menu',
     closeMainNav: 'Close Main Navigation Menu'
   },
+  sbcBreadcrumb: {
+    default: 'BC Registries and Digital Service',
+    backBtn: 'Go Back',
+    arialabel: 'Breadcrumb',
+    sbcHome: 'Service BC Connect',
+    sbcProducts: 'Products',
+    sbcDocs: 'Documentation'
+  },
   page: {
     notFound: {
       h1: 'Page Not Found'

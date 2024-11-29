@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SbcHeaderMain, SbcFooter } from '#components'
+import { SbcHeaderMain, SbcFooter, SbcBreadcrumb } from '#components'
 const { locale } = useI18n()
 const localePath = useLocalePath()
 // const user = useCurrentUser()
@@ -83,6 +83,7 @@ provide('footerHeight', footerHeight)
         $route.path.includes('dashboard') ? dashboardNavItems : undefined
       "
     />
+    <SbcBreadcrumb />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

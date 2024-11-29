@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
 const { t } = useI18n()
 useHead({
   title: t('page.home.title')
 })
-const localePath = useLocalePath()
+
+const breadcrumbs = useBreadcrumbs()
+watch(
+  breadcrumbs,
+  (newBreadcrumbs) => {
+    setBreadcrumbs(newBreadcrumbs)
+  },
+  { immediate: true }
+)
 
 </script>
 <template>
