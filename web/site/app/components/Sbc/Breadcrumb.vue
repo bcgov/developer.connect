@@ -25,7 +25,7 @@ function resolveBackHref () {
 </script>
 <template>
   <div class="bg-bcGovColor-nonClickable">
-    <div class="mx-auto flex max-w-full items-center divide-x divide-gray-300 px-4 py-2">
+    <div class="mx-auto flex max-w-full flex-wrap items-center divide-x divide-gray-300 px-4 py-2 sm:divide-x-0">
       <UButton
         class="mr-3 mt-px size-[28px] rounded-full px-1 text-blue-500"
         color="white"
@@ -38,7 +38,7 @@ function resolveBackHref () {
       <UBreadcrumb
         :links="breadcrumbs"
         :aria-label="$t('ConnectBreadcrumb.arialabel')"
-        class="pl-3"
+        class="flex min-w-0 flex-wrap items-center gap-x-1.5 pl-3 text-xs leading-6 text-white"
         :ui="{
           li: 'flex items-center gap-x-1.5 text-xs text-white leading-6 min-w-0',
           base: 'flex items-center gap-x-1.5 group font-normal min-w-0',
