@@ -56,8 +56,10 @@ export default {
   SbcFooter: {
     navLabel: 'Useful Links', // <nav> aria-label
     home: 'Home',
+    releaseNotes: 'Release Notes',
     disclaimer: 'Disclaimer',
     privacy: 'Privacy',
+    hours: 'Hours of Availability',
     ally: 'Accessibility',
     copyright: 'Copyright',
     bcApp: 'A BC Online Application'
