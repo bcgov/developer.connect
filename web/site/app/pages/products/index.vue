@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
+import { setBreadcrumbs } from '~/utils/setBreadcrumb'
 const { t, locale } = useI18n()
 useHead({
   title: t('page.products.title')
@@ -17,7 +19,15 @@ const { data: products } = await useAsyncData(
   }
 )
 
-// console.log(products.value)
+const breadcrumbs = useBreadcrumbs()
+watch(
+  breadcrumbs,
+  (newBreadcrumbs) => {
+    setBreadcrumbs(newBreadcrumbs)
+  },
+  { immediate: true }
+)
+
 </script>
 <template>
   <div class="mx-auto w-full max-w-[1360px] p-2 sm:p-4 lg:p-8">
