@@ -19,7 +19,7 @@ const { data: products } = await useAsyncData(
 const completedProducts = computed(() => {
   return products.value?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
 })
-// console.log(products.value)
+
 </script>
 <template>
   <div class="mx-auto w-full max-w-[1360px] p-2 sm:p-4 lg:p-8">
