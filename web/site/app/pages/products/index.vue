@@ -16,8 +16,10 @@ const { data: products } = await useAsyncData(
     watch: [locale]
   }
 )
+const completedProducts = computed(() => {
+  return products.value?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
+})
 
-// console.log(products.value)
 </script>
 <template>
   <div class="mx-auto w-full max-w-[1360px] p-2 sm:p-4 lg:p-8">
@@ -26,7 +28,7 @@ const { data: products } = await useAsyncData(
     </h1>
     <ul class="mx-auto flex flex-wrap justify-center gap-8">
       <SbcDocsProductCard
-        v-for="product in products"
+        v-for="product in completedProducts"
         :key="product._dir"
         :name="product.name"
         :badge="product.badge"

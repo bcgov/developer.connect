@@ -15,7 +15,8 @@ export default defineNuxtConfig({
         '/en-CA/sbc/dashboard',
         '/en-CA/sbc/tos',
         '/en-CA/sbc/auth/login',
-        '/en-CA/sbc/auth/logout'
+        '/en-CA/sbc/auth/logout',
+        '/en-CA/products/get-started/api-access-request'
       ]
     }
   },
@@ -70,7 +71,10 @@ export default defineNuxtConfig({
     },
     ignores: [
       'web-component',
-      '/sbc/tos'
+      '/sbc/tos',
+      '/products/bn',
+      'products/connect',
+      '/1.get-started/3.api-access-request.md'
     ]
   },
   colorMode: {
