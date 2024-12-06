@@ -86,6 +86,6 @@ provide('footerHeight', footerHeight)
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-    <SbcFooter ref="footerRef" class="z-50" />
+    <SbcFooter ref="footerRef" class="z-50 mt-auto" />
   </div>
 </template>
