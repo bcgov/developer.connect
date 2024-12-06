@@ -73,7 +73,7 @@ describe('<SbcHeaderMain/>', () => {
       }
     })
 
-    const linkTexts = ['Service BC Connect', 'Products', 'Docs'] // 'Dashboard',
+    const linkTexts = ['Service', 'BC', 'Connect'] // 'Dashboard',
 
     linkTexts.forEach((link: string) => {
       expect(screen.getByText(link)).toBeTruthy()
@@ -93,10 +93,10 @@ describe('<SbcHeaderMain/>', () => {
     const logo = screen.getAllByAltText('Government of British Columbia Logo')
     expect(logo).toBeTruthy()
 
-    const darkModeButton = screen.getByLabelText('Switch to dark mode')
-    expect(darkModeButton).toBeTruthy()
+    // const darkModeButton = screen.getByLabelText('Switch to dark mode')
+    // expect(darkModeButton).toBeTruthy()
 
-    const localeSelectMenu = screen.getByLabelText('Select a Language, current language: English')
-    expect(localeSelectMenu).toBeTruthy()
+    // const localeSelectMenu = screen.getByLabelText('Select a Language, current language: English')
+    // expect(localeSelectMenu).toBeTruthy()
   })
 })

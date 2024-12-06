@@ -31,7 +31,7 @@ export function useSbcNav () {
       //   icon: 'i-mdi-account',
       //   label: t('btn.dashboard'),
       //   to: localePath('/sbc/dashboard')
-      // },
+      // }
       {
         icon: 'i-mdi-book-open-variant',
         label: 'Docs',
