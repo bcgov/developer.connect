@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  accordianNavItems?: AccordianNavItem[] | undefined
+  accordianNavItems?: AccordianNavItem[] | undefined;
 }>()
 // const user = useCurrentUser()
 const { currentDir, tocLinks } = useDocPageData()
@@ -33,27 +33,45 @@ const {
           padding: 'p-2'
         },
         header: {
-          base: 'border-b-2 border-bcGovColor-navDivider dark:border-b-[1px] dark:bg-bcGovColor-darkGray',
+          base: 'border-b-4 border-bcGovColor-navDivider dark:border-b-[1px] dark:bg-bcGovColor-darkGray',
           background: 'bg-bcGovColor-header dark:bg-bcGovColor-darkGray',
           padding: 'p-2'
-        }
+        },
       }"
     >
       <template #header>
         <div class="m-auto flex w-full items-center justify-between">
-          <div class="flex items-center gap-1">
-            <NuxtLinkLocale
-              to="/"
-              tabindex="-1"
-              aria-hidden="true"
-              class="mr-2"
+          <div
+            class="flex h-12 min-h-12 items-center gap-3 py-2.5 sm:gap-5 md:gap-5 lg:gap-7"
+          >
+            <div class="flex">
+              <NuxtLinkLocale
+                to="/"
+                tabindex="-1"
+                aria-hidden="true"
+                class="mr-2"
+              >
+                <SbcLogo />
+              </NuxtLinkLocale>
+            </div>
+            <div
+              v-for="link in mainLinks"
+              :key="link.to"
+              class="flex h-11 w-24 cursor-pointer text-left font-sans text-sm font-semibold leading-5 lg:h-7 lg:w-60 lg:text-lg lg:font-bold lg:leading-7"
             >
-              <SbcLogo />
-            </NuxtLinkLocale>
+              <NuxtLinkLocale :to="link.to">
+                <span v-if="link.label === 'Service BC Connect'">
+                  <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
+                </span>
+                <!-- <span v-else class="text-white">
+                    {{ link.label }}
+                  </span> -->
+              </NuxtLinkLocale>
+            </div>
           </div>
           <div class="flex gap-1">
-            <ColorModeSelect />
-            <LocaleSelect />
+            <!-- <ColorModeSelect />
+            <LocaleSelect /> -->
             <!-- leave out auth options for now -->
             <!-- <UDropdown
               v-if="!user"
@@ -109,13 +127,17 @@ const {
         </div>
       </template>
       <UVerticalNavigation :links="mainLinks" />
-      <UDivider v-show="tocLinks.length && $route.path.includes('products')" class="my-4" />
-      <UAccordion v-show="tocLinks.length && $route.path.includes('products')" :items="[{label: 'Table of Contents', defaultOpen: true}]">
+      <UDivider
+        v-show="tocLinks.length && $route.path.includes('products')"
+        class="my-4"
+      />
+      <UAccordion
+        v-show="tocLinks.length && $route.path.includes('products')"
+        :items="[{ label: 'Table of Contents', defaultOpen: true }]"
+      >
         <!-- default slot is the accordian button itself, so we use a custom button variant here to match theme -->
         <template #default="{ open }">
-          <UButton
-            variant="accordian_trigger"
-          >
+          <UButton variant="accordian_trigger">
             <span class="truncate">Table of Contents</span>
 
             <template #trailing>
