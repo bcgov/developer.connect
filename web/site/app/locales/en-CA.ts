@@ -4,7 +4,7 @@ export default {
     goHome: 'Go Home',
     goBack: 'Go Back',
     downloadSpec: 'Download the specification',
-    allProducts: 'View all products',
+    allProducts: 'View Products',
     products: 'Products',
     dashboard: 'Dashboard',
     sbcConnect: 'Service BC Connect',
@@ -26,8 +26,8 @@ export default {
     },
     home: {
       title: 'Home',
-      h1: 'BC Registries API Gateway',
-      intro: 'Welcome to the BC Registries API Gateway! Access API information for all BC Registries services here.'
+      h1: 'Service BC Connect Developer Site',
+      intro: 'Welcome to the Service BC Connect Developer Site! Access API information for all BC Registries services here.'
     },
     products: {
       title: 'All Products',
@@ -56,8 +56,10 @@ export default {
   SbcFooter: {
     navLabel: 'Useful Links', // <nav> aria-label
     home: 'Home',
+    releaseNotes: 'Release Notes',
     disclaimer: 'Disclaimer',
     privacy: 'Privacy',
+    hours: 'Hours of Availability',
     ally: 'Accessibility',
     copyright: 'Copyright',
     bcApp: 'A BC Online Application'
@@ -73,6 +75,9 @@ export default {
   LocaleSelect: {
     // aria-label
     label: 'Select a Language, current language: English'
+  },
+  SbcMainCard: {
+    learnMore: 'Learn More'
   },
   SbcProductCard: {
     goTo: 'Go to'
