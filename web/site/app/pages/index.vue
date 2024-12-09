@@ -25,7 +25,7 @@ const localePath = useLocalePath()
       /> -->
       <UContainer class="flex h-full flex-col items-center justify-center gap-10 overflow-y-auto lg:flex-row">
         <UCard
-          class="flex max-h-[300px] min-h-[350px] w-[300px] flex-col items-center justify-center  rounded-none"
+          class="flex max-h-[300px] min-h-[350px] w-[325px] flex-col items-center justify-center  rounded-none shadow"
           :ui="{
             background: 'bg-gray-50 dark:bg-gray-800/50',
             header: { base: 'font-bold text-lg text-center border-none' },
@@ -39,30 +39,27 @@ const localePath = useLocalePath()
           <div class="flex h-16 items-center justify-center">
             <div class="mt-4 flex size-16 items-center justify-center rounded-full bg-bcGovColor-nonClickable">
               <div class="flex items-center justify-center">
-                <UIcon name="i-mdi-cursor-default-click" class="ms-auto size-6 shrink-0 text-white " />
+                <UIcon name="i-mdi-cursor-default-click" class="ms-auto size-8 shrink-0 text-white " />
               </div>
             </div>
           </div>
           <div class="mx-auto mt-4 max-w-5xl text-center">
-            <p class="text-gray-500 dark:text-gray-400">
+            <p class="text-bcGovColor-midGray dark:text-gray-400">
               Start to set up Service BC Connect APIs in your applications.
             </p>
           </div>
           <div class="flex grow items-center justify-center px-4 pb-3.5 text-center sm:p-7">
             <NuxtLink
               :to="localePath('/products/get-started/account-setup')"
-              class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] dark:text-white"
+              class="flex cursor-pointer flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] underline dark:text-white"
             >
-              <span>
-                {{ $t('SbcMainCard.learnMore') }}
-                <span class="inline-flex align-middle" />
-              </span>
+              {{ $t('SbcMainCard.learnMore') }}
             </NuxtLink>
           </div>
         </UCard>
 
         <UCard
-          class="flex max-h-[300px] min-h-[350px] w-[300px] flex-col items-center justify-center  rounded-none"
+          class="flex max-h-[300px] min-h-[350px] w-[325px] flex-col items-center justify-center  rounded-none shadow"
           :ui="{
             background: 'bg-gray-50 dark:bg-gray-800/50',
             header: { base: 'font-bold text-lg text-center border-none' },
@@ -76,24 +73,21 @@ const localePath = useLocalePath()
           <div class="flex h-16 items-center justify-center">
             <div class="mt-4 flex size-16 items-center justify-center rounded-full bg-bcGovColor-nonClickable">
               <div class="flex items-center justify-center">
-                <UIcon name="i-mdi-text-box-search" class="ms-auto size-6 shrink-0 text-white " />
+                <UIcon name="i-mdi-text-box-search" class="ms-auto size-8 shrink-0 text-white " />
               </div>
             </div>
           </div>
           <div class="mt-4 text-center">
-            <p class="text-gray-500 dark:text-gray-400">
+            <p class="text-bcGovColor-midGray dark:text-gray-400">
               Learn about and try Service BC Connect products
             </p>
           </div>
           <div class="flex grow items-center justify-center px-4 pb-3.5 text-center sm:p-7">
             <NuxtLink
               :to="localePath('/products')"
-              class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] dark:text-white"
+              class="flex cursor-pointer flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] underline dark:text-white"
             >
-              <span>
-                {{ $t('SbcMainCard.learnMore') }}
-                <span class="inline-flex align-middle" />
-              </span>
+              {{ $t('SbcMainCard.learnMore') }}
             </NuxtLink>
           </div>
         </UCard>

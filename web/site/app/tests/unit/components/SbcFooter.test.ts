@@ -11,11 +11,13 @@ describe('<SbcFooter/>', () => {
       }
     })
 
-    const linkTexts = ['Home', 'Disclaimer', 'Privacy', 'Accessibility', 'Copyright']
+    const linkTexts = ['Home', 'Disclaimer', 'Release Notes', 'Privacy', 'Hours of Availability', 'Accessibility', 'Copyright']
     const linkHrefs = [
       '/en-CA',
       'https://www2.gov.bc.ca/gov/content/home/disclaimer',
+      'https://www.release-notes.bcregistry.gov.bc.ca',
       'https://www2.gov.bc.ca/gov/content/home/privacy',
+      'https://www2.gov.bc.ca/gov/content?id=C41D8179671441B2BAA3BDDD3D89C9A9',
       'https://www2.gov.bc.ca/gov/content/home/accessibility',
       'https://www2.gov.bc.ca/gov/content/home/copyright'
     ]
