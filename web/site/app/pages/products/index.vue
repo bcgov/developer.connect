@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
+import { setBreadcrumbs } from '~/utils/setBreadcrumb'
 const { t, locale } = useI18n()
 useHead({
   title: t('page.products.title')
@@ -19,6 +21,15 @@ const { data: products } = await useAsyncData(
 const completedProducts = computed(() => {
   return products.value?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
 })
+
+const breadcrumbs = useBreadcrumbs()
+watch(
+  breadcrumbs,
+  (newBreadcrumbs) => {
+    setBreadcrumbs(newBreadcrumbs)
+  },
+  { immediate: true }
+)
 
 </script>
 <template>

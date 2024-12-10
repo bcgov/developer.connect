@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
+import { setBreadcrumbs } from '~/utils/setBreadcrumb'
+
 definePageMeta({
   layout: 'docs'
 })
+
+const breadcrumbs = useBreadcrumbs()
+watch(
+  breadcrumbs,
+  (newBreadcrumbs) => {
+    setBreadcrumbs(newBreadcrumbs)
+  },
+  { immediate: true }
+)
+
 </script>
 <template>
   <ContentDoc
