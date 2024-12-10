@@ -1,30 +1,19 @@
 <script setup lang="ts">
 import type { BreadcrumbLink } from '#ui/types'
 const { t } = useI18n()
+const route = useRoute()
 
-const breadcrumbs = computed<BreadcrumbLink[]>(() => {
-  const route = useRoute()
+const breadcrumbs = computed<BreadcrumbLink[]>(() =>
+  route.meta.breadcrumbs || [{ label: t('sbcBreadcrumb.default') }]
+)
 
-  if (route.meta.breadcrumbs) {
-    return route.meta.breadcrumbs
-  } else {
-    return [{ label: t('sbcBreadcrumb.default') }]
-  }
+const resolveBackHref = computed(() => {
+  const bc = breadcrumbs.value
+  return bc.length > 1 ? bc[bc.length - 2]?.to || bc[bc.length - 2]?.href : ''
 })
 
-function resolveBackHref () {
-  const bcLength = breadcrumbs.value.length
+const isBackButtonDisabled = computed(() => breadcrumbs.value.length <= 2)
 
-  if (bcLength > 1) {
-    // return the second to last breadcrumb link
-    return breadcrumbs.value[bcLength - 2]?.to ?? breadcrumbs.value[bcLength - 2]?.href
-  } else {
-    return ''
-  }
-}
-const isBackButtonDisabled = computed(() => {
-  return breadcrumbs.value.length <= 2
-})
 </script>
 <template>
   <div class="2xl: left-1 bg-bcGovColor-nonClickable sm:px-4">
@@ -37,7 +26,7 @@ const isBackButtonDisabled = computed(() => {
           icon="i-mdi-arrow-left"
           :aria-label="$t('sbcBreadcrumb.backBtn')"
           data-cy="crumb-back"
-          :to="resolveBackHref()"
+          :to="resolveBackHref"
         />
         <span class="text-white">|</span>
         <UBreadcrumb
