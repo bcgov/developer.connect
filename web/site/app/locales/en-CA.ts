@@ -25,8 +25,8 @@ export default {
     backBtn: 'Go Back',
     arialabel: 'Breadcrumb',
     sbcHome: 'Service BC Connect',
-    sbcProducts: 'Products',
-    sbcDocs: 'Documentation'
+    sbcProductslist: 'Products List',
+    sbcProducts: 'Products'
   },
   page: {
     notFound: {

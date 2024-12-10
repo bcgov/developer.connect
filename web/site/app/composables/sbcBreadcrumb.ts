@@ -12,11 +12,11 @@ export function useBreadcrumbs () {
     bc.push({ label: t('sbcBreadcrumb.sbcHome'), to: '/' })
     // Check for /products
     if (route.path.includes('/products') && !route.path.includes('/get-started')) {
-      bc.push({ label: t('sbcBreadcrumb.sbcProducts'), to: localePath('/products') })
+      bc.push({ label: t('sbcBreadcrumb.sbcProductslist'), to: localePath('/products') })
     }
     // Check for /products/get-started and include sub-paths like /account-setup
     if (route.path.includes('/products/get-started')) {
-      bc.push({ label: t('sbcBreadcrumb.sbcDocs'), to: localePath('/products/get-started') })
+      bc.push({ label: t('sbcBreadcrumb.sbcProducts'), to: localePath('/products/get-started') })
     }
 
     return bc
