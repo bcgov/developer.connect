@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import type { BreadcrumbLink } from '#ui/types'
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
@@ -131,3 +132,8 @@ export default defineNuxtConfig({
     id: 'G-GKRC2V8PT4'
   }
 })
+declare module '#app' {
+  interface PageMeta {
+    breadcrumbs?: BreadcrumbLink[]
+  }
+}
