@@ -7,7 +7,7 @@ export function useBreadcrumbs () {
 
   const breadcrumbs = computed(() => {
     const bc = [
-      { label: t('sbcBreadcrumb.default'), to: '/' }
+      { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca/' }
     ]
     bc.push({ label: t('sbcBreadcrumb.sbcHome'), to: '/' })
     // Check for /products

@@ -24,12 +24,13 @@ function resolveBackHref () {
 }
 </script>
 <template>
-  <div class="bg-bcGovColor-nonClickable">
-    <div class="mx-auto flex max-w-full flex-wrap items-center divide-x divide-gray-300 px-4 py-2 sm:divide-x-0">
+  <div class="bg-bcGovColor-nonClickable 2xl: left-1 sm:px-4">
+    <div class="m-auto flex w-full max-w-[1312px] items-center justify-between">
+    <div class="flex h-10 min-h-10 items-center">
       <UButton
         class="mr-3 mt-px size-[28px] rounded-full px-1 text-blue-500"
         color="white"
-        :disabled="breadcrumbs.length < 2"
+        :disabled="breadcrumbs.length <= 2"
         icon="i-mdi-arrow-left"
         :aria-label="$t('ConnectBreadcrumb.backBtn')"
         data-cy="crumb-back"
@@ -52,6 +53,7 @@ function resolveBackHref () {
           },
         }"
       />
+      </div>
     </div>
   </div>
 </template>
