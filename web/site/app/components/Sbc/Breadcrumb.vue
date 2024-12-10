@@ -22,6 +22,9 @@ function resolveBackHref () {
     return ''
   }
 }
+const isBackButtonDisabled = computed(() => {
+  return breadcrumbs.value.length <= 2
+})
 </script>
 <template>
   <div class="2xl: left-1 bg-bcGovColor-nonClickable sm:px-4">
@@ -30,7 +33,7 @@ function resolveBackHref () {
         <UButton
           class="mr-3 mt-px size-[28px] rounded-full px-1 text-blue-500"
           color="white"
-          :disabled="breadcrumbs.length <= 2"
+          :disabled="isBackButtonDisabled"
           icon="i-mdi-arrow-left"
           :aria-label="$t('sbcBreadcrumb.backBtn')"
           data-cy="crumb-back"
