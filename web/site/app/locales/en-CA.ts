@@ -21,7 +21,7 @@ export default {
     closeMainNav: 'Close Main Navigation Menu'
   },
   sbcBreadcrumb: {
-    default: 'BC Registries and Digital Service',
+    default: 'BC Registries and Online Services',
     backBtn: 'Go Back',
     arialabel: 'Breadcrumb',
     sbcHome: 'Service BC Connect',
@@ -89,6 +89,10 @@ export default {
   },
   SbcProductCard: {
     goTo: 'Go to'
+  },
+  SbcNavigation: {
+    intro: 'Introduction',
+    devproducts: 'Developer Products'
   },
   SbcDashboardTableApiKeys: {
     title: 'Developer Access',
