@@ -83,7 +83,7 @@ provide('footerHeight', footerHeight)
         $route.path.includes('dashboard') ? dashboardNavItems : undefined
       "
     />
-    <SbcBreadcrumb class="sticky inset-x-0 top-16 z-40" />
+    <SbcBreadcrumb class="sticky inset-x-0 top-16 z-40 hidden md:block" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
