@@ -7,7 +7,8 @@ defineProps<{
   <UButton
     :label="$t('btn.downloadSpec')"
     :to="href"
-    size="xl"
-    class="tracking-wide no-underline"
+    size="lg"
+    class="h-11 w-64 tracking-wide no-underline"
+    icon="i-mdi-download"
   />
 </template>

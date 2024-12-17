@@ -31,18 +31,23 @@ defineProps<{
       <template #item="{ item }">
         <UVerticalNavigation
           :aria-label="item.label"
-          class="mx-2"
+          class="mx-6 min-h-9 items-center border-s-2 border-bcGovGray-300"
           :links="item.children"
           :ui="{
-            label: 'text-ellipsis relative',
-            wrapper: 'border-s border-gray-500 dark:border-[#94A3B8] space-y-2',
+            label: 'text-sm relative',
+            wrapper: 'dark:border-[#94A3B8]',
             base: 'group block border-s -ms-px leading-6 before:hidden focus-visible:rounded',
-            padding: 'p-0 ps-4',
+            padding: 'px-4 py-2',
             rounded: '',
-            font: '',
+            font: 'font-sans font-normal text-lg',
             ring: 'focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-white',
-            active: 'text-primary-500 dark:text-[#7BB5EF] border-[#94A3B8] dark:border-[#7BB5EF] font-semibold',
-            inactive: 'border-transparent hover:border-gray-900 dark:hover:border-white text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+            active: 'text-primary-500 bg-bcGovColor-lightBlue dark:text-[#7BB5EF] border-[#94A3B8] dark:border-[#7BB5EF] font-semibold',
+            inactive: 'border-transparent hover:bg-bcGovColor-hairlinesOnWhite dark:hover:border-white  text-gray-700 hover:bg-bcGovBlue-50 hover:text-bcGovColor-activeBlue hover:font-semibold dark:text-gray-400 dark:hover:text-white',
+            width: 'w-[208px]',
+            height: 'h-[36px]',
+            gap: 'gap-2.5',
+            border: 'border-b-0 border-l-0 border-t-0 border-r',
+            opacity: 'opacity-0'
           }"
         />
       </template>

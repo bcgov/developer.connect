@@ -11,15 +11,16 @@ const localePath = useLocalePath()
   <UButton
     :aria-label="`${handleContentDirectoryLabel(page?._path?.split('/')[2] ?? '')}, ${page?.title}`"
     :to="localePath(page?._path || '/')"
-    variant="outline"
-    color="gray"
-    class="w-full sm:w-auto"
+    :variant="direction === 'prev' ? 'outline' : 'solid'"
+    class="flex h-11 w-48 items-center text-wrap align-middle"
   >
-    <UIcon v-if="direction === 'prev'" name="i-mdi-arrow-left-circle" class="size-8" />
-    <div :class="[ direction === 'next' ? 'ml-auto' : '', 'flex flex-col']">
-      <span class="text-lg font-medium text-bcGovColor-darkGray dark:text-white">{{ handleContentDirectoryLabel(page?._path?.split('/')[2] ?? '') }}</span>
-      <span class="text-base text-bcGovColor-midGray dark:text-gray-300">{{ page?.title }}</span>
+    <UIcon v-if="direction === 'prev'" name="i-mdi-chevron-left" class="size-6" />
+    <div v-if="direction === 'prev'" class="flex flex-col">
+      <span class="text-lg font-medium text-bcGovColor-activeBlue dark:text-white"> {{ $t('btn.prevpage') }}</span>
     </div>
-    <UIcon v-if="direction === 'next'" name="i-mdi-arrow-right-circle" class="size-8" />
+    <div v-if="direction === 'next'" :class="[ 'ml-9', 'flex', 'flex-row' ]">
+      <span class="text-lg font-medium text-bcGovColor-white dark:text-white ">{{ $t('btn.nextpage') }}</span>
+    </div>
+    <UIcon v-if="direction === 'next'" name="i-mdi-chevron-right" class="size-6" />
   </UButton>
 </template>
