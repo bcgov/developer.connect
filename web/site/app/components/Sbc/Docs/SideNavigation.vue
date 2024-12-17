@@ -14,11 +14,11 @@ const exceptgetStartedNavItems = computed(() => {
 </script>
 <template>
   <aside class="mx-2  min-w-56 max-w-min border-r-2  border-bcGovColor-hairlinesOnWhite " data-testid="docs-side-navigation">
-    <div class="flex items-center text-base font-semibold  uppercase ">
+    <div class="flex items-center text-base font-semibold  uppercase text-bcGovColor-midGray">
       {{ $t('SbcNavigation.intro') }}
     </div>
     <SbcDocsAccordianNavigation :nav-items="getStartedNavItems" />
-    <div class="flex items-center text-base font-semibold  uppercase ">
+    <div class="flex items-center text-base font-semibold  uppercase text-bcGovColor-midGray">
       {{ $t('SbcNavigation.devproducts') }}
     </div>
     <div v-for="item in exceptgetStartedNavItems" :key="item.label">
