@@ -26,7 +26,7 @@ const exceptgetStartedNavItems = computed(() => {
         :to="item.children?.[0]?.to"
         active-class="text-primary-500 bg-bcGovColor-lightBlue font-semibold"
         :class="[
-          'focus-visible:outline-{color}-500 mx-6 flex h-[40px] min-h-9 w-[215px] items-center gap-3 rounded-none px-1 font-sans text-sm font-normal text-bcGovColor-midGray transition-colors duration-300 ease-in-out hover:bg-bcGovBlue-50 hover:font-semibold hover:text-bcGovColor-activeBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:text-white dark:hover:bg-bcGovBlue-100/10 dark:focus-visible:outline-white '
+          'mx-6 flex h-[40px] min-h-9 w-[215px] items-center gap-3 rounded-none px-1 font-sans text-sm font-normal text-bcGovColor-midGray transition-colors duration-300 ease-in-out hover:bg-bcGovBlue-50 hover:font-semibold hover:text-bcGovColor-activeBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:text-white dark:hover:bg-bcGovBlue-100/10 dark:focus-visible:outline-white '
         ]"
       >
         {{ item.label }}

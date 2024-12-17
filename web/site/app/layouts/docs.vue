@@ -4,9 +4,8 @@ const navItems = inject<Ref<NavItem[]>>('docNavItems')
 const mainHeaderHeight = inject<Ref<number>>('mainHeaderHeight')
 const footerHeight = inject<Ref<number>>('footerHeight')
 const { prevPage, nextPage } = useSurroundPages()
-const { currentDir, tocLinks, createPageHead } = useDocPageData()
+const { createPageHead } = useDocPageData()
 const contentWrapper = shallowRef<HTMLDivElement | null>(null)
-const { activeTocId } = useHeadingObserver(contentWrapper.value)
 
 useHead({
   title: () => createPageHead()
