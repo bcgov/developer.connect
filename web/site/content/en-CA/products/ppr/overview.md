@@ -1,6 +1,6 @@
 ---
 title: 'Overview'
-description: 'Personal Property Registry Overview'
+description: 'Personal Property Registry API'
 ---
 
 # Personal Property Registry API

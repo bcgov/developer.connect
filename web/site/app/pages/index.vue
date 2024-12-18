@@ -3,7 +3,7 @@ import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
 import { setBreadcrumbs } from '~/utils/setBreadcrumb'
 const { t } = useI18n()
 useHead({
-  title: t('page.home.title')
+  title: `${t('page.home.title')} | Service BC Connect Developer Site`
 })
 
 const breadcrumbs = useBreadcrumbs()
