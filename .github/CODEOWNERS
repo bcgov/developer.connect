@@ -1,6 +1,5 @@
 * @thorwolpert @deetz99 @kris-daxiom @kialj876 @pwei1018
 
-
 ## Business Registry
 /web/site/content/en-CA/products/br @argush3 @thorwolpert
 /web/site/public/br @argush3 @thorwolpert
@@ -9,15 +8,18 @@
 /web/site/content/en-CA/products/bn @thorwolpert
 /web/site/public/bn @thorwolpert
 
-## Registry Search
-/web/site/content/en-CA/products/rs @deetz99 @kialj876
-/web/site/public/rs @deetz99 @kialj876
+## MHR - Manufactured Home Registry
+/web/site/content/en-CA/products/mhr @doug-lovett
+/web/site/public/mhr @doug-lovett
+
+## Pay - Connect Payment Services
+/web/site/content/en-CA/products/pay @seeker25 @ochiu
+/web/site/public/pay @seeker25 @ochiu
 
 ## PPR - Personal Property Registry
 /web/site/content/en-CA/products/ppr @doug-lovett
 /web/site/public/ppr @doug-lovett
 
-## MHR - Manufactured Home Registry
-/web/site/content/en-CA/products/mhr @doug-lovett
-/web/site/public/mhr @doug-lovett
-
+## Registry Search
+/web/site/content/en-CA/products/rs @deetz99 @kialj876
+/web/site/public/rs @deetz99 @kialj876
