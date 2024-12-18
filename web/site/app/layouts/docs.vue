@@ -4,9 +4,8 @@ const navItems = inject<Ref<NavItem[]>>('docNavItems')
 const mainHeaderHeight = inject<Ref<number>>('mainHeaderHeight')
 const footerHeight = inject<Ref<number>>('footerHeight')
 const { prevPage, nextPage } = useSurroundPages()
-const { currentDir, tocLinks, createPageHead } = useDocPageData()
+const { createPageHead } = useDocPageData()
 const contentWrapper = shallowRef<HTMLDivElement | null>(null)
-const { activeTocId } = useHeadingObserver(contentWrapper.value)
 
 useHead({
   title: () => createPageHead()
@@ -20,33 +19,34 @@ const stickyStyles = computed(() => ({
 }))
 </script>
 <template>
-  <main class="relative mx-auto flex w-full max-w-[1360px] grow gap-4 px-2 xl:gap-8 xl:px-0">
+  <main class="relative mx-auto flex w-full grow gap-4 bg-white px-2 xl:gap-8 xl:px-8 ">
     <!-- side navigation -->
-    <div
-      class="sticky hidden overflow-y-auto overflow-x-hidden py-4 lg:block"
-      :style="stickyStyles"
-    >
-      <SbcDocsSideNavigation :nav-items="createContentNav(navItems)" />
-    </div>
-    <!-- main content -->
-    <div class="flex grow flex-col gap-8 py-8">
-      <div ref="contentWrapper">
-        <slot />
+    <div class="m-auto flex w-full max-w-[1312px] gap-4 py-12">
+      <div
+        class="sticky hidden overflow-y-auto overflow-x-hidden lg:block "
+        :style="stickyStyles"
+      >
+        <SbcDocsSideNavigation :nav-items="createContentNav(navItems)" />
       </div>
-      <UDivider />
-      <div class="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
-        <SbcDocsNextPrevButton
-          :page="prevPage"
-          direction="prev"
-        />
-        <SbcDocsNextPrevButton
-          :page="nextPage"
-          direction="next"
-        />
+      <!-- main content -->
+      <div class="flex grow flex-col gap-8">
+        <div ref="contentWrapper">
+          <slot />
+        </div>
+        <UDivider />
+        <div class="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+          <SbcDocsNextPrevButton
+            :page="prevPage"
+            direction="prev"
+          />
+          <SbcDocsNextPrevButton
+            :page="nextPage"
+            direction="next"
+          />
+        </div>
       </div>
-    </div>
     <!-- table of contents -->
-    <div
+    <!-- <div
       class="sticky hidden overflow-y-auto py-8 lg:block"
       :style="stickyStyles"
     >
@@ -58,6 +58,7 @@ const stickyStyles = computed(() => ({
         :current-dir="currentDir"
         :active-toc-id="activeTocId"
       />
+    </div> -->
     </div>
   </main>
 </template>

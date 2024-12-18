@@ -3,7 +3,7 @@ export default {
     getStarted: 'Get Started',
     goHome: 'Go Home',
     goBack: 'Go Back',
-    downloadSpec: 'Download the specification',
+    downloadSpec: 'Download the Specification',
     allProducts: 'View Products',
     products: 'Products',
     dashboard: 'Dashboard',
@@ -18,7 +18,9 @@ export default {
     next: 'Next',
     previous: 'Previous',
     openMainNav: 'Open Main Navigation Menu',
-    closeMainNav: 'Close Main Navigation Menu'
+    closeMainNav: 'Close Main Navigation Menu',
+    prevpage: 'Previous Topic',
+    nextpage: 'Next Topic'
   },
   sbcBreadcrumb: {
     default: 'BC Registries and Online Services',
