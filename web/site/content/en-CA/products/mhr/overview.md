@@ -1,6 +1,6 @@
 ---
 title: 'Overview'
-description: 'Manufactured Home Registry Overview'
+description: 'Manufactured Home Registry API'
 ---
 
 # Manufactured Home Registry API

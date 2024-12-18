@@ -1,6 +1,6 @@
 ---
 title: 'Overview'
-description: 'Business Registry Overview'
+description: 'Business Registry API'
 ---
 
 # Business Registry API

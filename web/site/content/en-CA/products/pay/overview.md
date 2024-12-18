@@ -1,6 +1,6 @@
 ---
 title: 'Overview'
-description: 'Pay API Overview'
+description: 'Pay API'
 ---
 
 # Pay API
