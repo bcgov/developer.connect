@@ -1,7 +1,7 @@
 # Used to populate product card components
 name: Business Registry
 description: Start a B.C. based business and maintain it's info on the Registry
-badge: NEW
+badge: BETA
 bulletPoints: 
   - Incorporate and manage benefit companies and cooperative associations.
   - Register and manage general partnerships and sole proprietorships
