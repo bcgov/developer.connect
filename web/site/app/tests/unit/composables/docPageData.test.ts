@@ -50,7 +50,7 @@ describe('useDocPageData', () => {
     // assert current dir
     expect(composable.currentDir.value).toEqual(queryContentMockData._path)
     // assert generated page head
-    expect(composable.createPageHead()).toBe('Get Started - Test Title - Service BC Connect API Gateway')
+    expect(composable.createPageHead()).toBe('Get Started - Test Title | Service BC Connect Developer Site')
   })
 
   // TODO: figure out how to test the watcher reacting to route changes

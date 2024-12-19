@@ -1,6 +1,6 @@
 ---
 title: 'Overview'
-description: 'Registry Search Overview'
+description: 'Registry Search API'
 ---
 
 # Registry Search API

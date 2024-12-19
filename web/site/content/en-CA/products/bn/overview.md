@@ -1,6 +1,6 @@
 ---
 title: 'Overview'
-description: 'Business Number Overview'
+description: 'Business Names API'
 ---
 
 # Business Names API
