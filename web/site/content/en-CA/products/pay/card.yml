@@ -1,5 +1,5 @@
 # Used to populate product card components
-name: Platform Payment and Catalog Services
+name: Pay API and Catalog Services
 description: The payment and catalog services for the sbc-connect platform
 badge: BETA
 bulletPoints: 
