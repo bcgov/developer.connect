@@ -54,12 +54,10 @@ function goToProduct () {
       </ul>
     </div>
     <div class="px-4 pb-3.5 text-left sm:p-7">
-      <span class="flex flex-wrap items-center font-semibold tracking-wide text-[#1a5a96] underline dark:text-white">
+      <span class="flex flex-wrap items-center text-base font-semibold tracking-wide text-[#1a5a96] underline dark:text-white">
         <span>
           {{ $t('SbcProductCard.goTo') }} {{ name }} {{ name === 'Pay API and Catalog Services' ? '' : $t('SbcProductCard.api') }}
-          <span class="inline-flex align-middle">
-            <UIcon name="i-mdi-arrow-right-thin scale-150 ml-2" />
-          </span>
+
         </span>
       </span>
     </div>
