@@ -90,7 +90,8 @@ export default {
     learnMore: 'Learn More'
   },
   SbcProductCard: {
-    goTo: 'Go to'
+    goTo: 'Go to',
+    api: 'API'
   },
   SbcNavigation: {
     intro: 'Introduction',

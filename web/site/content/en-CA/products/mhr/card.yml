@@ -3,5 +3,6 @@ name: Manufactured Home Registry
 description: In the Manufactured Home Registry, you are currently able to
 badge: NEW
 bulletPoints: 
-  - Search for, and download reports for, manufactured homes and personal property liens on manufactured homes.
-  - Search by owner name, organization, registration or serial number.
+  - Search and download reports for manufactured homes
+  - Search for personal property liens on manufactured homes
+  - Search by owner name, organization name, registration or serial number
