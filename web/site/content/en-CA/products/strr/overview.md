@@ -11,11 +11,13 @@ description: 'Short Term Rental Registry API (Platform)'
 
 The Short Term Rental Registry contains all of the Hosts, Strata Title Hotels and Motels, and Platforms that can operate in the Province of BC.
 
-<br>
+<p>
 This API is used to validate a permit against the Short Term Rental Registry.
 It is also used to determine the requirements of an address in the Province of BC. For example, an address may be in an area that requires a business permit, or may be entirely exempt from being required to register.
+</p>
 
 <br>
+Temporary - Download the <a href="strr/platform.yaml" download="platform.yaml" target="_blank">API Spec</a>
 
 ::ButtonDownloadSpec{href="strr/platform.yaml"}
 ::
