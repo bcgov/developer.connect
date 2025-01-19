@@ -1,0 +1,652 @@
+openapi: 3.0.0
+x-stoplight:
+  id: 1d3quzhv06iyi
+info:
+  title: BC Short Term Rental Registry Validation API
+  version: '0.1'
+  termsOfService: 'https://developer.connect.gov.bc.ca/shared/api-terms-of-use.pdf'
+  contact:
+    url: 'https://www2.gov.bc.ca/gov/content/housing-tenancy/short-term-rentals'
+    name: Developer Engagement
+    email: thor@daxiom.com
+  description: This service is used to validate the registration and key elements of listing details against Short Term Rental Registrations and annual Permits.
+  license:
+    name: bsd-3-clause
+    url: 'https://opensource.org/license/bsd-3-clause'
+servers:
+  - url: 'https://bcregistry-sandbox.apigee.net/v1'
+    description: Test
+  - url: 'https://bcregistry-prod.apigee.net/v1'
+    description: Production
+paths:
+  '/permits/:validatePermit':
+    post:
+      summary: ValidatePermit
+      operationId: validate-permit
+      responses:
+        '200':
+          description: |-
+            {
+              "identifier": "H1234567",
+              "validUntil": "2025-08-24",
+              "status": "ACTIVE",
+              "address": {
+                "unitNumber": "101a",
+                "streetNumber": "101",
+                "streetName": "Test St",
+                "country": "CA",
+                "postalCode": "H0H0H0",
+                "province": "BC",
+                "city": "Test city"
+              }
+            }
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    identifier: string
+                    validUntil: '2019-08-24'
+                    status: ACTIVE
+                    address:
+                      unitNumber: 101a
+                      streetNumber: '101'
+                      streetName: Test
+                      streetAdditional: Test
+                      country: CA
+                      postalCode: H0H0H0
+                      province: bc
+                      city: Victoria
+                    errors:
+                      - code: STREET_NUMBER_MISMATCH
+                        message: Street number does not match with the data in the permit.
+                required:
+                  - identifier
+                  - address
+                properties:
+                  identifier:
+                    type: string
+                  validUntil:
+                    type: string
+                  status:
+                    type: string
+                  address:
+                    type: object
+                    required:
+                      - streetNumber
+                      - postalCode
+                    properties:
+                      unitNumber:
+                        type: string
+                      streetNumber:
+                        type: string
+                      streetName:
+                        type: string
+                      streetAdditional:
+                        type: string
+                      country:
+                        type: string
+                      postalCode:
+                        type: string
+                      province:
+                        type: string
+                      city:
+                        type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+              examples:
+                Valid Permit:
+                  value:
+                    identifier: H1234567
+                    validUntil: '2025-08-24'
+                    status: ACTIVE
+                    address:
+                      unitNumber: 101a
+                      streetNumber: '101'
+                      streetName: Test St
+                      country: CA
+                      postalCode: H0H0H0
+                      province: BC
+                      city: Test city
+                Data Mismatch:
+                  value:
+                    identifier: H1234567
+                    address:
+                      unitNumber: 101a
+                      streetNumber: '101'
+                      streetName: Test St
+                      country: CA
+                      postalCode: H0H0H0
+                      province: BC
+                      city: Test city
+                    errors:
+                      - code: STREET_NUMBER_MISMATCH
+                        message: Street number does not match with the data in the permit.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    x-stoplight:
+                      id: flpmdc6l7hvk2
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/error'
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - code: INVALID_REQUEST
+                        message: Field postalCode is missing in the address object.
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  identifier: H1234567
+                  address:
+                    unitNumber: 23a
+                    streetNumber: '721'
+                    streetName: Test St
+                    city: Test city
+                    province: BC
+                    country: CA
+                    postalCode: H0H0H0
+              required:
+                - identifier
+              properties:
+                identifier:
+                  type: string
+                address:
+                  type: object
+                  required:
+                    - streetNumber
+                    - postalCode
+                  properties:
+                    unitNumber:
+                      type: string
+                    streetNumber:
+                      type: string
+                    streetName:
+                      type: string
+                    city:
+                      type: string
+                    province:
+                      type: string
+                    country:
+                      type: string
+                    postalCode:
+                      type: string
+            examples:
+              Example:
+                value:
+                  identifier: H1234567
+                  address:
+                    unitNumber: 23a
+                    streetNumber: '721'
+                    streetName: Test St
+                    city: Test city
+                    province: BC
+                    country: CA
+                    postalCode: H0H0H0
+        description: Post the necessary fields for the API to validate a registration.
+      description: Validate a property has a valid permit.
+      x-stoplight:
+        id: 97n85oxv4riix
+    parameters: []
+  '/address/:requirements':
+    post:
+      summary: AddressRequirements
+      operationId: address-requirements
+      responses:
+        '200':
+          description: |-
+            {
+              "isBusinessLicenceRequired": false,
+              "isPrincipalResidenceRequired": true,
+              "isStrProhibited": false,
+              "isStraaExempt": false
+            }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressRequirements'
+              examples:
+                Example 1:
+                  value:
+                    isBusinessLicenceRequired: false
+                    isPrincipalResidenceRequired: true
+                    isStrProhibited: false
+                    isStraaExempt: false
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  address:
+                    unitNumber: 101a
+                    streetNumber: '101'
+                    streetName: Test street
+                    country: CA
+                    postalCode: H0H0H0
+                    province: BC
+                    city: Test City
+              properties:
+                address:
+                  type: object
+                  required:
+                    - streetNumber
+                    - streetName
+                    - city
+                  properties:
+                    unitNumber:
+                      type: string
+                    streetNumber:
+                      type: string
+                    streetName:
+                      type: string
+                    country:
+                      type: string
+                    postalCode:
+                      type: string
+                    province:
+                      type: string
+                    city:
+                      type: string
+            examples:
+              Example 1:
+                value:
+                  address:
+                    unitNumber: 101a
+                    streetNumber: '234'
+                    streetName: Test street
+                    country: CA
+                    postalCode: H0H0H0
+                    province: BC
+                    city: Test city
+        description: Post the address to get the short term rental requirements.
+      description: Post the address to get the short term rental requirements for that address.
+      x-stoplight:
+        id: 4sqp07r1juk5x
+    parameters: []
+  '/permits/:batchValidate':
+    post:
+      summary: BatchValidate
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      operationId: batch-validate-permit
+      x-stoplight:
+        id: pxnr153m69yor
+      description: Processes a batch submission of permits and/or addresses.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  control:
+                    count: 100
+                    callBackUrl: 'http://example.com/jurisdiction/hostsBatch?token=e1231nk123bni12uhi1ub4k2jb3hi2ughri23br'
+                  data:
+                    - identifier: BC1234567
+                      address:
+                        unitNumber: 101a
+                        streetNumber: '101'
+                        streetName: Test Street
+                        postalCode: H0H0H0
+                        city: Test city
+                    - address:
+                        unitNumber: 101a
+                        streetNumber: '101'
+                        streetName: Test Street
+                        postalCode: H0H0H0
+                        city: Test city
+              required:
+                - control
+                - data
+              properties:
+                control:
+                  type: object
+                  required:
+                    - count
+                    - callBackUrl
+                  description: Directives for the submission.
+                  properties:
+                    count:
+                      type: integer
+                      description: |-
+                        The total number of records submitted for processing.
+                        Used as a transmission check.
+                    callBackUrl:
+                      type: string
+                      description: An URL to callback and POST the response for long running responses.
+                data:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - address
+                    properties:
+                      identifier:
+                        type: string
+                        description: The registration number of the Permit.
+                      address:
+                        type: object
+                        required:
+                          - streetNumber
+                          - postalCode
+                          - streetName
+                          - city
+                        properties:
+                          unitNumber:
+                            type: string
+                          streetNumber:
+                            type: string
+                          postalCode:
+                            type: string
+                          streetName:
+                            type: string
+                          city:
+                            type: string
+            examples:
+              Example:
+                value:
+                  control:
+                    count: 2
+                    callBackUrl: 'http://example.com/jurisdiction/hostsBatch?token=e1231nk123bni12uhi1ub4k2jb3hi2ughri23br'
+                  data:
+                    - identifier: H12345678
+                      address:
+                        unitNumber: 12A
+                        streetNumber: '234'
+                        streetName: Test St
+                        postalCode: H0H0H0
+                        city: Test City
+                    - address:
+                        unitNumber: 12A
+                        streetNumber: '234'
+                        streetName: Test St
+                        postalCode: H0H0H0
+                        city: Test City
+      callbacks:
+        notification:
+          '{$request.body#/control/callBackUrl}':
+            post:
+              summary: Receive single notification about a batch
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        control:
+                          type: object
+                          $ref: '#/components/schemas/control'
+                        data:
+                          type: array
+                          x-stoplight:
+                            id: u3550r8tzkckb
+                          items:
+                            $ref: '#/components/schemas/batchRecord'
+              responses:
+                '200':
+                  description: Notification successfully processed
+                  content:
+                    text/plain:
+                      examples:
+                        ok:
+                          value: ok
+    parameters: []
+components:
+  schemas:
+    address:
+      title: address
+      description: 'Capture address information for an entity. If the country code is Canada or the US, city and postal code are required.'
+      type: object
+      x-examples:
+        address-example-1:
+          unitNumber: null
+          streetNumber: '721'
+          streetName: Fort St.
+          city: Victoria
+          province: BC
+          country: CA
+          postalCode: A1A 1A1
+      required:
+        - streetNumber
+        - postalCode
+      properties:
+        unitNumber:
+          type: string
+          x-stoplight:
+            id: h8zpkrtfo9otr
+          pattern: '^[0-9]*[A-Za-z]?'
+          example: 101a
+        streetNumber:
+          type: string
+          x-stoplight:
+            id: jrgzb5yhi8luf
+          pattern: '^[0-9]*'
+          example: '101'
+        streetName:
+          type: string
+          description: 'Street address and name. '
+          x-stoplight:
+            id: vkj7vfcyw6kc6
+        streetAdditional:
+          type: string
+          description: 'City, Town, or Village.'
+          x-stoplight:
+            id: 78128c30mv27f
+        country:
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: 2 Character ISO 3166-1 Alpha-2 Country Code.
+        postalCode:
+          type: string
+          description: 'Postal Code in A1A 1A1 format for Canada, or zip code for US addresses.'
+        province:
+          type: string
+          x-stoplight:
+            id: our822cmejye6
+        city:
+          type: string
+          x-stoplight:
+            id: 2bzbl5ifh081k
+    control:
+      title: control
+      x-stoplight:
+        id: hnpfgpeh4ptc0
+      type: object
+      x-examples:
+        batch-control:
+          count: 1
+          callBackUrl: 'http://example.com'
+      description: Directives for the submission
+      required:
+        - count
+        - callBackUrl
+      properties:
+        count:
+          type: integer
+          description: |-
+            The total number of permits submitted for review.
+            Used as a transmission check.
+          x-stoplight:
+            id: xhiwqb7mjcox2
+          minimum: 1
+        callBackUrl:
+          type: string
+          format: uri
+          description: An URL to callback and POST the response for long running responses.
+          x-stoplight:
+            id: zyeuc87pxvxsl
+    batchRecord:
+      title: batchRecord
+      x-stoplight:
+        id: k5714a71jogf9
+      type: object
+      x-examples:
+        Validation successful:
+          identifier: H1234567
+          validUntil: '2019-08-24'
+          status: ACTIVE
+          address:
+            unitNumber: 101a
+            streetNumber: '101'
+            streetName: Test st
+            country: CA
+            postalCode: H0H0H0
+            province: BC
+            city: Test
+        Validation Error:
+          identifier: H1234567
+          address:
+            unitNumber: 101a
+            streetNumber: '101'
+            streetName: Test St
+            country: CA
+            postalCode: H0H0H0
+            province: BC
+            city: Test
+          errors:
+            - code: STREET_NUMBER_MISMATCH
+              message: Street number does not match with the data in the permit.
+            - code: POSTAL_CODE_MISMATCH
+              message: Postal code does not match with the data in the permit.
+        STR Exempt:
+          address:
+            unitNumber: 101a
+            streetNumber: '101'
+            streetName: test st
+            country: CA
+            postalCode: H0H0H0
+            province: BC
+            city: Test
+          isStraaExempt: true
+      required:
+        - address
+      properties:
+        identifier:
+          type: string
+          description: The registration number of the Permit
+        validUntil:
+          type: string
+          format: date
+          description: The date when the permit is no longer valid.
+        status:
+          enum:
+            - ACTIVE
+            - EXPIRED
+            - SUSPENDED
+            - CANCELLED
+          description: The current status of the Permit
+        address:
+          $ref: '#/components/schemas/address'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/error'
+        isStraaExempt:
+          type: boolean
+          x-stoplight:
+            id: 321yvanazj3z9
+    error:
+      title: error
+      x-stoplight:
+        id: 55ddyc11ipxhv
+      description: Error object.
+      type: object
+      x-examples:
+        error:
+          code: STREET_NUMBER_MISMATCH
+          message: Street number does not match with the data in the permit.
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          pattern: '^[0-9]*[A-Za-z]?'
+          example: 101a
+          x-stoplight:
+            id: wbr16i5f71u91
+        message:
+          type: string
+          pattern: '^[0-9]*'
+          example: '101'
+          x-stoplight:
+            id: vtsqsw0p96lnp
+    addressRequirements:
+      title: addressRequirements
+      x-stoplight:
+        id: n0699fszvtnml
+      description: Short term rental requirements for an address.
+      type: object
+      x-examples:
+        Example:
+          isBusinessLicenceRequired: true
+          isPrincipalResidenceRequired: true
+          isStrProhibited: true
+          isStraaExempt: true
+      properties:
+        isBusinessLicenceRequired:
+          type: boolean
+          x-stoplight:
+            id: tw86vl4jl3dg7
+        isPrincipalResidenceRequired:
+          type: boolean
+          x-stoplight:
+            id: q473m1i7awkk6
+        isStrProhibited:
+          type: boolean
+          x-stoplight:
+            id: mmnwg5z5chhr0
+        isStraaExempt:
+          type: boolean
+          x-stoplight:
+            id: kju1p5kd0up0f
+  securitySchemes:
+    api_key:
+      type: apiKey
+      description: API Gateway assigned API key. Required for all requests.
+      name: x-apikey
+      in: header
+    jwt:
+      type: openIdConnect
+      openIdConnectUrl: 'https://AUTH_PROVIDER/.well-known/openid-configuration'
+tags:
+  - name: Draft
+    description: The release state
+  - name: Short Term Rental
+    description: 'Short-term rentals are defined under the Act as accommodations provided to members of the public in a host''s property, in exchange for money, for a period of less than 90 consecutive days.'
+  - name: Verification
+    description: The process of establishing the validity of a host's property as a qualified Short Term Rental
+security:
+  - api_key: []
