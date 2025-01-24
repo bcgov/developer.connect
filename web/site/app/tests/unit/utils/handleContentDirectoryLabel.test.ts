@@ -24,6 +24,7 @@ const productNames = [
   ['RS', 'Registry Search'],
   ['BR', 'Business Registry'],
   ['NR', 'Names Request'],
+  ['STRR', 'Short-Term Rental Registry'],
   ['CONNECT', 'SBC Connect']
 ]
 

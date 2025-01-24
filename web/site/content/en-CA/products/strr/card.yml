@@ -1,0 +1,8 @@
+# Used to populate product card components
+name: Short-Term Rental Registry (Platform)
+description: Validate the registration and key elements of listing details against Short-Term Rental Registrations.
+badge: BETA
+bulletPoints: 
+  - Validate a single permit.
+  - Validate permits in batches
+  - Retrieve the requirements for a single address.
