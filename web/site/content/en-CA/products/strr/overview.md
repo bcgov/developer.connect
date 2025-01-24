@@ -1,25 +1,25 @@
 ---
 title: 'Overview'
-description: 'Short Term Rental Registry API (Platform)'
+description: 'Short-Term Rental Registry API (Platform)'
 ---
 
-# Short Term Rental Registry API (Platform)
+# Short-Term Rental Registry API (Platform)
 
 ---
 
 ## Overview
 
-The Short Term Rental Registry contains all of the Hosts, Strata Title Hotels and Motels, and Platforms that can operate in the Province of BC.
+The Short-Term Rental Registry contains all of the Hosts, Strata Title Hotels and Motels, and Platforms that can operate in the Province of British Columbia.
 
 <p>
-This API is used to validate a permit against the Short Term Rental Registry.
+This API is used to validate a permit against the Short-Term Rental Registry.
 It is also used to determine the requirements of an address in the Province of BC. For example, an address may be in an area that requires a business permit, or may be entirely exempt from being required to register.
 </p>
 
 <br>
 Temporary - Download the <a href="strr/platform.yaml" download="platform.yaml" target="_blank">API Spec</a>
 
-::ButtonDownloadSpec{href="strr/platform.yaml"}
+::ButtonDownloadSpec{href="https://okagqp-test-bcregistryapis.apigee.io/portals/api/sites/okagqp-test-bcregistryapis/liveportal/apis/strrproxy/download_spec"}
 ::
 
 <br>
@@ -32,14 +32,15 @@ Temporary - Download the <a href="strr/platform.yaml" download="platform.yaml" t
 
 View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
-<a href="https://bcregistry-demo.apigee.io/docs/regsearchproxy/1/overview" target="_blank">> View the API</a>
+<a href="https://okagqp-test-bcregistryapis.apigee.io/docs/strrproxy/1/overview" target="_blank">> View the API</a>
 
 ---
 
 ## Fees
 
-All fees are specified within the regulations. Details of the fees and service charges can be found on the
-<a href="https://www2.gov.bc.ca/" target="_blank"> STRR site</a>.
+There are no fees to use the API.
+<br>
+Only registered platforms in good standing can access the API.
 
 ---
 

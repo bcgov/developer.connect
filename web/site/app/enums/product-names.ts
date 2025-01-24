@@ -7,5 +7,5 @@ export enum ProductNames {
   PAY = 'Pay',
   PPR = 'Personal Property Registry',
   RS = 'Registry Search',
-  STRR = 'Short Term Rental Registry',
+  STRR = 'Short-Term Rental Registry',
 }
