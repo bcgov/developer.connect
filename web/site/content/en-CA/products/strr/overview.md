@@ -17,7 +17,6 @@ It is also used to determine the requirements of an address in the Province of B
 </p>
 
 <br>
-Temporary - Download the <a href="strr/platform.yaml" download="platform.yaml" target="_blank">API Spec</a>
 
 ::ButtonDownloadSpec{href="https://okagqp-test-bcregistryapis.apigee.io/portals/api/sites/okagqp-test-bcregistryapis/liveportal/apis/strrproxy/download_spec"}
 ::
