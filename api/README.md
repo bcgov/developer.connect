@@ -2,7 +2,7 @@
 
 
 # Application Name
-SBC Developer Site
+SBC API Gateway
 
 
 ## Technology Stack Used
