@@ -1563,7 +1563,7 @@ components:
   securitySchemes:
     api_key:
       type: apiKey
-      description: API Gateway assigned API key for a consumer. Required for all requests.
+      description: Developer Site assigned API key for a consumer. Required for all requests.
       name: x-apikey
       in: header
     jwt:

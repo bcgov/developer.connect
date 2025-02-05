@@ -86,7 +86,7 @@ class ApiGateway:
 
     @classmethod
     def _create_consumer(cls, name, org_details, env):
-        """Create an API Gateway consumer."""
+        """Create an Developer Site consumer."""
         consumer_endpoint: str = cls._get_api_consumer_endpoint(env)
         gw_api_key = cls._get_api_gw_key(env)
         email = cls._get_email_id(org_details.get("id"), env)

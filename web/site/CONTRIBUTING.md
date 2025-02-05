@@ -1,5 +1,5 @@
 <!-- omit in toc -->
-# Contributing to SBC API Gateway
+# Contributing to SBC Developer Site
 
 First off, thanks for taking the time to contribute! ❤️
 
@@ -25,7 +25,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
-[SBC API Gateway Code of Conduct](https://github.com/bcgov/sbc-apigw/tree/main/web/site/CODE_OF_CONDUCT.md).
+[SBC Developer Site Code of Conduct](https://github.com/bcgov/sbc-apigw/tree/main/web/site/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
 to <>. Add contact?
 
@@ -104,7 +104,7 @@ Once it's filed:
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for SBC API Gateway, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
+This section guides you through submitting an enhancement suggestion for SBC Developer Site, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
 
 <!-- omit in toc -->
 #### Before Submitting an Enhancement
@@ -122,7 +122,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/bcgov/
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
-- **Explain why this enhancement would be useful** to most SBC API Gateway users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
+- **Explain why this enhancement would be useful** to most SBC Developer Site users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
 <!-- TODO
 ### Your First Code Contribution

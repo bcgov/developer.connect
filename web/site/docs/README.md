@@ -23,9 +23,9 @@ The page head is automatically mapped based on the current markdown file structu
 
 For example:
 - `content/en-CA/products/get-started/account-setup.md` will return the page head as:  
-  `Get Started - Account Setup - Service BC Connect API Gateway`.
+  `Get Started - Account Setup - Service BC Connect Developer Site`.
 - `content/en-CA/products/br/overview.md` will return the page head as:  
-  `BR - Overview - Service BC Connect API Gateway`.
+  `BR - Overview - Service BC Connect Developer Site`.
 
 <!-- omit in toc -->
 ### Page Title and Description
