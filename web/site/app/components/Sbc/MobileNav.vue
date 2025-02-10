@@ -161,7 +161,7 @@ const {
         </template>
       </UAccordion>
       <UDivider class="my-4" />
-      <SbcDocsAccordianNavigation :nav-items="accordianNavItems" />
+      <SbcDocsSideNavigation :nav-items="accordianNavItems" :is-mobile="true" />
     </UCard>
   </UModal>
 </template>

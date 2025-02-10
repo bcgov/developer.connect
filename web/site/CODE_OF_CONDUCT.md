@@ -1,4 +1,4 @@
-# Code of Conduct - SBC API Gateway
+# Code of Conduct - SBC Developer Site
 
 ## Our Pledge
 

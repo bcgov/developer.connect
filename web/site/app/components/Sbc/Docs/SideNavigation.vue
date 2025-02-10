@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  navItems: AccordianNavItem[] | undefined
+  navItems: AccordianNavItem[] | undefined,
+  isMobile: boolean | undefined,
 }>()
 
 const getStartedNavItems = computed(() => {
@@ -13,7 +14,11 @@ const exceptgetStartedNavItems = computed(() => {
 
 </script>
 <template>
-  <aside class="mx-2  min-w-56 max-w-min border-r-2  border-bcGovColor-hairlinesOnWhite " data-testid="docs-side-navigation">
+  <aside
+    class="mx-2 min-w-56 max-w-min border-bcGovColor-hairlinesOnWhite"
+    :class="{ 'border-r-2': !isMobile }"
+    data-testid="docs-side-navigation"
+  >
     <div class="flex items-center text-base font-semibold  uppercase text-bcGovColor-midGray">
       {{ $t('SbcNavigation.intro') }}
     </div>
