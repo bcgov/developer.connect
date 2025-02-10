@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   navItems: AccordianNavItem[] | undefined,
-  isMobile: boolean | undefined,
+  isMobile?: boolean | undefined,
 }>()
 
 const getStartedNavItems = computed(() => {
