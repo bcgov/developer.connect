@@ -95,24 +95,25 @@ provide('footerHeight', footerHeight)
 </template>
 <style>
   .light-mode {
-    --scalar-color-1: #f10dbc !important;
-    --scalar-color-2: rgba(0, 0, 0, 0.6);
-    --scalar-color-3: rgba(0, 0, 0, 0.4);
-    --scalar-color-accent: #0a85d1;
-    --scalar-background-1: #fff;
-    --scalar-background-2: #f6f5f4;
-    --scalar-background-3: #f1ede9;
-    --scalar-background-accent: #5369d20f;
-    --scalar-border-color: rgba(0, 0, 0, 0.08);
+    --scalar-color-1: #212529 !important;
+    --scalar-color-2: #212529 !important;
+    --scalar-color-3: #212529 !important;
+    --scalar-color-accent: #1669bb !important;
+    --scalar-background-1: #f1f3f5 !important;
+    --scalar-background-2: #e9ecef !important;
+    --scalar-background-3: #dee2e6 !important;
+    --scalar-background-accent: #5369d20f !important;
+    --scalar-border-color: rgba(0, 0, 0, 0.08) !important;
   }
   .dark-mode {
-    --scalar-color-1: rgba(255, 255, 255, 0.81);
-    --scalar-color-2: rgba(255, 255, 255, 0.443);
-    --scalar-color-3: rgba(255, 255, 255, 0.282);
-    --scalar-color-accent: #8ab4f8;
-    --scalar-background-1: #202020;
-    --scalar-background-2: #272727;
-    --scalar-background-3: #333333;
-    --scalar-background-accent: #8ab4f81f;
+    --scalar-color-1: rgba(255, 255, 255, 0.81) !important;
+    --scalar-color-2: rgba(255, 255, 255, 0.443) !important;
+    --scalar-color-3: rgba(255, 255, 255, 0.282) !important;
+    --scalar-color-accent: #e0e7ed !important;
+    --scalar-background-1: #202020 !important;
+    --scalar-background-2: #272727 !important;
+    --scalar-background-3: #333333 !important;
+    --scalar-background-accent: #8ab4f81f !important;
+    --scalar-border-color: rgb(209 213 219 / 0.5) !important;
   }
 </style>
