@@ -129,7 +129,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/pay/ppr-spec.yaml'
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/ppr/ppr-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/ppr'
