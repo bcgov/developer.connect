@@ -19,7 +19,7 @@ export default defineNuxtConfig({
         '/en-CA/sbc/auth/logout',
         '/en-CA/products/get-started/api-access-request',
         '/en-CA/oas/strr',
-        '/oas/strr',
+        '/oas/strr'
       ]
     }
   },
@@ -142,7 +142,7 @@ export default defineNuxtConfig({
         pathRouting: {
           basePath: '/oas/rs'
         }
-      },
+      }
       // {
       //   spec: {
       //     url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
@@ -191,6 +191,11 @@ export default defineNuxtConfig({
           // treat all tags starting with 'bcros-' as custom elements
           isCustomElement: tag => tag.startsWith('bcros-')
         }
+      }
+    },
+    server: {
+      watch: {
+        usePolling: true
       }
     }
   },

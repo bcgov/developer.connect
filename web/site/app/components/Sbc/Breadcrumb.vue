@@ -17,7 +17,7 @@ const isBackButtonDisabled = computed(() => breadcrumbs.value.length <= 2)
 </script>
 <template>
   <div class="2xl: left-1 bg-bcGovColor-nonClickable sm:px-4">
-    <div class="m-auto flex w-full max-w-[1312px] items-center justify-between">
+    <div class="m-auto flex w-full max-w-[1360px] items-center justify-between">
       <div class="flex h-10 min-h-10 items-center">
         <UButton
           class="mr-3 mt-px size-[28px] rounded-full px-1 text-blue-500"

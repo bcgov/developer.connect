@@ -18,10 +18,10 @@ defineExpose({
   <header
     id="sbc-main-header"
     ref="headerRef"
-    class="2xl: left-1 h-16 border-b-4 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
+    class="h-16 border-b-4 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
   >
     <nav
-      class="m-auto flex w-full max-w-[1312px] items-center justify-between"
+      class="m-auto flex w-full max-w-[1360px] items-center justify-between"
       :aria-label="$t('SbcHeader.navLabel')"
     >
       <div
