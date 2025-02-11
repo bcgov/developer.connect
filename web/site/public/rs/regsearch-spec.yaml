@@ -1,0 +1,1830 @@
+openapi: 3.0.1
+info:
+  title: Registry-Search API
+  description: Information about businesses or organizations registered in B.C. Documents that are filed and registered are public record and are available to citizens for a fee. The fee is legislated.
+  contact:
+    email: admin@daxiom.com
+    name: BCRegistry
+    url: 'https://developer.bcregistry.daxiom.ca/'
+  version: v1
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+paths:
+  /v1/businesses/search/facets:
+    get:
+      summary: Search facets
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  facets:
+                    $ref: '#/components/schemas/Facet_facets'
+                  searchResults:
+                    type: object
+                    required:
+                      - queryInfo
+                      - totalResults
+                      - results
+                    properties:
+                      queryInfo:
+                        $ref: '#/components/schemas/Facet_query_info'
+                      totalResults:
+                        type: integer
+                        example: 3452
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Facet_result'
+                    readOnly: true
+                required:
+                  - facets
+                  - searchResults
+                readOnly: true
+              examples:
+                example-1:
+                  value:
+                    facets:
+                      fields:
+                        legalType:
+                          - value: CP
+                            count: 25
+                        status:
+                          - value: CP
+                            count: 25
+                    searchResults:
+                      queryInfo:
+                        start: 5
+                        rows: 300
+                        query:
+                          value: 23422 test business
+                          bn: ''
+                          identifier: ''
+                          name: ''
+                        categories:
+                          legalType:
+                            - string
+                          status:
+                            - string
+                      totalResults: 3452
+                      results:
+                        - goodStanding: true
+                          identifier: BC1234567
+                          legalType: BC
+                          bn: 123456789BC0001
+                          status: ACTIVE
+                          name: Test Business 53212
+                          score: 134.3073
+      operationId: search_facets
+      parameters:
+        - schema:
+            type: string
+            example: 'query=value:la la::identifier:1234::bn:123::name:test'
+          in: query
+          name: query
+          description: 'Query with filtering options. Required: ''value:<query>''. See query payload for other filtering options. Subsequent options should be joined by ''::'' '
+          required: true
+        - name: categories
+          in: query
+          description: 'Filter by faceted categories. The category name and value should be joined by '':'', subsequent values should be joined by '','' and subsequent categories should be joined by ''::'''
+          schema:
+            type: string
+            example: 'categories=legalType:BEN,bc,sp::status:active,historical'
+          allowEmptyValue: true
+        - schema:
+            type: integer
+            format: int32
+            minimum: 0
+            example: 5
+          in: query
+          name: start
+          allowEmptyValue: true
+          description: Show the set starting with this row number
+        - schema:
+            type: integer
+            minimum: 1
+            example: 1000
+          in: query
+          name: rows
+          allowEmptyValue: true
+          description: The size of the set to retrieve
+        - $ref: '#/components/parameters/accountId'
+      description: |-
+        Return the faceted search business results for the query.
+
+        This endpoint is deprecated, please use POST /v2/search/businesses instead.
+      deprecated: true
+      x-stoplight:
+        id: 40lnwdm2l7lex
+    parameters: []
+  /v1/businesses/search/parties:
+    get:
+      summary: Search parties
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  facets:
+                    $ref: '#/components/schemas/Parties_facets'
+                  searchResults:
+                    type: object
+                    required:
+                      - queryInfo
+                      - totalResults
+                      - results
+                    properties:
+                      queryInfo:
+                        $ref: '#/components/schemas/Parties_query_info'
+                      totalResults:
+                        type: integer
+                        example: 3452
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Parties_result'
+                    readOnly: true
+                required:
+                  - facets
+                  - searchResults
+                readOnly: true
+              examples:
+                example-1:
+                  value:
+                    facets:
+                      fields:
+                        parentLegalType:
+                          - value: SP
+                            count: 11
+                          - value: GP
+                            count: 14
+                        parentStatus:
+                          - value: ACTIVE
+                            count: 20
+                          - value: HISTORICAL
+                            count: 5
+                        partyRoles:
+                          - value: partner
+                            count: 19
+                          - value: proprietor
+                            count: 6
+                    searchResults:
+                      queryInfo:
+                        start: 5
+                        rows: 300
+                        query:
+                          value: 23422 test business
+                          bn: ''
+                          identifier: ''
+                          name: ''
+                        categories:
+                          parentLegalType:
+                            - string
+                          parentStatus:
+                            - string
+                          partyRoles:
+                            - string
+                      totalResults: 3452
+                      results:
+                        - parentBN: 123456789BC0001
+                          parentIdentifier: BC1234567
+                          parentLegalType: GP
+                          parentName: Business Name
+                          parentStatus: ACTIVE
+                          partyName: John Doe
+                          partyRoles:
+                            - partner
+                          partyType: person
+      operationId: search_parties
+      parameters:
+        - schema:
+            type: string
+            example: 'query=value:la la::parentIdentifier:1234::parentName:test'
+          in: query
+          name: query
+          description: 'Query with filtering options. Required: ''value:<query>''. See query payload for other filtering options. Subsequent options should be joined by ''::'' '
+          required: true
+        - name: categories
+          in: query
+          description: 'Filter by faceted categories. The category name and value should be joined by '':'', subsequent values should be joined by '','' and subsequent categories should be joined by ''::'''
+          schema:
+            type: string
+            example: 'categories=parentLegalType:BEN,bc,sp::parentStatus:active,historical::partyRoles:partner,proprietor'
+          allowEmptyValue: true
+        - schema:
+            type: integer
+            format: int32
+            minimum: 0
+            example: 5
+          in: query
+          name: start
+          allowEmptyValue: true
+          description: Show the set starting with this row number
+        - schema:
+            type: integer
+            minimum: 1
+            example: 1000
+          in: query
+          name: rows
+          allowEmptyValue: true
+          description: The size of the set to retrieve
+        - $ref: '#/components/parameters/accountId'
+      description: |-
+        Return the faceted search party results for the query.
+
+        This endpoint is deprecated, please use POST /v2/search/businesses instead.
+      deprecated: true
+      x-stoplight:
+        id: g8xnf88zig5ra
+    parameters: []
+  '/v1/businesses/{identifier}/documents/requests':
+    parameters:
+      - schema:
+          type: string
+          example: BC1234567
+        name: identifier
+        in: path
+        required: true
+        description: Business Identifier the documents are for
+    get:
+      summary: User document access requests (specific identifier)
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documentAccessRequests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentAccessRequest'
+      operationId: get-businesses-identifier-document-requests
+      description: Endpoint to get document access requests for a specific business
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: 35op7isvcqwon
+    post:
+      summary: ''
+      tags:
+        - business
+      operationId: post-businesses-requests
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentAccessRequest'
+              examples:
+                example-1:
+                  value:
+                    businessIdentifier: BC1218851
+                    documents:
+                      - documentKey: 1db17RjuI
+                        type: BUSINESS_SUMMARY_FILING_HISTORY
+                        fileName: null
+                        id: 9
+                    expiryDate: '2022-06-21T21:51:51.907315+00:00'
+                    id: 9
+                    outputFileKey: null
+                    paymentStatus: APPROVED
+                    status: PAID
+                    submissionDate: '2022-06-14T21:51:51.513740+00:00'
+      description: Endpoint to create document access requests (permissions to access business documents)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                example-1:
+                  documentAccessRequest:
+                    documents:
+                      - type: BUSINESS_SUMMARY_FILING_HISTORY
+              properties:
+                documentAccessRequest:
+                  type: object
+                  required:
+                    - documents
+                  properties:
+                    documents:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Document'
+                business:
+                  type: object
+                  properties:
+                    businessName:
+                      type: string
+                      description: This name is saved in our database with the access request and will be returned with the access request data. It is NOT verified against the legal business name corresponding to the given identifier.
+              required:
+                - documentAccessRequest
+            examples:
+              example-1:
+                value:
+                  business:
+                    businessName: Business Name
+                  documentAccessRequest:
+                    documents:
+                      - type: BUSINESS_SUMMARY_FILING_HISTORY
+        description: ''
+      x-stoplight:
+        id: lhq15neax0lyr
+  /v1/purchases:
+    parameters: []
+    get:
+      summary: User document access requests (all)
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documentAccessRequests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentAccessRequest'
+              examples:
+                example-1:
+                  value:
+                    documentAccessRequests:
+                      - businessIdentifier: string
+                        businessName: string
+                        documents:
+                          - documentKey: string
+                            type: BUSINESS_SUMMARY_FILING_HISTORY
+                            fileName: string
+                        expiryDate: '2019-08-24T14:15:22Z'
+                        outputFileKey: string
+                        paymentStatus: string
+                        status: string
+                        submissionDate: '2019-08-24T14:15:22Z'
+      operationId: get-purchases
+      description: Endpoint to get all purchased document access requests
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: 1fxelx1k7plla
+  '/v1/businesses/{identifier}/documents/{document_key}':
+    parameters:
+      - schema:
+          type: string
+          example: BC1234567
+        name: identifier
+        in: path
+        required: true
+        description: Business Identifier the documents are for
+      - schema:
+          type: string
+        name: document_key
+        in: path
+        required: true
+        description: Key of the document access request
+    get:
+      summary: Business document pdf / json
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alterations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filingDateTime:
+                          type: string
+                          format: date-time
+                        fromLegalType:
+                          type: string
+                        toLegalType:
+                          type: string
+                  amalgamatedEntities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        identifier:
+                          type: string
+                        name:
+                          type: string
+                      required:
+                        - identifier
+                        - name
+                  business:
+                    $ref: '#/components/schemas/Business_Business'
+
+                  entityAct:
+                    type: string
+                  entityDescription:
+                    type: string
+                  liquidation:
+                    type: object
+                    properties:
+                      filingDateTime:
+                        type: string
+                        format: date-time
+                  listOfTranslations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                            - DBA
+                            - TRANSLATION
+                      required:
+                        - name
+                        - type
+                  nameChanges:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filingDateTime:
+                          type: string
+                          format: date-time
+                        fromLegalName:
+                          type: string
+                        toLegalName:
+                          type: string
+                      required:
+                        - filingDateTime
+                        - fromLegalName
+                        - toLegalName
+                  offices:
+                    oneOf:
+                      - properties:
+                          recordsOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                          registeredOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                          custodialOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                        required:
+                          - registeredOffice
+                      - properties:
+                          businessOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                        required:
+                          - businessOffice
+                    type: object
+                  parties:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Business_Party'
+                  registrarInfo:
+                    type: object
+                    required:
+                      - startDate
+                      - name
+                    properties:
+                      startDate:
+                        type: string
+                        format: date-time
+                        example: '2022-06-01T00:00:00'
+                      endDate:
+                        type: string
+                        format: date-time
+                        example: '2022-06-01T00:00:00'
+                        nullable: true
+                      name:
+                        type: string
+                      title:
+                        type: string
+                        example: Registrar of Companies
+                  reportDateTime:
+                    type: string
+                    format: date-time
+                    example: '2022-08-05T19:50:04.960880+00:00'
+                  reportType:
+                    type: string
+                    enum:
+                      - summary
+                      - cogs
+                      - cstat
+                      - lseal
+                  stateFilings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        effectiveDateTime:
+                          type: string
+                          format: date-time
+                        filingDateTime:
+                          type: string
+                          format: date-time
+                        filingName:
+                          type: string
+                          example: Voluntary Dissolution
+                required:
+                  - business
+                  - entityAct
+                  - entityDescription
+                  - registrarInfo
+                  - reportDateTime
+                  - reportType
+              examples:
+                example-1:
+                  value:
+                    alterations: []
+                    amalgamatedEntities: []
+                    business:
+                      adminFreeze: false
+                      arMaxDate: '2021-11-30'
+                      arMinDate: '2021-10-01'
+                      associationType: null
+                      complianceWarnings: []
+                      coopType: Not Available
+                      fiscalYearEndDate: '2020-10-01'
+                      foundingDate: '2020-10-01T21:20:12.666434+00:00'
+                      goodStanding: false
+                      hasCorrections: false
+                      hasRestrictions: false
+                      identifier: BC1218851
+                      lastAddressChangeDate: '2020-10-01'
+                      lastAnnualGeneralMeetingDate: ''
+                      lastAnnualReportDate: ''
+                      lastDirectorChangeDate: '2021-02-11'
+                      lastLedgerTimestamp: '2020-10-01T21:20:18.153647+00:00'
+                      lastModified: '2020-10-01T21:20:18.153630+00:00'
+                      legalName: 1218851 B.C. LTD.
+                      legalType: BEN
+                      naicsCode: null
+                      naicsDescription: null
+                      naicsKey: null
+                      nextAnnualReport: '2021-10-01T07:00:00+00:00'
+                      state: ACTIVE
+                      warnings: []
+                    entityAct: Business Corporations Act
+                    entityDescription: BC Benefit Company
+                    liquidation: {}
+                    listOfTranslations:
+                      - id: '24'
+                        name: TEST
+                        type: TRANSLATION
+                    nameChanges: []
+                    offices:
+                      recordsOffice:
+                        deliveryAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: delivery
+                          deliveryInstructions: ''
+                          id: 36078
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: mailing
+                          deliveryInstructions: ''
+                          id: 36077
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                      registeredOffice:
+                        deliveryAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: delivery
+                          deliveryInstructions: ''
+                          id: 36080
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: mailing
+                          deliveryInstructions: ''
+                          id: 36079
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                    parties:
+                      - deliveryAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: QC
+                          deliveryInstructions: null
+                          id: 36081
+                          postalCode: J2S 7N6
+                          streetAddress: 8-725 Boul Casavant E
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: QC
+                          deliveryInstructions: null
+                          id: 36082
+                          postalCode: J2S 7N6
+                          streetAddress: 8-725 Boul Casavant E
+                          streetAddressAdditional: ''
+                        officer:
+                          email: null
+                          firstName: TEST
+                          id: 10431
+                          lastName: TESTER
+                          partyType: person
+                        roles:
+                          - appointmentDate: '2020-10-01'
+                            cessationDate: null
+                            roleType: Completing Party
+                          - appointmentDate: '2020-10-01'
+                            cessationDate: null
+                            roleType: Incorporator
+                          - appointmentDate: '2020-10-01'
+                            cessationDate: null
+                            roleType: Director
+                      - deliveryAddress:
+                          addressCity: victoria
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          deliveryInstructions: ''
+                          id: 2188053
+                          postalCode: v8W 2C3
+                          streetAddress: 1012 douglas st
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: victoria
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          deliveryInstructions: ''
+                          id: 2188053
+                          postalCode: v8W 2C3
+                          streetAddress: 1012 douglas st
+                          streetAddressAdditional: ''
+                        officer:
+                          email: null
+                          firstName: SEV
+                          id: 441037
+                          lastName: SEVERIN
+                          partyType: person
+                        roles:
+                          - appointmentDate: '2021-02-11'
+                            cessationDate: null
+                            roleType: Director
+                    registrarInfo:
+                      endDate: null
+                      name: T.K. SPARKS
+                      startDate: '2022-06-01T00:00:00'
+                      title: Registrar of Companies
+                    reportDateTime: '2022-08-17T17:36:11.996369+00:00'
+                    reportType: summary
+                    stateFilings: []
+            application/pdf:
+              schema:
+                type: string
+      operationId: get-businesses-identifier-document-data
+      description: Endpoint to get document pdf /json
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - application/pdf
+              - application/json
+          in: header
+          name: Accept
+          description: mimetype of request
+          required: true
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: b4reuajxvua4y
+  '/v1/businesses/{identifier}/documents/filings/{filing_id}/{filing_name}}':
+    parameters:
+      - schema:
+          type: string
+          example: BC1234567
+        name: identifier
+        in: path
+        required: true
+        description: Business Identifier the documents are for
+      - schema:
+          type: string
+        name: filing_id
+        in: path
+        required: true
+        description: filing id of the document
+      - schema:
+          type: string
+        name: filing_name
+        in: path
+        required: true
+        description: filing name of the document
+    get:
+      summary: Filing history document pdf
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/pdf:
+              schema:
+                type: string
+      operationId: get-businesses-identifier-document-filings-filingId-filingName
+      description: Endpoint to get a document pdf of a filing in the business history
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: rtljpzg14ij73
+  /v2/search/businesses:
+    post:
+      summary: Search businesses
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    facets:
+                      fields:
+                        legalType:
+                          - count: 938
+                            value: BC
+                          - count: 74
+                            value: A
+                          - count: 6
+                            value: QE
+                          - count: 5
+                            value: S
+                          - count: 4
+                            value: C
+                          - count: 3
+                            value: LP
+                          - count: 3
+                            value: SP
+                          - count: 2
+                            value: GP
+                          - count: 2
+                            value: LL
+                          - count: 2
+                            value: XP
+                        status:
+                          - count: 639
+                            value: HISTORICAL
+                          - count: 403
+                            value: ACTIVE
+                    searchResults:
+                      queryInfo:
+                        categories:
+                          legalType: null
+                          status: null
+                        query:
+                          bn: ''
+                          identifier: ''
+                          name: ''
+                          value: kyle
+                        rows: 10
+                        start: 0
+                      results:
+                        - bn: '123'
+                          goodStanding: false
+                          identifier: BC0195391
+                          legalType: BC
+                          name: KYLE ELECTRIC LTD.
+                          score: 95.93843
+                          status: ACTIVE
+                        - bn: '123'
+                          identifier: BC0602833
+                          legalType: BC
+                          name: KYLE ENTERPRISES LTD.
+                          score: 95.93843
+                          status: HISTORICAL
+                        - bn: '123'
+                          goodStanding: false
+                          identifier: BC0103657
+                          legalType: BC
+                          name: KYLE HOLDINGS LTD.
+                          score: 95.93843
+                          status: ACTIVE
+                        - bn: '123'
+                          identifier: BC0232144
+                          legalType: BC
+                          name: KYLE INVESTMENTS INC.
+                          score: 95.93843
+                          status: HISTORICAL
+                        - bn: '123'
+                          goodStanding: false
+                          identifier: BC0724472
+                          legalType: BC
+                          name: KYLE PRODUCTIONS LTD.
+                          score: 95.93843
+                          status: ACTIVE
+                        - bn: '123'
+                          identifier: BC0164189
+                          legalType: BC
+                          name: KYLE CONSULTANTS LIMITED
+                          score: 95.93843
+                          status: HISTORICAL
+                        - bn: '123'
+                          goodStanding: false
+                          identifier: BC0481924
+                          legalType: BC
+                          name: KYLE PROPERTIES LTD.
+                          score: 95.93843
+                          status: ACTIVE
+                        - bn: '123'
+                          goodStanding: false
+                          identifier: BC0360244
+                          legalType: BC
+                          name: KYLE INVESTMENTS INC.
+                          score: 95.93843
+                          status: ACTIVE
+                        - bn: '123'
+                          identifier: BC0411171
+                          legalType: BC
+                          name: J.H. KYLE LTD.
+                          score: 95.93843
+                          status: HISTORICAL
+                        - bn: '123'
+                          identifier: BC0747645
+                          legalType: BC
+                          name: KYLE INDUSTRIES LTD.
+                          score: 95.93843
+                          status: HISTORICAL
+                      totalResults: 1042
+                required:
+                  - facets
+                  - searchResults
+                properties:
+                  facets:
+                    $ref: '#/components/schemas/Facet_facets'
+                  searchResults:
+                    type: object
+                    required:
+                      - queryInfo
+                      - results
+                      - totalResults
+                    properties:
+                      queryInfo:
+                        $ref: '#/components/schemas/Facet_query_info'
+                      results:
+                        $ref: '#/components/schemas/Facet_result'
+                      totalResults:
+                        type: integer
+      operationId: post-v2-search-businesses
+      x-stoplight:
+        id: hzxd9ut6wjtl8
+      description: Return the business results that match the given payload specifications.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: object
+                  x-stoplight:
+                    id: fu6rm1rmkxjf7
+                  required:
+                    - value
+                  properties:
+                    value:
+                      type: string
+                      x-stoplight:
+                        id: lbz5q3hgwo3uq
+                      description: |-
+                        The primary value the search response is based on.
+
+                        The response will match this value against the legal name, identifier and bn15 of businesses.
+                    name:
+                      type: string
+                      x-stoplight:
+                        id: izu8dpddspegp
+                      description: Filters the response to match business names against this value.
+                    identifier:
+                      type: string
+                      x-stoplight:
+                        id: 59q01a9n5d476
+                      description: Filters the response to match business identifiers against this value.
+                    bn:
+                      type: string
+                      x-stoplight:
+                        id: inn5j075n7vws
+                      description: Filters the response to match business bn15s against this value.
+                categories:
+                  type: object
+                  x-stoplight:
+                    id: ghwr98ptmran9
+                  properties:
+                    legalType:
+                      type: array
+                      x-stoplight:
+                        id: c6dp0ab26lquj
+                      description: Filters the response to require businesses of these legal types.
+                      items:
+                        x-stoplight:
+                          id: p5i1gqg4eh1yx
+                        type: string
+                        example: '["BC", "BEN", "CP"]'
+                    status:
+                      type: array
+                      x-stoplight:
+                        id: 9xyrjurxt8f0i
+                      description: Filters the response to require businesses of these statuses.
+                      items:
+                        x-stoplight:
+                          id: hb9r76bw51sfm
+                        type: string
+                        example: '["ACTIVE"]'
+                rows:
+                  type: integer
+                  x-stoplight:
+                    id: rj8tt710wxd15
+                  description: |-
+                    The maximum amount of records to return.
+
+                    Default: 10
+                  minLength: 1
+                start:
+                  type: integer
+                  x-stoplight:
+                    id: 5rgelqg2n2mbw
+                  minLength: 0
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Account-Id
+          description: The account that the user is operating on behalf of.
+          required: true
+    parameters: []
+  /v2/search/parties:
+    post:
+      summary: Search parties
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - facets
+                  - searchResults
+                properties:
+                  facets:
+                    $ref: '#/components/schemas/Parties_facets'
+                  searchResults:
+                    type: object
+                    x-stoplight:
+                      id: jsgwquitlgfgn
+                    required:
+                      - queryInfo
+                      - results
+                      - totalResults
+                    properties:
+                      queryInfo:
+                        $ref: '#/components/schemas/Parties_query_info'
+                      results:
+                        x-stoplight:
+                          id: yjtvkia4k83g3
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Parties_result'
+                      totalResults:
+                        type: integer
+                        x-stoplight:
+                          id: v9txspa80oe66
+          headers: {}
+      operationId: post-v2-search-parties
+      x-stoplight:
+        id: h4izgxur9t8pr
+      description: Return the party results that match the given payload specifications.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+                - categories
+              properties:
+                query:
+                  type: object
+                  x-stoplight:
+                    id: 4dzmi54nr6uix
+                  required:
+                    - value
+                  properties:
+                    value:
+                      type: string
+                      x-stoplight:
+                        id: ug4kffzi7emss
+                      description: This will determine the base result set that is returned.
+                    partyName:
+                      type: string
+                      x-stoplight:
+                        id: 7un9789lp8v3y
+                    parentName:
+                      type: string
+                      x-stoplight:
+                        id: 4dvx6faf75sxj
+                    parentIdentifier:
+                      type: string
+                      x-stoplight:
+                        id: ia8eo8emm4c1s
+                    parentBN:
+                      type: string
+                      x-stoplight:
+                        id: nvco1s61en83j
+                categories:
+                  type: object
+                  x-stoplight:
+                    id: bea9lv037x7fa
+                  required:
+                    - partyRoles
+                  properties:
+                    parentLegalType:
+                      type: array
+                      x-stoplight:
+                        id: 5kgsh5m5xg5kf
+                      items:
+                        x-stoplight:
+                          id: k3n6k21a0shjr
+                        type: string
+                        example: '[''BC'', ''SP'', ''GP'']'
+                    parentStatus:
+                      type: array
+                      x-stoplight:
+                        id: 9c8ryqyk69mgv
+                      items:
+                        x-stoplight:
+                          id: k59ll67v3lcnj
+                        type: string
+                        example: '[''ACTIVE'']'
+                    partyRoles:
+                      type: array
+                      x-stoplight:
+                        id: s6rbaha07bq7v
+                      description: Only partners and proprietors are available. You must specify one or both of these roles.
+                      items:
+                        x-stoplight:
+                          id: 0y8mimplcs6bp
+                        type: string
+                        example: '[''partner'', ''proprietor'']'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Account-Id
+          description: The account that the user is operating on behalf of.
+          required: true
+components:
+  schemas:
+    Facet_field_item:
+      type: object
+      x-examples:
+        facet-legalType:
+          value: CP
+          count: 25
+        facet-state:
+          value: ACTIVE
+          count: 9
+        facet-partyRoles:
+          value: partner
+          count: 67
+      description: The value/count pair within a faceted category (i.e. legalType)
+      properties:
+        value:
+          type: string
+          example: CP
+        count:
+          type: integer
+          example: 25
+    Facet_facets:
+      type: object
+      x-examples: {}
+      description: A facet is a set of items matching a broad and preset category across the entire set and top level filters.
+      properties:
+        fields:
+          type: object
+          properties:
+            legalType:
+              type: array
+              items:
+                $ref: '#/components/schemas/Facet_field_item'
+            status:
+              type: array
+              items:
+                $ref: '#/components/schemas/Facet_field_item'
+    Facet_query_info:
+      type: object
+      x-examples:
+        example-1:
+          start: 5
+          rows: 300
+          query:
+            value: 23422 test business
+            identifier: ''
+            name: ''
+            bn: ''
+          categories:
+            legalType:
+              - string
+            status:
+              - string
+      description: A facet is a set of items matching a broad and preset category across the entire set and top level filters.
+      properties:
+        start:
+          type: integer
+          minimum: 0
+          description: The number of elements in the facet
+          example: 5
+          readOnly: true
+        rows:
+          type: integer
+          example: 300
+          readOnly: true
+        query:
+          type: object
+          example:
+            value: 23422 test business
+            identifier: ''
+            name: ''
+            bn: ''
+          required:
+            - value
+          properties:
+            value:
+              type: string
+            name:
+              type: string
+            identifier:
+              type: string
+            bn:
+              type: string
+        categories:
+          type: object
+          properties:
+            legalType:
+              type: array
+              items:
+                type: string
+            status:
+              type: array
+              items:
+                type: string
+      required:
+        - start
+        - rows
+        - query
+    Facet_result:
+      type: object
+      x-examples:
+        example-1:
+          identifier: BC1234567
+          legalType: BC
+          bn: 123456789BC0001
+          status: ACTIVE
+          name: Test Business 53212
+          score: 134.3073
+      description: A business result in the first level search
+      properties:
+        identifier:
+          type: string
+          example: BC1234567
+          readOnly: true
+        legalType:
+          type: string
+          default: BC
+          enum:
+            - A
+            - B
+            - BC
+            - BEN
+            - C
+            - CC
+            - CCC
+            - CEM
+            - CP
+            - CS
+            - CUL
+            - EPR
+            - FI
+            - FOR
+            - GP
+            - LIC
+            - LIB
+            - LL
+            - LLC
+            - LP
+            - MF
+            - PA
+            - PAR
+            - PFS
+            - QA
+            - QB
+            - QC
+            - QD
+            - QE
+            - REG
+            - RLY
+            - S
+            - SB
+            - SP
+            - T
+            - TMY
+            - ULC
+            - UQA
+            - UQB
+            - UQC
+            - UQD
+            - UQE
+            - XCP
+            - XL
+            - XP
+            - XS
+        bn:
+          type: string
+          example: 123456789BC0001
+          readOnly: true
+        status:
+          type: string
+          example: ACTIVE
+          readOnly: true
+        name:
+          type: string
+          description: Current business name.
+          example: Test Business 53212
+          readOnly: true
+        score:
+          description: SOLR generated score.
+          example: 134.3073
+          type: number
+        goodStanding:
+          type: boolean
+          x-stoplight:
+            id: zxsjbcbzycy25
+          description: Whether or not the business is in 'good standing'. This value is only included in the response for 'active' businesses that fall under the Business Corporations Act.
+      required:
+        - identifier
+        - legalType
+        - status
+        - name
+    Parties_facets:
+      type: object
+      x-examples: {}
+      description: A facet is a set of items matching a broad and preset category across the entire set and top level filters.
+      properties:
+        fields:
+          type: object
+          properties:
+            parentLegalType:
+              type: array
+              items:
+                $ref: '#/components/schemas/Facet_field_item'
+            parentStatus:
+              type: array
+              items:
+                $ref: '#/components/schemas/Facet_field_item'
+            partyRoles:
+              type: array
+              items:
+                $ref: '#/components/schemas/Facet_field_item'
+    Parties_query_info:
+      type: object
+      x-examples:
+        example-1:
+          start: 5
+          rows: 300
+          query:
+            value: 23422 test business
+            parentName: ''
+            parentIdentifier: ''
+            parentBN: ''
+            partyName: ''
+          categories:
+            parentLegalType:
+              - string
+            parentStatus:
+              - string
+            partyRoles:
+              - string
+      description: A facet is a set of items matching a broad and preset category across the entire set and top level filters.
+      properties:
+        start:
+          type: integer
+          minimum: 0
+          description: The number of elements in the facet
+          example: 5
+          readOnly: true
+        rows:
+          type: integer
+          example: 300
+          readOnly: true
+        query:
+          example:
+            value: 23422 test business
+            parentName: ''
+            parentIdentifier: ''
+            parentBN: ''
+            partyName: ''
+          type: object
+          properties:
+            value:
+              type: string
+            parentName:
+              type: string
+            parentIdentifier:
+              type: string
+            parentBN:
+              type: string
+            partyName:
+              type: string
+        categories:
+          type: object
+          properties:
+            parentLegalType:
+              type: array
+              items:
+                type: string
+            parentStatus:
+              type: array
+              items:
+                type: string
+            partyRoles:
+              type: array
+              items:
+                type: string
+      required:
+        - start
+        - rows
+        - query
+    Parties_result:
+      type: object
+      x-examples:
+        example-1:
+          parentBN: 123456789BC0001
+          parentIdentifier: BC1234567
+          parentLegalType: GP
+          parentName: Business Name
+          parentStatus: ACTIVE
+          partyName: John Doe
+          partyRoles:
+            - partner
+          partyType: person
+      properties:
+        parentBN:
+          type: string
+          example: 123456789BC0001
+        parentIdentifier:
+          type: string
+          example: BC1234567
+        parentLegalType:
+          type: string
+          example: GP
+        parentName:
+          type: string
+          example: Business Name
+        parentStatus:
+          type: string
+          example: ACTIVE
+        partyName:
+          type: string
+          example: John Doe
+        partyRoles:
+          type: array
+          items:
+            type: string
+            enum:
+              - partner
+              - proprietor
+        partyType:
+          type: string
+          example: person
+          enum:
+            - person
+            - organization
+    DocumentAccessRequest:
+      title: DocumentAccessRequest
+      x-stoplight:
+        id: fn7gq4lt3ywyz
+      type: object
+      properties:
+        businessIdentifier:
+          type: string
+        businessName:
+          type: string
+          description: Only returned if a business name was given in the creation request.
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        expiryDate:
+          type: string
+          format: date-time
+        outputFileKey:
+          type: string
+          nullable: true
+        paymentStatus:
+          type: string
+        status:
+          type: string
+        submissionDate:
+          type: string
+          format: date-time
+      required:
+        - businessIdentifier
+        - documents
+        - status
+        - submissionDate
+    Document:
+      title: Document
+      x-stoplight:
+        id: kyorqiag18thv
+      type: object
+      properties:
+        documentKey:
+          type: string
+        type:
+          type: string
+          enum:
+            - BUSINESS_SUMMARY_FILING_HISTORY
+            - CERTIFICATE_OF_GOOD_STANDING
+            - CERTIFICATE_OF_STATUS
+            - LETTER_UNDER_SEAL
+        fileName:
+          type: string
+          nullable: true
+      required:
+        - type
+
+    Business_Address:
+      type: object
+      title: Address Schema
+      properties:
+        streetAddress:
+          type: string
+          maxLength: 50
+        streetAddressAdditional:
+          type: string
+          maxLength: 50
+        addressCity:
+          type: string
+          maxLength: 40
+        addressCountry:
+          type: string
+        addressRegion:
+          type: string
+          maxLength: 2
+        postalCode:
+          type: string
+          maxLength: 15
+        deliveryInstructions:
+          type: string
+      required:
+        - streetAddress
+        - addressCity
+        - addressCountry
+        - addressRegion
+        - postalCode
+    Business_Business:
+      type: object
+      title: Businesses Schema
+      x-examples:
+        example-1:
+          lastLedgerTimestamp: '2020-11-24T18:24:27.179623+00:00'
+          fiscalYearEndDate: '2020-11-24'
+          dissolutionDate: '2020-11-24T18:23:53.498863+00:00'
+          foundingDate: '2020-11-24T18:23:53.498863+00:00'
+          identifier: BC1234567
+          legalName: string
+          legalType: BEN
+          taxId: string
+          state: ACTIVE
+          goodStanding: true
+          adminFreeze: true
+          natureOfBusiness: string
+          naics:
+            naicsCode: string
+            naicsDescription: string
+          complianceWarnings:
+            - code: string
+              message: string
+              filing: string
+      properties:
+        lastLedgerTimestamp:
+          type: string
+          format: date-time
+          example: '2020-11-24T18:24:27.179623+00:00'
+        fiscalYearEndDate:
+          type: string
+          format: date
+          example: '2020-11-24'
+        dissolutionDate:
+          type: string
+          format: date-time
+          example: '2020-11-24T18:23:53.498863+00:00'
+        foundingDate:
+          type: string
+          format: date-time
+          example: '2020-11-24T18:23:53.498863+00:00'
+        identifier:
+          type: string
+          example: BC1234567
+          pattern: '^[A-Z]{1,3}[0-9]{7}|T[A-Za-z0-9]{9}$'
+        legalName:
+          type: string
+        legalType:
+          type: string
+          enum:
+            - BEN
+            - CP
+            - SP
+            - GP
+            - BC
+        taxId:
+          type: string
+          pattern: '^[0-9]{9}$'
+        state:
+          type: string
+          enum:
+            - ACTIVE
+            - HISTORICAL
+            - LIQUIDATION
+        goodStanding:
+          type: boolean
+        adminFreeze:
+          type: boolean
+        natureOfBusiness:
+          type: string
+          maxLength: 1000
+          minLength: 0
+        naics:
+          $ref: '#/components/schemas/Business_Naics'
+        complianceWarnings:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              filing:
+                type: string
+      required:
+        - identifier
+    Business_Naics:
+      type: object
+      title: NAICS Schema
+      properties:
+        naicsCode:
+          type: string
+          pattern: '^[0-9]{5,9}$'
+        naicsDescription:
+          type: string
+    Business_Office:
+      title: Office Schema
+      type: object
+      properties:
+        officeType:
+          type: string
+        mailingAddress:
+          $ref: '#/components/schemas/Business_Address'
+        deliveryAddress:
+          $ref: '#/components/schemas/Business_Address'
+    Business_Person:
+      type: object
+      title: Person Schema
+      properties:
+        givenName:
+          type: string
+          maxLength: 30
+        familyName:
+          type: string
+          maxLength: 30
+        additionalName:
+          type: string
+          title: 'An additional name for a Person, can be used for a middle name.'
+          maxLength: 30
+        middleInitial:
+          type: string
+          maxLength: 30
+        taxId:
+          type: string
+          title: The CRA business number
+          pattern: '^[0-9]{9}$'
+        email:
+          type: string
+          format: email
+    Business_Party:
+      type: object
+      title: party
+      properties:
+        party:
+          type: object
+          properties:
+            taxId:
+              type: string
+            roles:
+              type: array
+              items:
+                $ref: '#/components/schemas/Business_PartyRole'
+            officer:
+              oneOf:
+                - $ref: '#/components/schemas/Business_Person'
+                - $ref: '#/components/schemas/Business_Business'
+            deliveryAddress:
+              $ref: '#/components/schemas/Business_Address'
+            mailingAddress:
+              $ref: '#/components/schemas/Business_Address'
+            title:
+              type: string
+          required:
+            - roles
+            - officer
+            - mailingAddress
+    Business_PartyRole:
+      type: object
+      properties:
+        appointmentDate:
+          type: string
+          format: date
+        cessationDate:
+          type: string
+          format: date
+        roleType:
+          type: string
+          enum:
+            - Completing Party
+            - Custodian
+            - Liquidator
+            - Director
+            - Incorporator
+            - Proprietor
+            - Partner
+
+  securitySchemes:
+    api_key:
+      type: apiKey
+      description: API Gateway assigned API key for a consumer. Required for all requests.
+      name: x-apikey
+      in: header
+  parameters:
+    accountId:
+      name: Account-Id
+      in: header
+      description: The account that the user is operating on behalf of.
+      required: true
+      schema:
+        type: string
+      example: '1234567'
+  headers:
+    AccessControlAllowOrigin:
+      schema:
+        type: string
+        description: Access-Control-Allow-Origin
+        x-examples:
+          notify_1:
+            value: ''
+    AccessControlAllowMethods:
+      schema:
+        type: string
+        description: Access-Control-Allow-Methods
+        x-examples:
+          notify_1:
+            value: 'GET, PUT, POST, PATCH'
+    AccessControlAllowHeaders:
+      schema:
+        type: string
+        description: Access-Control-Allow-Headers
+        x-examples:
+          notify_1:
+            value: 'content-type, accept, x-apikey, authorization'
+    AccessControlMaxAge:
+      schema:
+        type: integer
+        description: Access-Control-Max-Age
+        x-examples:
+          notify_1:
+            value: 3628800
+tags:
+  - name: business
+    description: business services
+  - name: search
+    description: search services
+servers:
+  - url: 'https://bcregistry-sandbox.apigee.net/registry-search/api'
+    description: sandbox
+  - url: 'http://localhost:3000/registry-search/api'
+    description: local
+  - url: 'https://bcregistry-dev.apigee.net/registry-search/api'
+    description: dev
+  - url: 'https://bcregistry-test.apigee.net/registry-search/api'
+    description: test
+  - url: 'https://bcregistry-prod.apigee.net/registry-search/api'
+    description: prod
+security:
+  - api_key: []
