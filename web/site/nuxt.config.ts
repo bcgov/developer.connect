@@ -105,12 +105,52 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/br/business-spec.yaml'
         },
         pathRouting: {
-          basePath: '/scalar'
+          basePath: '/oas/br'
         }
-      }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/mhr/mhr-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/mhr'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/pay/payment-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/pay'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/pay/ppr-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/ppr'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/rs/regsearch-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/rs'
+        }
+      },
+      // {
+      //   spec: {
+      //     url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
+      //   },
+      //   pathRouting: {
+      //     basePath: '/scalar'
+      //   }
+      // }
     ]
   },
   // vuefire: {
