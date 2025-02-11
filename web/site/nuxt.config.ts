@@ -93,6 +93,7 @@ export default defineNuxtConfig({
     metaData: {
       title: 'API Documentation by Scalar | Service BC Connect Developer Site'
     },
+    proxyUrl: 'https://proxy.scalar.com',
     configurations: [
       {
         spec: {
@@ -102,14 +103,14 @@ export default defineNuxtConfig({
           basePath: '/oas/strr'
         }
       },
-      // {
-      //   spec: {
-      //     url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
-      //   },
-      //   pathRouting: {
-      //     basePath: '/json'
-      //   }
-      // }
+      {
+        spec: {
+          url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
+        },
+        pathRouting: {
+          basePath: '/scalar'
+        }
+      }
     ]
   },
   // vuefire: {
