@@ -19,6 +19,11 @@ watch(
 </script>
 <template>
   <div class="mx-auto flex flex-col items-center space-y-7 px-6 py-12 text-center sm:px-8 md:px-12 lg:px-16">
+    <UButton 
+      :to="localePath('/oas/strr')"
+      target="_blank"
+      label="Test Scalar Docs"
+    />
     <h1 class="text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
       {{ $t('page.home.h1') }}
     </h1>

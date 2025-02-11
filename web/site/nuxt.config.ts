@@ -17,18 +17,22 @@ export default defineNuxtConfig({
         '/en-CA/sbc/tos',
         '/en-CA/sbc/auth/login',
         '/en-CA/sbc/auth/logout',
-        '/en-CA/products/get-started/api-access-request'
+        '/en-CA/products/get-started/api-access-request',
+        '/en-CA/oas/strr',
+        '/oas/strr',
       ]
     }
   },
   routeRules: {
-    '/': { redirect: '/en-CA' }
+    '/': { redirect: '/en-CA' },
+    '/en-CA/oas/**': { prerender: false }
   },
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxt/test-utils/module',
     '@nuxt/image',
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@scalar/nuxt'
   ], // 'nuxt-vuefire'
   extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {
@@ -82,6 +86,32 @@ export default defineNuxtConfig({
     preference: 'light',
     fallback: 'light'
   },
+  scalar: {
+    darkMode: false,
+    theme: 'default',
+    hideSearch: true,
+    metaData: {
+      title: 'API Documentation by Scalar | Service BC Connect Developer Site'
+    },
+    configurations: [
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/strr/platform.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/strr'
+        }
+      },
+      // {
+      //   spec: {
+      //     url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
+      //   },
+      //   pathRouting: {
+      //     basePath: '/json'
+      //   }
+      // }
+    ]
+  },
   // vuefire: {
   //   emulators: {
   //     // uncomment this line to run the application in production mode without emulators during dev
@@ -129,7 +159,7 @@ export default defineNuxtConfig({
   },
   gtag: {
     enabled: process.env.NODE_ENV === 'production',
-    id: 'G-GKRC2V8PT4'
+    id: '' // G-GKRC2V8PT4
   }
 })
 declare module '#app' {
