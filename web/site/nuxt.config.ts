@@ -18,14 +18,12 @@ export default defineNuxtConfig({
         '/en-CA/sbc/auth/login',
         '/en-CA/sbc/auth/logout',
         '/en-CA/products/get-started/api-access-request',
-        '/en-CA/oas/strr',
-        '/oas/strr'
+        '/oas/**'
       ]
     }
   },
   routeRules: {
-    '/': { redirect: '/en-CA' },
-    '/en-CA/oas/**': { prerender: false }
+    '/': { redirect: '/en-CA' }
   },
   modules: [
     '@nuxtjs/eslint-module',
