@@ -11,6 +11,7 @@ const {
   // loggedOutUserOptions,
   closeMobileNav
 } = useSbcNav()
+const localePath = useLocalePath()
 </script>
 <template>
   <UModal
@@ -41,33 +42,13 @@ const {
     >
       <template #header>
         <div class="m-auto flex w-full items-center justify-between">
-          <div
-            class="flex h-12 min-h-12 items-center gap-3 py-2.5 sm:gap-5 md:gap-5 lg:gap-7"
-          >
-            <div class="flex">
-              <NuxtLinkLocale
-                to="/"
-                tabindex="-1"
-                aria-hidden="true"
-                class="mr-2"
-              >
-                <SbcLogo />
-              </NuxtLinkLocale>
-            </div>
-            <div
-              v-for="link in mainLinks"
-              :key="link.to"
-              class="flex h-11 w-24 cursor-pointer text-left font-sans text-sm font-semibold leading-5 lg:h-7 lg:w-60 lg:text-lg lg:font-bold lg:leading-7"
-            >
-              <NuxtLinkLocale :to="link.to">
-                <span v-if="link.label === 'Service BC Connect'">
-                  <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
-                </span>
-                <!-- <span v-else class="text-white">
-                    {{ link.label }}
-                  </span> -->
-              </NuxtLinkLocale>
-            </div>
+          <div class="flex h-full items-center gap-2 sm:gap-5">
+            <NuxtLink :to="localePath('/')" tabindex="-1" aria-hidden="true">
+              <SbcLogo />
+            </NuxtLink>
+            <NuxtLink :to="localePath('/')" class="font-bold lg:text-lg text-sm lg:leading-7 leading-5">
+              <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
+            </NuxtLink>
           </div>
           <div class="flex gap-1">
             <!-- <ColorModeSelect />
@@ -127,41 +108,8 @@ const {
         </div>
       </template>
       <UVerticalNavigation :links="mainLinks" />
-      <UDivider
-        v-show="tocLinks.length && $route.path.includes('products')"
-        class="my-4"
-      />
-      <UAccordion
-        v-show="tocLinks.length && $route.path.includes('products')"
-        :items="[{ label: 'Table of Contents', defaultOpen: true }]"
-      >
-        <!-- default slot is the accordian button itself, so we use a custom button variant here to match theme -->
-        <template #default="{ open }">
-          <UButton variant="accordian_trigger">
-            <span class="truncate">Table of Contents</span>
-
-            <template #trailing>
-              <UIcon
-                name="i-mdi-menu-up"
-                class="ms-auto size-7 transition-transform duration-200"
-                :class="[!open && 'rotate-180']"
-              />
-            </template>
-          </UButton>
-        </template>
-        <!-- item slot is the content inside each accordian, pass toc component into item slot of accordian -->
-        <template #item>
-          <SbcDocsTableOfContents
-            class="-mt-2 ml-4"
-            :hide-label="true"
-            :toc-links="tocLinks"
-            :current-dir="currentDir"
-            @click="closeMobileNav"
-          />
-        </template>
-      </UAccordion>
-      <UDivider class="my-4" />
-      <SbcDocsSideNavigation :nav-items="accordianNavItems" :is-mobile="true" />
+      <UDivider v-if="$route.path.includes('products')" class="my-4" />
+      <SbcDocsSideNavigation v-if="$route.path.includes('products')" :nav-items="accordianNavItems" :is-mobile="true" />
     </UCard>
   </UModal>
 </template>

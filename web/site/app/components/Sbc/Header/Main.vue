@@ -18,9 +18,7 @@ defineExpose({
       class="m-auto flex w-full max-w-[1360px] items-center justify-between"
       :aria-label="$t('SbcHeader.navLabel')"
     >
-      <div
-        class="flex h-full items-center gap-2 sm:gap-5"
-      >
+      <div class="flex h-full items-center gap-2 sm:gap-5">
         <NuxtLink :to="localePath('/')" tabindex="-1" aria-hidden="true">
           <SbcLogo />
         </NuxtLink>
