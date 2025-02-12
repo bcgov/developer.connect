@@ -17,13 +17,13 @@ export default defineNuxtConfig({
         '/en-CA/sbc/tos',
         '/en-CA/sbc/auth/login',
         '/en-CA/sbc/auth/logout',
-        '/en-CA/products/get-started/api-access-request',
-        '/oas/**'
+        '/en-CA/products/get-started/api-access-request'
       ]
     }
   },
   routeRules: {
-    '/': { redirect: '/en-CA' }
+    '/': { redirect: '/en-CA' },
+    '/en-CA/oas/**': { prerender: false }
   },
   modules: [
     '@nuxtjs/eslint-module',
