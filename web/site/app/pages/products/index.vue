@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
-import { setBreadcrumbs } from '~/utils/setBreadcrumb'
+const localePath = useLocalePath()
 const { t, locale } = useI18n()
+
 useHead({
   title: t('page.products.title')
 })
@@ -22,15 +22,11 @@ const completedProducts = computed(() => {
   return products.value?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
 })
 
-const breadcrumbs = useBreadcrumbs()
-watch(
-  breadcrumbs,
-  (newBreadcrumbs) => {
-    setBreadcrumbs(newBreadcrumbs)
-  },
-  { immediate: true }
-)
-
+setBreadcrumbs([
+  { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true },
+  { label: t('sbcBreadcrumb.sbcHome'), to: localePath('/') },
+  { label: t('sbcBreadcrumb.sbcProductslist') }
+])
 </script>
 <template>
   <div class="mx-auto w-full max-w-[1360px] p-2 sm:p-4 lg:p-8">

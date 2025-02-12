@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
-import { setBreadcrumbs } from '~/utils/setBreadcrumb'
 const { t } = useI18n()
 const localePath = useLocalePath()
 useHead({
   title: `${t('page.home.title')} | Service BC Connect Developer Site`
 })
 
-const breadcrumbs = useBreadcrumbs()
-watch(
-  breadcrumbs,
-  (newBreadcrumbs) => {
-    setBreadcrumbs(newBreadcrumbs)
-  },
-  { immediate: true }
-)
-
+setBreadcrumbs([
+  { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true },
+  { label: t('sbcBreadcrumb.sbcHome') }
+])
 </script>
 <template>
   <div class="mx-auto flex flex-col items-center gap-7 px-2 py-12 text-center sm:px-8 md:px-12 lg:px-16">
