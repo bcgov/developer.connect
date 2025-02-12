@@ -32,14 +32,14 @@ watch(
     </p>
     <div class="flex flex-wrap gap-8 items-center justify-center">
       <CardNavigation
-        title="Get Started"
-        description="Start to set up Service BC Connect APIs in your applications."
+        :title="$t('label.getStarted')"
+        :description="$t('text.card.getStarted')"
         icon="i-mdi-cursor-default-click"
         :link="localePath('/products/get-started/account-setup')"
       />
       <CardNavigation
-        title="All Products"
-        description="Learn about and try Service BC Connect products"
+        :title="$t('label.allProducts')"
+        :description="$t('text.card.allProducts')"
         icon="i-mdi-text-box-search"
         :link="localePath('/products')"
       />

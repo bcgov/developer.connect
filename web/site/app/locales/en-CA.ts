@@ -22,6 +22,16 @@ export default {
     prevpage: 'Previous Topic',
     nextpage: 'Next Topic'
   },
+  label: {
+    getStarted: 'Get Started',
+    allProducts: 'All Products'
+  },
+  text: {
+    card: {
+      getStarted: 'Start to set up Service BC Connect APIs in your applications.',
+      allProducts: 'Learn about and try Service BC Connect products'
+    }
+  },
   sbcBreadcrumb: {
     default: 'BC Registries and Online Services',
     backBtn: 'Go Back',
