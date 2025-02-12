@@ -20,8 +20,10 @@ useHead({
 // template ref for header component
 const headerRef = ref<InstanceType<typeof SbcHeaderMain> | null>(null)
 const footerRef = ref<InstanceType<typeof SbcFooter> | null>(null)
+const breadcrumbRef = ref<InstanceType<typeof SbcBreadcrumb> | null>(null)
 const { height: mainHeaderHeight } = useElementSize(headerRef)
 const { height: footerHeight } = useElementSize(footerRef)
+const { height: breadcrumbHeight } = useElementSize(breadcrumbRef)
 
 // fetch content files using composable from nuxt-content https://content.nuxt.com/composables/fetch-content-navigation
 const { data: docNavItems } = await useAsyncData(
@@ -59,6 +61,7 @@ provide('dashNavItems', dashboardNavItems)
 // provide element heights to offset headers/asides
 provide('mainHeaderHeight', mainHeaderHeight)
 provide('footerHeight', footerHeight)
+provide('breadcrumbHeight', breadcrumbHeight)
 
 // watch(user, async (currentUser, previousUser) => {
 //   // redirect user home if they sign in from the login page without a redirect
@@ -85,6 +88,7 @@ provide('footerHeight', footerHeight)
     />
     <SbcBreadcrumb
       v-if="!$route.path.includes('oas')"
+      ref="breadcrumbRef"
       class="sticky inset-x-0 top-16 z-40 hidden md:block"
     />
     <NuxtLayout>
