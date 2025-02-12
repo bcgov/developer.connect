@@ -22,7 +22,7 @@ defineExpose({
         <NuxtLink :to="localePath('/')" tabindex="-1" aria-hidden="true">
           <SbcLogo />
         </NuxtLink>
-        <NuxtLink :to="localePath('/')" class="font-bold lg:text-lg text-sm lg:leading-7 leading-5">
+        <NuxtLink :to="localePath('/')" class="text-sm font-bold leading-5 lg:text-lg lg:leading-7">
           <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
         </NuxtLink>
       </div>
