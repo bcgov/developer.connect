@@ -17,12 +17,12 @@ function goToItem () {
       base: 'cursor-pointer focus-within:ring-2 focus-within:ring-gray-500 hover:ring-2 hover:ring-gray-500 transition-colors',
       body: {
         base: 'w-[325px] h-full',
-        padding: 'sm:px-10 sm:py-8'
+        padding: 'sm:px-0 sm:py-0 p-0'
       },
     }"
   >
     <div
-      class="flex flex-col items-center justify-center gap-6"
+      class="flex flex-col items-center justify-center gap-6 sm:px-10 sm:py-8"
       @click="goToItem"
     >
       <h2 class="text-lg font-semibold uppercase text-bcGovColor-darkGray dark:text-white">

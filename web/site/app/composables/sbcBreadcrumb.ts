@@ -1,4 +1,4 @@
-import { computed } from 'vue'
+import type { BreadcrumbLink } from '#ui/types'
 
 export function useBreadcrumbs () {
   const { t } = useI18n()
@@ -6,8 +6,8 @@ export function useBreadcrumbs () {
   const localePath = useLocalePath()
 
   const breadcrumbs = computed(() => {
-    const bc = [
-      { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca/' }
+    const bc: BreadcrumbLink[] = [
+      { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true }
     ]
     bc.push({ label: t('sbcBreadcrumb.sbcHome'), to: '/' })
     // Check for /products

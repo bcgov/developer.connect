@@ -14,9 +14,8 @@ useHead({
 
 // styles for nav + toc sticky, for some reason header + footer height are consistently 18px short
 const stickyStyles = computed(() => ({
-  top: `${mainHeaderHeight!.value + breadcrumbHeight!.value + 18}px`
-  // maxHeight: `calc(100vh - (${mainHeaderHeight!.value + footerHeight!.value + 36}px))`,
-  // minHeight: `calc(100vh - ${mainHeaderHeight!.value + 18}px)`
+  top: `${mainHeaderHeight!.value + breadcrumbHeight!.value + 18}px` // TODO: fix scrollable area
+  // maxHeight: `calc(100dvh - (${mainHeaderHeight!.value + breadcrumbHeight!.value + footerHeight!.value + 36}px))`,
 }))
 </script>
 <template>
@@ -24,7 +23,7 @@ const stickyStyles = computed(() => ({
     <!-- side navigation -->
     <div class="m-auto flex w-full max-w-[1360px] gap-4 py-12">
       <div
-        class="sticky hidden overflow-y-auto overflow-x-hidden lg:block h-min"
+        class="sticky hidden overflow-x-hidden lg:block h-min"
         :style="stickyStyles"
       >
         <SbcDocsSideNavigation :nav-items="createContentNav(navItems)" />
@@ -46,20 +45,6 @@ const stickyStyles = computed(() => ({
           />
         </div>
       </div>
-    <!-- table of contents -->
-    <!-- <div
-      class="sticky hidden overflow-y-auto py-8 lg:block"
-      :style="stickyStyles"
-    >
-      <SbcDocsTableOfContents
-        v-show="tocLinks.length"
-        :hide-label="false"
-        class="max-w-48"
-        :toc-links="tocLinks"
-        :current-dir="currentDir"
-        :active-toc-id="activeTocId"
-      />
-    </div> -->
     </div>
   </main>
 </template>
