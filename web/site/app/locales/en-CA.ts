@@ -27,10 +27,8 @@ export default {
     allProducts: 'All Products'
   },
   text: {
-    card: {
-      getStarted: 'Start to set up Service BC Connect APIs in your applications.',
-      allProducts: 'Learn about and try Service BC Connect products'
-    }
+    getStarted: 'Start to set up Service BC Connect APIs in your applications.',
+    allProducts: 'Learn about and try Service BC Connect products.'
   },
   sbcBreadcrumb: {
     default: 'BC Registries and Online Services',

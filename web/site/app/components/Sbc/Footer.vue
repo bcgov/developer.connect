@@ -42,7 +42,7 @@ const links = [
     id="sbc-main-footer"
     class="inset-x-0 bottom-0 border-t-4 border-bcGovColor-navDivider bg-bcGovColor-footer p-2 dark:border-t dark:bg-bcGovColor-darkGray"
   >
-    <div class="mx-auto flex-wrap md:flex max-w-[1360px] gap-1 items-center justify-between">
+    <div class="mx-auto max-w-[1360px] flex-wrap items-center justify-between gap-1 md:flex">
       <nav
         :aria-label="$t('SbcFooter.navLabel')"
         class="flex flex-wrap divide-x divide-bcGovBlue-100 sm:flex-row sm:items-center"
@@ -59,7 +59,7 @@ const links = [
         <div />
       </nav>
       <div class="flex items-center gap-1">
-        <span class="whitespace-nowrap italic text-bcGovColor-navDivider text-sm">{{ $t("SbcFooter.bcApp") }}</span>
+        <span class="whitespace-nowrap text-sm italic text-bcGovColor-navDivider">{{ $t("SbcFooter.bcApp") }}</span>
         <UTooltip :text="useRuntimeConfig().public.version">
           <UIcon name="i-mdi-info-outline" class="size-5 shrink-0 text-white" />
         </UTooltip>

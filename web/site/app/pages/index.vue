@@ -19,27 +19,22 @@ watch(
 </script>
 <template>
   <div class="mx-auto flex flex-col items-center gap-7 px-2 py-12 text-center sm:px-8 md:px-12 lg:px-16">
-    <UButton
-      :to="localePath('/oas/strr')"
-      target="_blank"
-      label="Test Scalar Docs"
-    />
     <h1 class="text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
       {{ $t('page.home.h1') }}
     </h1>
     <p class="text-lg text-bcGovColor-midGray dark:text-white">
       {{ $t('page.home.intro') }}
     </p>
-    <div class="flex flex-wrap gap-8 items-center justify-center">
+    <div class="flex flex-wrap items-center justify-center gap-8">
       <CardNavigation
         :title="$t('label.getStarted')"
-        :description="$t('text.card.getStarted')"
+        :description="$t('text.getStarted')"
         icon="i-mdi-cursor-default-click"
         :link="localePath('/products/get-started/account-setup')"
       />
       <CardNavigation
         :title="$t('label.allProducts')"
-        :description="$t('text.card.allProducts')"
+        :description="$t('text.allProducts')"
         icon="i-mdi-text-box-search"
         :link="localePath('/products')"
       />
