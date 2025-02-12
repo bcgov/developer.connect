@@ -27,10 +27,10 @@ watch(
     <h1 class="text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
       {{ $t('page.home.h1') }}
     </h1>
-    <!-- <p class="text-lg text-bcGovColor-midGray dark:text-white">
+    <p class="text-lg text-bcGovColor-midGray dark:text-white">
       {{ $t('page.home.intro') }}
-    </p> -->
-    <div class="flex h-full flex-col items-center justify-center gap-8 lg:flex-row">
+    </p>
+    <div class="flex flex-wrap gap-8 items-center justify-center">
       <CardNavigation
         title="Get Started"
         description="Start to set up Service BC Connect APIs in your applications."

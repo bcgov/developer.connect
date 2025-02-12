@@ -201,7 +201,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     xApiKey: '',
-    accountID: ''
+    accountID: '',
+    public: {
+      version: `Dev Site v${process.env.npm_package_version || ''}`
+    }
   },
   gtag: {
     enabled: process.env.NODE_ENV === 'production',

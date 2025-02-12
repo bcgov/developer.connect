@@ -42,30 +42,28 @@ const links = [
     id="sbc-main-footer"
     class="inset-x-0 bottom-0 border-t-4 border-bcGovColor-navDivider bg-bcGovColor-footer p-2 dark:border-t dark:bg-bcGovColor-darkGray"
   >
-    <div class="mx-auto max-w-[1360px] items-center">
+    <div class="mx-auto flex-wrap md:flex max-w-[1360px] gap-1 items-center justify-between">
       <nav
         :aria-label="$t('SbcFooter.navLabel')"
-        class="flex flex-wrap gap-1 sm:flex-row sm:items-center sm:gap-4"
+        class="flex flex-wrap divide-x divide-bcGovBlue-100 sm:flex-row sm:items-center"
       >
         <NuxtLink
           v-for="link in links"
           :key="link.to"
           :to="link.to === '/' ? `/${$i18n.locale}` : link.to"
           :target="link.target"
-          class="rounded-none border-r-[0.25px] border-bcGovBlue-100 p-1 pr-2 text-sm text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          class="rounded-none px-2 text-sm text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           {{ $t(link.label) }}
         </NuxtLink>
-        <span
-          class="ml-auto flex justify-center whitespace-nowrap italic text-bcGovColor-navDivider lg:pl-12"
-        >
-          {{ $t("SbcFooter.bcApp") }}
-          <span class="flex h-6 justify-center"><UButton
-            icon="i-heroicons-information-circle"
-            variant="link"
-          /></span>
-        </span>
+        <div />
       </nav>
+      <div class="flex items-center gap-1">
+        <span class="whitespace-nowrap italic text-bcGovColor-navDivider text-sm">{{ $t("SbcFooter.bcApp") }}</span>
+        <UTooltip :text="useRuntimeConfig().public.version">
+          <UIcon name="i-mdi-info-outline" class="size-5 shrink-0 text-white" />
+        </UTooltip>
+      </div>
     </div>
   </footer>
 </template>
