@@ -15,7 +15,7 @@ const exceptgetStartedNavItems = computed(() => {
 </script>
 <template>
   <aside
-    class="mx-2 min-w-56 max-w-min border-bcGovColor-hairlinesOnWhite overflow-y-auto"
+    class="mx-2 min-w-56 max-w-min overflow-y-auto border-bcGovColor-hairlinesOnWhite"
     :class="{ 'border-r-2 pt-2': !isMobile }"
     data-testid="docs-side-navigation"
   >

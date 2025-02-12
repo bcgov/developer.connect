@@ -2,7 +2,7 @@
 import type { NavItem } from '@nuxt/content'
 const navItems = inject<Ref<NavItem[]>>('docNavItems')
 const mainHeaderHeight = inject<Ref<number>>('mainHeaderHeight')
-const footerHeight = inject<Ref<number>>('footerHeight')
+// const footerHeight = inject<Ref<number>>('footerHeight')
 const breadcrumbHeight = inject<Ref<number>>('breadcrumbHeight')
 const { prevPage, nextPage } = useSurroundPages()
 const { createPageHead } = useDocPageData()
@@ -23,7 +23,7 @@ const stickyStyles = computed(() => ({
     <!-- side navigation -->
     <div class="m-auto flex w-full max-w-[1360px] gap-4 py-12">
       <div
-        class="sticky hidden overflow-x-hidden lg:block h-min"
+        class="sticky hidden h-min overflow-x-hidden lg:block"
         :style="stickyStyles"
       >
         <SbcDocsSideNavigation :nav-items="createContentNav(navItems)" />
