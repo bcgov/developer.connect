@@ -22,7 +22,7 @@ function goToItem () {
     }"
   >
     <div
-      class="flex flex-col items-center justify-center gap-6 sm:px-10 sm:py-8"
+      class="flex flex-col items-center justify-center gap-6 sm:px-10 sm:py-8 p-4"
       @click="goToItem"
     >
       <h2 class="text-lg font-semibold uppercase text-bcGovColor-darkGray dark:text-white">

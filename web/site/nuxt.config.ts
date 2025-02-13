@@ -206,7 +206,7 @@ export default defineNuxtConfig({
   },
   gtag: {
     enabled: process.env.NODE_ENV === 'production',
-    id: '' // G-GKRC2V8PT4
+    id: 'G-GKRC2V8PT4'
   }
 })
 declare module '#app' {
