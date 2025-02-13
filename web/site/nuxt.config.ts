@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import type { BreadcrumbLink } from '#ui/types'
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
@@ -95,7 +96,7 @@ export default defineNuxtConfig({
     configurations: [
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/strr/platform.yaml'
+          url: 'https://cdn.jsdelivr.net/gh/bcgov/developer.connect/web/site/public/strr/platform.yaml'
         },
         pathRouting: {
           basePath: '/oas/strr'
@@ -103,7 +104,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/br/business-spec.yaml'
+          url: 'https://cdn.jsdelivr.net/gh/bcgov/developer.connect/web/site/public/br/business-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/br'
@@ -111,7 +112,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/mhr/mhr-spec.yaml'
+          url: 'https://cdn.jsdelivr.net/gh/bcgov/developer.connect/web/site/public/mhr/mhr-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/mhr'
@@ -119,7 +120,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/pay/payment-spec.yaml'
+          url: 'https://cdn.jsdelivr.net/gh/bcgov/developer.connect/web/site/public/pay/payment-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/pay'
@@ -127,7 +128,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/ppr/ppr-spec.yaml'
+          url: 'https://cdn.jsdelivr.net/gh/bcgov/developer.connect/web/site/public/ppr/ppr-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/ppr'
@@ -135,20 +136,12 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/rs/regsearch-spec.yaml'
+          url: 'https://cdn.jsdelivr.net/gh/bcgov/developer.connect/web/site/public/rs/regsearch-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/rs'
         }
       }
-      // {
-      //   spec: {
-      //     url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
-      //   },
-      //   pathRouting: {
-      //     basePath: '/scalar'
-      //   }
-      // }
     ]
   },
   // vuefire: {
