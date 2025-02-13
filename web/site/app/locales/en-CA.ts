@@ -31,10 +31,10 @@ export default {
     allProducts: 'Learn about and try Service BC Connect products.'
   },
   sbcBreadcrumb: {
-    default: 'BC Registries and Online Services',
+    default: 'Service BC Connect',
     backBtn: 'Go Back',
     arialabel: 'Breadcrumb',
-    sbcHome: 'Service BC Connect',
+    sbcHome: 'Service BC Connect Developer Site',
     sbcProductslist: 'Products List',
     sbcProducts: 'Products'
   },
