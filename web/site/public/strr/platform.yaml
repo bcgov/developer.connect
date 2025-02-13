@@ -14,9 +14,9 @@ info:
     name: bsd-3-clause
     url: 'https://opensource.org/license/bsd-3-clause'
 servers:
-  - url: 'https://bcregistry-sandbox.apigee.net/v1'
+  - url: 'https://bcregistry-sandbox.apigee.net/strr/v1'
     description: Test
-  - url: 'https://bcregistry-prod.apigee.net/v1'
+  - url: 'https://bcregistry-prod.apigee.net/strr/v1'
     description: Production
 paths:
   '/permits/:validatePermit':
@@ -635,7 +635,7 @@ components:
   securitySchemes:
     api_key:
       type: apiKey
-      description: Developer Site assigned API key. Required for all requests.
+      description: API Gateway assigned API key. Required for all requests.
       name: x-apikey
       in: header
     jwt:
