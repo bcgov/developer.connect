@@ -21,8 +21,8 @@ dependencies:
     specifier: ^11.11.1
     version: 11.11.1
   firebase-functions:
-    specifier: ^4.9.0
-    version: 4.9.0(firebase-admin@11.11.1)
+    specifier: ^6.3.2
+    version: 6.3.2(firebase-admin@11.11.1)
   vuefire:
     specifier: ^3.1.24
     version: 3.2.1(firebase@10.14.1)(vue@3.5.13)
@@ -78,7 +78,7 @@ devDependencies:
     version: 3.0.2
   nuxt-vuefire:
     specifier: ^1.0.3
-    version: 1.0.5(@firebase/app-types@0.9.3)(firebase-admin@11.11.1)(firebase-functions@4.9.0)(firebase@10.14.1)(vuefire@3.2.1)
+    version: 1.0.5(@firebase/app-types@0.9.3)(firebase-admin@11.11.1)(firebase-functions@6.3.2)(firebase@10.14.1)(vuefire@3.2.1)
   playwright-core:
     specifier: ^1.45.1
     version: 1.50.1
@@ -4183,27 +4183,12 @@ packages:
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
 
-  /@types/express-serve-static-core@5.0.6:
-    resolution: {integrity: sha512-3xhRnjJPkULekpSzgtoNYYcTWgEZkp4myc+Saevii5JPnHNvHMRlBSHDbs7Bh1iPPoVTERHEZXyhyLbMEsExsA==}
-    dependencies:
-      '@types/node': 22.13.1
-      '@types/qs': 6.9.18
-      '@types/range-parser': 1.2.7
-      '@types/send': 0.17.4
-
   /@types/express@4.17.21:
     resolution: {integrity: sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==}
     dependencies:
       '@types/body-parser': 1.19.5
       '@types/express-serve-static-core': 4.19.6
       '@types/qs': 6.9.18
-      '@types/serve-static': 1.15.7
-
-  /@types/express@4.17.3:
-    resolution: {integrity: sha512-I8cGRJj3pyOLs/HndoP+25vOqhqWkAZsWMEmq1qXy/b/M3ppufecUwaK2/TVDVxcV61/iSdhykUjQQ2DLSrTdg==}
-    dependencies:
-      '@types/body-parser': 1.19.5
-      '@types/express-serve-static-core': 5.0.6
       '@types/serve-static': 1.15.7
 
   /@types/gensync@1.0.4:
@@ -4798,7 +4783,7 @@ packages:
     peerDependencies:
       vue: ^3.0.0
     dependencies:
-      '@vue/devtools-kit': 7.6.8
+      '@vue/devtools-kit': 7.7.1
       '@vue/devtools-shared': 7.7.1
       mitt: 3.0.1
       nanoid: 5.0.9
@@ -4845,7 +4830,6 @@ packages:
       perfect-debounce: 1.0.0
       speakingurl: 14.0.1
       superjson: 2.2.2
-    dev: true
 
   /@vue/devtools-shared@7.7.1:
     resolution: {integrity: sha512-BtgF7kHq4BHG23Lezc/3W2UhK2ga7a8ohAIAGJMBr4BkxUFzhqntQtCiuL1ijo2ztWnmusymkirgqUrXoQKumA==}
@@ -6005,6 +5989,7 @@ packages:
   /cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
+    requiresBuild: true
     dependencies:
       string-width: 4.2.3
       strip-ansi: 6.0.1
@@ -6727,6 +6712,7 @@ packages:
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
+    requiresBuild: true
 
   /emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
@@ -7751,15 +7737,15 @@ packages:
       - encoding
       - supports-color
 
-  /firebase-functions@4.9.0(firebase-admin@11.11.1):
-    resolution: {integrity: sha512-IqxOEsVAWGcRv9KRGzWQR5mOFuNsil3vsfkRPPiaV1U/ATC27/jbahh4z8I4rW8Xqa6cQE5xqnw0ueyMH7i7Ag==}
+  /firebase-functions@6.3.2(firebase-admin@11.11.1):
+    resolution: {integrity: sha512-FC3A1/nhqt1ZzxRnj5HZLScQaozAcFSD/vSR8khqSoFNOfxuXgwJS6ZABTB7+v+iMD5z6Mmxw6OfqITUBuI7OQ==}
     engines: {node: '>=14.10.0'}
     hasBin: true
     peerDependencies:
-      firebase-admin: ^10.0.0 || ^11.0.0 || ^12.0.0
+      firebase-admin: ^11.10.0 || ^12.0.0 || ^13.0.0
     dependencies:
       '@types/cors': 2.8.17
-      '@types/express': 4.17.3
+      '@types/express': 4.17.21
       cors: 2.8.5
       express: 4.21.2
       firebase-admin: 11.11.1
@@ -7958,6 +7944,7 @@ packages:
   /get-caller-file@2.0.5:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
+    requiresBuild: true
 
   /get-func-name@2.0.2:
     resolution: {integrity: sha512-8vXOvuE167CtIc3OyItco7N/dpRtBbYOsPsXCz7X/PMnlGjYjSGuZJgM1Y7mmew7BKf9BqvLX2tnOVy1BBUsxQ==}
@@ -8899,6 +8886,7 @@ packages:
   /is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
+    requiresBuild: true
 
   /is-generator-function@1.1.0:
     resolution: {integrity: sha512-nPUB5km40q9e8UfN/Zc24eLlzdSf9OfKByBw9CIdw4H1giPMeA0OIJvbchsCu4npfI2QcMVBsGEBHKZ7wLTWmQ==}
@@ -9594,6 +9582,7 @@ packages:
 
   /lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
+    requiresBuild: true
 
   /lodash.castarray@4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
@@ -10325,6 +10314,7 @@ packages:
 
   /napi-wasm@1.1.3:
     resolution: {integrity: sha512-h/4nMGsHjZDCYmQVNODIrYACVJ+I9KItbG+0si6W/jSjdA9JbWDoU4LLeMXVcEQGHjttI2tuXqDrbGF7qkUHHg==}
+    requiresBuild: true
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -10561,7 +10551,7 @@ packages:
       - supports-color
     dev: true
 
-  /nuxt-vuefire@1.0.5(@firebase/app-types@0.9.3)(firebase-admin@11.11.1)(firebase-functions@4.9.0)(firebase@10.14.1)(vuefire@3.2.1):
+  /nuxt-vuefire@1.0.5(@firebase/app-types@0.9.3)(firebase-admin@11.11.1)(firebase-functions@6.3.2)(firebase@10.14.1)(vuefire@3.2.1):
     resolution: {integrity: sha512-e165U1jGTd9t3nk81HBpZg375OY8G2Wnbjr7ZhE6ach3U4d3Mpm3XJQTts3bStLj2W//cDciK7EcLD2lAYtkGA==}
     peerDependencies:
       '@firebase/app-types': '>=0.8.1'
@@ -10582,7 +10572,7 @@ packages:
       '@posva/lru-cache': 10.0.1
       firebase: 10.14.1
       firebase-admin: 11.11.1
-      firebase-functions: 4.9.0(firebase-admin@11.11.1)
+      firebase-functions: 6.3.2(firebase-admin@11.11.1)
       lodash-es: 4.17.21
       strip-json-comments: 5.0.1
       vuefire: 3.2.1(firebase@10.14.1)(vue@3.5.13)
@@ -12092,6 +12082,7 @@ packages:
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
 
   /require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
@@ -14493,6 +14484,7 @@ packages:
   /y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
     engines: {node: '>=10'}
+    requiresBuild: true
 
   /yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
