@@ -3,7 +3,7 @@ const localePath = useLocalePath()
 const { t, locale } = useI18n()
 
 useHead({
-  title: t('page.products.title')
+  title: `${t('page.products.title')} | Service BC Connect Developer Site`
 })
 
 const { data: products } = await useAsyncData(
