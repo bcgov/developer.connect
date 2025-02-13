@@ -22,13 +22,15 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    '/': { redirect: '/en-CA' }
+    '/': { redirect: '/en-CA' },
+    '/en-CA/oas/**': { prerender: false }
   },
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxt/test-utils/module',
     '@nuxt/image',
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@scalar/nuxt'
   ], // 'nuxt-vuefire'
   extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {
@@ -82,6 +84,73 @@ export default defineNuxtConfig({
     preference: 'light',
     fallback: 'light'
   },
+  scalar: {
+    darkMode: false,
+    theme: 'default',
+    hideSearch: true,
+    metaData: {
+      title: 'API Documentation by Scalar | Service BC Connect Developer Site'
+    },
+    proxyUrl: 'https://proxy.scalar.com',
+    configurations: [
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/strr/platform.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/strr'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/br/business-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/br'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/mhr/mhr-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/mhr'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/pay/payment-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/pay'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/ppr/ppr-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/ppr'
+        }
+      },
+      {
+        spec: {
+          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/rs/regsearch-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/rs'
+        }
+      }
+      // {
+      //   spec: {
+      //     url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
+      //   },
+      //   pathRouting: {
+      //     basePath: '/scalar'
+      //   }
+      // }
+    ]
+  },
   // vuefire: {
   //   emulators: {
   //     // uncomment this line to run the application in production mode without emulators during dev
@@ -121,11 +190,19 @@ export default defineNuxtConfig({
           isCustomElement: tag => tag.startsWith('bcros-')
         }
       }
+    },
+    server: {
+      watch: {
+        usePolling: true
+      }
     }
   },
   runtimeConfig: {
     xApiKey: '',
-    accountID: ''
+    accountID: '',
+    public: {
+      version: `Dev Site v${process.env.npm_package_version || ''}`
+    }
   },
   gtag: {
     enabled: process.env.NODE_ENV === 'production',

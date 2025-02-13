@@ -22,7 +22,7 @@ With this API you can submit the following transactions:
 
 <br>
 
-::ButtonDownloadSpec{href="https://bcregistry-demo.apigee.io/portals/api/sites/bcregistry-demo/liveportal/apis/payment-proxy/download_spec"}
+::ButtonDownloadSpec{href="/pay/payment-spec.yaml" download="payment-spec.yaml"}
 ::
 
 <br>
@@ -36,7 +36,7 @@ With this API you can submit the following transactions:
 
 View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
-<a href="https://bcregistry-demo.apigee.io/docs/payment-proxy/1/overview" target="_blank">> View the API</a>
+<a href="/en-CA/oas/pay" target="_blank">> View the API</a>
 
 ---
 

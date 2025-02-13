@@ -124,6 +124,43 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/bcgov/
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
 - **Explain why this enhancement would be useful** to most SBC Developer Site users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
+### Code Style and Standards
+
+- All code should be written in Vue 3 using the [composition API](https://vuejs.org/guide/extras/composition-api-faq.html), adhering to best practices and naming conventions.
+- Ensure all components, composables, utilities, and other code are written in TypeScript.
+- Follow the recommended [file structure](https://nuxt.com/docs/guide/directory-structure/nuxt) for Nuxt 3 projects.
+- Use ESLint to enforce code style and formatting.
+- Write unit tests for all components, composables, stores, utilities, etc using [Vitest](https://vitest.dev/) and [Nuxt Test Utils](https://nuxt.com/docs/getting-started/testing?utm_source=nuxt.com&utm_medium=aside-module&utm_campaign=nuxt.com), supplemented with [@testing-library/vue](https://testing-library.com/docs/vue-testing-library/intro/) and aim for high test coverage.
+- Document all composables, and utilities with JSDoc comments.
+- Use [Tailwind CSS](https://tailwindcss.com/) for styling, and follow the project's established design system and utility classes.
+- Prefer using [Nuxt Modules](https://nuxt.com/modules) for adding functionality and integrations, and avoid custom implementations unless necessary.
+- Use environment variables for configuration settings, and never hard-code sensitive information or credentials in the codebase.
+- Regularly update dependencies to their latest versions to ensure security and stability.
+
+### Internationalization
+
+- Ensure all text content is translated using the i18n framework to manage translations.
+- Use the `$t` function for translation strings within your components.
+- Add new translation keys to the appropriate language files in the locales directory.
+- Follow the established patterns for structuring and naming translation keys.
+
+### Accessibility
+
+- Follow accessibility best practices to ensure that the application is usable by people with disabilities.
+- Use semantic HTML elements and attributes correctly.
+- Ensure that all interactive elements are keyboard accessible.
+- Provide appropriate ARIA roles, states, and properties where necessary.
+- Use color contrast checkers to ensure that text meets WCAG AA guidelines for contrast.
+- Test your changes with screen readers and other assistive technologies.
+
+### Responsive Design
+
+- Design and implement components with a mobile-first approach.
+- Use CSS media queries to adapt layouts for different screen sizes.
+- Ensure that components are flexible and can resize appropriately based on their container size.
+- Test your changes on various devices and screen sizes to ensure a consistent and functional user experience.
+- Use relative units (e.g., %, em, rem) rather than fixed units (e.g., px) to allow for better scalability and responsiveness.
+
 <!-- TODO
 ### Your First Code Contribution
 include Setup of env, IDE and typical getting started instructions?

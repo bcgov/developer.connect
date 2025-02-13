@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { useBreadcrumbs } from '~/composables/sbcBreadcrumb'
-import { setBreadcrumbs } from '~/utils/setBreadcrumb'
+const { t } = useI18n()
+const localePath = useLocalePath()
 
 definePageMeta({
   layout: 'docs'
 })
 
-const breadcrumbs = useBreadcrumbs()
-watch(
-  breadcrumbs,
-  (newBreadcrumbs) => {
-    setBreadcrumbs(newBreadcrumbs)
-  },
-  { immediate: true }
-)
-
+setBreadcrumbs([
+  { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true },
+  { label: t('sbcBreadcrumb.sbcHome'), to: localePath('/') },
+  { label: t('sbcBreadcrumb.sbcProducts') }
+])
 </script>
 <template>
   <ContentDoc

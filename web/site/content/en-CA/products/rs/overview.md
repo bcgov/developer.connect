@@ -13,7 +13,7 @@ The Registry Search provides a Google like search into the business registry of 
 
 <br>
 
-::ButtonDownloadSpec{href="https://bcregistry-demo.apigee.io/portals/api/sites/bcregistry-demo/liveportal/apis/regsearchproxy/download_spec"}
+::ButtonDownloadSpec{href="/rs/regsearch-spec.yaml" download="regsearch-spec.yaml"}
 ::
 
 <br>
@@ -27,7 +27,7 @@ The Registry Search provides a Google like search into the business registry of 
 
 View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
-<a href="https://bcregistry-demo.apigee.io/docs/regsearchproxy/1/overview" target="_blank">> View the API</a>
+<a href="/en-CA/oas/rs" target="_blank">> View the API</a>
 
 ---
 

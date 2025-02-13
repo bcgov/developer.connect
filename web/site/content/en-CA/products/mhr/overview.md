@@ -15,7 +15,7 @@ The Manufactured Home Registry (MHR) is a centralised, electronic register where
 
 <br>
 
-::ButtonDownloadSpec{href="https://bcregistry-demo.apigee.io/portals/api/sites/bcregistry-demo/liveportal/apis/mhrproxy/download_spec"}
+::ButtonDownloadSpec{href="/mhr/mhr-spec.yaml" download="mhr-spec.yaml"}
 ::
 
 <br>
@@ -29,7 +29,7 @@ The Manufactured Home Registry (MHR) is a centralised, electronic register where
 
 View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
-<a href="https://bcregistry-demo.apigee.io/docs/mhrproxy/1/overview" target="_blank">> View the API</a>
+<a href="/en-CA/oas/mhr" target="_blank">> View the API</a>
 
 ---
 

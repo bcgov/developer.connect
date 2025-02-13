@@ -1,12 +1,6 @@
 <script setup lang="ts">
-const {
-  mainLinks,
-  openMobileNav
-  // loggedInUserOptions, leaving out auth options for now
-  // loggedOutUserOptions
-} = useSbcNav()
-// const { t } = useI18n()
-// const localePath = useLocalePath()
+const localePath = useLocalePath()
+const { openMobileNav } = useSbcNav()
 const headerRef = ref<HTMLElement | null>(null)
 // const user = useCurrentUser()
 // expose template ref to access properties in parent
@@ -18,34 +12,19 @@ defineExpose({
   <header
     id="sbc-main-header"
     ref="headerRef"
-    class="2xl: left-1 h-16 border-b-4 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
+    class="h-16 border-b-4 border-bcGovColor-navDivider bg-bcGovColor-header p-2 sm:px-4 dark:border-b dark:bg-bcGovColor-darkGray"
   >
     <nav
-      class="m-auto flex w-full max-w-[1312px] items-center justify-between"
+      class="m-auto flex w-full max-w-[1360px] items-center justify-between"
       :aria-label="$t('SbcHeader.navLabel')"
     >
-      <div
-        class="flex h-12 min-h-12 items-center gap-3 py-2.5 sm:gap-5 md:gap-5 lg:gap-7"
-      >
-        <div class="h-12">
-          <NuxtLinkLocale to="/" tabindex="-1" aria-hidden="true" class="mr-2">
-            <SbcLogo />
-          </NuxtLinkLocale>
-        </div>
-        <div
-          v-for="link in mainLinks"
-          :key="link.to"
-          class="flex h-11 w-24 cursor-pointer text-left font-sans text-sm font-semibold leading-5 lg:h-7 lg:w-60 lg:text-lg lg:font-bold lg:leading-7"
-        >
-          <NuxtLinkLocale :to="link.to">
-            <span v-if="link.label === 'Service BC Connect'">
-              <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
-            </span>
-            <!-- <span v-else class="text-white">
-              {{ link.label }}
-            </span> -->
-          </NuxtLinkLocale>
-        </div>
+      <div class="flex h-full items-center gap-2 sm:gap-5">
+        <NuxtLink :to="localePath('/')" tabindex="-1" aria-hidden="true">
+          <SbcLogo />
+        </NuxtLink>
+        <NuxtLink :to="localePath('/')" class="text-sm font-bold leading-5 lg:text-lg lg:leading-7">
+          <span class="text-white">Service</span><span class="text-bcGovColor-navDivider">BC</span> <span class="text-white">Connect</span>
+        </NuxtLink>
       </div>
       <div class="flex gap-1">
         <!-- <ColorModeSelect /> -->

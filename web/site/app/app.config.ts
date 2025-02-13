@@ -129,6 +129,10 @@ export default defineAppConfig({
         base: 'pointer-events-none relative inline-block rounded-full bg-white dark:bg-white shadow transform ring-0 transition ease-in-out duration-200'
       }
     },
+    tooltip: {
+      rounded: 'rounded',
+      base: '[@media(pointer:coarse)]:hidden h-6 px-2 py-1 text-xs font-normal truncate relative'
+    },
     verticalNavigation: {
       active: 'text-bcGovColor-activeBlue dark:text-white font-semibold',
       inactive: 'text-bcGovColor-midGray dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',

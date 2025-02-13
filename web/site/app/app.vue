@@ -20,8 +20,10 @@ useHead({
 // template ref for header component
 const headerRef = ref<InstanceType<typeof SbcHeaderMain> | null>(null)
 const footerRef = ref<InstanceType<typeof SbcFooter> | null>(null)
+const breadcrumbRef = ref<InstanceType<typeof SbcBreadcrumb> | null>(null)
 const { height: mainHeaderHeight } = useElementSize(headerRef)
 const { height: footerHeight } = useElementSize(footerRef)
+const { height: breadcrumbHeight } = useElementSize(breadcrumbRef)
 
 // fetch content files using composable from nuxt-content https://content.nuxt.com/composables/fetch-content-navigation
 const { data: docNavItems } = await useAsyncData(
@@ -59,6 +61,7 @@ provide('dashNavItems', dashboardNavItems)
 // provide element heights to offset headers/asides
 provide('mainHeaderHeight', mainHeaderHeight)
 provide('footerHeight', footerHeight)
+provide('breadcrumbHeight', breadcrumbHeight)
 
 // watch(user, async (currentUser, previousUser) => {
 //   // redirect user home if they sign in from the login page without a redirect
@@ -83,10 +86,38 @@ provide('footerHeight', footerHeight)
         $route.path.includes('dashboard') ? dashboardNavItems : undefined
       "
     />
-    <SbcBreadcrumb class="sticky inset-x-0 top-16 z-40 hidden md:block" />
+    <SbcBreadcrumb
+      v-if="!$route.path.includes('oas')"
+      ref="breadcrumbRef"
+      class="sticky inset-x-0 top-16 z-40 hidden md:block"
+    />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
     <SbcFooter ref="footerRef" class="z-50 mt-auto" />
   </div>
 </template>
+<style>
+  .light-mode {
+    --scalar-color-1: #212529 !important;
+    --scalar-color-2: #212529 !important;
+    --scalar-color-3: #212529 !important;
+    --scalar-color-accent: #1669bb !important;
+    --scalar-background-1: #f1f3f5 !important;
+    --scalar-background-2: #e9ecef !important;
+    --scalar-background-3: #dee2e6 !important;
+    --scalar-background-accent: #5369d20f !important;
+    --scalar-border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+  .dark-mode {
+    --scalar-color-1: rgba(255, 255, 255, 0.81) !important;
+    --scalar-color-2: rgba(255, 255, 255, 0.443) !important;
+    --scalar-color-3: rgba(255, 255, 255, 0.282) !important;
+    --scalar-color-accent: #e0e7ed !important;
+    --scalar-background-1: #202020 !important;
+    --scalar-background-2: #272727 !important;
+    --scalar-background-3: #333333 !important;
+    --scalar-background-accent: #8ab4f81f !important;
+    --scalar-border-color: rgb(209 213 219 / 0.5) !important;
+  }
+</style>

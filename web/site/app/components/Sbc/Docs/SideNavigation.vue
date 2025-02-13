@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   navItems: AccordianNavItem[] | undefined,
-  isMobile: boolean | undefined,
+  isMobile?: boolean | undefined,
 }>()
 
 const getStartedNavItems = computed(() => {
@@ -15,8 +15,8 @@ const exceptgetStartedNavItems = computed(() => {
 </script>
 <template>
   <aside
-    class="mx-2 min-w-56 max-w-min border-bcGovColor-hairlinesOnWhite"
-    :class="{ 'border-r-2': !isMobile }"
+    class="mx-2 min-w-56 max-w-min overflow-y-auto border-bcGovColor-hairlinesOnWhite"
+    :class="{ 'border-r-2 pt-2': !isMobile }"
     data-testid="docs-side-navigation"
   >
     <div class="flex items-center text-base font-semibold  uppercase text-bcGovColor-midGray">
