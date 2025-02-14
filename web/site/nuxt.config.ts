@@ -95,7 +95,7 @@ export default defineNuxtConfig({
     configurations: [
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/strr/platform.yaml'
+          url: '/strr/platform.yaml'
         },
         pathRouting: {
           basePath: '/oas/strr'
@@ -103,7 +103,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/br/business-spec.yaml'
+          url: '/br/business-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/br'
@@ -111,7 +111,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/mhr/mhr-spec.yaml'
+          url: '/mhr/mhr-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/mhr'
@@ -119,7 +119,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/pay/payment-spec.yaml'
+          url: '/pay/payment-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/pay'
@@ -127,7 +127,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://raw.githubusercontent.com/bcgov/developer.connect/refs/heads/main/web/site/public/ppr/ppr-spec.yaml'
+          url: '/ppr/ppr-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/ppr'
