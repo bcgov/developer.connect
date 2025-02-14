@@ -6694,11 +6694,6 @@ components:
         - securedParties
         - debtors
   securitySchemes:
-    JWT:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: OIDC generated JWT for a gateway consumer which includes a claim granting the PPR API privilege. Required for all non-external (not B2B) consumers.
     api_key:
       type: apiKey
       description: API Gateway assigned API key for a consumer with the PPR API privilege. Required for all requests.
@@ -6840,4 +6835,3 @@ tags:
   - name: User Profile
 security:
   - api_key: []
-  - JWT: []
