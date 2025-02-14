@@ -135,7 +135,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: 'https://dev.developer.connect.gov.bc.ca/rs/regsearch-spec.yaml'
+          url: '/rs/regsearch-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/rs'
