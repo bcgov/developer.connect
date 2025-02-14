@@ -26,7 +26,7 @@ your business systems and the Business Registry.
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/account-setup). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
 <a href="/en-CA/oas/br" target="_blank">> View the API</a>
 
@@ -64,11 +64,18 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
     <th>Description</th>
   </tr>
   <tr>
-    <td>2022-04-08</td>
-    <td>0.0.0</td>
-    <td>Pre-Release</td>
+    <td>2025-01-22</td>
+    <td>2.136.0</td>
+    <td>BCA-Corps Directed Launch</td>
   </tr>
 </table>
+
+---
+
+## Sandbox Limitations
+- Future Effective Filings
+- Email Notification
+- Integrations with External Partners (ex: CRA)
 
 ---
 
