@@ -48,6 +48,8 @@ A service fee is charged for the completion each search request (Search Step 2 i
 ---
 
 ## API Quick Reference
+Use the GET /mhr/api/v1/meta/info request to obtain the current version of the API. 
+Internal minor fixes, updates unrelated to MHR searches, and software version updates are not included in the table.
 
 <table>
   <tr>
@@ -188,7 +190,13 @@ Updates of note to this page are recorded here.
     <th>Description</th>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
+    <td>2023-11-13</td>
+    <td>API specification property lengths CSV file updated after data migration.</td>
+  </tr>
+  <tr>
+    <td>2025-02-21</td>
+    <td>
+      <p>Added API Version History text.</p>
+    </td>
   </tr>
 </table>
