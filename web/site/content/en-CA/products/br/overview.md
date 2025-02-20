@@ -111,7 +111,19 @@ Updates of note to this page are recorded here.
     <th>Description</th>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
+    <td>2024-08-22</td>
+    <td>Update Postman collection</td>
+  </tr>
+  <tr>
+    <td>2025-01-08</td>
+    <td>Update Postman collection</td>
+  </tr>
+  <tr>
+    <td>2025-02-18</td>
+    <td>Update request access link, add sandbox limitations</td>
+  </tr>
+  <tr>
+    <td>2025-02-20</td>
+    <td>Update API version history, update Sandbox Postman collection</td>
   </tr>
 </table>
