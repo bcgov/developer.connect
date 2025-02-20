@@ -76,7 +76,7 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
   <tr>
     <td>2025-01-22</td>
     <td>2.136.0</td>
-    <td>BCA-Corps Directed Launch</td>
+    <td>BCA-Corps Directed Release</td>
   </tr>
 </table>
 
