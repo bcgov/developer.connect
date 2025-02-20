@@ -64,9 +64,19 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
     <th>Description</th>
   </tr>
   <tr>
+    <td>2022-04-08</td>
+    <td>0.0.0</td>
+    <td>Cooperative and Benefit Companies Release</td>
+  </tr>
+  <tr>
+    <td>2022-10-24</td>
+    <td>2.62.0</td>
+    <td>Firms(SP/GP) Release</td>
+  </tr>
+  <tr>
     <td>2025-01-22</td>
     <td>2.136.0</td>
-    <td>BCA-Corps Directed Launch</td>
+    <td>BCA-Corps Directed Release</td>
   </tr>
 </table>
 
@@ -83,7 +93,7 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
 
 - Refer to the <a href="https://www2.gov.bc.ca/" target="_blank">BC Gov site</a> to answer any business rule related questions including <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/managing-a-business/permits-licences/businesses-incorporated-companies/forms-corporate-registry" target="_blank">Fees</a>
 
-- Download a <a href="/br/apigw-business-api-demo.postman_collection.json.zip" download="apigw-business-demo-postman.json.zip" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+- Download a <a href="/br/apigw-business-api-demo.postman_collection.zip" download="apigw-business-demo-postman.json.zip" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
 
 - Refer to the <a href="https://www.bcregistry.gov.bc.ca/" target="_blank">BC Registry site</a> to open an account and see all the Registry services.
 
@@ -101,7 +111,19 @@ Updates of note to this page are recorded here.
     <th>Description</th>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
+    <td>2024-08-22</td>
+    <td>Update Postman collection</td>
+  </tr>
+  <tr>
+    <td>2025-01-08</td>
+    <td>Update Postman collection</td>
+  </tr>
+  <tr>
+    <td>2025-02-18</td>
+    <td>Update request access link, add sandbox limitations</td>
+  </tr>
+  <tr>
+    <td>2025-02-20</td>
+    <td>Update API version history, update Sandbox Postman collection</td>
   </tr>
 </table>
