@@ -64,6 +64,16 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
     <th>Description</th>
   </tr>
   <tr>
+    <td>2022-04-08</td>
+    <td>0.0.0</td>
+    <td>Cooperative and Benefit Companies Release</td>
+  </tr>
+  <tr>
+    <td>2022-10-24</td>
+    <td>2.62.0</td>
+    <td>Firms(SP/GP) Release</td>
+  </tr>
+  <tr>
     <td>2025-01-22</td>
     <td>2.136.0</td>
     <td>BCA-Corps Directed Launch</td>
