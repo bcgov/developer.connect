@@ -91,7 +91,7 @@ export default defineNuxtConfig({
     metaData: {
       title: 'API Documentation by Scalar | Service BC Connect Developer Site'
     },
-    // proxyUrl: 'https://proxy.scalar.com',
+    proxyUrl: 'https://proxy.scalar.com',
     configurations: [
       {
         spec: {
