@@ -2,13 +2,13 @@ openapi: 3.0.0
 info:
   title: Personal Property Registry API
   version: 1.0.0
-  description: '<p>The Personal Property Registry (PPR) is a centralised, electronic register where details of security interests in personal property can be registered and searched. The PPR API provides a real-time, secure, direct link between your business systems and the PPR. With this API you can submit the following transactions:<ul><li>Search for Personal Property information</li><li>Register an interest or lien as a Financing Statement</li><li>Amend a Financing Statement</li><li>Renew a Financing Statement</li><li>Discharge a Financing Statement</li></ul></p><p>All requests must include a BC Registries issued API key.</p><p>All requests must include an Account ID.</p><p>Fee Information<br>Refer to the BC Registries Payment API to look up a PPR service fee by fee code.</p><p>Payment Information<br>When submitting a request for which there is a fee, the payment invoice ID and a reference to the payment receipt are returned in the response.</p><p>Searches<br>Executing a search is a two step process:<ol><li>Submit search query criteria which on success returns a set of results as summary information.</li><li>Submit selected summary results from the first step to obtain details on one or more Financing Statements.</li></ol>A fee is charged for every new search request - the first step.</p><p>Schema definition "string" type property lengths are published in a separate document named "ppr-api-property-lengths.pdf" on the Registries API web site.</p>'
+  description: '<p>The Personal Property Registry (PPR) is a centralised, electronic register where details of security interests in personal property can be registered and searched. The PPR API provides a real-time, secure, direct link between your business systems and the PPR. With this API you can submit the following transactions:<ul><li>Search for Personal Property information</li><li>Register an interest or lien as a Financing Statement</li><li>Amend a Financing Statement</li><li>Renew a Financing Statement</li><li>Discharge a Financing Statement</li></ul></p><p>All requests must include a BC Registries issued API key.</p><p>All requests must include an Account ID.</p><p>Fee Information<br>Refer to the BC Registries Payment API to look up a PPR service fee by fee code.</p><p>Payment Information<br>When submitting a request for which there is a fee, the payment invoice ID and a reference to the payment receipt are returned in the response.</p><p>Searches<br>Executing a search is a two step process:<ol><li>Submit search query criteria which on success returns a set of results as summary information.</li><li>Submit selected summary results from the first step to obtain details on one or more Financing Statements.</li></ol>A fee is charged for every new search request - the first step.</p><p>Schema definition "string" type property lengths are published in a separate document named "ppr-api-property-lengths.pdf" on the Registries API web site.</p><p><b>NOTE: </b>With registration and search results it is possible to request a PDF report as a response. If the request header Accept value is application/pdf a report is returned in the response only if the immediate report generation is successful. If the report service fails to generate a report but the request is otherwise successful, a status code of 202 - Accepted is returned and the response payload is JSON. A subsequent GET is required to obtain the report.</p>'
   contact:
     name: BC Registries
 servers:
-  - url: 'https://bcregistry-sandbox.apigee.net'
-    description: Test
-  - url: 'https://bcregistry-prod.apigee.net'
+  - url: 'https://sandbox.api.connect.gov.bc.ca'
+    description: Sandbox
+  - url: 'https://api.connect.gov.bc.ca'
     description: Production
 paths:
   /ppr/api/v1/drafts:
@@ -675,8 +675,8 @@ paths:
     post:
       tags:
         - Financing Statement
-      summary: Create a financing statement
-      description: Create (register) a new Financing Statement.
+      summary: Create a financing statement.
+      description: Create (register) a new Financing Statement. If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201. 
       operationId: post-financing-statements
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -1095,7 +1095,7 @@ paths:
       tags:
         - Financing Statement
       summary: Retrieve a Financing Statement
-      description: Retrieve by registration number a Financing Statement. The  account ID used to submit the request must match the account ID used to create the Financing Statement identified by the registration number.
+      description: <p>Retrieve by registration number a Financing Statement. The account ID used to submit the request must match the account ID used to create the Financing Statement identified by the registration number.</p><p>If the request is for a report and the report does not exist and the report service returns an error, the response status is 503 service unavailable.</p>
       operationId: get-financing-statement
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -1198,12 +1198,14 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
   '/ppr/api/v1/financing-statements/{registration_num}/amendments':
     post:
       tags:
         - Financing Statement
       summary: Create an Amendment Statement
-      description: '<p>Register a Financing Statement amendment or court order change as an Amendment Statement to add or delete:</p><ul><li>Secured parties</li><li>Debtors</li><li>Vehicles</li><li>General collateral</li></ul><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>When the Amendment includes a Secured Party or Debtor name/address change, use the added party amendPartyId to link the added party to the deleted party. Set the amendPartyId value to the deleted party partyId value.</p><p>For SE registration type amendments, include addSecuritiesActNotices and deleteSecuritiesActNotices only when modifying the securities act information. At least one notice must be active. With this registration type the Secured Party may not be modified.</p>'
+      description: '<p>Register a Financing Statement amendment or court order change as an Amendment Statement to add or delete:</p><ul><li>Secured parties</li><li>Debtors</li><li>Vehicles</li><li>General collateral</li></ul><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>When the Amendment includes a Secured Party or Debtor name/address change, use the added party amendPartyId to link the added party to the deleted party. Set the amendPartyId value to the deleted party partyId value.</p><p>For SE registration type amendments, include addSecuritiesActNotices and deleteSecuritiesActNotices only when modifying the securities act information. At least one notice must be active. With this registration type the Secured Party may not be modified.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p>'
       operationId: post-amendment-statement
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -1745,7 +1747,7 @@ paths:
       tags:
         - Financing Statement
       summary: Retrieve an Amendment Statement
-      description: <p>Retrieve by amendment registration number an Amendment Statement. The account ID used to submit the request must match the account ID used to create the Amendment Statement identified by the amendment registration number. The Amendment registration must be a change to the Financing Statement identified by the registration_num path parameter.</p>
+      description: <p>Retrieve by amendment registration number an Amendment Statement. The account ID used to submit the request must match the account ID used to create the Amendment Statement identified by the amendment registration number. The Amendment registration must be a change to the Financing Statement identified by the registration_num path parameter.</p><p>If the request is for a report and the report does not exist and the report service returns an error, the response status is 503 service unavailable.</p>
       operationId: get-amendment-statement
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -1884,6 +1886,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
   '/ppr/api/v1/financing-statements/{registration_num}/changes/{change_registration_num}':
     get:
       tags:
@@ -2077,7 +2081,7 @@ paths:
       tags:
         - Financing Statement
       summary: Create a Discharge Statement
-      description: '<p>Discharge a Financing Statement to remove a lien or encumbrance. Once discharged, a Financing Statement becomes historical and will not show up in search results.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p>'
+      description: '<p>Discharge a Financing Statement to remove a lien or encumbrance. Once discharged, a Financing Statement becomes historical and will not show up in search results.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p>'
       operationId: post-statement-discharge
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -2217,7 +2221,7 @@ paths:
       tags:
         - Financing Statement
       summary: Retrieve a Discharge Statement
-      description: <p>Retrieve by discharge registration number a Discharge Statement. The account ID used to submit the request must match the account ID used to create the Discharge Statement identified by the discharge registration number. The Discharge registration must be a change to the Financing Statement identified by the registration_num path parameter.</p>
+      description: <p>Retrieve by discharge registration number a Discharge Statement. The account ID used to submit the request must match the account ID used to create the Discharge Statement identified by the discharge registration number. The Discharge registration must be a change to the Financing Statement identified by the registration_num path parameter.</p><p>If the request is for a report and the report does not exist and the report service returns an error, the response status is 503 service unavailable.</p>
       operationId: get-discharge-statement
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -2340,12 +2344,14 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
   '/ppr/api/v1/financing-statements/{registration_num}/renewals':
     post:
       tags:
         - Financing Statement
       summary: Create a Renewal Statement
-      description: <p>Renew a Financing Statement by extending the expiry date. Court order information is required and should only be included when submitting a renewal for a Repairer's Lien (RL) registration type. The Court Order Date must be between the base registration creation date and the request date. Specify lifeYears or lifeInfinite for all registration types except RL. Registrations with an infinite life cannot be renewed.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p>
+      description: <p>Renew a Financing Statement by extending the expiry date. Court order information is required and should only be included when submitting a renewal for a Repairer's Lien (RL) registration type. The Court Order Date must be between the base registration creation date and the request date. Specify lifeYears or lifeInfinite for all registration types except RL. Registrations with an infinite life cannot be renewed.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p>
       operationId: post-statement-renewal
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -2585,7 +2591,7 @@ paths:
       tags:
         - Financing Statement
       summary: Retrieve a Renewal Statement
-      description: <p>Retrieve by renewal registration number a Renewal Statement. The account ID used to submit the request must match the account ID used to create the Renewal Statement identified by the renewal registration number. The Renewal registration must be a change to the Financing Statement identified by the registration_num path parameter.</p>
+      description: <p>Retrieve by renewal registration number a Renewal Statement. The account ID used to submit the request must match the account ID used to create the Renewal Statement identified by the renewal registration number. The Renewal registration must be a change to the Financing Statement identified by the registration_num path parameter.</p><p>If the request is for a report and the report does not exist and the report service returns an error, the response status is 503 service unavailable.</p>
       operationId: get-renewal-statement
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -2714,6 +2720,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
   '/ppr/api/v1/party-codes/{code}':
     parameters:
       - schema:
@@ -3567,7 +3575,7 @@ paths:
       tags:
         - Search
       summary: Fetch Previous Search Financing Statements
-      description: 'After a search has completed, this operation may be used to retrieve the search detail information identified by the searchId path parameter. This operation is permitted for up to seven days after the initial search.'
+      description: '<p>After a search has completed, this operation may be used to retrieve the search detail information identified by the searchId path parameter. This operation is permitted for up to seven days after the initial search.</p><p>If the request is for a report and the report does not exist and the report service returns an error, the response status is 503 service unavailable.</p>'
       operationId: get-searches-select-results
       responses:
         '200':
@@ -3959,7 +3967,7 @@ paths:
       tags:
         - Search
       summary: Select Search Financing Statements
-      description: '<p>As the second step in the search two-step process, choose from the summary information returned in the first step which Financing Statements to retrieve detailed information about. Only matchType and baseRegistrationNumber need to be provided to select a Financing Statement. The detail information includes all Change Statement, Amendment Statement, Renewal, and Discharge Statement information in reverse chronological order (most recent first). Exact match Financing Statements are automatically included in the results. If the request "selected" property is either absent or set to true the associated Financing Statement is included in the response.</p><p>If requesting a PDF and the number of Financing Statements is greater than 75, the request must include a callbackURL parameter, otherwise a 400 status is returned. If the request is accepted in this scenario the response will return a getReportURL value. When the report is available a notification will be sent to the callbackURL. The body of the notification is a single JSON property getReportURL with the same value as the original response. The caller can then use the GET /ppr/api/v1/search-results/{searchId} endpoint to fetch the PDF.</p><p>As of version 1.2.5, a callback URL will be used in a search results report request if it is submitted and the response JSON is over 220KB in size, which corresponds to a report of approximatedly 150 pages or more.</p><p>Only include a callbackURL in the request if one of the above conditions is true.</p>'
+      description: '<p>As the second step in the search two-step process, choose from the summary information returned in the first step which Financing Statements to retrieve detailed information about. Only matchType and baseRegistrationNumber need to be provided to select a Financing Statement. The detail information includes all Change Statement, Amendment Statement, Renewal, and Discharge Statement information in reverse chronological order (most recent first). Exact match Financing Statements are automatically included in the results. If the request "selected" property is either absent or set to true the associated Financing Statement is included in the response.</p><p>If requesting a PDF and the number of Financing Statements is greater than 75, the request must include a callbackURL parameter, otherwise a 400 status is returned. If the request is accepted in this scenario the response will return a getReportURL value. When the report is available a notification will be sent to the callbackURL. The body of the notification is a single JSON property getReportURL with the same value as the original response. The caller can then use the GET /ppr/api/v1/search-results/{searchId} endpoint to fetch the PDF.</p><p>As of version 1.2.5, a callback URL will be used in a search results report request if it is submitted and the response JSON is over 220KB in size, which corresponds to a report of approximatedly 150 pages or more.</p><p>Only include a callbackURL in the request if one of the above conditions is true.</p><p><b>NOTE: </b> if the request header Accept value is application/pdf a report is returned in the response only if the immediate report generation is successful. If the report service fails to generate a report but the request is otherwise successful, a status code of 202 - Accepted is returned and the repsonse payload is JSON. A subsequent GET is required to obtain the report.</p>'
       operationId: post-searches-select-results
       parameters:
         - name: callbackURL
@@ -4512,6 +4520,8 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
   /ppr/api/v1/user-profile:
     parameters:
       - $ref: '#/components/parameters/accountId'
@@ -6744,6 +6754,17 @@ components:
             example-1:
               value:
                 errorMessage: 'API unexpected error. If error persists, contact API support.'
+                rootCause: '{"fault":{"faultstring":"Execution of ServiceCallout SC-Request-JWT failed. Reason: ResponseCode 400 is treated as error","detail":{"errorcode":"steps.servicecallout.ExecutionFailed"}}}'
+    ServiceUnavailableError:
+      description: 'A 503 service unavailable status error message, given when the service is unavailable because of a maintenance/change window. Also returned if the request is for a report and the report service is busy.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorResponse'
+          examples:
+            example-1:
+              value:
+                errorMessage: 'Service unavailable due to maintenance.'
                 rootCause: '{"fault":{"faultstring":"Execution of ServiceCallout SC-Request-JWT failed. Reason: ResponseCode 400 is treated as error","detail":{"errorcode":"steps.servicecallout.ExecutionFailed"}}}'
   parameters:
     document_id:

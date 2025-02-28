@@ -55,7 +55,7 @@ GET request. Here is an example of the notification body:
 
     {
     	"id": 99999,
-    	"getReportURL": "https://bcregistry-sandbox.apigee.net/ppr/api/v1/search-results/99999"
+    	"getReportURL": "https://api.connect.gov.bc.ca/ppr/api/v1/search-results/99999"
     }
 
 - The callback URL must be encoded.
@@ -66,12 +66,23 @@ GET request. Here is an example of the notification body:
 
 ## Reports for Registrations With a Large Data Size
 
-Both Verification Statement Registrations and Search Results reports may contain individual registrations
-with a large amount of data - typically hundreds of serial collateral - resulting in reports that
-are hundreds of pages in length. Such reports take too long to generate as a real time request. As part of completing a
+Both Verification Statement Registrations and Search Results reports may contain individual registrations 
+with a large amount of data - typically hundreds of serial collateral - resulting in reports that 
+are hundreds of pages in length. Such reports take too long to generate as a real time request. As part of completing a 
 registration or completing Search Step 2, the API queues the report request and returns a JSON response with a getReportURL property.
 When the report is available it can be downloaded from the PPR application Registrations or Searches tables,
 or with a subsequent API GET request. In the latter case, if the queued report is not yet available the API returns a 400 response.
+
+As of version 1.2.5, a callback URL will be used in a search results report request if it is submitted and the response JSON is 
+over 220KB in size, which corresponds to a report of approximatedly 150 pages or more. See the previous Large Search Results 
+Report section for instructions on including a callback URL in a search results request.
+
+</br>
+<p>Only include a callbackURL in the request if one of the above conditions is true.</p>
+<p>A new registration or search results POST submission that requests an immediate report as the response will return a 202 Accepted status response if
+the request report generation fails but processing is otherwise successful (the report service is busy).
+In this scenario a subsequent GET request is required to retrieve the report.</p>
+
 
 ---
 
@@ -409,6 +420,7 @@ All API responses represent date-time values in the UTC timezone.
 ---
 
 ## API Version History
+Use the GET /ppr/api/v1/meta/info request to obtain the current version of the API. Internal minor fixes and software version updates are not included in the table.
 
 <table>
   <tr>
@@ -632,7 +644,34 @@ All API responses represent date-time values in the UTC timezone.
       If the financing statement is for one of these registrations, three additional properties are conditionally included in a response: transitionDescription, transitionDate, and transitionNumber..</p>
     </td>
   </tr>
-
+  <tr>
+    <td>2024-06-15</td>
+    <td>1.2.5 Patch</td>
+    <td>
+      <p>Accept callback URLs for search result report requests where the number of results is small but the JSON data size is large (over 220KB).</p>
+      <p>
+          Add support for the Securities Act Commision new registration type SE - SECURITIES ORDER OR PROCEEDINGS NOTICE. Creating, amending, 
+          and discharging this registration type is restricted to the Securities Act Commission account ID. The following updates were made for 
+          this new registration type, which may be included in search results: 
+          <ul>
+             <li>Add 4 registration types SE, A1 (AMENDMENT - NOTICE ADDED), A2 (AMENDMENT - NOTICE REMOVED), A3 (AMENDMENT - NOTICE AMENDED).</li>
+             <li>Add models securitiesActNotice and securitiesActOrder.</li>
+             <li>Add securitiesActNotices to the financingStatement model.</li>
+             <li>Add deleteSecuritiesActNotices and addSecuritiesActNotices to the amendmentStatement model.</li>
+          </ul>
+      </p>
+      <p>API specification updated.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>2025-02-21</td>
+    <td>1.3.2</td>
+    <td>
+      <p>Improve POST registration and search result responses where a report is requested and a report is not immediately available because of a report service error.
+         Return a distinct 202 status in this scenario instead of a 200/201. API specification updated. </p>
+      <p>Improve internal report generation retries when the report service returns a 502 or 503 status.</p>
+    </td>
+  </tr>
 </table>
 
 ---
@@ -684,6 +723,19 @@ Updates of note to this page are recorded here.
     <td>2022-05-02</td>
     <td>
       <p>Update API specification vehicleCollateral model/schema description regarding required properties.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>2024-06-15</td>
+    <td>
+      <p>Update section Reports for Registrations With a Large Data Size to add callback URL information.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>2025-02-21</td>
+    <td>
+      <p>Added note on 202 Accepted conditional response when a POST request for a report response does not return a report.</p>
+      <p>Added API Version History text</p>
     </td>
   </tr>
 </table>

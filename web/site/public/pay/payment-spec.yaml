@@ -15,10 +15,10 @@ info:
   contact:
     name: "BC Registries"
 servers:
-- url: "https://bcregistry-sandbox.apigee.net"
-  description: "Test"
-- url: "https://bcregistry-prod.apigee.net"
-  description: "Production"
+  - url: "https://sandbox.api.connect.gov.bc.ca"
+    description: "Test"
+  - url: "https://api.connect.gov.bc.ca"
+    description: "Production"
 paths:
   /pay/api/v1/fees/{business_type}/{filing_type}:
     get:
