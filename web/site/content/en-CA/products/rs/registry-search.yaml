@@ -1618,15 +1618,9 @@ tags:
   - name: search
     description: search services
 servers:
-  - url: 'https://bcregistry-sandbox.apigee.net/registry-search/api'
-    description: sandbox
-  - url: 'http://localhost:3000/registry-search/api'
-    description: local
-  - url: 'https://bcregistry-dev.apigee.net/registry-search/api'
-    description: dev
-  - url: 'https://bcregistry-test.apigee.net/registry-search/api'
-    description: test
-  - url: 'https://bcregistry-prod.apigee.net/registry-search/api'
-    description: prod
+  - url: 'https://sandbox.api.connect.gov.bc.ca/registry-search/api'
+    description: Test
+  - url: 'https://api.connect.gov.bc.ca/registry-search/api'
+    description: Production
 security:
   - api_key: []

@@ -6,9 +6,9 @@ info:
   contact:
     name: BC Registries
 servers:
-  - url: 'https://bcregistry-sandbox.apigee.net'
-    description: Test
-  - url: 'https://bcregistry-prod.apigee.net'
+  - url: 'https://sandbox.api.connect.gov.bc.ca'
+    description: Sandbox
+  - url: 'https://api.connect.gov.bc.ca'
     description: Production
 paths:
   /ppr/api/v1/drafts:

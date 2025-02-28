@@ -55,7 +55,7 @@ GET request. Here is an example of the notification body:
 
     {
     	"id": 99999,
-    	"getReportURL": "https://bcregistry-sandbox.apigee.net/ppr/api/v1/search-results/99999"
+    	"getReportURL": "https://api.connect.gov.bc.ca/ppr/api/v1/search-results/99999"
     }
 
 - The callback URL must be encoded.

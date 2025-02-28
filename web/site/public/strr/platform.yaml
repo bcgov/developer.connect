@@ -14,9 +14,9 @@ info:
     name: bsd-3-clause
     url: 'https://opensource.org/license/bsd-3-clause'
 servers:
-  - url: 'https://bcregistry-sandbox.apigee.net/strr/v1'
+  - url: 'https://sandbox.api.connect.gov.bc.ca/strr/v1'
     description: Test
-  - url: 'https://bcregistry-prod.apigee.net/strr/v1'
+  - url: 'https://api.connect.gov.bc.ca/strr/v1'
     description: Production
 paths:
   '/permits/:validatePermit':
