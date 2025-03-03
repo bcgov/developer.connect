@@ -1473,13 +1473,13 @@ components:
           description: "id of the account"
         corpTypeCode:
           type: "string"
-          description: "username of the account"
+          description: "type of invoice"
         createdBy:
           type: "string"
-          description: "name of user who created"
+          description: "username who created"
         createdName:
           type: "string"
-          description: "user who created"
+          description: "name who created"
         createdOn:
           type: "string"
           description: "date made payment"
