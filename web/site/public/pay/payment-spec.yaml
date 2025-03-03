@@ -11,14 +11,14 @@ info:
     \ statements</li><li>Generate account transactions reports</li></ul>\n<p>All requests\
     \ must include a BC Registries issued API key.</p>\n<p>All requests must include\
     \ an Account ID.</p>"
-  version: "1.0.1"
+  version: "1.0.3"
   contact:
     name: "BC Registries"
 servers:
-  - url: "https://sandbox.api.connect.gov.bc.ca"
-    description: "Test"
-  - url: "https://api.connect.gov.bc.ca"
-    description: "Production"
+- url: "https://sandbox.api.connect.gov.bc.ca"
+  description: "Test"
+- url: "https://api.connect.gov.bc.ca"
+  description: "Production"
 paths:
   /pay/api/v1/fees/{business_type}/{filing_type}:
     get:
@@ -1476,16 +1476,50 @@ components:
           description: "username of the account"
         createdBy:
           type: "string"
-          description: "invoice creation date"
+          description: "name of user who created"
+        createdName:
+          type: "string"
+          description: "user who created"
         createdOn:
           type: "string"
           description: "date made payment"
+        details:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              label:
+                type: "string"
+              value:
+                type: "string"
+        disbursementDate:
+          type: "string"
+          description: "date when disbursement status code was set"
+        disbursementReversalDate:
+          type: "string"
+          description: "date when disbursement reversal status code was set"
+        isPaymentActionRequired:
+          type: "boolean"
+          description: "Flag to indicate if a user action/redirection is needed to complete the payment."
+        isOnlineBankingAllowed:
+          type: "boolean"
+        overdueDate:
+          type: "string"
+          description: "date when payment is overdue (EFT)"
         paid:
           type: "number"
           description: "amount paid"
+        paymentDate:
+          type: "string"
+          description: "date when invoice was marked as paid"
+        paymentMethod:
+          type: "string"
         refund:
           type: "number"
           description: "reference number"
+        refundDate:
+          type: "string"
+          description: date when received confirmation invoice was refunded
         serviceFees:
           type: "number"
           description: "service fees"
@@ -1497,6 +1531,14 @@ components:
           - "PAID"
           - "DELETED"
           - "CREATED"
+          - "APPROVED"
+          - "COMPLETED"
+          - "REFUND_REQUESTED"
+          - "REFUNDED"
+          - "SETTLEMENT_SCHED"
+          - "CANCELLED"
+          - "CREDITED"
+          - "OVERDUE"
         references:
           type: "array"
           items:
@@ -1509,6 +1551,12 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/LineItem"
+        updatedOn:
+          type: "string"
+        updatedBy:
+          type: "string"
+        updatedName:
+          type: "string"
       title: "Invoice"
       description: "<p>Object to hold invoice information </p>"
     Transaction:
