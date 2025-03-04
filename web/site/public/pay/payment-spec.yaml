@@ -1494,10 +1494,10 @@ components:
                 type: "string"
         disbursementDate:
           type: "string"
-          description: "date when disbursement status code was set"
+          description: "date when disbursement to partner"
         disbursementReversalDate:
           type: "string"
-          description: "date when disbursement reversal status code was set"
+          description: "date when disbursement reversal to partner"
         isPaymentActionRequired:
           type: "boolean"
           description: "Flag to indicate if a user action/redirection is needed to complete the payment."
