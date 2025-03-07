@@ -24,11 +24,13 @@ export default {
   },
   label: {
     getStarted: 'Get Started',
-    allProducts: 'All Products'
+    allProducts: 'All Products',
+    userForum: 'User Forum'
   },
   text: {
     getStarted: 'Start to set up Service BC Connect APIs in your applications.',
-    allProducts: 'Learn about and try Service BC Connect products.'
+    allProducts: 'Learn about and try Service BC Connect products.',
+    userForum: 'Find the latest info, view trending topics, or ask questions.'
   },
   sbcBreadcrumb: {
     default: 'Service BC Connect',
