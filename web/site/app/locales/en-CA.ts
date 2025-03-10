@@ -24,11 +24,13 @@ export default {
   },
   label: {
     getStarted: 'Get Started',
-    allProducts: 'All Products'
+    allProducts: 'All Products',
+    userForum: 'User Forum'
   },
   text: {
     getStarted: 'Start to set up Service BC Connect APIs in your applications.',
-    allProducts: 'Learn about and try Service BC Connect products.'
+    allProducts: 'Learn about and try Service BC Connect products.',
+    userForum: 'Find the latest info, view trending topics, or ask questions.'
   },
   sbcBreadcrumb: {
     default: 'Service BC Connect',
@@ -63,6 +65,18 @@ export default {
       tabs: {
         profile: 'Profile',
         apiKeys: 'API Keys' // Clés API
+      }
+    },
+    error: {
+      404: {
+        title: 'Page Not Found - Service BC Connect',
+        h1: '404 Page Not Found',
+        content: 'This page could not be found or does not exist.'
+      },
+      unknown: {
+        title: 'Unknown Error - Service BC Connect',
+        h1: 'Unknown Error',
+        content: 'An unknown error occured, please refresh the page or try again later.'
       }
     }
   },

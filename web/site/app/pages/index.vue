@@ -31,6 +31,13 @@ setBreadcrumbs([
         icon="i-mdi-text-box-search"
         :link="localePath('/products')"
       />
+      <CardNavigation
+        :title="$t('label.userForum')"
+        :description="$t('text.userForum')"
+        icon="i-mdi-comment-text-outline"
+        link="https://discourse.onebc.ca/"
+        external
+      />
     </div>
   </div>
 </template>
