@@ -3,7 +3,7 @@ x-stoplight:
   id: 1d3quzhv06iyi
 info:
   title: BC Short Term Rental Registry Validation API
-  version: '0.1'
+  version: '0.5'
   termsOfService: 'https://developer.connect.gov.bc.ca/shared/api-terms-of-use.pdf'
   contact:
     url: 'https://www2.gov.bc.ca/gov/content/housing-tenancy/short-term-rentals'
@@ -14,9 +14,9 @@ info:
     name: bsd-3-clause
     url: 'https://opensource.org/license/bsd-3-clause'
 servers:
-  - url: 'https://bcregistry-sandbox.apigee.net/strr/v1'
+  - url: 'https://sandbox.api.connect.gov.bc.ca/strr/v1'
     description: Test
-  - url: 'https://bcregistry-prod.apigee.net/strr/v1'
+  - url: 'https://api.connect.gov.bc.ca/strr/v1'
     description: Production
 paths:
   '/permits/:validatePermit':
@@ -180,15 +180,8 @@ paths:
                   properties:
                     unitNumber:
                       type: string
+                      description: Unit number must be included if it was included in the Registration.
                     streetNumber:
-                      type: string
-                    streetName:
-                      type: string
-                    city:
-                      type: string
-                    province:
-                      type: string
-                    country:
                       type: string
                     postalCode:
                       type: string
@@ -208,6 +201,8 @@ paths:
       description: Validate a property has a valid permit.
       x-stoplight:
         id: 97n85oxv4riix
+      parameters:
+        - $ref: '#/components/parameters/Account-Id'
     parameters: []
   '/address/:requirements':
     post:
@@ -256,6 +251,9 @@ paths:
                   required:
                     - streetNumber
                     - streetName
+                    - country
+                    - postalCode
+                    - province
                     - city
                   properties:
                     unitNumber:
@@ -287,6 +285,8 @@ paths:
       description: Post the address to get the short term rental requirements for that address.
       x-stoplight:
         id: 4sqp07r1juk5x
+      parameters:
+        - $ref: '#/components/parameters/Account-Id'
     parameters: []
   '/permits/:batchValidate':
     post:
@@ -332,10 +332,10 @@ paths:
               properties:
                 control:
                   type: object
+                  description: Directives for the submission.
                   required:
                     - count
                     - callBackUrl
-                  description: Directives for the submission.
                   properties:
                     count:
                       type: integer
@@ -360,18 +360,13 @@ paths:
                         required:
                           - streetNumber
                           - postalCode
-                          - streetName
-                          - city
                         properties:
                           unitNumber:
                             type: string
+                            description: Unit number must be included if it was included in the Registration.
                           streetNumber:
                             type: string
                           postalCode:
-                            type: string
-                          streetName:
-                            type: string
-                          city:
                             type: string
             examples:
               Example:
@@ -421,6 +416,8 @@ paths:
                       examples:
                         ok:
                           value: ok
+      parameters:
+        - $ref: '#/components/parameters/Account-Id'
     parameters: []
 components:
   schemas:
@@ -641,6 +638,14 @@ components:
     jwt:
       type: openIdConnect
       openIdConnectUrl: 'https://AUTH_PROVIDER/.well-known/openid-configuration'
+  parameters:
+    Account-Id:
+      name: Account-Id
+      in: header
+      required: true
+      schema:
+        type: string
+      description: The account that the user is operating on behalf of.
 tags:
   - name: Draft
     description: The release state
