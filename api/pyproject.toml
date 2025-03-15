@@ -15,7 +15,7 @@ python-dotenv = "^1.0.1"
 sentry-sdk = "^2.0.0"
 flask-babel = "2.0.0"
 flask-jwt-oidc = "^0.7.0"
-gunicorn = "^22.0.0"
+gunicorn = "^23.0.0"
 sbc-common-components = {git = "https://github.com/bcgov/sbc-common-components.git", rev = "master", subdirectory = "python"}
 auth-api = {git = "https://github.com/bcgov/sbc-auth.git", rev = "c286045eb2cf9761cd57b59aa4c6e7b3146ea36c", subdirectory = "auth-api"}
 
