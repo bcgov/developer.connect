@@ -3,7 +3,7 @@ x-stoplight:
   id: 1d3quzhv06iyi
 info:
   title: BC Short Term Rental Registry Validation API
-  version: '0.5'
+  version: '0.7'
   termsOfService: 'https://developer.connect.gov.bc.ca/shared/api-terms-of-use.pdf'
   contact:
     url: 'https://www2.gov.bc.ca/gov/content/housing-tenancy/short-term-rentals'

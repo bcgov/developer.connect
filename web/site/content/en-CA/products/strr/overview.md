@@ -68,6 +68,11 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
     <th>Description</th>
   </tr>
   <tr>
+    <td>2025-03-15</td>
+    <td>0.7</td>
+    <td>Release Candidate</td>
+  </tr>
+  <tr>
     <td>2025-01-20</td>
     <td>0.1.0</td>
     <td>Pre-Release</td>
@@ -96,5 +101,9 @@ Updates of note to this page are recorded here.
   <tr>
     <td></td>
     <td></td>
+  </tr>
+  <tr>
+    <td>2025-01-20</td>
+    <td>Release Candidate. Fixes required & optional fields on the Address submissions.</td>
   </tr>
 </table>
