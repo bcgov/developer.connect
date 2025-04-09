@@ -97,13 +97,13 @@ View the definition and select a path to try it out. To submit a request you wil
   <tr>
     <td>GET /pay/api/v1/accounts/{accountId}/statements</td>
     <td>
-        Get a list of statements generated for the account.
+        Get a list of statements generated for the account. NOTE: BACKEND STATEMENT GENERATION JOB NOT CURRENTLY IMPLEMENTED, NO DATA WIP
     </td>
   </tr>
   <tr>
     <td>GET /pay/api/v1/accounts/{accountId}/statments/{statementId}</td>
     <td>
-      Return the statement as either PDF or CSV.
+      Return the statement as either PDF or CSV. NOTE: BACKEND STATEMENT GENERATION JOB NOT CURRENTLY IMPLEMENTED, NO DATA WIP
     </td>
   </tr>
 </table>
