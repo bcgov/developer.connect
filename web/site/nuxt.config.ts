@@ -76,7 +76,6 @@ export default defineNuxtConfig({
       'web-component',
       '/sbc/tos',
       '/products/bn',
-      'products/connect',
       '/1.get-started/3.api-access-request.md'
     ]
   },
