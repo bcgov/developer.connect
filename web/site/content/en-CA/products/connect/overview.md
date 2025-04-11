@@ -46,36 +46,61 @@ View the definition and select a path to try it out. To submit a request you wil
     <th>Description</th>
   </tr>
   <tr>
+    <td>GET /orgs/{account_id}/affiliations</td>
+    <td>
+      Get Affiliations
+    </td>
+  </tr>
+  <tr>
+    <td>POST /orgs/{account_id}/affiliations</td>
+    <td>
+      Create affiliation by passcode
+    </td>
+  </tr>
+  </tr>
+  <tr>
     <td>GET /auth/api/v1/affiliationInvitations</td>
+    <td>
+      Get delegation or magic links.
+    </td>
+  </tr>
+  </tr>
+    <tr>
+    <td>POST /auth/api/v1/affiliationInvitations</td>
     <td>
       Get fee details based on the type business type and filing type.
     </td>
   </tr>
     <tr>
-    <td>GET /auth/api/v1/affiliationInvitations</td>
+    <td>GET /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}</td>
     <td>
       Get fee details based on the type business type and filing type.
     </td>
   </tr>
     <tr>
-    <td>GET /auth/api/v1/affiliationInvitations</td>
+    <td>PATCH /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}</td>
     <td>
       Get fee details based on the type business type and filing type.
     </td>
   </tr>
-    <tr>
-    <td>GET /auth/api/v1/affiliationInvitations</td>
+  <tr>
+    <td>DELETE /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}</td>
     <td>
       Get fee details based on the type business type and filing type.
     </td>
   </tr>
-    <tr>
-    <td>GET /auth/api/v1/affiliationInvitations</td>
+  <tr>
+    <td>PUT /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}/token/{affiliation_invitation_token}</td>
     <td>
       Get fee details based on the type business type and filing type.
     </td>
   </tr>
-  
+  <tr>
+    <td>PATCH /affiliationInvitations/{affiliation_invitation_id}/authorization/{authorize_action}</td>
+    <td>
+    go
+    </td>
+  </tr>
 </table>
 
 ---
