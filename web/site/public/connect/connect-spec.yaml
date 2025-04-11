@@ -8,7 +8,7 @@ info:
   license:
     name: Apache 2.0
 paths:
-  '/affiliationInvitations':
+  /auth/api/v1/affiliationInvitations:
     parameters:
       - name: businessDetails
         in: query
@@ -114,7 +114,7 @@ paths:
         - affiliationInvitations
       summary: Send a new affiliation invitation and save it.
       description: Send a new affiliation invitation using the details in request and saves the affiliation invitation.
-  '/affiliationInvitations/{affiliation_invitation_id}':
+  /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}:
     parameters:
       - name: affiliation_invitation_id
         in: path
@@ -195,7 +195,7 @@ paths:
         - affiliationInvitations
       summary: Delete the affiliation invitation.
       description: Delete the specified affiliation invitation.
-  '/affiliationInvitations/{affiliation_invitation_id}/token/{affiliation_invitation_token}':
+  /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}/token/{affiliation_invitation_token}:
     parameters:
       - name: affiliation_invitation_id
         in: path
@@ -232,7 +232,7 @@ paths:
         - affiliationInvitations
       summary: Accept an affiliation invitation using a token.
       description: Check whether the passed token is valid and add affiliation from the affiliation invitation.
-  '/affiliationInvitations/{affiliation_invitation_id}/authorization/{authorize_action}':
+  /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}/authorization/{authorize_action}:
     parameters:
       - name: affiliation_invitation_id
         in: path
