@@ -8,7 +8,7 @@ info:
   license:
     name: Apache 2.0
 paths:
-'/affiliationInvitations':
+  '/affiliationInvitations':
     parameters:
       - name: businessDetails
         in: query
@@ -114,7 +114,7 @@ paths:
         - affiliationInvitations
       summary: Send a new affiliation invitation and save it.
       description: Send a new affiliation invitation using the details in request and saves the affiliation invitation.
-  '/affiliationInvitations/{affiliation_invitation_id}'':
+  '/affiliationInvitations/{affiliation_invitation_id}':
     parameters:
       - name: affiliation_invitation_id
         in: path
