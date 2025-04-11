@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
   title: SBC Connect API former Auth API
   description: <p>SBC Connect API is used to manage the SBC Connect accounts. The system manages the authorizations related data and does integration with keycloak. </p>
@@ -8,7 +8,7 @@ info:
   license:
     name: Apache 2.0
 paths:
-/affiliationInvitations:
+'/affiliationInvitations':
     parameters:
       - name: businessDetails
         in: query
@@ -114,7 +114,7 @@ paths:
         - affiliationInvitations
       summary: Send a new affiliation invitation and save it.
       description: Send a new affiliation invitation using the details in request and saves the affiliation invitation.
-  /affiliationInvitations/{affiliation_invitation_id}:
+  '/affiliationInvitations/{affiliation_invitation_id}'':
     parameters:
       - name: affiliation_invitation_id
         in: path
@@ -195,7 +195,7 @@ paths:
         - affiliationInvitations
       summary: Delete the affiliation invitation.
       description: Delete the specified affiliation invitation.
-  /affiliationInvitations/{affiliation_invitation_id}/token/{affiliation_invitation_token}:
+  '/affiliationInvitations/{affiliation_invitation_id}/token/{affiliation_invitation_token}':
     parameters:
       - name: affiliation_invitation_id
         in: path
@@ -232,7 +232,7 @@ paths:
         - affiliationInvitations
       summary: Accept an affiliation invitation using a token.
       description: Check whether the passed token is valid and add affiliation from the affiliation invitation.
-  /affiliationInvitations/{affiliation_invitation_id}/authorization/{authorize_action}:
+  '/affiliationInvitations/{affiliation_invitation_id}/authorization/{authorize_action}':
     parameters:
       - name: affiliation_invitation_id
         in: path
