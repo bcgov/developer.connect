@@ -46,13 +46,13 @@ View the definition and select a path to try it out. To submit a request you wil
     <th>Description</th>
   </tr>
   <tr>
-    <td>GET /orgs/{account_id}/affiliations</td>
+    <td>GET /auth/api/v1/orgs/{account_id}/affiliations</td>
     <td>
       Get Affiliations
     </td>
   </tr>
   <tr>
-    <td>POST /orgs/{account_id}/affiliations</td>
+    <td>POST /auth/api/v1/orgs/{account_id}/affiliations</td>
     <td>
       Create affiliation by passcode
     </td>
@@ -136,7 +136,7 @@ View the definition and select a path to try it out. To submit a request you wil
     <th>Description</th>
   </tr>
   <tr>
-    <td>2020-10-06</td>
+    <td>2025-04-11</td>
     <td>1.0.0</td>
     <td>Initial version</td>
   </tr>
