@@ -102,6 +102,14 @@ export default defineNuxtConfig({
       },
       {
         spec: {
+          url: '/connect/connect-spec.yaml'
+        },
+        pathRouting: {
+          basePath: '/oas/connect'
+        }
+      },
+      {
+        spec: {
           url: '/br/business-spec.yaml'
         },
         pathRouting: {
