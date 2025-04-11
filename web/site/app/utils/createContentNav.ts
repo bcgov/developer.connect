@@ -18,6 +18,8 @@ export function createContentNav (navItems: NavItem[] | undefined) {
           }
         })
       }
+    }).sort((a, b) => {
+      return a.label?.localeCompare(b.label) // sort accordian items alphabetically
     })
   }) as AccordianNavItem[]
 }

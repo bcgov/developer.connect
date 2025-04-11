@@ -8,6 +8,10 @@
 /web/site/content/en-CA/products/bn @thorwolpert
 /web/site/public/bn @thorwolpert
 
+## SBC Connect
+/web/site/content/en-CA/products/connect @thorwolpert @deetz99 @pwei1018 @bolyachevets @seeker25 @jxio @ochiu
+/web/site/public/connect @thorwolpert @deetz99 @pwei1018 @bolyachevets @seeker25 @jxio @ochiu
+
 ## MHR - Manufactured Home Registry
 /web/site/content/en-CA/products/mhr @doug-lovett
 /web/site/public/mhr @doug-lovett

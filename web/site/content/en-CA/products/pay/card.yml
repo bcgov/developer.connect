@@ -1,7 +1,7 @@
 # Used to populate product card components
 name: Platform Payment and Catalog Services
-description: The payment and catalog services for the sbc-connect platform
-badge: BETA
+description: The payment and catalog services for the SBC Connect platform
+badge: Stable
 bulletPoints: 
   - Pay for a service
   - Register services in the Catalog
