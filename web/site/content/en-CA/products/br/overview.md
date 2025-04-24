@@ -140,6 +140,6 @@ Updates of note to this page are recorded here.
   </tr>
   <tr>
     <td>2025-04-23</td>
-    <td>Update Sandbox Postman collection</td>
+    <td>Update Sandbox Postman collection, add affiliation and delegation flow examples</td>
   </tr>
 </table>
