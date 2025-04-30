@@ -26,7 +26,7 @@ your business systems and the Business Registry.
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/account-setup). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request, you will need an API key and an account ID, which you can get by completing the [account setup](/products/get-started/account-setup) process. To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
 <a href="/en-CA/oas/br" target="_blank">> View the API</a>
 
@@ -126,8 +126,20 @@ Updates of note to this page are recorded here.
     <td>2025-02-20</td>
     <td>Update API version history, update Sandbox Postman collection</td>
   </tr>
-    <tr>
+  <tr>
     <td>2025-03-25</td>
     <td>Update Sandbox Postman collection</td>
+  </tr>
+    <tr>
+    <td>2025-03-28</td>
+    <td>Update API Specification</td>
+  </tr>
+  <tr>
+    <td>2025-04-04</td>
+    <td>Update Sandbox Postman collection</td>
+  </tr>
+  <tr>
+    <td>2025-04-23</td>
+    <td>Update Sandbox Postman collection, add affiliation and delegation flow examples</td>
   </tr>
 </table>

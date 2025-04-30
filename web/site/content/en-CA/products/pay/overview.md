@@ -34,7 +34,7 @@ With this API you can submit the following transactions:
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request, you will need an API key and an account ID, which you can get by completing the [account setup](/products/get-started/account-setup) process. To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
 <a href="/en-CA/oas/pay" target="_blank">> View the API</a>
 
@@ -97,13 +97,13 @@ View the definition and select a path to try it out. To submit a request you wil
   <tr>
     <td>GET /pay/api/v1/accounts/{accountId}/statements</td>
     <td>
-        Get a list of statements generated for the account.
+        Get a list of statements generated for the account. NOTE: BACKEND STATEMENT GENERATION JOB NOT CURRENTLY IMPLEMENTED, NO DATA WIP
     </td>
   </tr>
   <tr>
     <td>GET /pay/api/v1/accounts/{accountId}/statments/{statementId}</td>
     <td>
-      Return the statement as either PDF or CSV.
+      Return the statement as either PDF or CSV. NOTE: BACKEND STATEMENT GENERATION JOB NOT CURRENTLY IMPLEMENTED, NO DATA WIP
     </td>
   </tr>
 </table>
