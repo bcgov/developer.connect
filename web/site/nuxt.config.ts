@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import type { BreadcrumbLink } from '#ui/types'
+const localScalarUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
@@ -93,7 +94,7 @@ export default defineNuxtConfig({
     configurations: [
       {
         spec: {
-          url: '/strr/platform.yaml'
+          url: `${localScalarUrl}/strr/platform.yaml`
         },
         pathRouting: {
           basePath: '/oas/strr'
@@ -101,7 +102,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: '/connect/connect-spec.yaml'
+          url: `${localScalarUrl}/connect/connect-spec.yaml`
         },
         pathRouting: {
           basePath: '/oas/connect'
@@ -109,7 +110,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: '/br/business-spec.yaml'
+          url: `${localScalarUrl}/br/business-spec.yaml`
         },
         pathRouting: {
           basePath: '/oas/br'
@@ -117,7 +118,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: '/mhr/mhr-spec.yaml'
+          url: `${localScalarUrl}/mhr/mhr-spec.yaml`
         },
         pathRouting: {
           basePath: '/oas/mhr'
@@ -125,7 +126,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: '/pay/payment-spec.yaml'
+          url: `${localScalarUrl}/pay/payment-spec.yaml`
         },
         pathRouting: {
           basePath: '/oas/pay'
@@ -133,7 +134,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: '/ppr/ppr-spec.yaml'
+          url: `${localScalarUrl}/ppr/ppr-spec.yaml`
         },
         pathRouting: {
           basePath: '/oas/ppr'
@@ -141,7 +142,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: '/rs/regsearch-spec.yaml'
+          url: `${localScalarUrl}/rs/regsearch-spec.yaml`
         },
         pathRouting: {
           basePath: '/oas/rs'
