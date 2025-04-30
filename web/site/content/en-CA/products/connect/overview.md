@@ -251,7 +251,7 @@ View the definition and select a path to try it out. To submit a request you wil
 
 ## Additional Resources
 
-Postman collection WIP - Download a <a href="connect/apigw-connect-demo.postman_collection.json.zip" download="apigw-connect-demo-postman.json" target="_blank">Demo Postman collection</a> to view at least one example of each API path. Provide your own API key and account Id to submit requests and view the responses.
+Postman collection of these calls is included in the [Business Registry](/products/br/overview) postman collection.
 
 ## Page History
 
