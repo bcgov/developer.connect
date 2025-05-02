@@ -1051,7 +1051,7 @@ paths:
       required: true
     get:
       summary: "Get list of statements"
-      tags: []
+      tags: ["Statements"]
       responses:
         "200":
           description: "OK"
@@ -1255,7 +1255,7 @@ paths:
       required: true
     get:
       summary: "Get the statement"
-      tags: []
+      tags: ["Statements"]
       responses:
         "200":
           description: "OK"
