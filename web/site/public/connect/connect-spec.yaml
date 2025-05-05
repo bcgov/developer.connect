@@ -241,7 +241,7 @@ paths:
       description: Get entity authentication to see if the entity has passcode or magic link email available.
       get:
         summary: Get affiliations for account
-        description: The Business Dashboard uses this. This will change in the near future to include pagination. Request Parameters and response likely to change.
+        description: The Business Dashboard calls get affiliations for account. This will change in the near future to include pagination. Request Parameters and response likely to change.
         tags:
           - Affiliations
         responses:

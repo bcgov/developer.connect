@@ -32,7 +32,7 @@ More to be added in the future.
 
 ## View the API
 
-View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an [access request](/products/get-started/api-access-request). To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
+View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an access request. To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
 <a href="/en-CA/oas/connect" target="_blank"> View the API</a>
 
