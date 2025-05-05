@@ -1,15 +1,326 @@
 openapi: 3.0.1
 info:
   title: SBC Connect API former Auth API
-  description: <p>SBC Connect API is used to manage the SBC Connect accounts. The system manages the authorizations related data and does integration with keycloak. </p>
+  description: |-
+    <p>SBC Connect API is used to manage the SBC Connect accounts. The system manages the authorizations related data and does integration with keycloak. This specification focuses on documentating the relationship between an account and a entity (Name Request/Business). There are three different methods - Passcode, Magic Link, Delegation.</p>
+    <br/>
+    All API requests must include an issued API key.
   version: 1.0.2
   contact:
     name: BC Registries
   license:
     name: Apache 2.0
 paths:
-  /auth/api/v1/affiliationInvitations:
+  /auth/api/v1/orgs/affiliation/{business_identifer}:
     parameters:
+    - name: business_identifier
+      in: path
+      description: Business identifier
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get accounts that have affiliations for business identifier
+      description: Used as part of the affiliation invitation toOrgUuid payload delegations only.
+      tags:
+      - Passcode / Magic link / Delegation prerequisites
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orgsDetails:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        branchName:
+                          type: string
+                          example: "Downtown"
+                        name:
+                          type: string
+                          example: "ICBC PROPERTIES LTD."
+                        uuid:
+                          type: string
+                          format: uuid
+                          example: "e50a83f6-606d-42b6-a7cf-54555af76037"
+                      required:
+                        - branchName
+                        - name
+                        - uuid
+        '401':
+          description: Not Authorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: Identifier representing the type of error that occurred.
+                  message:
+                    type: string
+                    description: Description of the error.
+        '404':
+          description: Business not found
+  /auth/api/v1/entities/{business_identifier}/authentication:
+    parameters:
+      - name: business_identifier
+        in: path
+        description: Business identifier
+        required: true
+        schema:
+          type: string
+    get:
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contactEmail:
+                    type: string
+                    description: Masked contact email of entity
+                    example: he***@me********
+                  hasValidPassCode:
+                    type: boolean
+                    description: If the entity has a valid passcode that isn't consumed
+                    example: true
+        '401':
+          description: Not Authorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: Identifier representing the type of error that occurred.
+                  message:
+                    type: string
+                    description: Description of the error.
+          '403':
+            description: Not Authorized
+          '404':
+            description: Business not found
+
+      tags:
+        - Passcode / Magic link / Delegation prerequisites
+      operationId: get_entity_authentication
+      summary: Get entity authentication
+      description: Get entity authentication to see if the entity has passcode or magic link email available.
+  /auth/api/v1/orgs/{account_id}/affiliations/{business_identifier}:
+    get:
+      summary: Get affiliations for entity
+      tags:
+       - Affiliations
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: business_identifier
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with affiliation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    example: DATA_ALREADY_EXISTS
+                  message:
+                    type: string
+                    example: The data you want to insert already exists.
+          '401':
+            description: Not Authorized
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: Identifier representing the type of error that occurred.
+                    message:
+                      type: string
+                      description: Description of the error.
+          '403':
+            description: Not Authorized
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: Identifier representing the type of error that occurred.
+                    message:
+                      type: string
+                      description: Description of the error.
+            '404':
+              description: Business not found
+  /auth/api/v1/entities/{business_identifier}/contacts:
+    put:
+      tags:
+        - Passcode / Magic link / Delegation prerequisites
+      summary: Update contact information for a business entity
+      description: For updating the contact information for a business entity so magic link will work (email needs to be present). An existing affiliation must be present for this to work.
+      parameters:
+        - name: business_identifier
+          in: path
+          description: Business identifier
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  required: true
+                  description: "email for entity contact"
+                  format: email
+                  example: hello@mellow.com
+                phone:
+                  type: string
+                  required: true
+                  description: "phone for entity contact"
+                  example: "(437) 887-5267"
+                phoneExtension:
+                  type: string
+                  required: true
+                  example: ""
+
+      responses:
+        '200':
+          description: Contact information updated successfully
+        '400':
+          description: Bad Request
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Authorized (missing affiliation)
+        '404':
+          description: Business not found
+  /auth/api/v1/orgs/{account_id}/affiliations:
+      parameters:
+          - name: account_id
+            in: path
+            description: account id
+            required: true
+            schema:
+              type: integer
+      tags:
+        - Passcode / Magic link / Delegation prerequisites
+
+      summary: Get entity authentication
+      description: Get entity authentication to see if the entity has passcode or magic link email available.
+      get:
+        summary: Get affiliations for account
+        description: The Business Dashboard uses this. This will change in the near future to include pagination. Request Parameters and response likely to change.
+        tags:
+          - Affiliations
+        responses:
+          '200':
+            description: Successful
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/AffiliationSearchResponse'
+          '401':
+            description: Not Authorized
+          '403':
+            description: Not Authorized (missing affiliation)
+          '404':
+            description: Business not found
+      post:
+        summary: Create a new business affiliation (via Passcode)
+        operationId: post-affiliation
+        tags:
+          - Affiliations
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliationByPasscodeRequest'
+              examples:
+                bc-ben-passcode:
+                  summary: Example for BC/BEN where the passcode is a phrase
+                  value:
+                    businessIdentifier: "BC1234567"
+                    certifiedByName: ""
+                    passcode: "passcode"
+                sp-gp-passcode:
+                  summary: Example for SP/GP passcode is an officer of the company
+                  value:
+                    businessIdentifier: "FM1004308"
+                    certifiedByName: ""
+                    passcode: "Doug, Funny B"
+                sp-gp-passcode-organization:
+                  summary: Example for SP/GP the passcode is organization of the company
+                  value:
+                    businessIdentifier: "FM1004308"
+                    certifiedByName: ""
+                    passcode: "Lawyers Organization"
+        responses:
+          '200':
+            description: Affiliation successfully created
+          '400':
+            description: Bad Request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    code:
+                      type: string
+                      example: DATA_ALREADY_EXISTS
+                    message:
+                      type: string
+                      example: The data you want to insert already exists.
+          '401':
+            description: Not Authorized
+          '403':
+            description: Not Authorized
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: Identifier representing the type of error that occurred.
+                    message:
+                      type: string
+                      description: Description of the error.
+  /auth/api/v1/affiliationInvitations:
+    get:
+      parameters:
       - name: businessDetails
         in: query
         schema:
@@ -52,7 +363,6 @@ paths:
             type: string
         description: Invitation types to filter
         explode: true
-    get:
       responses:
         '200':
           description: Success
@@ -64,7 +374,7 @@ paths:
                   affiliationInvitations:
                     type: array
                     items:
-                      $ref: '#/components/schemas/affiliation_invitation'
+                      $ref: '#/components/schemas/AffiliationInvitationResponse'
         '401':
           description: Not Authorized
           content:
@@ -78,11 +388,18 @@ paths:
                   message:
                     type: string
                     description: Description of the error.
+        '403':
+          description: Not Authorized
       operationId: get_affiliation_invitations
       tags:
-        - affiliationInvitations
-      summary: Get affiliation invitations.
-      description: Get affiliation invitations.
+        - Affiliation Invitation (Magic Link / Delegation)
+      summary: Get affiliation invitations
+      description: |-
+        An example of the business dashboard fetching affiliation invitations for an account (outgoing requests Magic Link and Delegation, includes business details):
+        ?orgId=574&businessDetails=true
+
+        An example of the business landing page fetching affiliation invitations (incoming delegation requests):
+        ?toOrgId=1923&businessIdentifier=FM1000334&statuses=PENDING
     post:
       responses:
         '201':
@@ -90,7 +407,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/affiliation_invitation'
+                $ref: '#/components/schemas/AffiliationInvitationCreateResponse'
         '400':
           description: Bad Request
           content:
@@ -101,19 +418,45 @@ paths:
                   code:
                     type: string
                     description: Identifier representing the type of error that occurred.
+                    example: INVALID_BUSINESS_EMAIL
                   message:
                     type: string
                     description: Description of the error.
+                    example: Business contact email not valid.
+        '401':
+          description: Unauthorized
+        '403':
+          description: Unauthorized
       operationId: post_affiliation_invitation
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/affiliation_invitation_request'
+              $ref: '#/components/schemas/AffiliationInvitationRequest'
+            examples:
+              magic-link:
+                summary: magic link request
+                value:
+                  fromOrgId: 574
+                  businessIdentifier: 'FM1004378'
+              delegation-request:
+                summary: delegation request
+                value:
+                  fromOrgId: 2821
+                  toOrgUuid: 'e50a83f6-606d-42b6-a7cf-76206af76037'
+                  businessIdentifier: 'FM1004377'
+                  type: 'REQUEST'
+                  additionalMessage: 'requesting delegation owner sees this'
       tags:
-        - affiliationInvitations
-      summary: Send a new affiliation invitation and save it.
-      description: Send a new affiliation invitation using the details in request and saves the affiliation invitation.
+        - Affiliation Invitation (Magic Link / Delegation)
+      summary: Create new affiliation invitation
+      description: |-
+        Can create two affiliation invitations using two methods:
+        - Magic Link
+        - Delegation
+        <br/>
+        They both have different payloads included in the examples.
+        Passcode is affiliated by directly creating an affiliation.
   /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}:
     parameters:
       - name: affiliation_invitation_id
@@ -129,7 +472,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/affiliation_invitation'
+                $ref: '#/components/schemas/AffiliationInvitationResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Authorized
         '404':
           description: Not Found
           content:
@@ -142,9 +491,9 @@ paths:
                     description: Description of the error.
       operationId: get_affiliation_invitation
       tags:
-        - affiliationInvitations
-      summary: Get the affiliation invitation by id.
-      description: Get the affiliation invitation specified by the provided id.
+        - Affiliation Invitation (Magic Link / Delegation)
+      summary: Get affiliation invitation by id
+      description: Get a specific affiliation invitation by id.
     patch:
       responses:
         '200':
@@ -152,7 +501,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/affiliation_invitation'
+                $ref: '#/components/schemas/AffiliationInvitationResponse'
         '404':
           description: Not Found
           content:
@@ -163,20 +512,22 @@ paths:
                   message:
                     type: string
                     description: Description of the error.
-      operationId: patch_affiliation_invitation
+      operationId: patch_AffiliationInvitation
       requestBody:
         content:
           application/json:
-            schema:
-              type: object
       tags:
-        - affiliationInvitations
-      summary: Update the affiliation invitation.
-      description: Update the affiliation invitation specified by the provided id.
+        - Affiliation Invitation (Magic Link / Delegation)
+      summary: Update the affiliation invitation  (Magic Link only)
+      description: Update the affiliation invitation specified by the provided id. EG. resending the Magic Link if it expired. Only works on PENDING invitations.
     delete:
       responses:
         '200':
           description: Success
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Authorized
         '404':
           description: Not Found
           content:
@@ -192,23 +543,25 @@ paths:
                     description: Description of the error.
       operationId: delete_affiliation_invitation
       tags:
-        - affiliationInvitations
-      summary: Delete the affiliation invitation.
-      description: Delete the specified affiliation invitation.
-  /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}/token/{affiliation_invitation_token}:
+        - Affiliation Invitation (Magic Link / Delegation)
+      summary: Delete the affiliation invitation
+      description: Delete the specified affiliation invitation. Soft delete if it's already accepted.
+  /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}/token/{token}:
     parameters:
       - name: affiliation_invitation_id
         in: path
         description: Affiliation invitation identifier
         required: true
         schema:
-          type: string
-      - name: affiliation_invitation_token
+          type: integer
+        example: 234
+      - name: token
         in: path
-        description: Affiliation invitation token
+        description: Invitation token from email or affiliationInvitation
         required: true
         schema:
           type: string
+        example: "eyJpZCI6MTU4LCJmcm9tT3.aBkYkw.wKI2wUtP6pSdiuqJ9UoI4CmOiD4.........."
     put:
       responses:
         '200':
@@ -216,7 +569,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/affiliation_invitation'
+                $ref: '#/components/schemas/AffiliationInvitationResponse'
         '401':
           description: Not Authorized
           content:
@@ -227,11 +580,15 @@ paths:
                   message:
                     type: string
                     description: Description of the error.
+        '403':
+          description: Not Authorized
       operationId: accept_affiliation_invitation_token
       tags:
-        - affiliationInvitations
-      summary: Accept an affiliation invitation using a token.
-      description: Check whether the passed token is valid and add affiliation from the affiliation invitation.
+        - Affiliation Invitation (Magic Link / Delegation)
+      summary: Accept an affiliation invitation using a token (Magic Link only)
+      description: |-
+        Token can be either grabbed from the Magic Link Email, or grabbed by using GET on an affiliation invitation (with type EMAIL).
+        This route is used by the owner of the business to grant an affiliation to the requester via Magic Link.
   /auth/api/v1/affiliationInvitations/{affiliation_invitation_id}/authorization/{authorize_action}:
     parameters:
       - name: affiliation_invitation_id
@@ -254,7 +611,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/affiliation_invitation'
+                $ref: '#/components/schemas/AffiliationInvitationResponse'
         '400':
           description: Bad Request
           content:
@@ -268,51 +625,314 @@ paths:
                   message:
                     type: string
                     description: Description of the error.
+          '401':
+            description: Not Authorized
+          '403':
+            description: Not Authorized
       operationId: patch_affiliation_invitation_authorization
       tags:
-        - affiliationInvitations
-      summary: Authorize or refuse an affiliation invitation.
-      description: Check if user is active part of the Org. Authorize/Refuse Authorization invite if he is.
+        - Affiliation Invitation (Magic Link / Delegation)
+      summary: Authorize or refuse an affiliation invitation (Delegation only)
 servers:
+  - url: "https://test.api.connect.gov.bc.ca"
+    description: "Internal Test"
   - url: "https://sandbox.api.connect.gov.bc.ca"
     description: "Test"
   - url: "https://api.connect.gov.bc.ca"
     description: "Production"
-tags:
-  - name: affiliationInvitations
 components:
   schemas:
-    affiliation_invitation_request:
-      title: affiliation_invitation_request
+    AffiliationResponse:
+      type: object
+      properties:
+        business:
+          type: object
+          properties:
+            affiliations:
+              type: array
+              items:
+                type: object
+                properties:
+                  created:
+                    type: string
+                    format: date-time
+                    example: "2022-06-01T19:48:21+00:00"
+                  id:
+                    type: integer
+                    example: 4496
+            businessIdentifier:
+              type: string
+              example: "FM1000334"
+            contacts:
+              type: array
+              items:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    example: "hey@hah.com"
+                  phone:
+                    type: string
+                    example: "(250) 567-5675"
+                  phoneExtension:
+                    type: string
+                    example: ""
+            corpType:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: "SP"
+                default:
+                  type: boolean
+                  example: false
+                desc:
+                  type: string
+                  example: "Sole Proprietorship"
+            created:
+              type: string
+              format: date-time
+              example: "2022-06-01T19:48:21+00:00"
+            createdBy:
+              type: string
+              example: "None None"
+            modified:
+              type: string
+              format: date-time
+              example: "2022-06-01T21:39:26+00:00"
+            modifiedBy:
+              type: string
+              example: "None None"
+            name:
+              type: string
+              example: "fsdfsf"
+            passCodeClaimed:
+              type: boolean
+              example: true
+            status:
+              type: string
+              example: "HISTORICAL"
+        created:
+          type: string
+          format: date-time
+          example: "2025-05-05T18:00:48+00:00"
+        createdBy:
+          type: string
+          example: "User"
+        id:
+          type: integer
+          example: 33807
+        modified:
+          type: string
+          format: date-time
+          example: "2025-05-05T18:00:48+00:00"
+        organization:
+          type: object
+          properties:
+            accessType:
+              type: string
+              example: "REGULAR"
+            branchName:
+              type: string
+              example: ""
+            contacts:
+              type: array
+              items:
+                type: object
+                properties:
+                  city:
+                    type: string
+                    example: "Saskatoon"
+                  country:
+                    type: string
+                    example: "CA"
+                  postalCode:
+                    type: string
+                    example: "S7K 7Z4"
+                  region:
+                    type: string
+                    example: "SK"
+                  street:
+                    type: string
+                    example: "324-305 Pinehouse Dr"
+                  streetAdditional:
+                    type: string
+                    example: ""
+            created:
+              type: string
+              format: date-time
+              example: "2025-05-05T14:06:31+00:00"
+            createdBy:
+              type: string
+              example: "BCREGTEST Bena THIRTEEN"
+            hasApiAccess:
+              type: boolean
+              example: true
+            id:
+              type: integer
+              example: 2821
+            isBusinessAccount:
+              type: boolean
+              example: false
+            mailingAddress:
+              type: object
+              properties:
+                city:
+                  type: string
+                  example: "Victoria"
+                country:
+                  type: string
+                  example: "CA"
+                postalCode:
+                  type: string
+                  example: "S7K 7Z7"
+                region:
+                  type: string
+                  example: "SK"
+                street:
+                  type: string
+                  example: "3555 Hello Drive"
+                streetAdditional:
+                  type: string
+                  example: ""
+            modified:
+              type: string
+              format: date-time
+              example: "2025-05-05T14:07:05+00:00"
+            modifiedBy:
+              type: string
+              example: "None None"
+            name:
+              type: string
+              example: "API Testing"
+            orgStatus:
+              type: string
+              example: "ACTIVE"
+            orgType:
+              type: string
+              example: "PREMIUM"
+            statusCode:
+              type: string
+              example: "ACTIVE"
+            typeCode:
+              type: string
+              example: "PREMIUM"
+            uuid:
+              type: string
+              format: uuid
+              example: "0ebc402d-ed11-44ac-b833-3f46301326a5"
+            version:
+              type: integer
+              example: 2
+        version:
+          type: integer
+          example: 1
+    AffiliationByPasscodeRequest:
+      title: AffiliationByPasscodeRequest
+      type: object
+      required:
+        - businessIdentifier
+        - certifiedByName
+        - passCode
+      properties:
+        businessIdentifier:
+          type: string
+          example: BC0000001
+        certifiedByName:
+          type: string
+          example: ""
+        passCode:
+          type: string
+          example: passcode
+    AffiliationInvitationRequest:
+      title: AffiliationInvitationRequest
       type: object
       properties:
         fromOrgId:
           type: string
           description: The ID of the organization sending the invitation
-        toOrgId:
-          type: string
-          description: The ID of the organization receiving the invitation
         toOrgUuid:
           type: string
-          description: The UUID of the organization receiving the invitation
+          description: The UUID of the organization receiving the invitation (may need to call /orgs/affiliation/{business_identifer}/ to get this info)
         businessIdentifier:
           type: string
           description: The business identifier for the entity
-        recipientEmail:
-          type: string
-          description: The email of the recipient
         type:
           type: string
           description: The type of affiliation invitation
           enum: [EMAIL, REQUEST]
         additionalMessage:
           type: string
-          description: Additional message for the invitation
+          description: Additional message for the delegation invitation
       required:
         - fromOrgId
         - businessIdentifier
-    affiliation_invitation:
-      title: affiliation_invitation
+    AffiliationInvitationCreateResponse:
+      title: AffiliationInvitationCreateResponse
+      type: object
+      properties:
+        additionalMessage:
+          type: string
+          example: "Hello trying to affiliate"
+        businessIdentifier:
+          type: string
+          example: "FM1000334"
+        expiresOn:
+          type: string
+          format: date-time
+          example: "2025-05-05T16:04:00+00:00"
+        fromOrg:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 2821
+            name:
+              type: string
+              example: "API Testing"
+            orgType:
+              type: string
+              example: "PREMIUM"
+        toOrg:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 422
+            name:
+              type: string
+              example: "API Testing"
+            orgType:
+              type: string
+              example: "PREMIUM"
+        id:
+          type: integer
+          example: 151
+        isDeleted:
+          type: boolean
+          example: false
+        recipientEmail:
+          type: string
+          example: "tr***********@go*******"
+        sentDate:
+          type: string
+          format: date-time
+          example: "2025-05-05T15:49:00+00:00"
+        status:
+          type: string
+          enum: [PENDING, ACCEPTED, EXPIRED, FAILED]
+          example: "PENDING"
+        token:
+          type: string
+          description: invitation token
+          example: "eyJpZ..."
+        type:
+          type: string
+          enum: [EMAIL, REQUEST]
+          example: "EMAIL/REQUEST"
+    AffiliationInvitationResponse:
+      title: AffiliationInvitationResponse
       type: object
       properties:
         id:
@@ -380,9 +1000,89 @@ components:
           type: string
           format: date-time
           description: The date the invitation expires
+        isDeleted:
+          type: bool
+          description: Soft delete flag
+          default: false
+    AffiliationSearchResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        entities:
+          type: array
+          items:
+            type: object
+            properties:
+              adminFreeze:
+                type: boolean
+                description: Determine if business is frozen
+              alternateNames:
+                type: array
+                description: alternate names for SP/GP
+                items:
+                  type: object
+                  properties:
+                    entityType:
+                      type: string
+                      example: "SP"
+                    identifier:
+                      type: string
+                      example: "FM1004308"
+                    name:
+                      type: string
+                      example: "SPSPSPSP"
+                    registeredDate:
+                      type: string
+                      format: date-time
+                      example: "2022-07-20T08:00:00+00:00"
+                    startDate:
+                      type: string
+                      format: date-time
+                      nullable: true
+                      example: null
+                    type:
+                      type: string
+                      example: "DBA"
+              foundingDate:
+                type: string
+                description: Date entity was founted
+                format: date-time
+                example: "2022-07-20T08:00:00+00:00"
+              goodStanding:
+                type: boolean
+                description: field to determine if business is in good standing
+                example: true
+              identifier:
+                type: string
+                description: business identifier
+                example: "FM1004308"
+              inDissolution:
+                type: boolean
+                example: false
+              lastModified:
+                type: string
+                format: date-time
+                example: "2022-07-20T23:31:09.839582+00:00"
+              legalName:
+                type: string
+                description: "Legal name"
+                example: "FSFS FSF"
+              legalType:
+                type: string
+                description: "Legal type"
+                example: "SP"
+              state:
+                type: string
+                description: "State of the business"
+                example: "ACTIVE"
   securitySchemes:
     JWT:
-      type: http
-      scheme: bearer
+      type: "http"
+      scheme: "bearer"
+    api_key:
+      name: "x-apikey"
+      type: "apiKey"
+      in: "header"
 security:
-  - JWT: []
+- api_key: []
+- JWT: []
