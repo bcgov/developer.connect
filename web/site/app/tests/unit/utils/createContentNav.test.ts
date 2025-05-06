@@ -58,6 +58,16 @@ const initialNavItems = [
 const formattedNavItems = [
   {
     children: [
+      { label: 'Overview', to: '/en-CA/products/br/overview' },
+      { label: 'Api', to: '/en-CA/products/br/api' },
+      { label: 'Examples', to: '/en-CA/products/br/examples' },
+      { label: 'Contact', to: '/en-CA/products/br/contact' }
+    ],
+    defaultOpen: true,
+    label: 'Business Registry'
+  },
+  {
+    children: [
       { label: 'Account Setup', to: '/en-CA/products/get-started/account-setup' },
       { label: 'APIs Summary', to: '/en-CA/products/get-started/apis-summary' },
       { label: 'API Access Request', to: '/en-CA/products/get-started/api-access-request' },
@@ -67,16 +77,7 @@ const formattedNavItems = [
     ],
     defaultOpen: true,
     label: 'Get Started'
-  }, {
-    children: [
-      { label: 'Overview', to: '/en-CA/products/br/overview' },
-      { label: 'Api', to: '/en-CA/products/br/api' },
-      { label: 'Examples', to: '/en-CA/products/br/examples' },
-      { label: 'Contact', to: '/en-CA/products/br/contact' }
-    ],
-    defaultOpen: true,
-    label: 'Business Registry'
-  }
+  } 
 ]
 
 describe('createContentNav', () => {
