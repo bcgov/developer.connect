@@ -11,7 +11,7 @@ info:
   license:
     name: Apache 2.0
 paths:
-  /auth/api/v1/orgs/affiliation/{business_identifer}:
+  /auth/api/v1/orgs/affiliation/{business_identifier}:
     parameters:
     - name: business_identifier
       in: path
@@ -875,7 +875,7 @@ components:
           description: The ID of the organization sending the invitation
         toOrgUuid:
           type: string
-          description: The UUID of the organization receiving the invitation (may need to call /orgs/affiliation/{business_identifer}/ to get this info)
+          description: The UUID of the organization receiving the invitation (may need to call /orgs/affiliation/{business_identifier}/ to get this info)
         businessIdentifier:
           type: string
           description: The business identifier for the entity
