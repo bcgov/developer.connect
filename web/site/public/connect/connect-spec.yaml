@@ -226,6 +226,28 @@ paths:
           description: Not Authorized (missing affiliation)
         '404':
           description: Business not found
+  # Rajandeep please update this.
+  # /auth/api/v1/orgs/{account_id}/affiliations/search:
+  #   tags:
+  #     - Passcode / Magic link / Delegation prerequisites
+  #   get:
+  #     summary: Get affiliations for account (search endpoint, WIP)
+  #     description: The Business Dashboard calls get affiliations via search for account. This will change in the near future to include pagination. Request Parameters and response likely to change. This is a WIP and is likely broken, it calls into NAMES and LEAR to build it's data. I wouldn't recommend using this route for now, use the /{account_id}/affiliations route instead.
+  #     tags:
+  #       - Affiliations
+  #     responses:
+  #       '200':
+  #         description: Successful
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/AffiliationSearchResponse'
+  #       '401':
+  #         description: Not Authorized
+  #       '403':
+  #         description: Not Authorized (missing affiliation)
+  #       '404':
+  #         description: Business not found
   /auth/api/v1/orgs/{account_id}/affiliations:
       parameters:
           - name: account_id
@@ -236,12 +258,11 @@ paths:
               type: integer
       tags:
         - Passcode / Magic link / Delegation prerequisites
-
       summary: Get entity authentication
       description: Get entity authentication to see if the entity has passcode or magic link email available.
       get:
         summary: Get affiliations for account
-        description: The Business Dashboard calls get affiliations for account. This will change in the near future to include pagination. Request Parameters and response likely to change.
+        description: This is an older version (doesn't call into Names / LEAR for business information like our search endpoint that is WIP) of the affiliation endpoint that should be working.
         tags:
           - Affiliations
         responses:
@@ -250,7 +271,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/AffiliationSearchResponse'
+                  $ref: '#/components/schemas/AffiliationOrgResponse'
           '401':
             description: Not Authorized
           '403':
@@ -1004,6 +1025,86 @@ components:
           type: bool
           description: Soft delete flag
           default: false
+    AffiliationOrgResponse:
+      type: object
+      properties:
+        entities:
+          type: array
+          items:
+            type: object
+            properties:
+              affiliations:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    created:
+                      type: string
+                      format: date-time
+              businessIdentifier:
+                type: string
+              contacts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    phone:
+                      type: string
+                    phoneExtension:
+                      type: string
+              corpType:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  default:
+                    type: boolean
+                  desc:
+                    type: string
+              corpSubType:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  default:
+                    type: boolean
+                  desc:
+                    type: string
+                nullable: true
+              created:
+                type: string
+                format: date-time
+              createdBy:
+                type: string
+                nullable: true
+              modified:
+                type: string
+                format: date-time
+              modifiedBy:
+                type: string
+                nullable: true
+              lastModified:
+                type: string
+                format: date-time
+                nullable: true
+              name:
+                type: string
+              folioNumber:
+                type: string
+                nullable: true
+              nrNumber:
+                type: string
+                nullable: true
+              passCodeClaimed:
+                type: boolean
+              status:
+                type: string
+                nullable: true
+      additionalProperties: true
     AffiliationSearchResponse:
       type: object
       additionalProperties: true
