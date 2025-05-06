@@ -77,7 +77,7 @@ const formattedNavItems = [
     ],
     defaultOpen: true,
     label: 'Get Started'
-  } 
+  }
 ]
 
 describe('createContentNav', () => {
