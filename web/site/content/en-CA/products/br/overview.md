@@ -130,7 +130,7 @@ Updates of note to this page are recorded here.
     <td>2025-03-25</td>
     <td>Update Sandbox Postman collection</td>
   </tr>
-    <tr>
+  <tr>
     <td>2025-03-28</td>
     <td>Update API Specification</td>
   </tr>
@@ -141,5 +141,9 @@ Updates of note to this page are recorded here.
   <tr>
     <td>2025-04-23</td>
     <td>Update Sandbox Postman collection, add affiliation and delegation flow examples</td>
+  </tr>
+  <tr>
+    <td>2025-05-06</td>
+    <td>Update Sandbox Postman collection, add future effective filing related requests and notes</td>
   </tr>
 </table>
