@@ -655,8 +655,6 @@ paths:
         - Affiliation Invitation (Magic Link / Delegation)
       summary: Authorize or refuse an affiliation invitation (Delegation only)
 servers:
-  - url: "https://test.api.connect.gov.bc.ca"
-    description: "Internal Test"
   - url: "https://sandbox.api.connect.gov.bc.ca"
     description: "Test"
   - url: "https://api.connect.gov.bc.ca"
