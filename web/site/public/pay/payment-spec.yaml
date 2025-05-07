@@ -316,7 +316,7 @@ paths:
     get:
       tags:
       - "Invoice"
-      summary: "Get Invoice"
+      summary: "Get invoice"
       description: "Get invoice details by request identifier"
       operationId: "get_payment_request"
       responses:
@@ -443,7 +443,7 @@ paths:
     delete:
       tags:
       - "Invoice"
-      summary: ""
+      summary: "Delete invoice"
       operationId: "delete_payment_request"
       responses:
         "202":
@@ -1051,7 +1051,7 @@ paths:
       required: true
     get:
       summary: "Get list of statements"
-      tags: []
+      tags: ["Statements"]
       responses:
         "200":
           description: "OK"
@@ -1255,7 +1255,7 @@ paths:
       required: true
     get:
       summary: "Get the statement"
-      tags: []
+      tags: ["Statements"]
       responses:
         "200":
           description: "OK"
