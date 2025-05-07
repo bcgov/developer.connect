@@ -83,7 +83,6 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
 ---
 
 ## Sandbox Limitations
-- Future Effective Filings
 - Email Notification
 - Integrations with External Partners (ex: CRA)
 
