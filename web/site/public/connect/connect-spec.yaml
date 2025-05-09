@@ -460,6 +460,7 @@ paths:
                 value:
                   fromOrgId: 574
                   businessIdentifier: 'FM1004378'
+                  type: 'EMAIL'
               delegation-request:
                 summary: delegation request
                 value:
