@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Personal Property Registry API
   version: 1.0.0
-  description: '<p>The Personal Property Registry (PPR) is a centralised, electronic register where details of security interests in personal property can be registered and searched. The PPR API provides a real-time, secure, direct link between your business systems and the PPR. With this API you can submit the following transactions:<ul><li>Search for Personal Property information</li><li>Register an interest or lien as a Financing Statement</li><li>Amend a Financing Statement</li><li>Renew a Financing Statement</li><li>Discharge a Financing Statement</li></ul></p><p>All requests must include a BC Registries issued API key.</p><p>All requests must include an Account ID.</p><p>Fee Information<br>Refer to the BC Registries Payment API to look up a PPR service fee by fee code.</p><p>Payment Information<br>When submitting a request for which there is a fee, the payment invoice ID and a reference to the payment receipt are returned in the response.</p><p>Searches<br>Executing a search is a two step process:<ol><li>Submit search query criteria which on success returns a set of results as summary information.</li><li>Submit selected summary results from the first step to obtain details on one or more Financing Statements.</li></ol>A fee is charged for every new search request - the first step.</p><p>Schema definition "string" type property lengths are published in a separate document named "ppr-api-property-lengths.pdf" on the Registries API web site.</p><p><b>NOTE: </b>With registration and search results it is possible to request a PDF report as a response. If the request header Accept value is application/pdf a report is returned in the response only if the immediate report generation is successful. If the report service fails to generate a report but the request is otherwise successful, a status code of 202 - Accepted is returned and the response payload is JSON. A subsequent GET is required to obtain the report.</p>'
+  description: '<p>The Personal Property Registry (PPR) is a centralised, electronic register where details of security interests in personal property can be registered and searched. The PPR API provides a real-time, secure, direct link between your business systems and the PPR. With this API you can submit the following transactions:<ul><li>Search for Personal Property information</li><li>Register an interest or lien as a Financing Statement</li><li>Amend a Financing Statement</li><li>Renew a Financing Statement</li><li>Discharge a Financing Statement</li></ul></p><p>All requests must include a BC Registries issued API key.</p><p>All requests must include an Account ID.</p><p>Fee Information<br>Refer to the BC Registries Payment API to look up a PPR service fee by fee code.</p><p>Payment Information<br>When submitting a request for which there is a fee, the payment invoice ID and a reference to the payment receipt are returned in the response.</p><p>Searches<br>Executing a search is a two step process:<ol><li>Submit search query criteria which on success returns a set of results as summary information.</li><li>Submit selected summary results from the first step to obtain details on one or more Financing Statements.</li></ol>A fee is charged for every new search request - the first step.</p><p>Schema definition "string" type property lengths are published in a separate document named "ppr-api-property-lengths.pdf" on the Registries API web site.</p><p><b>NOTE: </b>With registration and search results it is possible to request a PDF report as a response. If the request header Accept value is application/pdf a report is returned in the response only if the immediate report generation is successful. If the report service fails to generate a report but the request is otherwise successful, a status code of 202 - Accepted is returned and the response payload is JSON. A subsequent GET is required to obtain the report.</p><p><b>NOTE:</b> a new Commercial Lien (CL) registration type replaces the Repairers Lien (RL) registration type. The business rules for creating and changing a CL type are similar to those of an SA but with no trust indenture. The transition date from RL to CL registrations, after which new RL registrations are no longer allowed, is published elsewhere by the Registry. After the CLA becomes law amendments, renewals, and discharges on an active RL base registration will change the type to CL.</p>'
   contact:
     name: BC Registries
 servers:
@@ -1205,7 +1205,7 @@ paths:
       tags:
         - Financing Statement
       summary: Create an Amendment Statement
-      description: '<p>Register a Financing Statement amendment or court order change as an Amendment Statement to add or delete:</p><ul><li>Secured parties</li><li>Debtors</li><li>Vehicles</li><li>General collateral</li></ul><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>When the Amendment includes a Secured Party or Debtor name/address change, use the added party amendPartyId to link the added party to the deleted party. Set the amendPartyId value to the deleted party partyId value.</p><p>For SE registration type amendments, include addSecuritiesActNotices and deleteSecuritiesActNotices only when modifying the securities act information. At least one notice must be active. With this registration type the Secured Party may not be modified.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p>'
+      description: '<p>Register a Financing Statement amendment or court order change as an Amendment Statement to add or delete:</p><ul><li>Secured parties</li><li>Debtors</li><li>Vehicles</li><li>General collateral</li></ul><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>When the Amendment includes a Secured Party or Debtor name/address change, use the added party amendPartyId to link the added party to the deleted party. Set the amendPartyId value to the deleted party partyId value.</p><p>For SE registration type amendments, include addSecuritiesActNotices and deleteSecuritiesActNotices only when modifying the securities act information. At least one notice must be active. With this registration type the Secured Party may not be modified.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p><p>After the Commercial Lien Act becomes law, an amendment on a Repairers Lien (RL) base registration will change the registration type to CL (Commercial Lien).</p>'
       operationId: post-amendment-statement
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -2081,7 +2081,7 @@ paths:
       tags:
         - Financing Statement
       summary: Create a Discharge Statement
-      description: '<p>Discharge a Financing Statement to remove a lien or encumbrance. Once discharged, a Financing Statement becomes historical and will not show up in search results.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p>'
+      description: '<p>Discharge a Financing Statement to remove a lien or encumbrance. Once discharged, a Financing Statement becomes historical and will not show up in search results.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p><p>After the Commercial Lien Act becomes law, a discharge on a Repairers Lien (RL) base registration will change the registration type to CL (Commercial Lien).</p>'
       operationId: post-statement-discharge
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -2351,7 +2351,7 @@ paths:
       tags:
         - Financing Statement
       summary: Create a Renewal Statement
-      description: <p>Renew a Financing Statement by extending the expiry date. Court order information is required and should only be included when submitting a renewal for a Repairer's Lien (RL) registration type. The Court Order Date must be between the base registration creation date and the request date. Specify lifeYears or lifeInfinite for all registration types except RL. Registrations with an infinite life cannot be renewed.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p>
+      description: <p>Renew a Financing Statement by extending the expiry date. Specify lifeYears or lifeInfinite for all registration types. Registrations with an infinite life cannot be renewed.</p><p>The name of any Debtor that exists at the time of the registration is required as an additional check on the Financing Statement (base) registration number.</p><p>If the request is for a PDF response and the report generation is not successful, a 202 Accepted status is returned and a subsequent GET is required to retrieve the report. Otherwise on success the response status is 201.</p><p>After the Commercial Lien Act becomes law, a renewal on a Repairers Lien (RL) base registration will change the registration type to CL (Commercial Lien).</p>
       operationId: post-statement-renewal
       parameters:
         - $ref: '#/components/parameters/accountId'
@@ -2550,8 +2550,8 @@ paths:
                         first: TEST
                         last: REGISTERING
                         middle: '2'
-                    registrationAct: REPAIRERS LIEN ACT
-                    registrationDescription: REPAIRERS LIEN
+                    registrationAct: COMMERCIAL LIEN ACT
+                    registrationDescription: COMMERCIAL LIEN
                     renewalRegistrationNumber: 0023020B
                     securedParties:
                       - address:
@@ -2568,7 +2568,7 @@ paths:
                     statusType: ACT
                     surrenderDate: '2021-12-16T20:34:01+00:00'
                     trustIndenture: false
-                    type: RL
+                    type: CL
                     vehicleCollateral:
                       - make: HYUNDAI
                         model: TUSCON
@@ -5540,10 +5540,10 @@ components:
           type: integer
           minimum: 1
           maximum: 25
-          description: Life of the registration in years. Must be a value from 1 to 25. Cannot be set when lifeInfinite is true. Cannot be set when type is RL. Required for other types when lifeInfinite is not true.
+          description: Life of the registration in years. Must be a value from 1 to 25. Cannot be set when lifeInfinite is true. Required when lifeInfinite is not true.
         lifeInfinite:
           type: boolean
-          description: Set to true if the registration has an infinite life (no expiry date). Cannot be true when lifeYears has a value. Cannot be true when type is RL. Must be true or lifeYears must have a value for all other registration types.
+          description: Set to true if the registration has an infinite life (no expiry date). Cannot be true when lifeYears has a value. Must be true or lifeYears must have a value for all registration types.
         payment:
           $ref: '#/components/schemas/payment'
         trustIndenture:
@@ -5552,11 +5552,11 @@ components:
         lienAmount:
           type: string
           maxLength: 15
-          description: The value of a lien. Required when the type is RL. Should be null otherwise.
+          description: The value of a lien. Required and only submitted when the registration type is RL.
         surrenderDate:
           type: string
           format: date-time
-          description: 'The date the vehicle was or will be surrendered to the owner, in the ISO 8601 format YYYY-MM-DDThh:mm:ssTZD. When provided it must be within the past 21 days or a later date. Required when the type is RL. Should be empty otherwise. Returned as a date and time in the UTC timezone at the end of the day. For example, 2021-03-17T23:59:59+00:00.'
+          description: 'The date the vehicle was or will be surrendered to the owner, in the ISO 8601 format YYYY-MM-DDThh:mm:ssTZD. When provided it must be within the past 21 days or a later date. Required and only submitted when the registration type is RL. Returned as a date and time in the UTC timezone at the end of the day. For example, 2021-03-17T23:59:59+00:00.'
         dischargedDateTime:
           type: string
           format: date-time
@@ -5763,6 +5763,7 @@ components:
       type: string
       enum:
         - SA
+        - CL
         - RL
         - FR
         - LT
@@ -5829,6 +5830,7 @@ components:
           <li>Legacy deprecated Financing Statement registration types which may be included in a search response.</li>
           <li>Change or Amendment types.</li>
         </ol>
+        <p>The CL Commercial Lien type replaces the RL Repairers Lien</p>
         <p>If an incorrect value is submitted then the response is a [400] status code.</p>
         <p>Create Financing Statement registration types:</p>
         <ul>
@@ -5838,7 +5840,7 @@ components:
           <li>FS - FORESTRY - SUB-CONTRACTOR CHARGE</li>
           <li>LT - LAND TAX DEFERMENT LIEN ON A MANUFACTURED HOME</li>
           <li>MH - TAX LIEN UNDER S.27/28 OF THE MANUFACTURED HOME ACT</li>
-          <li>RL - REPAIRER''S LIEN</li>
+          <li>CL - COMMERCIAL LIEN</li>
           <li>SA - PPSA SECURITY AGREEMENT</li>
           <li>SG - POSSESSION UNDER S.30 OF THE SALE OF GOODS ACT</li>
           <li>HN - HERITAGE CONSERVATION NOTICE</li>
@@ -5864,8 +5866,9 @@ components:
           <li>SV - CROWN CHARGE FILED PURSUANT TO SPECULATION AND VACANCY TAX ACT</li>
           <li>TO - CROWN CHARGE FILED PURSUANT TO TOBACCO TAX ACT</li>
         </ul>
-        <p>Legacy Deprecated Registration Types:</p>
+        <p>Legacy or Deprecated Registration Types:</p>
         <ul>
+          <li>RL - REPAIRERS LIEN</li>
           <li>CC - CROWN CHARGE FILED PURSUANT TO CORPORATION CAPITAL TAX</li>
           <li>DP - CROWN CHARGE FILED PURSUANT TO CONSUMPTION, TRANSITION TAX</li>
           <li>HR - CROWN CHARGE FILED PURSUANT TO HOTEL ROOM TAX</li>
@@ -6042,7 +6045,7 @@ components:
           description: Extension of the life of the registration in years. Must be a value between 1 to 25.
         lifeInfinite:
           type: boolean
-          description: Set to true if the registration has an infinite life (no expiry date). Cannot be true when lifeYears has a value. Cannot be true when type is RL. Must be true or lifeYears must have a value for all other registration types.
+          description: Set to true if the registration has an infinite life (no expiry date). Cannot be true when lifeYears has a value. Must be true or lifeYears must have a value for all registration types.
         courtOrderInformation:
           $ref: '#/components/schemas/courtOrderInformation'
         createDateTime:
@@ -6645,10 +6648,10 @@ components:
           type: integer
           minimum: 1
           maximum: 25
-          description: Life of the registration in years. Must be a value from 1 to 25. Cannot be set when lifeInfinite is true. Cannot be set when type is RL. Required for other types when lifeInfinite is not true.
+          description: Life of the registration in years. Must be a value from 1 to 25. Cannot be set when lifeInfinite is true. Required when lifeInfinite is not true.
         lifeInfinite:
           type: boolean
-          description: Set to true if the registration has an infinite life (no expiry date). Cannot be true when lifeYears has a value. Cannot be true when type is RL. Must be true or lifeYears must have a value for all other registration types.
+          description: Set to true if the registration has an infinite life (no expiry date). Cannot be true when lifeYears has a value. Must be true or lifeYears must have a value for all registration types.
         payment:
           $ref: '#/components/schemas/payment'
         trustIndenture:
@@ -6657,11 +6660,11 @@ components:
         lienAmount:
           type: string
           maxLength: 15
-          description: The value of a lien. Required when the type is RL. Should be null otherwise.
+          description: The value of a lien. Required and only present when the type is RL.
         surrenderDate:
           type: string
           format: date-time
-          description: 'The date the vehicle was or will be surrendered to the owner, in the ISO 8601 format YYYY-MM-DDThh:mm:ssTZD. When provided it must be within the past 21 days or a later date. Required when the type is RL. Should be empty otherwise. Returned as a date and time in the UTC timezone at the end of the day. For example, 2021-03-17T23:59:59+00:00.'
+          description: 'The date the vehicle was or will be surrendered to the owner, in the ISO 8601 format YYYY-MM-DDThh:mm:ssTZD. When provided it must be within the past 21 days or a later date. Required and only present when the type is RL. Returned as a date and time in the UTC timezone at the end of the day. For example, 2021-03-17T23:59:59+00:00.'
         dischargedDateTime:
           type: string
           format: date-time
@@ -6694,6 +6697,11 @@ components:
         - securedParties
         - debtors
   securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC generated JWT for a gateway consumer which includes a claim granting the PPR API privilege. Required for all non-external (not B2B) consumers.
     api_key:
       type: apiKey
       description: API Gateway assigned API key for a consumer with the PPR API privilege. Required for all requests.
@@ -6835,3 +6843,4 @@ tags:
   - name: User Profile
 security:
   - api_key: []
+  - JWT: []
