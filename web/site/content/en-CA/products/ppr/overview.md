@@ -672,6 +672,14 @@ Use the GET /ppr/api/v1/meta/info request to obtain the current version of the A
       <p>Improve internal report generation retries when the report service returns a 502 or 503 status.</p>
     </td>
   </tr>
+  <tr>
+    <td>2025-05-13</td>
+    <td>1.3.6</td>
+    <td>
+      <p>Add new registration type Commercial Lien (CL) which replaces the Repairer's Lien (RL) registration type. This update takes effect when the Commercial Liens Act become law (published by BC Registries).</p>
+      <p>Stop capturing secured party and debtor email addresses on new registrations. Do not include debtor or secured party existing email addresses in API JSON responses.</p>
+    </td>
+  </tr>
 </table>
 
 ---
