@@ -5409,12 +5409,13 @@ components:
               description: 'Whether the company has liability or not: Yes/No.'
             parties:
               type: array
-              description: Can be the company directors or applicant of the filing.
+              description: Can be the company directors or applicant of the filing. This field is required for voluntary dissolution filings.
               items:
                 $ref: '#/components/schemas/party'
             courtOrder:
               $ref: '#/components/schemas/Court_order'
             custodialOffice:
+              description: 'Corporations required custodial office when applying for voluntary dissolution.'
               $ref: '#/components/schemas/Office'
             affidavitFileKey:
               type: string
@@ -6504,6 +6505,7 @@ components:
               description: Officer is a key management executive of the business
             deliveryAddress:
               $ref: '#/components/schemas/Address'
+              description: 'Required when the role type is Director or Custodian.'
             mailingAddress:
               $ref: '#/components/schemas/Address'
             title:
@@ -6602,7 +6604,7 @@ components:
           type: string
           format: email
           example: abc.def@gov.bc.ca
-          description: email address of the individual for contact information.
+          description: email address of the individual for contact information. Required for corporation voluntary dissolution filings.
       x-examples:
         Example 1:
           givenName: John
