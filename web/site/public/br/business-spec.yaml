@@ -5306,7 +5306,7 @@ components:
           description: 'Standard address format: apartment, unit, or street address number and street name. City, province or territory code, country, postal code and instructions for delivery. Required for Change of Directors filing and Annual Report filing.'
         mailingAddress:
           $ref: '#/components/schemas/Address'
-          description: 'Standard address format: apartment, unit, or street address number and street name. City, province or territory code, country, postal code and instructions for delivery.Required for Change of Directors filing and Annual Report filing.'
+          description: 'Standard address format: apartment, unit, or street address number and street name. City, province or territory code, country, postal code and instructions for delivery. Required for Change of Directors filing and Annual Report filing.'
         title:
           type: string
           description: 'Official title or position of the director in the company.'
