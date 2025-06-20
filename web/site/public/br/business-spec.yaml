@@ -5303,8 +5303,10 @@ components:
             - lastName
         deliveryAddress:
           $ref: '#/components/schemas/Address'
+          description: Required for Change of Directors filing and Annual Report filing.
         mailingAddress:
           $ref: '#/components/schemas/Address'
+          description: Required for Change of Directors filing and Annual Report filing.
         title:
           type: string
           description: 'Official title or position of the director in the company.'
