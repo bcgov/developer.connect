@@ -483,7 +483,6 @@ paths:
                         - name
                   business:
                     $ref: '#/components/schemas/Business_Business'
-
                   entityAct:
                     type: string
                   entityDescription:
@@ -1057,6 +1056,102 @@ paths:
           description: The account that the user is operating on behalf of.
           required: true
     parameters: []
+  /v2/search/businesses/bulk:
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: Account-Id
+        description: The account that the user is operating on behalf of.
+        required: true
+    post:
+      summary: Bulk Search Businesses
+      tags:
+        - search
+      operationId: post-v2-search-businesses-bulk
+      description: '<p>Return the bulk business search results that match the given payload specifications (query/filter parameters).<ul><li>The maximum combined length of the ''names'' and ''identifiers'' arrays is 1000.</li><li>The minimum combined length of the ''names'' and ''identifiers'' arrays is 1 (i.e. if ''names'' is provided with at least 1 value then ''identifiers'' does not need to be provided in the payload).</li><li>The initial maximum value for ''rows'' is 10,000.</li><li>If ''state'' is not provided then the response will include businesses in all states.</li></ul></p>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Search_Query_Bulk'
+            examples:
+              all-filters-example:
+                summary: Submit a bulk search request with all filters.
+                value:
+                  names:
+                    - FULL BUSINESS NAME INC.
+                    - A DIFFERENT NAME CORP.
+                  identifiers:
+                    - BC1234567
+                    - FM7654321
+                  rows: 1000
+                  state: ACTIVE
+              names-filter-example:
+                summary: Submit a bulk search request querying only on business names.
+                value:
+                  names:
+                    - FULL BUSINESS NAME INC.
+                    - A DIFFERENT NAME CORP.
+              identifiers-filter-example:
+                summary: Submit a bulk search request querying only on business identifiers.
+                value:
+                  identifiers:
+                    - BC1234567
+                    - FM7654321
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Facet_result'
+                    description: The list of results that match any of the items inside the request names or identifiers arrays.
+                  totalResults:
+                    type: integer
+                    description: 'The number of results the request found. If this is larger than the length of results then you may need to increase the request rows value, provide a request state, or ensure there are no partial names or identifiers submitted in the request.'
+                required:
+                  - results
+                  - totalResults
+              examples:
+                example-1:
+                  summary: Bulk business search response example.
+                  value:
+                    results:
+                      - bn: 123456789BC0001
+                        goodStanding: false
+                        identifier: BC0000001
+                        legalType: BC
+                        name: FULL BUSINESS NAME INC.
+                        score: 10.525328
+                        status: ACTIVE
+                      - bn: 123456788BC0001
+                        goodStanding: false
+                        identifier: BC0000002
+                        legalType: BEN
+                        name: A DIFFERENT NAME CORP.
+                        score: 10.525328
+                        status: ACTIVE
+                      - bn: 123456787BC0001
+                        goodStanding: true
+                        identifier: BC1234567
+                        legalType: BC
+                        name: FOUND BY IDENTIFIER INC.
+                        score: 10.525328
+                        status: ACTIVE
+                      - bn: 123456787BC0001
+                        identifier: FM7654321
+                        legalType: FM
+                        name: FOUND BY IDENTIFIER FIRM
+                        score: 10.525328
+                        status: ACTIVE
+                    totalResults: 4
   /v2/search/parties:
     post:
       summary: Search parties
@@ -1312,6 +1407,7 @@ components:
             - CUL
             - EPR
             - FI
+            - FM
             - FOR
             - GP
             - LIC
@@ -1559,7 +1655,6 @@ components:
           nullable: true
       required:
         - type
-
     Business_Address:
       type: object
       title: Address Schema
@@ -1765,7 +1860,51 @@ components:
             - Incorporator
             - Proprietor
             - Partner
-
+    Search_Query_Bulk:
+      type: object
+      x-examples:
+        example-all:
+          names:
+            - FULL BUSINESS NAME INC.
+            - A DIFFERENT NAME CORP.
+          identifiers:
+            - BC1234567
+            - FM7654321
+          rows: 1000
+          state: ACTIVE
+        example-minimal:
+          names:
+            - FULL BUSINESS NAME INC.
+      description: Contains bulk business search request query/filter parameters.
+      properties:
+        names:
+          type: array
+          items:
+            type: string
+            description: The full business name to query/filter on.
+            example: FULL BUSINESS NAME INC.
+        identifiers:
+          type: array
+          items:
+            type: string
+            description: The fully formatted business identifier to query/filter on.
+            example: BC1234567
+        rows:
+          type: integer
+          description: 'Optional, the maximum number of results to return.'
+          example: 2000
+          minimum: 1
+        state:
+          type: string
+          description: 'Optional, the state of the business to query/filter on.'
+          enum:
+            - ACTIVE
+            - HISTORICAL
+      anyOf:
+        - required:
+            - names
+        - required:
+            - identifiers
   securitySchemes:
     api_key:
       type: apiKey
