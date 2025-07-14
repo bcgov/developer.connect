@@ -34,8 +34,8 @@ View the definition and select a path to try it out. To submit a request, you wi
 
 ## Fees
 
-All fees are specified within the regulations. Details of the fees and service charges can be found on the
-<a href="https://www2.gov.bc.ca/gov/content/employment-business/business/managing-a-business/permits-licences/businesses-incorporated-companies/forms-corporate-registry" target="_blank"> business site</a>.
+All fees are specified within the regulations.
+<a href="https://www.bcregistry.gov.bc.ca/product-fees" target="_blank">See our fee schedule for details</a>
 
 ---
 
