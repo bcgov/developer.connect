@@ -2,7 +2,7 @@
   "name": "developer-connect-site",
   "private": true,
   "type": "module",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "scripts": {
     "build-check": "nuxt build",
     "build": "nuxt generate",
