@@ -23,7 +23,7 @@ const productNames = [
   ['PAY', 'Pay'],
   ['RS', 'Registry Search'],
   ['BR', 'Business Registry'],
-  ['NR', 'Names Request'],
+  ['NAMEX', 'Name Request Service'],
   ['STRR', 'Short-Term Rental Registry'],
   ['CONNECT', 'SBC Connect']
 ]
