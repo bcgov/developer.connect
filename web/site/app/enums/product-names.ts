@@ -3,7 +3,7 @@ export enum ProductNames {
   BR = 'Business Registry',
   CONNECT = 'SBC Connect',
   MHR = 'Manufactured Home Registry',
-  NR = 'Names Request',
+  NAMEX = 'Name Request Service',
   PAY = 'Pay',
   PPR = 'Personal Property Registry',
   RS = 'Registry Search',

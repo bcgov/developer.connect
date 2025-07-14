@@ -1,0 +1,1994 @@
+---
+openapi: 3.0.0
+info:
+  title: BC Registries Name Request API
+  description: |
+    The Name Request API lets you submit, track, and manage requests to reserve and obtain approval for business names in the BC Business Registry.
+
+    With this API you can:
+    - Submit new Name Requests to reserve a business name
+    - Track and update the status of existing Name Requests
+    - Validate name structure, designation, and restricted-term requirements
+    - Search for exact or similar existing business names
+    - Generate invoices and retrieve payment receipts
+
+    All requests require a BC Registries issued API key and an Account ID.
+  version: '1.2.65'
+  contact:
+    name: BC Registries
+servers:
+  - url: https://api.connect.gov.bc.ca
+    description: Production
+paths:
+  /namex/api/v1/statistics/:
+    get:
+      tags:
+        - Insights
+      summary: Get NR Processing Time
+      description: Average time (in business days) from payment receipt to decision issuance.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - regular_wait_time
+                  - priority_wait_time
+                properties:
+                  regular_wait_time:
+                    type: number
+                    format: integer
+                    description: Average wait time for standard name requests
+                  priority_wait_time:
+                    type: number
+                    format: integer
+                    description: Average wait time for priority name requests
+                  auto_approved_count:
+                    type: integer
+                    description: Number of auto-approved name requests (not in use)
+                    deprecated: true
+                example:
+                  regular_wait_time: 6.0
+                  priority_wait_time: 2.0
+                  auto_approved_count: 0
+        500:
+          description: Internal server error
+  /namex/api/v1/payments/fees:
+    post:
+      tags:
+        - Insights
+      summary: Get NR Fees
+      description: Compute the fees (in CAD) you must pay for a Name Request.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filing_type_code
+                - priority
+              properties:
+                filing_type_code:
+                  type: string
+                  enum: [NM620]
+                priority:
+                  type: boolean
+            example:
+              filing_type_code: NM620
+              priority: false
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - total
+                properties:
+                  filingFees:
+                    type: number
+                  filingType:
+                    type: string
+                  filingTypeCode:
+                    type: string
+                  futureEffectiveFees:
+                    type: number
+                  priorityFees:
+                    type: number
+                  processingFees:
+                    type: number
+                  serviceFees:
+                    type: number
+                  tax:
+                    type: object
+                    properties:
+                      gst:
+                        type: number
+                      pst:
+                        type: number
+                  total:
+                    type: number
+              example:
+                filingFees: 30.0
+                filingType: Name Request fee
+                filingTypeCode: NM620
+                futureEffectiveFees: 0.0
+                priorityFees: 0.0
+                processingFees: 0.0
+                serviceFees: 1.5
+                tax:
+                  gst: 0.0
+                  pst: 0.0
+                total: 31.5
+        500:
+          description: Internal server error
+  /namex/api/v1/name-analysis/:
+    get:
+      tags:
+        - Name Validation
+      summary: Structure & Designation
+      description: Analyze a proposed BC business name to identify structural or designation issues.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+          example: FIDDLE & FIZZ SODA
+        - in: query
+          name: location
+          required: true
+          schema:
+            type: string
+            enum: [BC]
+          example: BC
+        - in: query
+          name: entity_type_cd
+          required: true
+          schema:
+            type: string
+            enum: [CR, BC, CC, SO, PA, FI, PAR, FR, GP, LP, LL, DBA, CP, C, CUL]
+          example: CR
+        - in: query
+          name: request_action_cd
+          required: true
+          schema:
+            type: string
+            enum: [NEW, AML, CHG, MVE, CNV, REH]
+          example: NEW
+        - in: query
+          name: analysis_type
+          required: true
+          schema:
+            type: string
+            enum: [structure, designation]
+          example: designation
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - header
+                  - status
+                  - issues
+                properties:
+                  header:
+                    type: string
+                  status:
+                    type: string
+                  issues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        line1:
+                          type: string
+                        line2:
+                          type: string
+                        consenting_body:
+                          type: string
+                        designations:
+                          type: array
+                          items:
+                            type: string
+                        issue_type:
+                          type: string
+                        show_next_button:
+                          type: boolean
+                        show_reserve_button:
+                          type: boolean
+                        show_examination_button:
+                          type: boolean
+                        conflicts:
+                          type: array
+                          items:
+                            type: string
+                        setup:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              button:
+                                type: string
+                              checkbox:
+                                type: string
+                              type:
+                                type: string
+                              header:
+                                type: string
+                              line1:
+                                type: string
+                              line2:
+                                type: string
+                              label:
+                                type: string
+                        name_actions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              position:
+                                type: string
+                              message:
+                                type: string
+                              word:
+                                type: string
+                              index:
+                                type: integer
+                              endIndex:
+                                type: integer
+                example:
+                  header: Further Action Required
+                  status: fa
+                  issues:
+                    - line1: A designation is required.
+                      line2: null
+                      consenting_body: null
+                      designations:
+                        - INCORPORATED
+                        - CORPORATION
+                        - LIMITED
+                        - INC.
+                        - CORP
+                        - LTD.
+                        - INCORPOREE
+                        - LIMITEE
+                        - LTEE
+                      issue_type: designation_non_existent
+                      show_next_button: false
+                      show_reserve_button: false
+                      show_examination_button: false
+                      conflicts: null
+                      setup:
+                        - button: ""
+                          checkbox: ""
+                          type: add_designation
+                          header: Required Action
+                          line1: Select a designation from the following
+                          line2: ""
+                          label: ""
+                      name_actions: []
+        400:
+          description: Invalid input parameters
+        500:
+          description: Internal server error
+  /namex/api/v1/documents:restricted_words:
+    get:
+      tags:
+        - Name Validation
+      summary: Restricted Words
+      description: Scan a proposed BC business name for restricted terms that are prohibited or require written consent.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: content
+          in: query
+          required: true
+          schema:
+            type: string
+          example: Dr. Delight Donuts
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - restricted_words_conditions
+                properties:
+                  restricted_words_conditions:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - cnd_info
+                        - word_info
+                      properties:
+                        cnd_info:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              allow_use:
+                                type: string
+                              consent_required:
+                                type: string
+                              consenting_body:
+                                type: string
+                              id:
+                                type: integer
+                              instructions:
+                                type: string
+                              text:
+                                type: string
+                        word_info:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            phrase:
+                              type: string
+                example:
+                  restricted_words_conditions:
+                    - cnd_info:
+                        - allow_use: Y
+                          consent_required: N
+                          consenting_body: The Accredited Bc College Authorizing Its Use. Fax Your Consent To 250-356-8923 For incorporation Or 250 356-0206 For Partnerships/Proprietorships
+                          id: 5858
+                          instructions: Use of this term requires written consent from - The Accredited BC College Authorizing its use. Please scan your consent to bcregistries@gov.bc.ca
+                          text: You may be able to use this term if it is not related to medical services or health care. Ie Staging Doctor Solutions Corp.
+                      word_info:
+                        id: 10460
+                        phrase: DR
+        400:
+          description: Invalid or missing query parameter
+        401:
+          description: Unauthorized
+        500:
+          description: Internal server error
+  /namex/api/v1/exact-match:
+    get:
+      tags:
+        - Name Validation
+      summary: Exact Match
+      description: Retrieve BC business names that exactly match the provided name.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: query
+          in: query
+          schema:
+            type: string
+          required: true
+          example: ROCKY POINT FOREST SERVICES LTD.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - names
+                properties:
+                  names:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        jurisdiction:
+                          type: string
+                        name:
+                          type: string
+                        source:
+                          type: string
+                        start_date:
+                          type: string
+                example:
+                  names:
+                    - id: '0861999'
+                      jurisdiction: BC
+                      name: ROCKY POINT FOREST SERVICES LTD.
+                      source: CORP
+                      start_date: 2009-09-23T13:40:31Z
+        400:
+          description: Invalid or missing query parameter
+        401:
+          description: Unauthorized
+        500:
+          description: Internal server error
+  '/namex/api/v1/requests/synonymbucket/{name}/{advanced_search}':
+    get:
+      tags:
+        - Name Validation
+      summary: Similar Names
+      description: Retrieve BC business names similar to the provided name to identify potential conflicts.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: QUANTUM NEBULA EXPLORATIONS LTD.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - names
+                  - response
+                properties:
+                  highlighting:
+                    type: array
+                    items:
+                      type: string
+                  names:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name_info:
+                          type: object
+                          required:
+                            - name
+                          properties:
+                            id:
+                              type: string
+                            jurisdiction:
+                              type: string
+                            name:
+                              type: string
+                            score:
+                              type: number
+                              format: float
+                            source:
+                              type: string
+                            start_date:
+                              type: string
+                              format: date-time
+                        stems:
+                          type: array
+                          items:
+                            type: string
+                  response:
+                    type: object
+                    properties:
+                      maxScore:
+                        type: number
+                        format: float
+                      name:
+                        type: string
+                      numFound:
+                        type: integer
+                example:
+                  highlighting: []
+                  names:
+                    - name_info:
+                        name: ----QUANTUM NEBULA EXPLORATIONS - PROXIMITY SEARCH
+                      stems:
+                        - QUANTUM
+                        - NEBULA
+                        - EXPLOR
+                    - name_info:
+                        name: ----QUANTUM NEBULA EXPLORATIONS* - EXACT WORD ORDER
+                      stems:
+                        - QUANTUM
+                        - NEBULA
+                        - EXPLOR
+                    - name_info:
+                        name: ----QUANTUM NEBULA synonyms:(EXPLOR) - PROXIMITY SEARCH
+                      stems:
+                        - QUANTUM
+                        - NEBULA
+                    - name_info:
+                        name: ----QUANTUM NEBULA* synonyms:(EXPLOR) - EXACT WORD ORDER
+                      stems:
+                        - QUANTUM
+                        - NEBULA
+                    - name_info:
+                        name: ----QUANTUM synonyms:(EXPLOR) - PROXIMITY SEARCH
+                      stems:
+                        - QUANTUM
+                    - name_info:
+                        id: 0887613
+                        jurisdiction: BC
+                        name: QUANTUM BATTERY METALS CORP.
+                        score: 6.7480874
+                        source: CORP
+                        start_date: 2010-08-06T11:27:25Z
+                      stems:
+                        - QUANTUM
+                        - METAL
+                    - name_info:
+                        id: 0766575
+                        jurisdiction: BC
+                        name: QUANTUM CRITICAL METALS CORP.
+                        score: 6.7480874
+                        source: CORP
+                        start_date: 2006-08-21T09:17:25Z
+                      stems:
+                        - QUANTUM
+                        - METAL
+                    - name_info:
+                        id: 1006807
+                        jurisdiction: BC
+                        name: FIRST QUANTUM MINERALS LTD.
+                        score: 6.7480874
+                        source: CORP
+                        start_date: 2014-06-30T10:39:51Z
+                      stems:
+                        - QUANTUM
+                        - MINER
+                    - name_info:
+                        id: 0680742
+                        jurisdiction: BC
+                        name: QMC QUANTUM MINERALS CORP.
+                        score: 6.7480874
+                        source: CORP
+                        start_date: 2003-11-07T00:00:00Z
+                      stems:
+                        - QUANTUM
+                        - MINER
+                    - name_info:
+                        name: ----QUANTUM* synonyms:(EXPLOR) - EXACT WORD ORDER
+                      stems:
+                        - QUANTUM
+                  response:
+                    maxScore: 0.0
+                    name: txt_starts_with:QUANTUM*
+                    numFound: 6
+        401:
+          description: Unauthorized
+        500:
+          description: Internal server error
+  /namex/api/v1/namerequests/:
+    post:
+      tags:
+        - Name Requests
+      summary: Create NR
+      description: |
+        Creates a new Name Request and returns a provisional L-number in `PENDING_PAYMENT` status. 
+        To complete the request and receive an invoice and permanent NR number, call `Generate NR Invoice`.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_name_request_example_model'
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/name_request_model'
+              example:
+                actions:
+                  - EDIT
+                  - UPGRADE
+                additionalInfo: null
+                applicants:
+                  addrLine1: 456 Maple Avenue
+                  addrLine2: Apt 7B
+                  addrLine3: null
+                  city: Vancouver
+                  clientFirstName: null
+                  clientLastName: null
+                  contact: null
+                  countryTypeCd: CA
+                  declineNotificationInd: null
+                  emailAddress: sophia.wilson@email.com
+                  faxNumber: null
+                  firstName: Sophia
+                  lastName: Wilson
+                  middleName: null
+                  partyId: 1667849
+                  phoneNumber: '7781231234'
+                  postalCd: V5K 2P1
+                  stateProvinceCd: BC
+                checkedOutBy: null
+                checkedOutDt: null
+                comments:
+                  - comment: The applicant has indicated the submitted name or names are in English.
+                    examiner: name_request_service_account
+                    id: 142252
+                    timestamp: 2025-07-12T02:21:28.785149+00:00
+                consentFlag: null
+                consent_dt: null
+                corpNum: null
+                entity_type_cd: CR
+                expirationDate: null
+                furnished: N
+                hasBeenReset: false
+                homeJurisNum: null
+                id: 2270972
+                lastUpdate: 2025-07-12T02:21:28.880475+00:00
+                legalType: BC
+                names:
+                  - choice: 1
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: FIDDLE & FIZZ SODA
+                    name_type_cd: CO
+                    state: NE
+                  - choice: 2
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: TWIST & TONIC DISTILLERS
+                    name_type_cd: CO
+                    state: NE
+                  - choice: 3
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: BREW & BUBBLES WINERY
+                    name_type_cd: CO
+                    state: NE
+                natureBusinessInfo: Crafts premium, small-batch beverages—from sodas and spirits to sparkling wines—by blending locally sourced ingredients with artisanal techniques.
+                notifiedBeforeExpiry: false
+                notifiedExpiry: false
+                nrNum: NR L010299
+                nwpta: []
+                previousNr: null
+                previousRequestId: null
+                previousStateCd: null
+                priorityCd: N
+                priorityDate: null
+                requestTypeCd: CR
+                request_action_cd: NEW
+                source: NAMEREQUEST
+                state: PENDING_PAYMENT
+                stateCd: PENDING_PAYMENT
+                submitCount: 1
+                submittedDate: 2025-07-12T02:21:28.772128+00:00
+                submitter_userid: name_request_service_account
+                target: lear
+                tradeMark: null
+                userId: name_request_service_account
+                xproJurisdiction: null
+        400:
+          description: Invalid input
+        409:
+          description: Duplicate name request submission
+        500:
+          description: Internal server error
+    get:
+      tags:
+        - Name Requests
+      summary: Get NR
+      description: Retrieves the details of a Name Request. Requires the NR number along with the applicant's email or phone number.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: Bcreg-Nr
+          in: header
+          description: NR number
+          schema:
+            type: string
+        - name: Bcreg-User-Phone
+          in: header
+          description: Applicant phone - required if email not provided
+          schema:
+            type: string
+        - name: Bcreg-User-Email
+          in: header
+          description: Applicant email - required if phone not provided
+          schema:
+            type: string
+        - name: Bcreg-Nrl
+          in: header
+          description: Temporary NR number
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/name_request_model'
+              example:
+                actions:
+                  - EDIT
+                  - UPGRADE
+                  - RECEIPT
+                  - REQUEST REFUND
+                additionalInfo: null
+                applicants:
+                  addrLine1: 456 Maple Avenue
+                  addrLine2: Apt 7B
+                  addrLine3: null
+                  city: Vancouver
+                  clientFirstName: null
+                  clientLastName: null
+                  contact: null
+                  countryTypeCd: CA
+                  declineNotificationInd: null
+                  emailAddress: sophia.wilson@email.com
+                  faxNumber: null
+                  firstName: Sophia
+                  lastName: Wilson
+                  middleName: null
+                  partyId: 1667849
+                  phoneNumber: '7781231234'
+                  postalCd: V5K 2P1
+                  stateProvinceCd: BC
+                checkedOutBy: null
+                checkedOutDt: null
+                comments:
+                  - comment: The applicant has indicated the submitted name or names are in English.
+                    examiner: name_request_service_account
+                    id: 142252
+                    timestamp: 2025-07-12T02:21:28.785149+00:00
+                consentFlag: null
+                consent_dt: null
+                corpNum: null
+                entity_type_cd: CR
+                expirationDate: null
+                furnished: N
+                hasBeenReset: false
+                homeJurisNum: null
+                id: 2270972
+                lastUpdate: 2025-07-12T02:21:28.880475+00:00
+                legalType: BC
+                names:
+                  - choice: 1
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: FIDDLE & FIZZ SODA
+                    name_type_cd: CO
+                    state: NE
+                  - choice: 2
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: TWIST & TONIC DISTILLERS
+                    name_type_cd: CO
+                    state: NE
+                  - choice: 3
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: BREW & BUBBLES WINERY
+                    name_type_cd: CO
+                    state: NE
+                natureBusinessInfo: Crafts premium, small-batch beverages—from sodas and spirits to sparkling wines—by blending locally sourced ingredients with artisanal techniques.
+                notifiedBeforeExpiry: false
+                notifiedExpiry: false
+                nrNum: NR 4278442
+                nwpta: []
+                previousNr: null
+                previousRequestId: null
+                previousStateCd: null
+                priorityCd: N
+                priorityDate: null
+                requestTypeCd: CR
+                request_action_cd: NEW
+                source: NAMEREQUEST
+                state: DRAFT
+                stateCd: DRAFT
+                submitCount: 1
+                submittedDate: 2025-07-12T02:21:28.772128+00:00
+                submitter_userid: name_request_service_account
+                target: lear
+                tradeMark: null
+                userId: name_request_service_account
+                xproJurisdiction: null
+        400:
+          description: Invalid input
+        403:
+          description: You do not have access to this NameRequest
+        500:
+          description: Internal server error
+  '/namex/api/v1/namerequests/{nr_id}/{nr_action}':
+    patch:
+      tags:
+        - Name Requests
+      summary: Edit NR
+      description: |
+        Performs an action or partial update on a Name Request:
+        - `EDIT`: Updates only the provided fields; others remain unchanged.
+        - `CANCEL`: Cancels the Name Request.  
+        - `REQUEST_REFUND`: Initiates a refund if the request is eligible.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: Bcreg-Nr
+          in: header
+          description: NR number
+          schema:
+            type: string
+        - name: Bcreg-User-Phone
+          in: header
+          description: Applicant phone - required if email not provided
+          schema:
+            type: string
+        - name: Bcreg-User-Email
+          in: header
+          description: Applicant email - required if phone not provided
+          schema:
+            type: string
+        - name: Bcreg-Nrl
+          in: header
+          description: Temporary NR number
+          schema:
+            type: string
+        - name: nr_id
+          in: path
+          required: true
+          description: Internal ID of the Name Request
+          schema:
+            type: integer
+        - name: nr_action
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [EDIT, CANCEL, REQUEST_REFUND]
+      requestBody:
+        description: |
+          For `EDIT`, include a JSON body with only the fields you want to change.
+          Not required for other actions.
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/edit_name_request_example_model'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/name_request_model'
+              example:
+                actions:
+                  - EDIT
+                  - UPGRADE
+                  - RECEIPT
+                  - REQUEST REFUND
+                additionalInfo: THIS WAS EDITED
+                applicants:
+                  addrLine1: 456 Maple Avenue
+                  addrLine2: Apt 7B
+                  addrLine3: null
+                  city: Vancouver
+                  clientFirstName: null
+                  clientLastName: null
+                  contact: null
+                  countryTypeCd: CA
+                  declineNotificationInd: null
+                  emailAddress: sophia.wilson@email.com
+                  faxNumber: null
+                  firstName: EDITED
+                  lastName: Wilson
+                  middleName: null
+                  partyId: 1667849
+                  phoneNumber: '7781231234'
+                  postalCd: V5K 2P1
+                  stateProvinceCd: BC
+                checkedOutBy: null
+                checkedOutDt: null
+                comments:
+                  - comment: The applicant has indicated the submitted name or names are in English.
+                    examiner: name_request_service_account
+                    id: 142252
+                    timestamp: 2025-07-12T02:21:28.785149+00:00
+                consentFlag: null
+                consent_dt: null
+                corpNum: null
+                entity_type_cd: CR
+                expirationDate: null
+                furnished: N
+                hasBeenReset: false
+                homeJurisNum: null
+                id: 2270972
+                lastUpdate: 2025-07-12T02:21:28.880475+00:00
+                legalType: BC
+                names:
+                  - choice: 1
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: THIS WAS EDITED
+                    name_type_cd: CO
+                    state: NE
+                  - choice: 2
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: TWIST & TONIC DISTILLERS
+                    name_type_cd: CO
+                    state: NE
+                  - choice: 3
+                    comment: null
+                    conflict1: null
+                    conflict1_num: null
+                    conflict2: null
+                    conflict2_num: null
+                    conflict3: null
+                    conflict3_num: null
+                    consumptionDate: null
+                    corpNum: null
+                    decision_text: null
+                    designation: CORP.
+                    id: 4274732
+                    name: BREW & BUBBLES WINERY
+                    name_type_cd: CO
+                    state: NE
+                natureBusinessInfo: Crafts premium, small-batch beverages—from sodas and spirits to sparkling wines—by blending locally sourced ingredients with artisanal techniques.
+                notifiedBeforeExpiry: false
+                notifiedExpiry: false
+                nrNum: NR 4278442
+                nwpta: []
+                previousNr: null
+                previousRequestId: null
+                previousStateCd: null
+                priorityCd: N
+                priorityDate: null
+                requestTypeCd: CR
+                request_action_cd: NEW
+                source: NAMEREQUEST
+                state: PENDING_PAYMENT
+                stateCd: PENDING_PAYMENT
+                submitCount: 1
+                submittedDate: 2025-07-12T02:21:28.772128+00:00
+                submitter_userid: name_request_service_account
+                target: lear
+                tradeMark: null
+                userId: name_request_service_account
+                xproJurisdiction: null
+        400:
+          description: Invalid payload, state transition, or unsupported action
+        403:
+          description: Forbidden
+        423:
+          description: Locked - name request is currently checked out by another user
+        500:
+          description: Internal server error
+  '/namex/api/v1/namerequests/{nr_id}/result':
+    get:
+      tags:
+        - Name Requests
+      summary: Get NR Result
+      description: |
+        Returns the Name Request results report as a PDF file. The file is served with a `.bin` extension 
+        and must be renamed to `.pdf` to open. Requires the applicant's email or phone in the headers, 
+        and the Name Request must be in an approved, consumed, expired, or rejected state.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: Bcreg-User-Phone
+          in: header
+          description: Applicant phone - required if email not provided
+          schema:
+            type: string
+        - name: Bcreg-User-Email
+          in: header
+          description: Applicant email - required if phone not provided
+          schema:
+            type: string
+        - name: Bcreg-NR
+          in: header
+          required: true
+          description: NR number
+          schema:
+            type: string
+        - name: nr_id
+          in: path
+          required: true
+          description: Internal ID of the name request
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Binary PDF file download (served with .bin extension, rename to .pdf).
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: Invalid name request state for generating a report
+        403:
+          description: Forbidden
+        404:
+          description: Name request not found
+        500:
+          description: Internal server error
+  '/namex/api/v1/payments/{nr_id}/{payment_action}':
+    post:
+      tags:
+        - Invoices
+      summary: Generate NR Invoice
+      description: |
+        Creates a payment invoice for the Name Request. If it's a new Name Request, it replaces 
+        the temporary L-number with a permanent NR number. For upgrades or reapplications, it 
+        finalizes the request and generates a new invoice. Payment records are created based on 
+        the account's configuration and selected payment method.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: nr_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Internal ID of the Name Request
+        - name: payment_action
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [CREATE, UPGRADE, REAPPLY, RESUBMIT]
+          description: |
+            • `CREATE` - Generate an invoice for a new Name Request  
+            • `UPGRADE` - Add priority to an existing Name Request  
+            • `REAPPLY` - Renew an existing Name Request before it expires  
+            • `RESUBMIT` - Renew an expired Name Request  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - headers
+                - filingInfo
+              properties:
+                headers:
+                  type: object
+                  required:
+                    - authorization
+                  properties:
+                    authorization:
+                      type: object
+                      description: For staff only
+                filingInfo:
+                  type: object
+                  required:
+                    - filingTypes
+                  properties:
+                    filingTypes:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                          - filingTypeCode
+                          - priority
+                        properties:
+                          filingTypeCode:
+                            type: string
+                            description: NM606 = Upgrade to priority; NM620 = reg submisstion; 
+                            enum: [NM606, NM620]
+                          priority:
+                            type: boolean
+              example:
+                headers:
+                  authorization: {}
+                filingInfo:
+                  filingTypes:
+                    - filingTypeCode: 'NM620'
+                      priority: false
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoice_model'
+              example:
+                action: CREATE
+                completionDate: null
+                id: 8141
+                isPaymentActionRequired: true
+                nrId: 2270990
+                nrNum: NR 4278442
+                payment:
+                  id: 8141
+                  nr_id: 2270990
+                  payment_action: CREATE
+                  payment_completion_date: null
+                  payment_note: null
+                  payment_status_code: CREATED
+                  payment_token: 51438
+                  receipt_sent: false
+                sbcPayment:
+                  _links:
+                    collection: /api/v1/payment-requests?invoice_id=51438
+                    self:       /api/v1/payment-requests/51438
+                  businessIdentifier: NR 4278442
+                  corpTypeCode: NRO
+                  createdBy: SERVICE-ACCOUNT-NAME-REQUEST-SERVICE-ACCOUNT
+                  createdOn: 2025-07-13T02:40:41+00:00
+                  details:
+                    - label: NR Number
+                      value: NR 4278442
+                    - label: Name Choices
+                      value: null
+                    - label: 1.
+                      value: FIDDLE & FIZZ SODA
+                    - label: 2.
+                      value: TWIST & TONIC DISTILLERS
+                    - label: 3.
+                      value: BREW & BUBBLES WINERY
+                  id: 51438
+                  isPaymentActionRequired: true
+                  lineItems:
+                    - description: Name Request fee
+                      filingFees: 30
+                      futureEffectiveFees: 0
+                      gst: 0
+                      id: 54352
+                      priorityFees: 0
+                      pst: 0
+                      quantity: 1
+                      serviceFees: 1.5
+                      statusCode: ACTIVE
+                      total: 30
+                      waivedBy: null
+                      waivedFees: 0
+                  paid: 0
+                  paymentAccount:
+                    accountId: SERVICE-ACCOUNT-NAME-REQUEST-SERVICE-ACCOUNT
+                  paymentMethod: DIRECT_PAY
+                  receipts: []
+                  references:
+                    - createdOn: 2025-07-13T02:40:41+00:00
+                      id: 43440
+                      invoiceNumber: REGUT00051438
+                      statusCode: ACTIVE
+                  refund: 0
+                  serviceFees: 1.5
+                  statusCode: CREATED
+                  total: 31.5
+                statusCode: CREATED
+                token: '51438'
+        400:
+          description: Invalid request or input
+        500:
+          description: Internal server error
+  '/namex/api/v1/payments/{nr_id}':
+    get:
+      tags:
+        - Invoices
+      summary: List NR Invoices
+      description: Retrieves all payment records from SBC Pay that are linked to the specified Name Request.
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: nr_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Name Request ID
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/invoice_model'
+              example:
+                - action: CREATE
+                  completionDate: Mon, 14 Jul 2025 16:43:27 GMT
+                  id: 8145
+                  nrId: 2270995
+                  payment:
+                    id: 8145
+                    nr_id: 2270995
+                    payment_action: CREATE
+                    payment_completion_date: Mon, 14 Jul 2025 16:43:27 GMT
+                    payment_note: null
+                    payment_status_code: COMPLETED
+                    payment_token: '51442'
+                    receipt_sent: true
+                  receipts:
+                    - id: 75243
+                      receiptAmount: 31.5
+                      receiptDate: Jul 14, 2025
+                      receiptNumber: '49379'
+                  sbcPayment:
+                    _links:
+                      collection: /api/v1/payment-requests?invoice_id=51442
+                      self: /api/v1/payment-requests/51442
+                    businessIdentifier: NR 4278442
+                    corpTypeCode: NRO
+                    createdBy: BCSC/PMD3QDZ4HZR3HPWBM7JWUFEL6FLPQTYJ
+                    createdName: Sophia Wilson
+                    createdOn: 2025-07-14T16:40:05+00:00
+                    details:
+                      - label: NR Number
+                        value: NR 4278442
+                      - label: Name Choices
+                        value: null
+                      - label: 1.
+                        value: FIDDLE & FIZZ SODA CORP.
+                      - label: 2.
+                        value: TWIST & TONIC DISTILLERS CORP.
+                      - label: 3.
+                        value: BREW & BUBBLES WINERY CORP.
+                    id: 51442
+                    isPaymentActionRequired: false
+                    lineItems:
+                      - description: Name Request fee
+                        filingFees: 30
+                        futureEffectiveFees: 0
+                        gst: 0
+                        id: 54356
+                        priorityFees: 0
+                        pst: 0
+                        quantity: 1
+                        serviceFees: 1.5
+                        statusCode: ACTIVE
+                        total: 30
+                        waivedBy: null
+                        waivedFees: 0
+                    paid: 31.5
+                    paymentAccount:
+                      accountId: 668
+                      accountName: resd
+                      billable: true
+                    paymentMethod: DIRECT_PAY
+                    receipts:
+                      - id: 75243
+                        receiptAmount: 31.5
+                        receiptDate: Jul 14, 2025
+                        receiptNumber: '49379'
+                    references:
+                      - createdOn: 2025-07-14T16:40:05+00:00
+                        id: 43444
+                        invoiceNumber: REGUT00051442
+                        statusCode: COMPLETED
+                    refund: 0
+                    serviceFees: 1.5
+                    statusCode: COMPLETED
+                    total: 31.5
+                    updatedOn: 2025-07-14T16:43:26+00:00
+                  statusCode: COMPLETED
+                  token: '51442'
+                - action: UPGRADE
+                  completionDate: Mon, 14 Jul 2025 16:51:49 GMT
+                  id: 8146
+                  nrId: 2270995
+                  payment:
+                    id: 8146
+                    nr_id: 2270995
+                    payment_action: UPGRADE
+                    payment_completion_date: Mon, 14 Jul 2025 16:51:49 GMT
+                    payment_note: null
+                    payment_status_code: COMPLETED
+                    payment_token: '51443'
+                    receipt_sent: true
+                  receipts:
+                    - id: 75244
+                      receiptAmount: 101.5
+                      receiptDate: Jul 14, 2025
+                      receiptNumber: '49380'
+                  sbcPayment:
+                    _links:
+                      collection: /api/v1/payment-requests?invoice_id=51443
+                      self: /api/v1/payment-requests/51443
+                    businessIdentifier: NR 4278442
+                    corpTypeCode: NRO
+                    createdBy: BCSC/PMD3QDZ4HZR3HPWBM7JWUFEL6FLPQTYJ
+                    createdName: Sophia Wilson
+                    createdOn: 2025-07-14T16:51:29+00:00
+                    details:
+                      - label: NR Number
+                        value: NR 4278442
+                      - label: Name Choices
+                        value: null
+                      - label: 1.
+                        value: FIDDLE & FIZZ SODA CORP.
+                      - label: 2.
+                        value: TWIST & TONIC DISTILLERS CORP.
+                      - label: 3.
+                        value: BREW & BUBBLES WINERY CORP.
+                    id: 51443
+                    isPaymentActionRequired: false
+                    lineItems:
+                      - description: Priority Request fee
+                        filingFees: 100
+                        futureEffectiveFees: 0
+                        gst: 0
+                        id: 54357
+                        priorityFees: 0
+                        pst: 0
+                        quantity: 1
+                        serviceFees: 1.5
+                        statusCode: ACTIVE
+                        total: 100
+                        waivedBy: null
+                        waivedFees: 0
+                    paid: 101.5
+                    paymentAccount:
+                      accountId: '668'
+                      accountName: resd
+                      billable: true
+                    paymentMethod: DIRECT_PAY
+                    receipts:
+                      - id: 75244
+                        receiptAmount: 101.5
+                        receiptDate: Jul 14, 2025
+                        receiptNumber: 49380
+                    references:
+                      - createdOn: 2025-07-14T16:51:29+00:00
+                        id: 43445
+                        invoiceNumber: REGUT00051443
+                        statusCode: COMPLETED
+                    refund: 0
+                    serviceFees: 1.5
+                    statusCode: COMPLETED
+                    total: 101.5
+                    updatedOn: 2025-07-14T16:51:48+00:00
+                  statusCode: COMPLETED
+                  token: '51443'
+        404:
+          description: Name request or payment records not found
+        500:
+          description: Internal server error
+  '/namex/api/v1/payments/{payment_id}/receipt':
+    post:
+      tags:
+        - Receipts
+      summary: Generate NR Receipt
+      description: Generate a PDF receipt for the specified payment
+      parameters:
+        - in: header
+          name: Account-Id
+          required: true
+          schema:
+            type: string
+        - name: payment_id
+          in: path
+          required: true
+          description: SBC payment ID
+          schema:
+            type: integer
+      responses:
+        201:
+          description: Success
+        500:
+          description: Internal server error
+components:
+  schemas:
+    applicant_model:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - addrLine1
+        - city
+        - stateProvinceCd
+        - postalCd
+        - countryTypeCd
+        - emailAddress
+        - phoneNumber
+      properties:
+        firstName:
+          type: string
+          example: Sophia
+        middleName:
+          type: string
+          example: A.
+        lastName:
+          type: string
+          example: Wilson
+        contact:
+          type: string
+          example: John Doe
+        clientFirstName:
+          type: string
+          example: Harry
+        clientLastName:
+          type: string
+          example: Gunther
+        emailAddress:
+          type: string
+          format: email
+          example: sophia.wilson@example.com
+        phoneNumber:
+          type: string
+          example: 778-123-4567
+        faxNumber:
+          type: string
+          example: 604-555-4321
+        addrLine1:
+          type: string
+          example: 456 Maple Avenue
+        addrLine2:
+          type: string
+          example: Apt 7B
+        addrLine3:
+          type: string
+        city:
+          type: string
+          example: Vancouver
+        stateProvinceCd:
+          type: string
+          example: BC
+        postalCd:
+          type: string
+          example: V5K 2P1
+        countryTypeCd:
+          type: string
+          example: CA
+    name_model:
+      type: object
+      required:
+        - choice
+        - name
+        - designation
+        - conflict1
+      properties:
+        choice:
+          type: integer
+          description: Choice ranking for this name (1 = top preference)
+          example: 1
+        name:
+          type: string
+          description: The proposed name to be examined
+          example: Spectacular plumbing
+        designation:
+          type: string
+          description: Legal entity suffix to append to the name
+          example: CORPORATION
+          enum:
+            - LIMITED
+            - INCORPORATED
+            - CORPORATION
+            - LIMITED LIABILITY PARTNERSHIP
+            - LIMITED PARTNERSHIP
+            - PARTNERSHIP
+            - CO-OP
+            - SOCIETY
+            - UNLIMITED LIABILITY COMPANY
+        conflict1:
+          type: string
+          description: Primary conflicting name (send as empty string if none or unknown)
+          default: ''
+    name_request_model:
+      type: object
+      required:
+        - actions
+        - applicants
+        - id
+        - nrNum
+        - stateCd
+        - request_action_cd
+        - entity_type_cd
+        - priorityCd
+        - names
+        - submittedDate
+        - submitter_userid
+        - userId
+      properties:
+        actions:
+          type: array
+          description: Available actions for this Name Request
+        additionalInfo:
+          type: string
+        applicants:
+          type: array
+          description: List of applicant contact and address details
+          items:
+            $ref: '#/components/schemas/applicant_model'
+        checkedOutBy:
+          type: string
+        checkedOutDt:
+          type: string
+        comments:
+          type: array
+        consentFlag:
+          type: boolean
+        consentDate:
+          type: string
+        corpNum:
+          type: string
+        entity_type_cd:
+          type: string
+        expirationDate:
+          type: string
+        furnished:
+          type: string
+        hasBeenReset:
+          type: boolean
+        homeJurisNum:
+          type: string
+        id:
+          type: integer
+          description: Internal identifier for this Name Request
+        lastUpdate:
+          type: string
+        legalType:
+          type: string
+        names:
+          type: array
+          description: Proposed name choices
+          items:
+            $ref: '#/components/schemas/name_model'
+        natureBusinessInfo:
+          type: string
+        notifiedBeforeExpiry:
+          type: boolean
+        notifiedExpiry:
+          type: boolean
+        nrNum:
+          type: string
+        nwpta:
+          type: array
+        previousNr:
+          type: string
+        previousRequestId:
+          type: string
+        previousStateCd:
+          type: string
+        priorityCd:
+          type: string
+        priorityDate:
+          type: string
+        requestTypeCd:
+          type: string
+        source:
+          type: string
+        state:
+          type: string
+        stateCd:
+          type: string
+        submitCount:
+          type: string
+        submittedDate:
+          type: string
+        submitter_userid:
+          type: string
+        target:
+          type: string
+        tradeMark:
+          type: string
+        userId:
+          type: string
+        xproJurisdiction:
+          type: string
+    payment_receipt_model:
+      type: object
+      properties:
+        id:            { type: integer }
+        receiptAmount: { type: number }
+        receiptDate:   { type: string }
+        receiptNumber: { type: string }
+    sbc_payment_model:
+      type: object
+      properties:
+        _links:
+          type: object
+          properties:
+            collection: { type: string }
+            self:       { type: string }
+        businessIdentifier:       { type: string }
+        corpTypeCode:             { type: string }
+        createdBy:                { type: string }
+        createdName:              { type: string }
+        createdOn:                { type: string }
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              label: { type: string }
+              value: { type: string }
+        id: { type: integer }
+        isPaymentActionRequired: { type: boolean }
+        lineItems:
+          type: array
+          items:
+            type: object
+            properties:
+              description:          { type: string }
+              filingFees:           { type: number }
+              futureEffectiveFees:  { type: number }
+              gst:                  { type: number }
+              id:                   { type: integer }
+              priorityFees:         { type: number }
+              pst:                  { type: number }
+              quantity:             { type: integer }
+              serviceFees:          { type: number }
+              statusCode:           { type: string }
+              total:                { type: number }
+              waivedBy:             { type: string }
+              waivedFees:           { type: number }
+        paid: { type: number }
+        paymentAccount:
+          type: object
+          properties:
+            accountId:   { type: string }
+            accountName: { type: string }
+            billable:    { type: boolean }
+        paymentMethod: { type: string }
+        receipts:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment_receipt_model'
+        references:
+          type: array
+          items:
+            type: object
+            properties:
+              createdOn:     { type: string }
+              id:            { type: integer }
+              invoiceNumber: { type: string }
+              statusCode:    { type: string }
+        refund:       { type: number }
+        serviceFees:  { type: number }
+        statusCode:   { type: string }
+        total:        { type: number }
+        updatedOn:    { type: string }
+    invoice_model:
+      allOf:
+        - type: object
+          properties:
+            action:          { type: string }
+            completionDate:  { type: string }
+            id:              { type: integer }
+            nrId:            { type: integer }
+            nrNum:           { type: string }
+            statusCode:      { type: string }
+            token:           { type: string }
+            receipts:
+              type: array
+              items:
+                $ref: '#/components/schemas/payment_receipt_model'
+        - type: object
+          properties:
+            payment:
+              type: object
+              properties:
+                id:                      { type: integer }
+                nr_id:                   { type: integer }
+                payment_action:          { type: string }
+                payment_completion_date: { type: string }
+                payment_note:            { type: string }
+                payment_status_code:     { type: string }
+                payment_token:           { type: string }
+                receipt_sent:            { type: boolean }
+            sbcPayment:
+              $ref: '#/components/schemas/sbc_payment_model'
+    create_name_request_example_model:
+      type: object
+      required:
+        - applicants
+        - names
+        - natureBusinessInfo
+        - priorityCd
+        - entity_type_cd
+        - request_action_cd
+        - english
+        - nameFlag
+        - stateCd
+      properties:
+        applicants:
+          type: array
+          description: List of applicant contact and address details
+          items:
+            $ref: '#/components/schemas/applicant_model'
+        names:
+          type: array
+          description: Proposed name choices
+          items:
+            $ref: '#/components/schemas/name_model'
+        english:
+          type: boolean
+          description: Flag indicating whether the name is English only
+        nameFlag:
+          type: boolean
+          description: "`true` if NR is for an individual's legal name; `false` if it's for a business/corporate name"
+        natureBusinessInfo:
+          type: string
+          description: Brief description of the business's primary activities
+        priorityCd:
+          type: string
+          description: Priority indicator (e.g. `Y` for priority requests, `N` otherwise)
+        entity_type_cd:
+          type: string
+          description: |
+            • `CR`   - Corporation  
+            • `BC`   - Benefit Company  
+            • `CC`   - Community Contribution Company  
+            • `SO`   - Society  
+            • `PA`   - Private Act  
+            • `FI`   - Financial Institution  
+            • `PAR`  - Parish  
+            • `FR`   - Sole Proprietorship  
+            • `GP`   - General Partnership  
+            • `LP`   - Limited Partnership  
+            • `LL`   - Limited Liability Partnership  
+            • `DBA`  - Doing Business As  
+            • `CP`   - Cooperative  
+            • `XCR`  - XPRO Corporation  
+            • `XUL`  - XPRO Unlimited Liability Company  
+            • `RLC`  - XPRO Limited Liability Company  
+            • `XLP`  - XPRO Limited Partnership  
+            • `XLL`  - XPRO Limited Liability Partnership  
+            • `XCP`  - XPRO Cooperative  
+            • `C`    - Continued In BC Limited Company  
+            • `CUL`  - Continued In BC Unlimited Liability Company  
+        request_action_cd:
+          type: string
+          description: |
+            • `NEW` - New name request  
+            • `AML` - Amalgamate existing companies (BC only)  
+            • `CHG` - Name change request  
+            • `MVE` - Move or continue your business in BC  
+            • `CNV` - Convert to another corporate structure (e.g. sole proprietor → corporation)  
+            • `REH` - Restore a historical business  
+        stateCd:
+          type: string
+          description: Set to `DRAFT` for new NRs
+          default: DRAFT
+        additionalInfo:
+          type: string
+          description: Any extra comments or instructions from the applicant
+      example:
+        applicants:
+          - lastName: Wilson
+            firstName: Sophia
+            phoneNumber: '7781231234'
+            emailAddress: sophia.wilson@email.com
+            addrLine1: 456 Maple Avenue
+            addrLine2: Apt 7B
+            city: Vancouver
+            stateProvinceCd: BC
+            postalCd: V5K 2P1
+            countryTypeCd: CA
+        names:
+          - name: FIDDLE & FIZZ SODA
+            designation: CORP.
+            choice: 1
+            conflict1: ''
+          - name: TWIST & TONIC DISTILLERS
+            designation: CORP.
+            choice: 2
+            conflict1: ''
+          - name: BREW & BUBBLES WINERY
+            designation: CORP.
+            choice: 3
+            conflict1: ''
+        english: true
+        nameFlag: false
+        natureBusinessInfo: Crafts premium, small-batch beverages—from sodas and spirits to sparkling wines—by blending locally sourced ingredients with artisanal techniques.
+        priorityCd: N
+        entity_type_cd: CR
+        request_action_cd: NEW
+        stateCd: DRAFT
+    edit_name_request_example_model:
+      type: object
+      properties:
+        additionalInfo:
+          type: string
+          description: Additional notes or instructions
+        applicants:
+          type: array
+          description: Applicant contact details
+          items:
+            type: object
+            properties:
+              firstName:
+                type: string
+              middleName:
+                type: string
+              lastName:
+                type: string
+              contact:
+                type: string
+              clientFirstName:
+                type: string
+              clientLastName:
+                type: string
+              emailAddress:
+                type: string
+              phoneNumber:
+                type: string
+              faxNumber:
+                type: string
+              addrLine1:
+                type: string
+              addrLine2:
+                type: string
+              addrLine3:
+                type: string
+              city:
+                type: string
+              stateProvinceCd:
+                type: string
+              postalCd:
+                type: string
+              countryTypeCd:
+                type: string
+        entity_type_cd:
+          type: string
+        names:
+          type: array
+          description: Name choices for the request
+          items:
+            type: object
+            properties:
+              choice:
+                type: integer
+              name:
+                type: string
+              designation:
+                type: string
+              conflict1:
+                type: string
+        natureBusinessInfo:
+          type: string
+      example:
+        additionalInfo: THIS WAS EDITED
+        applicants:
+          firstName: EDITED
+        names:
+          - choice: 1
+            name: THIS WAS EDITED
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+    api_key:
+      name: x-apikey
+      type: apiKey
+      in: header
+security:
+- api_key: []
+- JWT: []
+tags:
+  - name: Insights
+    description: Metrics and cost breakdowns for Name Requests
+  - name: Name Validation
+    description: Validate and search proposed names for potential issues or conflicts
+  - name: Name Requests
+    description: Create, update, and manage Name Requests
+  - name: Invoices
+    description: Generate and view invoices related to Name Requests
+  - name: Receipts
+    description: Retrieve payment receipts for completed Name Requests

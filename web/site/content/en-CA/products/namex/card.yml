@@ -1,7 +1,7 @@
 # Used to populate product card components
-name: Names Request Service
+name: Name Request Service
 description: Request a name to use for a BC Business
 badge: BETA
 bulletPoints: 
-  - Make a NameRequest
-  - Check the status of a NameRequest
+  - Make a Name Request
+  - Check the status of a Name Request
