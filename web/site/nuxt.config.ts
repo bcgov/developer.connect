@@ -147,6 +147,14 @@ export default defineNuxtConfig({
         pathRouting: {
           basePath: '/oas/rs'
         }
+      },
+      {
+        spec: {
+          url: `${localScalarUrl}/namex/namex-spec.yaml`
+        },
+        pathRouting: {
+          basePath: '/oas/namex'
+        }
       }
       // {
       //   spec: {
