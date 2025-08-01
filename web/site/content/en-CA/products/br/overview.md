@@ -149,4 +149,8 @@ Updates of note to this page are recorded here.
     <td>2025-07-16</td>
     <td>Update Sandbox Postman collection, add effective date to AR filing</td>
   </tr>
+  <tr>
+    <td>2025-08-01</td>
+    <td>Update API Specification</td>
+  </tr>
 </table>
