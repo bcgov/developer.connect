@@ -68,7 +68,7 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
     <td>Pre-Release</td>
   </tr>
   <tr>
-    <td>2025-06-17</td>5
+    <td>2025-06-17</td>
     <td>2.1.0</td>
     <td>Added bulk search endpoint /registry-search/api/v2/search/businesses/bulk. Released to SANDBOX 2025-06-17; released to PROD 2025-06-24.</td>
   </tr>
