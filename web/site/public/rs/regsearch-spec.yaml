@@ -6,7 +6,7 @@ info:
     email: admin@daxiom.com
     name: BCRegistry
     url: 'https://developer.bcregistry.daxiom.ca/'
-  version: v1
+  version: '2.2.0'
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -276,7 +276,7 @@ paths:
         required: true
         description: Business Identifier the documents are for
     get:
-      summary: User document access requests (specific identifier)
+      summary: DEPRECTED User document access requests (specific identifier). This endpoint is deprecated, please use GET /v2/businesses/{identifier}/documents/requests instead.
       tags:
         - search
       responses:
@@ -307,7 +307,7 @@ paths:
       x-stoplight:
         id: 35op7isvcqwon
     post:
-      summary: ''
+      summary: 'DEPRECATED This endpoint is deprecated, please use POST /v2/businesses/{identifier}/documents/requests instead.'
       tags:
         - business
       operationId: post-businesses-requests
@@ -376,7 +376,7 @@ paths:
   /v1/purchases:
     parameters: []
     get:
-      summary: User document access requests (all)
+      summary: DEPRECATED User document access requests (all). This endpoint is deprecated, please use GET /v2/purchases instead.
       tags:
         - search
       responses:
@@ -437,7 +437,7 @@ paths:
         required: true
         description: Key of the document access request
     get:
-      summary: Business document pdf / json
+      summary: DEPRECATED Business document pdf / json. This endpoint is deprecated, please use GET /v2/businesses/{identifier}/documents/{document_key} instead.
       tags:
         - search
       responses:
@@ -779,7 +779,7 @@ paths:
         - $ref: '#/components/parameters/accountId'
       x-stoplight:
         id: b4reuajxvua4y
-  '/v1/businesses/{identifier}/documents/filings/{filing_id}/{filing_name}}':
+  '/v1/businesses/{identifier}/documents/filings/{filing_id}/{filing_name}':
     parameters:
       - schema:
           type: string
@@ -801,7 +801,7 @@ paths:
         required: true
         description: filing name of the document
     get:
-      summary: Filing history document pdf
+      summary: DEPRECATED Filing history document pdf.  This endpoint is deprecated, please use GET /v2/businesses/{identifier}/documents/filings/{filing_id}/{filing_name} instead.
       tags:
         - search
       responses:
@@ -826,6 +826,573 @@ paths:
         - $ref: '#/components/parameters/accountId'
       x-stoplight:
         id: rtljpzg14ij73
+  '/v2/businesses/{identifier}/documents/requests':
+    parameters:
+      - schema:
+          type: string
+          example: BC1234567
+        name: identifier
+        in: path
+        required: true
+        description: Business Identifier the documents are for
+    get:
+      summary: User document access requests (specific identifier).
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documentAccessRequests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentAccessRequest'
+      operationId: get-businesses-identifier-document-requests-v2
+      description: Endpoint to get document access requests for a specific business
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: 35op7isvcqwon
+    post:
+      summary: ''
+      tags:
+        - business
+      operationId: post-businesses-requests-v2
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentAccessRequest'
+              examples:
+                example-1:
+                  value:
+                    businessIdentifier: BC1218851
+                    documents:
+                      - documentKey: 1db17RjuI
+                        type: BUSINESS_SUMMARY_FILING_HISTORY
+                        fileName: null
+                        id: 9
+                    expiryDate: '2022-06-21T21:51:51.907315+00:00'
+                    id: 9
+                    outputFileKey: null
+                    paymentStatus: APPROVED
+                    status: PAID
+                    submissionDate: '2022-06-14T21:51:51.513740+00:00'
+      description: >-
+        Endpoint to create document access requests (permissions to access business
+        documents)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                example-1:
+                  documentAccessRequest:
+                    documents:
+                      - type: BUSINESS_SUMMARY_FILING_HISTORY
+              properties:
+                documentAccessRequest:
+                  type: object
+                  required:
+                    - documents
+                  properties:
+                    documents:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Document'
+                business:
+                  type: object
+                  properties:
+                    businessName:
+                      type: string
+                      description: >-
+                        This name is saved in our database with the access request
+                        and will be returned with the access request data. It is NOT
+                        verified against the legal business name corresponding to
+                        the given identifier.
+              required:
+                - documentAccessRequest
+            examples:
+              example-1:
+                value:
+                  business:
+                    businessName: Business Name
+                  documentAccessRequest:
+                    documents:
+                      - type: BUSINESS_SUMMARY_FILING_HISTORY
+        description: ''
+      x-stoplight:
+        id: ijim8h60u470a
+  /v2/purchases:
+    parameters: []
+    get:
+      summary: User document access requests (all).
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documentAccessRequests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentAccessRequest'
+              examples:
+                example-1:
+                  value:
+                    documentAccessRequests:
+                      - businessIdentifier: string
+                        businessName: string
+                        documents:
+                          - documentKey: string
+                            type: BUSINESS_SUMMARY_FILING_HISTORY
+                            fileName: string
+                        expiryDate: '2019-08-24T14:15:22Z'
+                        outputFileKey: string
+                        paymentStatus: string
+                        status: string
+                        submissionDate: '2019-08-24T14:15:22Z'
+      operationId: get-purchases-v2
+      description: Endpoint to get all purchased document access requests
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: 1fxelx1k7plla
+  '/v2/businesses/{identifier}/documents/{document_key}':
+    parameters:
+      - schema:
+          type: string
+          example: BC1234567
+        name: identifier
+        in: path
+        required: true
+        description: Business Identifier the documents are for
+      - schema:
+          type: string
+        name: document_key
+        in: path
+        required: true
+        description: Key of the document access request
+    get:
+      summary: Business document pdf / json.
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alterations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filingDateTime:
+                          type: string
+                          format: date-time
+                        fromLegalType:
+                          type: string
+                        toLegalType:
+                          type: string
+                  amalgamatedEntities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        identifier:
+                          type: string
+                        name:
+                          type: string
+                      required:
+                        - identifier
+                        - name
+                  business:
+                    $ref: '#/components/schemas/Business_Business'
+                  entityAct:
+                    type: string
+                  entityDescription:
+                    type: string
+                  liquidation:
+                    type: object
+                    properties:
+                      filingDateTime:
+                        type: string
+                        format: date-time
+                  listOfTranslations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                            - DBA
+                            - TRANSLATION
+                      required:
+                        - name
+                        - type
+                  nameChanges:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filingDateTime:
+                          type: string
+                          format: date-time
+                        fromLegalName:
+                          type: string
+                        toLegalName:
+                          type: string
+                      required:
+                        - filingDateTime
+                        - fromLegalName
+                        - toLegalName
+                  offices:
+                    oneOf:
+                      - properties:
+                          recordsOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                          registeredOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                          custodialOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                        required:
+                          - registeredOffice
+                      - properties:
+                          businessOffice:
+                            $ref: '#/components/schemas/Business_Office'
+                        required:
+                          - businessOffice
+                    type: object
+                  parties:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Business_Party'
+                  registrarInfo:
+                    type: object
+                    required:
+                      - startDate
+                      - name
+                    properties:
+                      startDate:
+                        type: string
+                        format: date-time
+                        example: '2022-06-01T00:00:00'
+                      endDate:
+                        type: string
+                        format: date-time
+                        example: '2022-06-01T00:00:00'
+                        nullable: true
+                      name:
+                        type: string
+                      title:
+                        type: string
+                        example: Registrar of Companies
+                  reportDateTime:
+                    type: string
+                    format: date-time
+                    example: '2022-08-05T19:50:04.960880+00:00'
+                  reportType:
+                    type: string
+                    enum:
+                      - summary
+                      - cogs
+                      - cstat
+                      - lseal
+                  stateFilings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        effectiveDateTime:
+                          type: string
+                          format: date-time
+                        filingDateTime:
+                          type: string
+                          format: date-time
+                        filingName:
+                          type: string
+                          example: Voluntary Dissolution
+                required:
+                  - business
+                  - entityAct
+                  - entityDescription
+                  - registrarInfo
+                  - reportDateTime
+                  - reportType
+              examples:
+                example-1:
+                  value:
+                    alterations: []
+                    amalgamatedEntities: []
+                    business:
+                      adminFreeze: false
+                      arMaxDate: '2021-11-30'
+                      arMinDate: '2021-10-01'
+                      associationType: null
+                      complianceWarnings: []
+                      coopType: Not Available
+                      fiscalYearEndDate: '2020-10-01'
+                      foundingDate: '2020-10-01T21:20:12.666434+00:00'
+                      goodStanding: false
+                      hasCorrections: false
+                      hasRestrictions: false
+                      identifier: BC1218851
+                      lastAddressChangeDate: '2020-10-01'
+                      lastAnnualGeneralMeetingDate: ''
+                      lastAnnualReportDate: ''
+                      lastDirectorChangeDate: '2021-02-11'
+                      lastLedgerTimestamp: '2020-10-01T21:20:18.153647+00:00'
+                      lastModified: '2020-10-01T21:20:18.153630+00:00'
+                      legalName: 1218851 B.C. LTD.
+                      legalType: BEN
+                      naicsCode: null
+                      naicsDescription: null
+                      naicsKey: null
+                      nextAnnualReport: '2021-10-01T07:00:00+00:00'
+                      state: ACTIVE
+                      warnings: []
+                    entityAct: Business Corporations Act
+                    entityDescription: BC Benefit Company
+                    liquidation: {}
+                    listOfTranslations:
+                      - id: '24'
+                        name: TEST
+                        type: TRANSLATION
+                    nameChanges: []
+                    offices:
+                      recordsOffice:
+                        deliveryAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: delivery
+                          deliveryInstructions: ''
+                          id: 36078
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: mailing
+                          deliveryInstructions: ''
+                          id: 36077
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                      registeredOffice:
+                        deliveryAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: delivery
+                          deliveryInstructions: ''
+                          id: 36080
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          addressType: mailing
+                          deliveryInstructions: ''
+                          id: 36079
+                          postalCode: J2S 7N6
+                          streetAddress: 6-755 Boul Casavant E
+                          streetAddressAdditional: ''
+                    parties:
+                      - deliveryAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: QC
+                          deliveryInstructions: null
+                          id: 36081
+                          postalCode: J2S 7N6
+                          streetAddress: 8-725 Boul Casavant E
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: Saint-Hyacinthe
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: QC
+                          deliveryInstructions: null
+                          id: 36082
+                          postalCode: J2S 7N6
+                          streetAddress: 8-725 Boul Casavant E
+                          streetAddressAdditional: ''
+                        officer:
+                          email: null
+                          firstName: TEST
+                          id: 10431
+                          lastName: TESTER
+                          partyType: person
+                        roles:
+                          - appointmentDate: '2020-10-01'
+                            cessationDate: null
+                            roleType: Completing Party
+                          - appointmentDate: '2020-10-01'
+                            cessationDate: null
+                            roleType: Incorporator
+                          - appointmentDate: '2020-10-01'
+                            cessationDate: null
+                            roleType: Director
+                      - deliveryAddress:
+                          addressCity: victoria
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          deliveryInstructions: ''
+                          id: 2188053
+                          postalCode: v8W 2C3
+                          streetAddress: 1012 douglas st
+                          streetAddressAdditional: ''
+                        mailingAddress:
+                          addressCity: victoria
+                          addressCountry: Canada
+                          addressCountryDescription: Canada
+                          addressRegion: BC
+                          deliveryInstructions: ''
+                          id: 2188053
+                          postalCode: v8W 2C3
+                          streetAddress: 1012 douglas st
+                          streetAddressAdditional: ''
+                        officer:
+                          email: null
+                          firstName: SEV
+                          id: 441037
+                          lastName: SEVERIN
+                          partyType: person
+                        roles:
+                          - appointmentDate: '2021-02-11'
+                            cessationDate: null
+                            roleType: Director
+                    registrarInfo:
+                      endDate: null
+                      name: T.K. SPARKS
+                      startDate: '2022-06-01T00:00:00'
+                      title: Registrar of Companies
+                    reportDateTime: '2022-08-17T17:36:11.996369+00:00'
+                    reportType: summary
+                    stateFilings: []
+            application/pdf:
+              schema:
+                type: string
+      operationId: get-businesses-identifier-document-data-v2
+      description: Endpoint to get document pdf /json
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - application/pdf
+              - application/json
+          in: header
+          name: Accept
+          description: mimetype of request
+          required: true
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: b4reuajxvua4y
+  '/v2/businesses/{identifier}/documents/filings/{filing_id}/{filing_name}':
+    parameters:
+      - schema:
+          type: string
+          example: BC1234567
+        name: identifier
+        in: path
+        required: true
+        description: Business Identifier the documents are for
+      - schema:
+          type: string
+        name: filing_id
+        in: path
+        required: true
+        description: filing id of the document
+      - schema:
+          type: string
+        name: filing_name
+        in: path
+        required: true
+        description: filing name of the document
+    get:
+      summary: Filing history document pdf.
+      tags:
+        - search
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+            Access-Control-Max-Age:
+              $ref: '#/components/headers/AccessControlMaxAge'
+          content:
+            application/pdf:
+              schema:
+                type: string
+      operationId: get-businesses-identifier-document-filings-filingId-filingName-v2
+      description: Endpoint to get a document pdf of a filing in the business history
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      x-stoplight:
+        id: rtljpzg14ij73
+
   /v2/search/businesses:
     post:
       summary: Search businesses

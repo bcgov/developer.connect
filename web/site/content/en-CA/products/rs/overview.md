@@ -68,9 +68,23 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
     <td>Pre-Release</td>
   </tr>
   <tr>
-    <td>2025-06-17</td>
+    <td>2025-06-17</td>5
     <td>2.1.0</td>
     <td>Added bulk search endpoint /registry-search/api/v2/search/businesses/bulk. Released to SANDBOX 2025-06-17; released to PROD 2025-06-24.</td>
+  </tr>
+  <tr>
+    <td>2025-11-24</td>
+    <td>2.2.0</td>
+    <td><p>Deprecating the following v1 endpoints and replacing them with version 2 v2:
+           <ul>
+             <li>GET, POST /v1/businesses/{identifier}/documents/requests</li>
+             <li>GET /v1/purchases</li>
+             <li>GET /v1/businesses/{identifier}/documents/{document_key}</li>
+             <li>GET /v1/businesses/{identifier}/documents/filings/{filing_id}/{filing_name}</li>
+            </ul>
+            Released to SANDBOX 2025-11-24; released to PROD 2025-11-25.
+         </p>
+    </td>
   </tr>
 </table>
 
