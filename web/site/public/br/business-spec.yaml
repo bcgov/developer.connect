@@ -6,25 +6,28 @@ info:
     The Business Registry is a centralized electronic register of all business in British Columbia. This encompasses all types of businesses authorized to do business by the Registrar. The Business API provides a secure means of integrating your business systems with the Registry.
     <br/>
     <br/>This API supports the following filings:
-    - Incorporation Application
-    - Amalgamation Regular
-    - Amalgamation Short Form Horizontal 
-    - Amalgamation Short Form Vertical 
-    - Continuation In 
-    - Registration 
-    - AGM Extension Information 
-    - AGM Location Change Information 
-    - Alteration 
-    - Annual Report 
-    - Change of Address
-    - Change of Directors
-    - Change of Registration 
-    - Consent Continuation Out 
-    - Conversion
-    - Dissolution
-    - Notice of Withdrawal
-    - Registration (Sole Proprietorship, General Partnership)
-    - Special Resolution
+
+    | Filing | Supported Business Types |
+    | :--- | :--- |
+    | Incorporation Application | BC, BEN, CC, CP, ULC |
+    | Amalgamation Regular | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | Amalgamation Short Form Horizontal | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | Amalgamation Short Form Vertical | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | Continuation In | C, CBEN, CCC, CUL |
+    | Registration | GP, SP |
+    | AGM Extension Information | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | AGM Location Change Information | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | Alteration | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | Annual Report | BC, BEN, C, CBEN, CC, CCC, CP, CUL, ULC |
+    | Change of Address | BC, BEN, C, CBEN, CC, CCC, CP, CUL, ULC |
+    | Change of Directors | BC, BEN, C, CBEN, CC, CCC, CP, CUL, ULC |
+    | Change of Registration | GP, SP |
+    | Consent Continuation Out | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | Conversion | GP, SP |
+    | Dissolution | BC, BEN, C, CBEN, CC, CCC, CP, CUL, GP, SP, ULC |
+    | Notice of Withdrawal | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
+    | Registration (Sole Proprietorship, General Partnership) | GP, SP |
+    | Special Resolution | CP |
 
     All API requests must include a BC Registries issued API key and an Account ID.
   contact:
