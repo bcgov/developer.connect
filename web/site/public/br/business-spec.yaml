@@ -23,10 +23,7 @@ info:
     | Change of Directors | BC, BEN, C, CBEN, CC, CCC, CP, CUL, ULC |
     | Change of Registration | GP, SP |
     | Consent Continuation Out | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
-    | Conversion | GP, SP |
     | Dissolution | BC, BEN, C, CBEN, CC, CCC, CP, CUL, GP, SP, ULC |
-    | Notice of Withdrawal | BC, BEN, C, CBEN, CC, CCC, CUL, ULC |
-    | Registration (Sole Proprietorship, General Partnership) | GP, SP |
     | Special Resolution | CP |
 
     All API requests must include a BC Registries issued API key and an Account ID.
