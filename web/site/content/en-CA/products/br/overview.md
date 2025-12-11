@@ -157,4 +157,8 @@ Updates of note to this page are recorded here.
     <td>2025-11-25</td>
     <td>Update API Specification</td>
   </tr>
+  <tr>
+    <td>2025-12-10</td>
+    <td>Update API Specification</td>
+  </tr>
 </table>
