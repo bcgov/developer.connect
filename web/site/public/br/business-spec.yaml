@@ -4123,7 +4123,10 @@ components:
     Annual_report:
       type: object
       title: Annual Report Filing
-      description: To file any change or confirm the information shown in the Corporate Register. Must be filed within two months of the anniversary date of incorporation.
+      description: |
+        To file any change or confirm the information shown in the Corporate Register. Must be filed within two months of the anniversary date of incorporation.
+
+        **Note:** Officers are not required as part of the annual report filing.
       properties:
         annualReport:
           type: object
@@ -4153,7 +4156,7 @@ components:
                 properties:
                   officer:
                     type: object
-                    description: Person responsible for the management and day-to-day operations of the company.
+                    description: Personal information about the director.
                     required:
                       - firstName
                       - lastName
