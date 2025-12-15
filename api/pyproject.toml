@@ -10,7 +10,7 @@ packages = [{include = "developer-connect-api", from = "src"}]
 [tool.poetry.dependencies]
 python = "^3.12.4"
 flask = "^1.1.4"
-launchdarkly-server-sdk = "^8.3.0"
+launchdarkly-server-sdk = "^9.14.1"
 python-dotenv = "^1.0.1"
 sentry-sdk = "^2.0.0"
 flask-babel = "2.0.0"
