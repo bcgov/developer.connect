@@ -5356,7 +5356,13 @@ components:
               description: 'Whether the company has liability or not: Yes/No.'
             parties:
               type: array
-              description: Can be the company directors, Custodian or applicant of the filing. This field is required for voluntary dissolution filings, in which case a Custodian must be included.
+              description: >
+                Persons associated with the dissolution filing eg: custodian.
+                This field is required for voluntary dissolution filings.
+                Allowed party roles depend on the business type:
+                  - Corporations must include exactly one custodian
+                  - Cooperative Associations must include either one custodian or one liquidator
+                  - Sole Proprietorships and General Partnerships must include a completing party
               items:
                 $ref: '#/components/schemas/party'
             courtOrder:
