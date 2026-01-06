@@ -6,7 +6,7 @@ info:
     email: admin@daxiom.com
     name: BCRegistry
     url: 'https://developer.bcregistry.daxiom.ca/'
-  version: '2.2.1'
+  version: '2.2.0'
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'

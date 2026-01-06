@@ -73,6 +73,17 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
     <td>Added bulk search endpoint /registry-search/api/v2/search/businesses/bulk. Released to SANDBOX 2025-06-17; released to PROD 2025-06-24.</td>
   </tr>
   <tr>
+    <td>2025-07-30</td>
+    <td>2.1.1</td>
+    <td><p>Added modernized property to the Facet_result model returned by the following endpoints in a result.
+           <ul>
+             <li>POST /v2/search/businesses</li>
+             <li>POST /v2/search/businesses/bulk</li>
+            </ul>
+         </p>
+    </td>
+  </tr>
+  <tr>
     <td>2025-11-24</td>
     <td>2.2.0</td>
     <td><p>Deprecating the following v1 endpoints and replacing them with version 2 v2:
@@ -83,17 +94,6 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
              <li>GET /v1/businesses/{identifier}/documents/filings/{filing_id}/{filing_name}</li>
             </ul>
             Released to SANDBOX 2025-11-24; released to PROD 2025-11-25.
-         </p>
-    </td>
-  </tr>
-  <tr>
-    <td>2026-01</td>
-    <td>2.2.1</td>
-    <td><p>Added modernized property to the Facet_result model returned by the following endpoints in a result.
-           <ul>
-             <li>POST /v2/search/businesses</li>
-             <li>POST /v2/search/businesses/bulk</li>
-            </ul>
          </p>
     </td>
   </tr>
