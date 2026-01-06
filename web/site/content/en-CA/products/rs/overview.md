@@ -86,6 +86,17 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
          </p>
     </td>
   </tr>
+  <tr>
+    <td>2026-01</td>
+    <td>2.2.1</td>
+    <td><p>Added modernized property to the Facet_result model returned by the following endpoints in a result.
+           <ul>
+             <li>POST /v2/search/businesses</li>
+             <li>POST /v2/search/businesses/bulk</li>
+            </ul>
+         </p>
+    </td>
+  </tr>
 </table>
 
 ---
