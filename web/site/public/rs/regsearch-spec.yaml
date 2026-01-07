@@ -1456,12 +1456,14 @@ paths:
                           name: KYLE ELECTRIC LTD.
                           score: 95.93843
                           status: ACTIVE
+                          modernized: false
                         - bn: '123'
                           identifier: BC0602833
                           legalType: BC
                           name: KYLE ENTERPRISES LTD.
                           score: 95.93843
                           status: HISTORICAL
+                          modernized: false
                         - bn: '123'
                           goodStanding: false
                           identifier: BC0103657
@@ -1469,12 +1471,14 @@ paths:
                           name: KYLE HOLDINGS LTD.
                           score: 95.93843
                           status: ACTIVE
+                          modernized: false
                         - bn: '123'
                           identifier: BC0232144
                           legalType: BC
                           name: KYLE INVESTMENTS INC.
                           score: 95.93843
                           status: HISTORICAL
+                          modernized: false
                         - bn: '123'
                           goodStanding: false
                           identifier: BC0724472
@@ -1482,12 +1486,14 @@ paths:
                           name: KYLE PRODUCTIONS LTD.
                           score: 95.93843
                           status: ACTIVE
+                          modernized: true
                         - bn: '123'
                           identifier: BC0164189
                           legalType: BC
                           name: KYLE CONSULTANTS LIMITED
                           score: 95.93843
                           status: HISTORICAL
+                          modernized: false
                         - bn: '123'
                           goodStanding: false
                           identifier: BC0481924
@@ -1495,6 +1501,7 @@ paths:
                           name: KYLE PROPERTIES LTD.
                           score: 95.93843
                           status: ACTIVE
+                          modernized: false
                         - bn: '123'
                           goodStanding: false
                           identifier: BC0360244
@@ -1502,18 +1509,21 @@ paths:
                           name: KYLE INVESTMENTS INC.
                           score: 95.93843
                           status: ACTIVE
+                          modernized: false
                         - bn: '123'
                           identifier: BC0411171
                           legalType: BC
                           name: J.H. KYLE LTD.
                           score: 95.93843
                           status: HISTORICAL
+                          modernized: false
                         - bn: '123'
                           identifier: BC0747645
                           legalType: BC
                           name: KYLE INDUSTRIES LTD.
                           score: 95.93843
                           status: HISTORICAL
+                          modernized: false
                       totalResults: 1042
                 required:
                   - facets
@@ -1698,6 +1708,7 @@ paths:
                         name: FULL BUSINESS NAME INC.
                         score: 10.525328
                         status: ACTIVE
+                        modernized: false
                       - bn: 123456788BC0001
                         goodStanding: false
                         identifier: BC0000002
@@ -1705,6 +1716,7 @@ paths:
                         name: A DIFFERENT NAME CORP.
                         score: 10.525328
                         status: ACTIVE
+                        modernized: false
                       - bn: 123456787BC0001
                         goodStanding: true
                         identifier: BC1234567
@@ -1712,12 +1724,14 @@ paths:
                         name: FOUND BY IDENTIFIER INC.
                         score: 10.525328
                         status: ACTIVE
+                        modernized: true
                       - bn: 123456787BC0001
                         identifier: FM7654321
                         legalType: FM
                         name: FOUND BY IDENTIFIER FIRM
                         score: 10.525328
                         status: ACTIVE
+                        modernized: false
                     totalResults: 4
   /v2/search/parties:
     post:
@@ -2030,6 +2044,9 @@ components:
           x-stoplight:
             id: zxsjbcbzycy25
           description: Whether or not the business is in 'good standing'. This value is only included in the response for 'active' businesses that fall under the Business Corporations Act.
+        modernized:
+          type: boolean
+          description: True indicates that data has been moved to the modernized system and documents can be purchased through the search API.      
       required:
         - identifier
         - legalType
