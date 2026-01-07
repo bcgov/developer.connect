@@ -1180,7 +1180,6 @@ paths:
                       fiscalYearEndDate: '2020-10-01'
                       foundingDate: '2020-10-01T21:20:12.666434+00:00'
                       goodStanding: false
-                      modernized: false
                       hasCorrections: false
                       hasRestrictions: false
                       identifier: BC1218851
