@@ -59,6 +59,8 @@ paths:
                   regular_wait_time: 6.0
                   priority_wait_time: 2.0
                   auto_approved_count: 0
+        400:
+          description: Invalid response from WaitTimeStatsService
         500:
           description: Internal server error
   /namex/api/v1/payments/fees:
