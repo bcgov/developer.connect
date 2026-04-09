@@ -133,3 +133,5 @@ dist
 
 .history
 .idea
+
+.firebase/
