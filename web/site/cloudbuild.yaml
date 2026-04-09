@@ -1,0 +1,67 @@
+# Cloud Build Configuration for Nuxt SSR Deployment
+# Usage: gcloud builds submit --config=web/site/cloudbuild.yaml
+# Customize PROJECT_ID, REGION, and ARTIFACT_REGISTRY_URL before deploy
+
+steps:
+  # Step 1: Build Docker image using monorepo Dockerfile with APP_NAME build arg
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build'
+    args:
+      - 'build'
+      - '--build-arg'
+      - 'APP_NAME=site'
+      - '-t'
+      - '${_ARTIFACT_REGISTRY_URL}/developer-connect-ssr:${SHORT_SHA}'
+      - '-t'
+      - '${_ARTIFACT_REGISTRY_URL}/developer-connect-ssr:latest'
+      - '-f'
+      - 'web/site/Dockerfile'
+      - '.'
+
+  # Step 2: Push image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'push'
+    args:
+      - 'push'
+      - '${_ARTIFACT_REGISTRY_URL}/developer-connect-ssr:${SHORT_SHA}'
+
+  # Step 3: Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/run'
+    id: 'deploy'
+    args:
+      - 'deploy'
+      - 'developer-connect-ssr'
+      - '--image'
+      - '${_ARTIFACT_REGISTRY_URL}/developer-connect-ssr:${SHORT_SHA}'
+      - '--region'
+      - 'northamerica-northeast1'
+      - '--project'
+      - '${_PROJECT_ID}'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '1024Mi'
+      - '--cpu'
+      - '2'
+      - '--timeout'
+      - '300'
+      - '--set-env-vars'
+      - 'NODE_ENV=production'
+
+# Configuration
+timeout: '1800s'
+machineType: 'N1_HIGHCPU_4'
+
+# Substitutions - CUSTOMIZE THESE
+substitutions:
+  _PROJECT_ID: 'gtksf3-dev'
+  _ARTIFACT_REGISTRY_URL: 'northamerica-northeast1-docker.pkg.dev/${_PROJECT_ID}/cloud-run-repo'
+
+# Images created/pushed
+images:
+  - '${_ARTIFACT_REGISTRY_URL}/developer-connect-ssr:${SHORT_SHA}'
+  - '${_ARTIFACT_REGISTRY_URL}/developer-connect-ssr:latest'
+
+# Options
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'N1_HIGHCPU_4'

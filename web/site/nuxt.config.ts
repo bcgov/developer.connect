@@ -9,21 +9,14 @@ export default defineNuxtConfig({
   },
   nitro: {
     routeRules: {
-      '/en-CA/sbc/**': { redirect: '/en-CA' }
-    },
-    prerender: {
-      routes: [],
-      ignore: [
-        '/en-CA/sbc/dashboard',
-        '/en-CA/sbc/tos',
-        '/en-CA/sbc/auth/login',
-        '/en-CA/sbc/auth/logout'
-      ]
+      '/en-CA/sbc/**': { redirect: '/en-CA' },
+      '/public/**': { cache: { maxAge: 60 * 60 * 24 * 365 } },
+      '/img/**': { cache: { maxAge: 60 * 60 * 24 * 30 } }
     }
   },
   routeRules: {
     '/': { redirect: '/en-CA' },
-    '/en-CA/oas/**': { prerender: false }
+    '/en-CA/oas/**': { cache: { maxAge: 60 * 5 } }
   },
   modules: [
     '@nuxtjs/eslint-module',
