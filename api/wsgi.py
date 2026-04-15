@@ -15,7 +15,7 @@
 """
 import os
 
-from developer-connect-api import create_app
+from developer_connect_api import create_app
 
 app = create_app() # pylint: disable=invalid-name
 
