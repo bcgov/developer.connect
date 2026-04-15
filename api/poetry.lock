@@ -1145,14 +1145,13 @@ docs = ["sphinx"]
 
 [[package]]
 name = "flask-opentracing"
-version = "2.0.0"
+version = "1.1.0"
 description = "OpenTracing support for Flask applications"
 optional = false
 python-versions = "*"
 groups = ["main"]
 files = [
-    {file = "Flask-OpenTracing-2.0.0.tar.gz", hash = "sha256:4de9db3d4f0d2b506ce3874fc721278d41b2e8b0125ea567164be0100df502fe"},
-    {file = "Flask_OpenTracing-2.0.0-py3-none-any.whl", hash = "sha256:e7086ffb3531a518c6e3bf2b365af4a51e56a0922fdd5ebe91c9ddeeda632e70"},
+    {file = "Flask-OpenTracing-1.1.0.tar.gz", hash = "sha256:a9a39d367fbe7e9ed9c77b90ac48159c1a3e82982a5abf84d3f4d710d24580ac"},
 ]
 
 [package.dependencies]
@@ -1160,7 +1159,7 @@ Flask = "*"
 opentracing = ">=2.0,<3"
 
 [package.extras]
-tests = ["flake8", "flake8-quotes", "mock", "pytest", "pytest-cov", "tox"]
+tests = ["flake8", "flake8-quotes", "mock", "pytest", "pytest-cov"]
 
 [[package]]
 name = "flask-sqlalchemy"
@@ -1318,14 +1317,8 @@ files = [
 [package.dependencies]
 google-auth = ">=2.14.1,<3.0.0"
 googleapis-common-protos = ">=1.63.2,<2.0.0"
-grpcio = [
-    {version = ">=1.75.1,<2.0.0", optional = true, markers = "python_version >= \"3.14\" and extra == \"grpc\""},
-    {version = ">=1.49.1,<2.0.0", optional = true, markers = "python_version >= \"3.11\" and extra == \"grpc\" and python_version < \"3.14\""},
-]
-grpcio-status = [
-    {version = ">=1.75.1,<2.0.0", optional = true, markers = "python_version >= \"3.14\" and extra == \"grpc\""},
-    {version = ">=1.49.1,<2.0.0", optional = true, markers = "python_version >= \"3.11\" and extra == \"grpc\""},
-]
+grpcio = {version = ">=1.49.1,<2.0.0", optional = true, markers = "python_version >= \"3.11\" and extra == \"grpc\""}
+grpcio-status = {version = ">=1.49.1,<2.0.0", optional = true, markers = "python_version >= \"3.11\" and extra == \"grpc\""}
 proto-plus = [
     {version = ">=1.25.0,<2.0.0", markers = "python_version >= \"3.13\""},
     {version = ">=1.22.3,<2.0.0"},
@@ -2980,7 +2973,7 @@ develop = false
 [package.dependencies]
 flask = "*"
 flask-jwt-oidc = ">=0.1.5"
-Flask-OpenTracing = "*"
+Flask-OpenTracing = "1.1.0"
 Flask-SQLAlchemy = "*"
 jaeger-client = "*"
 
@@ -2988,7 +2981,7 @@ jaeger-client = "*"
 type = "git"
 url = "https://github.com/bcgov/sbc-common-components.git"
 reference = "master"
-resolved_reference = "5807c201b057875f9061f60b408ab765ebaa4235"
+resolved_reference = "2f744cb3d8e90c9fdfabd5e547bcd3b7545dc28b"
 subdirectory = "python"
 
 [[package]]
@@ -3629,5 +3622,5 @@ type = ["pytest-mypy"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.12.4,<3.15"
-content-hash = "0511aa19cade645fde084930d9fd01e6cde4f03cabc4b701ef2c0ca3436fbf65"
+python-versions = ">=3.12.4,<3.14"
+content-hash = "ab560f9df33c53e147456599fea72a0ce31fe443e464ddd0b1a2efb59368b53d"
