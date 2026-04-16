@@ -8,13 +8,13 @@ readme = "README.md"
 packages = [{include = "developer-connect-api", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.12.4"
-flask = "^1.1.4"
-launchdarkly-server-sdk = "^8.3.0"
+python = ">=3.12.4,<3.15"
+flask = ">=3.0.2"
+launchdarkly-server-sdk = ">=8.3.0"
 python-dotenv = "^1.0.1"
 sentry-sdk = "^2.0.0"
-flask-babel = "2.0.0"
-flask-jwt-oidc = "^0.7.0"
+flask-babel = "^4.0.0"
+flask-jwt-oidc = ">=0.7.0"
 gunicorn = "^22.0.0"
 sbc-common-components = {git = "https://github.com/bcgov/sbc-common-components.git", rev = "master", subdirectory = "python"}
 auth-api = {git = "https://github.com/bcgov/sbc-auth.git", rev = "c286045eb2cf9761cd57b59aa4c6e7b3146ea36c", subdirectory = "auth-api"}
