@@ -4,7 +4,7 @@ First off, thank you for taking the time to contribute! ❤️
 
 > **⚠️ IMPORTANT: Central Governance**
 > 
-> We govern all our product and documentation repositories centrally. Before proceeding, you **must** read and understand our **[Organization Contributing Guidelines](https://www.google.com/search?q=https://github.com/bcgov/.github/blob/main/CONTRIBUTING.md)**.
+> We govern all our product and documentation repositories centrally. Before proceeding, you **must** read and understand our **[Organization Contributing Guidelines](https://github.com/bcgov/connect/blob/main/CONTRIBUTING.md)**.
 > 
 > The central guidelines cover our mandatory Issue-first engagement model, the Fork-Clone-Branch-PR workflow, Conventional Commits requirements, and the path to maintainership.
 
