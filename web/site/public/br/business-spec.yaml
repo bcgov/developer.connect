@@ -889,7 +889,7 @@ paths:
                   filing:
                     header:
                       name: agmExtension
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2024-07-21'
                       accountId: 1234
                     business:
@@ -922,7 +922,7 @@ paths:
                     header:
                       date: '2024-07-18'
                       name: agmLocationChange
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       accountId: 1234
                     business:
                       foundingDate: '2023-07-12T17:31:58.000+00:00'
@@ -939,7 +939,7 @@ paths:
                   filing:
                     header:
                       name: alteration
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2024-07-25'
                       accountId: 1234
                     business:
@@ -987,7 +987,7 @@ paths:
                   filing:
                     header:
                       name: annualReport
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2025-03-21'
                       accountId: 1234,
                       effectiveDate: '2025-03-21T07:00:00+00:00'
@@ -1067,7 +1067,7 @@ paths:
                     filing:
                       header:
                         name: changeOfAddress
-                        certifiedBy: "full name"
+                        authorizationReceived: true
                         email: "no_one@never.get"
                         date: '2024-07-23'
                       business:
@@ -1130,7 +1130,7 @@ paths:
                   filing:
                     header:
                       name: changeOfDirectors
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2025-03-25'
                       effectiveDate: '2025-03-25T07:00:00+00:00'
                       accountId: 1234
@@ -1203,7 +1203,7 @@ paths:
                     header:
                       name: consentContinuationOut
                       date: '2025-03-25'
-                      certifiedBy: "First Last"
+                      authorizationReceived: true
                       accountId: 1234
                     business:
                       legalName: 1234567 B.C. LTD.
@@ -1223,7 +1223,7 @@ paths:
                   filing:
                     header:
                       name: noticeOfWithdrawal
-                      certifiedBy: Sample Certified Person
+                      authorizationReceived: true
                       email: api.specs@example.com
                       date: '2024-12-18'
                       priority: false
@@ -1240,7 +1240,7 @@ paths:
                   filing:
                     header:
                       name: noticeOfWithdrawal
-                      certifiedBy: Sample Certified Person
+                      authorizationReceived: true
                       email: api.specs@example.com
                       date: '2024-12-18'
                       priority: false
@@ -1263,7 +1263,7 @@ paths:
                     header:
                       date: '2025-03-25'
                       name: dissolution
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       accountId: 1234
                     business:
                       foundingDate: '2023-07-12T17:31:58.000+00:00'
@@ -1476,7 +1476,7 @@ paths:
                   filing:
                     header:
                       accountId: 1234
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2025-03-21'
                       name: continuationIn
                     continuationIn:
@@ -2894,7 +2894,7 @@ paths:
                         accountId: 1234
                         affectedFilings: []
                         availableOnPaperOnly: false
-                        certifiedBy: First Last
+                        authorizationReceived: true
                         colinIds: []
                         comments: []
                         date: '2025-03-20T21:29:35.662445+00:00'
@@ -3099,7 +3099,7 @@ paths:
                   filing:
                     header:
                       accountId: 1234
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2024-07-26'
                       name: amalgamationApplication
                     amalgamationApplication:
@@ -3210,7 +3210,7 @@ paths:
                     filing:
                       header:
                         accountId: 1234
-                        certifiedBy: First Last
+                        authorizationReceived: true
                         date: '2024-07-26'
                         name: amalgamationApplication
                       amalgamationApplication:
@@ -3321,7 +3321,7 @@ paths:
                   filing:
                     header:
                       accountId: 1234
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2024-07-26'
                       name: amalgamationApplication
                     amalgamationApplication:
@@ -3432,7 +3432,7 @@ paths:
                   filing:
                     header: 
                       accountId: 1234
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       date: '2025-03-21'
                       name: continuationIn
                     continuationIn:
@@ -3458,7 +3458,7 @@ paths:
                 value:
                   filing:
                     header:
-                      certifiedBy: First Last
+                      authorizationReceived: true
                       name: incorporationApplication
                       date: '2025-03-20'
                       accountId: 1234
@@ -5389,6 +5389,7 @@ components:
             inColinOnly: true
             date: '2019-08-24'
             certifiedBy: John Smith
+            authorizationReceived: true
             email: John.Smith@gmail.ca
             filingId: 1234
             effectiveDate: '2019-08-24T14:15:22Z'
@@ -5466,7 +5467,17 @@ components:
           description: 'Date of the filing. '
         certifiedBy:
           type: string
-          description: 'Staff certifying filing. '
+          description: |
+            Staff certifying filing. 
+
+            **Note:** Required for Cooperative Association, General Partnership and Sole Proprietorship filings.  
+ 
+        authorizationReceived:
+          type: boolean
+          description: |
+            Indicates the client has authorized the filing submission.
+
+            **Note:** Required for Corporation filings. Must be true to indicate client authorization of the filing.
         email:
           type: string
           format: email
@@ -5588,7 +5599,6 @@ components:
       required:
         - name
         - date
-        - certifiedBy
     Filing:
       type: object
       title: Registry Filing Envelope
@@ -5601,6 +5611,7 @@ components:
               inColinOnly: true
               date: '2019-08-24'
               certifiedBy: string
+              authorizationReceived: true
               email: user@example.com
               filingId: 0
               effectiveDate: '2019-08-24T14:15:22Z'
