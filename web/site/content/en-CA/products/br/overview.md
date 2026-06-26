@@ -96,7 +96,7 @@ All data with times are in UTC, both submitted and retrieved via the API. These 
 
 - Refer to the <a href="https://www.bcregistry.gov.bc.ca/" target="_blank">BC Registry site</a> to open an account and see all the Registry services.
 
-- Refer to the <a href="https://discourse.onebc.ca/" target="_blank">Discourse Community site</a> to answer any API and service related questions.
+- Refer to the <a href="https://github.com/bcgov/api.connect/discussions" target="_blank">Community site</a> to answer any API and service related questions.
 
 ---
 

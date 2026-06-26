@@ -35,7 +35,7 @@ setBreadcrumbs([
         :title="$t('label.userForum')"
         :description="$t('text.userForum')"
         icon="i-mdi-comment-text-outline"
-        link="https://discourse.onebc.ca/"
+        link="https://github.com/bcgov/api.connect/discussions"
         external
       />
     </div>
