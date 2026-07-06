@@ -1,28 +1,28 @@
-* @thorwolpert @deetz99 @kris-daxiom @kialj876 @pwei1018 @stevenc987 @mengdong19 @ozamani9gh @rarmitag @hfekete @davemck513
+* @thorwolpert @deetz99 @kialj876 @pwei1018 @bolyachevets
 
 ## Business Registry
-/web/site/content/en-CA/products/br @argush3 @thorwolpert
-/web/site/public/br @argush3 @thorwolpert
+/web/site/content/en-CA/products/br @argush3 @thorwolpert @deetz99 @kialj876
+/web/site/public/br @argush3 @thorwolpert @deetz99 @kialj876
 
 ## Business Number
 /web/site/content/en-CA/products/bn @thorwolpert
 /web/site/public/bn @thorwolpert
 
 ## SBC Connect
-/web/site/content/en-CA/products/connect @thorwolpert @deetz99 @pwei1018 @bolyachevets @seeker25 @jxio @ochiu
-/web/site/public/connect @thorwolpert @deetz99 @pwei1018 @bolyachevets @seeker25 @jxio @ochiu
+/web/site/content/en-CA/products/connect @thorwolpert @deetz99 @pwei1018 @bolyachevets
+/web/site/public/connect @thorwolpert @deetz99 @pwei1018 @bolyachevets
 
 ## MHR - Manufactured Home Registry
 /web/site/content/en-CA/products/mhr @doug-lovett
 /web/site/public/mhr @doug-lovett
 
 ## NameX - Name Request Service
-/web/site/content/en-CA/products/namex @thorwolpert @stevenc987 @mengdong19 @ozamani9gh @rarmitag @hfekete @davemck513
-/web/site/public/namex @thorwolpert @stevenc987 @mengdong19 @ozamani9gh @rarmitag @hfekete @davemck513
+/web/site/content/en-CA/products/namex @stevenc987 @mengdong19 @ozamani9gh @davemck513
+/web/site/public/namex @stevenc987 @mengdong19 @ozamani9gh @davemck513
 
 ## Pay - Connect Payment Services
-/web/site/content/en-CA/products/pay @seeker25 @ochiu @jxio
-/web/site/public/pay @seeker25 @ochiu @jxio
+/web/site/content/en-CA/products/pay @sumesh85 @ochiu @jxio
+/web/site/public/pay @ochiu @jxio @sumesh85
 
 ## PPR - Personal Property Registry
 /web/site/content/en-CA/products/ppr @doug-lovett
@@ -33,5 +33,5 @@
 /web/site/public/rs @deetz99 @kialj876
 
 ## Short Term Rental Registry
-/web/site/content/en-CA/products/strr @kris-daxiom @thorwolpert @deetz99 @kialj876
-/web/site/public/strr @kris-daxiom @thorwolpert @deetz99 @kialj876
+/web/site/content/en-CA/products/strr @JazzarKarim @jimmypalelil @Jacky-Pham
+/web/site/public/strr @JazzarKarim @jimmypalelil @Jacky-Pham
