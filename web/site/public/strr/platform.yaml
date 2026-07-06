@@ -3,7 +3,7 @@ x-stoplight:
   id: 1d3quzhv06iyi
 info:
   title: BC Short Term Rental Registry Validation API
-  version: '0.7'
+  version: '0.8'
   termsOfService: 'https://developer.connect.gov.bc.ca/shared/api-terms-of-use.pdf'
   contact:
     url: 'https://www2.gov.bc.ca/gov/content/housing-tenancy/short-term-rentals'
@@ -28,7 +28,6 @@ paths:
           description: |-
             {
               "identifier": "H1234567",
-              "validUntil": "2025-08-24",
               "status": "ACTIVE",
               "address": {
                 "unitNumber": "101a",
@@ -47,7 +46,6 @@ paths:
                 x-examples:
                   Example 1:
                     identifier: string
-                    validUntil: '2019-08-24'
                     status: ACTIVE
                     address:
                       unitNumber: 101a
@@ -66,8 +64,6 @@ paths:
                   - address
                 properties:
                   identifier:
-                    type: string
-                  validUntil:
                     type: string
                   status:
                     type: string
@@ -106,7 +102,6 @@ paths:
                 Valid Permit:
                   value:
                     identifier: H1234567
-                    validUntil: '2025-08-24'
                     status: ACTIVE
                     address:
                       unitNumber: 101a
@@ -182,6 +177,14 @@ paths:
                       type: string
                       description: Unit number must be included if it was included in the Registration.
                     streetNumber:
+                      type: string
+                    streetName:
+                      type: string
+                    city:
+                      type: string
+                    province:
+                      type: string
+                    country:
                       type: string
                     postalCode:
                       type: string
@@ -368,6 +371,10 @@ paths:
                             type: string
                           postalCode:
                             type: string
+                          streetName:
+                            type: string
+                          city:
+                            type: string
             examples:
               Example:
                 value:
@@ -512,7 +519,6 @@ components:
       x-examples:
         Validation successful:
           identifier: H1234567
-          validUntil: '2019-08-24'
           status: ACTIVE
           address:
             unitNumber: 101a
@@ -553,10 +559,6 @@ components:
         identifier:
           type: string
           description: The registration number of the Permit
-        validUntil:
-          type: string
-          format: date
-          description: The date when the permit is no longer valid.
         status:
           enum:
             - ACTIVE
@@ -650,7 +652,7 @@ tags:
   - name: Draft
     description: The release state
   - name: Short Term Rental
-    description: 'Short-term rentals are defined under the Act as accommodations provided to members of the public in a host''s property, in exchange for money, for a period of less than 90 consecutive days.'
+    description: "Short-term rentals are defined under the Act as accommodations provided to members of the public in a host's property, in exchange for money, for a period of less than 90 consecutive days."
   - name: Verification
     description: The process of establishing the validity of a host's property as a qualified Short Term Rental
 security:

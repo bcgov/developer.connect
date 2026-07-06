@@ -2,7 +2,7 @@
   "name": "developer-connect-site",
   "private": true,
   "type": "module",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "engines": {
     "node": ">=24"
   },
