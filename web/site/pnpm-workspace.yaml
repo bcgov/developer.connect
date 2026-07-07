@@ -1,0 +1,6 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  protobufjs: true
+  sharp: true
+  vue-demi: true
