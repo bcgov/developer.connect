@@ -32,7 +32,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build-check
 
       - name: Report pnpm version
         run: pnpm --version
