@@ -9,24 +9,43 @@ description: 'SBC Connect API'
 
 ## Overview
 
-SBC Connect API (former Auth API) is a centralized authorization and authentication system designed to manage secure access across all partner applications. It ensures seamless user verification, enforces access controls, and protects sensitive resources through robust authentication mechanisms. By integrating with SBC Connect, partner apps can leverage a unified security framework, simplifying user management while maintaining compliance and security best practices.
+The SBC Connect API (formerly Auth API) covers the authentication and authorization surface behind BC Registries services.
 
-This specification focuses on creating business affiliations:
-- By passcode
-- By magic link
-- By delegation
+Two capability areas are documented here:
 
+### Business Affiliations
 
-More to be added in the future.
+Endpoints used by **Business Registry** to add the businesses managed by a BC Registries account. A business can be affiliated to an account using one of three methods:
+- Passcode
+- Magic link
+- Delegation
+
+These endpoints are consumed internally by Business Registry and are not typically called directly by external vendors or partner apps.
+
+### Account Linking <span style="display:inline-block;background:#e5e7eb;color:#1a5a96;padding:2px 8px;border-radius:4px;font-size:0.85em;margin-left:6px;vertical-align:middle;">Coming soon</span>
+
+Account linking lets a **vendor account** (e.g. a filing vendor) act on behalf of a **source account** (e.g. a lawfirm) using a shared **linking key**. The vendor works with the source account's affiliated businesses; billing routes to the vendor's own account. The source account issues the key and can revoke it at any time.
+
+#### How it works
+
+1. **The source account generates a linking key.** An admin or coordinator on the source account signs in to their BC Registries account and generates a linking key. The key is shared with the vendor out of band (for example, by email or a direct handoff).
+2. **The vendor binds the key** to their own account by calling the bind endpoint. Once bound, the key is active for use.
+3. **The vendor uses the key** on subsequent requests to any BC Registries API by sending it as an extra header:
+
+    ```
+    Account-Id: <vendor's own account id>
+    x-apikey: <vendor's API key>
+    Account-Linking-Key: <the shared secret>
+    ```
+
+    Requests are resolved against the source account's affiliated businesses, but any invoiceable action is billed to the vendor's account.
+4. **The source can revoke the key** at any time. Keys also expire automatically after 365 days.
+
+Only one active key is permitted per (source, vendor) pair. Generating a new key for the same pair supersedes the previous one.
 <br>
 
 ::ButtonDownloadSpec{href="/connect/connect-spec.yaml" download="connect-spec.yaml"}
 ::
-
-<br>
-<br>
-
-**Note:** All requests must include a **BC Registries issued API key** and an **Account ID**.
 
 ---
 
