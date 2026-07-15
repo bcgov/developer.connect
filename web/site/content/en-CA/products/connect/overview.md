@@ -13,7 +13,7 @@ The SBC Connect API (formerly Auth API) exposes the account, identity, and deleg
 
 | Section | Audience | What it does |
 | ------- | -------- | ------------ |
-| [Partner Authentication](#partner-authentication) | Partner apps | Resolve the user's BC Registries accounts after SSO |
+| [Partner Authentication](#partner-authentication) | Ministry / Partner applications | Resolve the user's BC Registries accounts after SSO |
 | [Business Affiliations](#business-affiliations) | Internal (Business Registry) | Attach businesses to a BC Registries account |
 | [Account Linking](#account-linking) | Vendor / API accounts | Act on a customer account using a shared linking key |
 
@@ -71,7 +71,7 @@ These endpoints are consumed internally by Business Registry and are not typical
 
 ## Account Linking <span style="display:inline-block;background:#e5e7eb;color:#1a5a96;padding:2px 8px;border-radius:4px;font-size:0.85em;margin-left:6px;vertical-align:middle;">Coming soon</span>
 
-Account linking lets a **vendor account** (e.g. a filing vendor) act on behalf of a **source account** (e.g. a lawfirm) using a shared **linking key**. The vendor works with the source account's affiliated businesses; billing routes to the vendor's own account.
+Account linking lets a **vendor account** (e.g. third-party software for registration submissions) submit data digitally on behalf of a **source account** (e.g. a lawfirm) using a shared **linking key**. The vendor works with the source account's affiliated businesses; billing routes to the vendor's own account.
 
 A link is established through a browser redirect handshake that the vendor initiates. The source account's admin authenticates at BC Registries, picks the account, and confirms the link. On success, BC Registries redirects back to the vendor with the linking key.
 
@@ -87,7 +87,7 @@ Before you can use account linking, register the return URL(s) your vendor app w
     GET <BC Registries account linking URL>?vendorAccountId=<vendor account id>&returnUrl=<allow-listed URL>
     ```
 
-2. **The user signs in** to BC Registries and, in the account picker, selects the source account they want to link. A confirmation step names the vendor being linked so the user knows what they are authorizing.
+2. **The user signs in** to BC Registries and, in the account picker, selects the source account they want to link. A confirmation step names the vendor being linked so the user knows what they are authorizing through the vendor's request.
 3. **BC Registries mints and binds the linking key** in a single step, associating the selected source account with the vendor account. There is no separate bind call for the vendor to make.
 4. **BC Registries redirects the user's browser** back to the return URL with the source account id and the linking key appended as query parameters:
 
@@ -107,11 +107,12 @@ x-apikey: <vendor's API key>
 Account-Linking-Key: <the stored key for the target source account>
 ```
 
-Requests are resolved against the source account's affiliated businesses; billing routes to the vendor's account.
+Requests are resolved against the source account's affiliated businesses. All transaction summaries are logged on the vendor account only.
 
 #### Lifecycle
 
 - **One active key per (source, vendor) pair.** Running the handshake again for the same pair supersedes the previous key.
+- **Expiration.** Account linking keys expire 365 days after they are issued. The source account administrator can obtain a new linking key at any time by logging in to BC Registries through the vendor system; the new key supersedes the old.
 - **Revocation.** Admins and coordinators on the source account can revoke the linking key at any time from their BC Registries account. Subsequent API calls from the vendor using a revoked key return `401 Unauthorized`.
 
 ---
@@ -157,7 +158,7 @@ View the definition and select a path to try it out. To submit a request you wil
   <tr>
     <td>2026-07-15</td>
     <td>1.0.3</td>
-    <td>Added Partner Authentication endpoints (<code>GET /users/@me</code>, <code>GET /users/orgs</code>).</td>
+    <td>Added Account Linking sections.</td>
   </tr>
   <tr>
     <td>2025-04-11</td>
@@ -183,7 +184,7 @@ Updates of note to this page are recorded here.
   </tr>
   <tr>
     <td>2026-07-15</td>
-    <td>Restructured overview around three audience-specific sections (Partner Authentication, Business Affiliations, Account Linking).</td>
+    <td>Added Account Linking sections.</td>
   </tr>
   <tr>
     <td>2025-04-03</td>
