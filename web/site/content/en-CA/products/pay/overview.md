@@ -28,7 +28,7 @@ With this API you can submit the following transactions:
 <br>
 <br>
 
-**Note:** All requests must include a **BC Registries issued API key** and an **Account ID**.
+**Note:** All requests must include a **BC Registries issued API key** and an **Account ID**. Partner apps that authenticate end users via BC Registries SSO also include the end user's **bearer token** on each request; the Account ID identifies **which** of the user's BC Registries accounts the request is made under (a user may belong to more than one).
 
 ---
 
@@ -36,7 +36,7 @@ With this API you can submit the following transactions:
 
 View the definition and select a path to try it out. To submit a request, you will need an API key and an account ID, which you can get by completing the [account setup](/products/get-started/account-setup) process. To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
-<a href="/en-CA/oas/pay" target="_blank">> View the API</a>
+<a href="/en-CA/oas/pay" target="_blank">View the API</a>
 
 ---
 
@@ -56,9 +56,9 @@ View the definition and select a path to try it out. To submit a request, you wi
   <tr>
     <td>POST /pay/api/v1/payment-requests</td>
     <td>
-      Create invoice records. This will create transaction records in payment 
-      system based on account settings. Below payment methods are decided based 
-      on the account preference.
+      Create invoice records. This will create transaction records in payment
+      system based on account settings. Payment methods are decided based
+      on the account preference:
       <ul>
         <li>Credit Card</li>
         <li>Pre Authorized Debit</li>
@@ -92,21 +92,32 @@ View the definition and select a path to try it out. To submit a request, you wi
   </tr>
   <tr>
     <td>POST /pay/api/v1/accounts/{accountId}/payments/queries</td>
-    <td>Query account transaction reports.</td>
+    <td>Query the account's transaction history. The request body accepts filters (such as a date range); pagination is controlled with <code>page</code> and <code>limit</code> query parameters. Each result includes the transaction status, payment method, fees, refund amount, and a link to the underlying invoice.</td>
   </tr>
   <tr>
     <td>GET /pay/api/v1/accounts/{accountId}/statements</td>
-    <td>
-        Get a list of statements generated for the account. NOTE: BACKEND STATEMENT GENERATION JOB NOT CURRENTLY IMPLEMENTED, NO DATA WIP
-    </td>
+    <td>Get a list of statements generated for the account.</td>
   </tr>
   <tr>
-    <td>GET /pay/api/v1/accounts/{accountId}/statments/{statementId}</td>
-    <td>
-      Return the statement as either PDF or CSV. NOTE: BACKEND STATEMENT GENERATION JOB NOT CURRENTLY IMPLEMENTED, NO DATA WIP
-    </td>
+    <td>GET /pay/api/v1/accounts/{accountId}/statements/{statementId}</td>
+    <td>Return the statement as either PDF or CSV.</td>
   </tr>
 </table>
+
+---
+
+## Completing a Payment for Partner Apps
+
+Some payment methods require user action at the point of sale. For **partner apps** whose end users pay by **credit card** or **online banking**, the flow is a browser hand-off:
+
+1. **Create the invoice** by calling `POST /pay/api/v1/payment-requests`. The response body includes an `isPaymentActionRequired` flag.
+2. **If `isPaymentActionRequired` is `true`**, redirect the end user's browser to the SBC Connect payment page, passing the invoice identifier and a return URL. The SBC Connect payment page hosts the payment flow and interacts with the payment provider on your behalf.
+3. **On return**, the user's browser is redirected back to your return URL whether they completed or cancelled the payment. Call `GET /pay/api/v1/payment-requests/{invoice_identifier}` and check the invoice `statusCode`:
+    - `COMPLETED`: payment succeeded.
+    - `CREATED`: the user did not complete payment. For online banking, this can also mean the payment was submitted but has not yet settled; a subsequent GET will reflect the update.
+    - `CANCELLED`: the invoice was cancelled.
+
+API accounts using pre-authorized debit do not require user action. Settlement is batched separately, and `isPaymentActionRequired` will be `false`.
 
 ---
 
@@ -161,9 +172,5 @@ Updates of note to this page are recorded here.
   <tr>
     <th>Date</th>
     <th>Description</th>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
   </tr>
 </table>

@@ -2,15 +2,60 @@ openapi: 3.0.1
 info:
   title: SBC Connect API former Auth API
   description: |-
-    <p>SBC Connect API is used to manage the SBC Connect accounts. The system manages the authorizations related data and does integration with keycloak. This specification focuses on documentating the relationship between an account and a entity (Name Request/Business). There are three different methods - Passcode, Magic Link, Delegation.</p>
-    <br/>
-    All API requests must include an issued API key.
-  version: 1.0.2
+    <p>SBC Connect API exposes the account, identity, and delegation surfaces behind BC Registries services. Endpoints are grouped by consumer:</p>
+    <ul>
+      <li><strong>Partner Authentication</strong>: resolve the current user and the BC Registries accounts they belong to (for partner apps whose users sign in via BC Registries SSO).</li>
+      <li><strong>Business Affiliations</strong>: attach businesses to a BC Registries account (Passcode / Magic Link / Delegation). Consumed by Business Registry internally.</li>
+    </ul>
+    All requests must include an API key. Endpoints that act on user identity or account membership additionally require a bearer token obtained via BC Registries SSO.
+  version: 1.0.3
   contact:
     name: BC Registries
   license:
     name: Apache 2.0
 paths:
+  /auth/api/v1/users/@me:
+    get:
+      summary: Get the current user
+      description: Returns the user profile associated with the bearer token. Partner apps call this to identify the signed-in user (e.g. to display the user's name).
+      tags:
+        - Partner Authentication
+      operationId: get_current_user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Not Authorized
+        '404':
+          description: User not found
+  /auth/api/v1/users/orgs:
+    get:
+      summary: List BC Registries accounts for the current user
+      description: |-
+        Returns every BC Registries account (org) that the signed-in user is associated with. Partner apps use this to build an account picker after SSO. The `id` of the selected org becomes the `Account-Id` header on subsequent requests.
+      tags:
+        - Partner Authentication
+      operationId: get_user_organizations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orgs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Org'
+        '401':
+          description: Not Authorized
+        '404':
+          description: User not found
   /auth/api/v1/orgs/affiliation/{business_identifier}:
     parameters:
     - name: business_identifier
@@ -662,6 +707,76 @@ servers:
     description: "Production"
 components:
   schemas:
+    UserProfile:
+      type: object
+      description: The user profile associated with the current bearer token. Additional fields may be returned; the properties below are the ones stable enough for partner apps to rely on.
+      properties:
+        id:
+          type: integer
+          example: 12345
+        firstname:
+          type: string
+          example: "Jane"
+        lastname:
+          type: string
+          example: "Smith"
+        username:
+          type: string
+          example: "jsmith@idir"
+        keycloakGuid:
+          type: string
+          format: uuid
+          example: "b3d6b8f0-6a3d-4c2c-9a11-6f2b5c9c1234"
+        userStatus:
+          type: integer
+          description: Numeric status code for the user
+          example: 1
+        userTerms:
+          type: object
+          properties:
+            isTermsOfUseAccepted:
+              type: boolean
+              example: true
+            termsOfUseAcceptedVersion:
+              type: string
+              example: "d1"
+    Org:
+      type: object
+      description: A BC Registries account (org) the current user belongs to. Additional fields may be present; the properties below are the ones a partner picker typically needs.
+      properties:
+        id:
+          type: integer
+          description: Account identifier. Send this as the `Account-Id` header on subsequent calls.
+          example: 574
+        uuid:
+          type: string
+          format: uuid
+          example: "e50a83f6-606d-42b6-a7cf-54555af76037"
+        name:
+          type: string
+          example: "Acme Legal"
+        branchName:
+          type: string
+          description: Optional differentiator when a user belongs to multiple branches of the same account.
+          example: "Downtown"
+        orgType:
+          type: string
+          example: "PREMIUM"
+        orgStatus:
+          type: string
+          example: "ACTIVE"
+        statusCode:
+          type: string
+          example: "ACTIVE"
+        typeCode:
+          type: string
+          example: "PREMIUM"
+        accessType:
+          type: string
+          example: "REGULAR"
+        isBusinessAccount:
+          type: boolean
+          example: false
     AffiliationResponse:
       type: object
       properties:

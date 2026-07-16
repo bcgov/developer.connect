@@ -210,6 +210,8 @@ paths:
         fee_1:
           value: false
   /pay/api/v1/payment-requests:
+    parameters:
+      - $ref: '#/components/parameters/AccountLinkingKeyHeader'
     post:
       tags:
       - "Invoice"
@@ -435,6 +437,7 @@ paths:
         in: "header"
         name: "Account-Id"
     parameters:
+    - $ref: '#/components/parameters/AccountLinkingKeyHeader'
     - schema:
         type: "string"
       name: "invoice_identifier"
@@ -655,6 +658,7 @@ paths:
         in: "header"
         name: "Account-Id"
     parameters:
+    - $ref: '#/components/parameters/AccountLinkingKeyHeader'
     - schema:
         type: "string"
       name: "invoice_identifier"
@@ -711,6 +715,7 @@ paths:
         description: "Generate receipt request"
   /pay/api/v1/accounts/{accountId}/payments/queries:
     parameters:
+    - $ref: '#/components/parameters/AccountLinkingKeyHeader'
     - schema:
         type: "string"
       name: "accountId"
@@ -1044,6 +1049,7 @@ paths:
                     endDate: "2020-12-31"
   /pay/api/v1/accounts/{accountId}/statements:
     parameters:
+    - $ref: '#/components/parameters/AccountLinkingKeyHeader'
     - schema:
         type: "string"
       name: "accountId"
@@ -1243,6 +1249,7 @@ paths:
         description: "Number of records to include"
   /pay/api/v1/accounts/{accountId}/statements/{statementId}:
     parameters:
+    - $ref: '#/components/parameters/AccountLinkingKeyHeader'
     - schema:
         type: "string"
       name: "accountId"
@@ -1293,6 +1300,15 @@ paths:
         description: "Accept"
         required: true
 components:
+  parameters:
+    AccountLinkingKeyHeader:
+      name: "Account-Linking-Key"
+      in: "header"
+      required: false
+      schema:
+        type: "string"
+      description: |-
+        Present only when using SBC Connect Account Linking. Vendors include the shared secret received from a source account so the request is resolved against the source account's affiliated businesses while billing remains with the vendor. See the SBC Connect API "Account Linking" section for details.
   schemas:
     ErrorResponse:
       type: "object"
