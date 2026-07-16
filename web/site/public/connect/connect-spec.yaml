@@ -6,7 +6,6 @@ info:
     <ul>
       <li><strong>Partner Authentication</strong>: resolve the current user and the BC Registries accounts they belong to (for partner apps whose users sign in via BC Registries SSO).</li>
       <li><strong>Business Affiliations</strong>: attach businesses to a BC Registries account (Passcode / Magic Link / Delegation). Consumed by Business Registry internally.</li>
-      <li><strong>Account Linking</strong>: issue and bind linking keys so a vendor account can act on behalf of a source account (for vendor / API accounts).</li>
     </ul>
     All requests must include an API key. Endpoints that act on user identity or account membership additionally require a bearer token obtained via BC Registries SSO.
   version: 1.0.3
@@ -701,112 +700,6 @@ paths:
       tags:
         - Affiliation Invitation (Magic Link / Delegation)
       summary: Authorize or refuse an affiliation invitation (Delegation only)
-  /auth/api/v1/orgs/{orgId}/linking-keys:
-    parameters:
-      - name: orgId
-        in: path
-        description: Source account (org) identifier
-        required: true
-        schema:
-          type: integer
-    get:
-      summary: List linking keys for a source account
-      description: |-
-        **Used by the BC Registries account UI, not by external vendor apps.** Account owners view and manage their issued linking keys through their BC Registries account; this endpoint backs that UI.
-
-        Returns all active keys for the source account. The secret value is never returned by this endpoint.
-      tags:
-        - Account Linking
-      operationId: get_linking_keys
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  linkingKeys:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AccountLinkingKeyResponse'
-        '401':
-          description: Not Authorized
-        '403':
-          description: Not Authorized
-        '404':
-          description: Organization not found
-        '501':
-          description: Account linking is disabled
-    post:
-      summary: Generate a new linking key
-      description: |-
-        **Used by the BC Registries account UI, not by external vendor apps.** In the shipped flow, keys are minted and bound automatically as part of the redirect handshake initiated by the vendor; vendors do not call this endpoint directly.
-
-        Generates a new linking key associating a source account with a vendor account. The secret value (`linkingKey`) is returned **only once** in this response.
-      tags:
-        - Account Linking
-      operationId: post_linking_key
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                vendorAccountId:
-                  type: integer
-                  description: Vendor account (org) identifier to bind the new key to. Omit to create an unbound key.
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountLinkingKeyResponseWithSecret'
-        '400':
-          description: Bad Request
-        '401':
-          description: Not Authorized
-        '403':
-          description: Not Authorized
-        '404':
-          description: Organization not found
-        '501':
-          description: Account linking is disabled
-  /auth/api/v1/orgs/{orgId}/linking-keys/{keyId}:
-    parameters:
-      - name: orgId
-        in: path
-        description: Source account (org) identifier
-        required: true
-        schema:
-          type: integer
-      - name: keyId
-        in: path
-        description: Linking key identifier
-        required: true
-        schema:
-          type: integer
-    delete:
-      summary: Revoke a linking key
-      description: |-
-        **Used by the BC Registries account UI, not by external vendor apps.** Admins and coordinators on the source account revoke a linking key through their BC Registries account; this endpoint backs that action.
-
-        Revokes (soft-deletes) an issued key. A revoked key can no longer be used for authorization; subsequent vendor calls using it return `401 Unauthorized`.
-      tags:
-        - Account Linking
-      operationId: delete_linking_key
-      responses:
-        '200':
-          description: Success
-        '401':
-          description: Not Authorized
-        '403':
-          description: Not Authorized
-        '404':
-          description: Not Found
-        '501':
-          description: Account linking is disabled
 servers:
   - url: "https://sandbox.api.connect.gov.bc.ca"
     description: "Test"
@@ -1397,58 +1290,6 @@ components:
                 type: string
                 description: "State of the business"
                 example: "ACTIVE"
-    AccountLinkingKeyResponse:
-      type: object
-      description: A linking key record. The secret value is only returned on generation; list responses omit it.
-      properties:
-        id:
-          type: integer
-          example: 42
-        accountId:
-          type: integer
-          description: Source account (org) identifier
-          example: 574
-        vendorAccountId:
-          type: integer
-          nullable: true
-          description: Vendor account (org) identifier bound to this key, if any
-          example: 2821
-        vendorAccountName:
-          type: string
-          nullable: true
-          description: Display name of the vendor account bound to this key
-          example: "API Testing"
-        status:
-          type: string
-          description: Lifecycle state of the key
-          enum: [ACTIVE, PENDING, REVOKED]
-          example: ACTIVE
-        expiresOn:
-          type: string
-          format: date-time
-          example: "2027-06-22T15:35:30+00:00"
-        lastUsed:
-          type: string
-          format: date-time
-          nullable: true
-          example: "2026-07-12T21:04:11+00:00"
-        createdOn:
-          type: string
-          format: date-time
-          example: "2026-06-22T15:35:30+00:00"
-        createdBy:
-          type: string
-          nullable: true
-          example: "Bena Thirteen"
-    AccountLinkingKeyResponseWithSecret:
-      allOf:
-        - $ref: '#/components/schemas/AccountLinkingKeyResponse'
-        - type: object
-          properties:
-            linkingKey:
-              type: string
-              description: The secret value of the key. Returned only in the generation response.
-              example: "xn0Q8yZ8-K2p3S1qLmVw..."
   securitySchemes:
     JWT:
       type: "http"
