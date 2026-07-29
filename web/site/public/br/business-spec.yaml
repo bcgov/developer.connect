@@ -1479,6 +1479,8 @@ paths:
                       authorizationReceived: true
                       date: '2025-03-21'
                       name: continuationIn
+                    business:
+                      identifier: TO12345678
                     continuationIn:
                         authorization:
                           files:
@@ -3102,6 +3104,8 @@ paths:
                       authorizationReceived: true
                       date: '2024-07-26'
                       name: amalgamationApplication
+                    business: 
+                      identifier: TO12345678
                     amalgamationApplication:
                       amalgamatingBusinesses:
                         - identifier: BC0883189
@@ -3213,6 +3217,8 @@ paths:
                         authorizationReceived: true
                         date: '2024-07-26'
                         name: amalgamationApplication
+                      business: 
+                        identifier: TO12345678
                       amalgamationApplication:
                         amalgamatingBusinesses:
                           - identifier: BC0883189
@@ -3324,6 +3330,8 @@ paths:
                       authorizationReceived: true
                       date: '2024-07-26'
                       name: amalgamationApplication
+                    business: 
+                      identifier: TO12345678
                     amalgamationApplication:
                       amalgamatingBusinesses:
                         - identifier: BC0883189
@@ -3435,6 +3443,8 @@ paths:
                       authorizationReceived: true
                       date: '2025-03-21'
                       name: continuationIn
+                    business: 
+                      identifier: TO12345678
                     continuationIn:
                       authorization: 
                           files: 
@@ -3462,6 +3472,8 @@ paths:
                       name: incorporationApplication
                       date: '2025-03-20'
                       accountId: 1234
+                    business: 
+                      identifier: TO12345678
                     incorporationApplication:
                       nameRequest:
                         legalType: BEN
@@ -3547,6 +3559,8 @@ paths:
                       email: "no_one@never.get"
                       date: '2024-07-26'
                       name: registration
+                    business: 
+                      identifier: TO12345678
                     registration: 
                       business: 
                         natureOfBusiness: sample business
