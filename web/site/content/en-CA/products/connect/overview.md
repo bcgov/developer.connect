@@ -65,7 +65,7 @@ Endpoints used by **Business Registry** to attach the businesses managed by a BC
 - Magic link
 - Delegation
 
-These endpoints are consumed internally by Business Registry and are not typically called directly by external vendors or partner apps.
+These endpoints are used to get the affiliations on an account. An `Account-Linking-Key` gives access to a source account's affiliations (see [Account Linking](#account-linking)).
 
 ---
 

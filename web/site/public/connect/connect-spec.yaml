@@ -271,28 +271,90 @@ paths:
           description: Not Authorized (missing affiliation)
         '404':
           description: Business not found
-  # Rajandeep please update this.
-  # /auth/api/v1/orgs/{account_id}/affiliations/search:
-  #   tags:
-  #     - Passcode / Magic link / Delegation prerequisites
-  #   get:
-  #     summary: Get affiliations for account (search endpoint, WIP)
-  #     description: The Business Dashboard calls get affiliations via search for account. This will change in the near future to include pagination. Request Parameters and response likely to change. This is a WIP and is likely broken, it calls into NAMES and LEAR to build it's data. I wouldn't recommend using this route for now, use the /{account_id}/affiliations route instead.
-  #     tags:
-  #       - Affiliations
-  #     responses:
-  #       '200':
-  #         description: Successful
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/AffiliationSearchResponse'
-  #       '401':
-  #         description: Not Authorized
-  #       '403':
-  #         description: Not Authorized (missing affiliation)
-  #       '404':
-  #         description: Business not found
+  /auth/api/v1/orgs/{account_id}/affiliations/search:
+      parameters:
+          - name: account_id
+            in: path
+            description: account id
+            required: true
+            schema:
+              type: integer
+      tags:
+        - Passcode / Magic link / Delegation prerequisites
+      get:
+        summary: Search affiliations for account
+        description: >
+          Returns affiliations for the given account with support for filtering and
+          pagination. Calls into Names and LEAR to hydrate business details.
+
+          Callers may access this endpoint as a member of `{account_id}`, OR as a
+          vendor presenting an `Account-Linking-Key` issued by `{account_id}`. In the
+          vendor case, `{account_id}` in the URL must equal the source account that
+          issued the key, otherwise 403.
+        tags:
+          - Affiliations
+        parameters:
+          - name: identifier
+            in: query
+            description: Filter by business identifier.
+            required: false
+            schema:
+              type: string
+          - name: status
+            in: query
+            description: Filter by status. May be repeated to match multiple statuses.
+            required: false
+            schema:
+              type: array
+              items:
+                type: string
+          - name: name
+            in: query
+            description: Filter by business name.
+            required: false
+            schema:
+              type: string
+          - name: type
+            in: query
+            description: Filter by corp type. May be repeated to match multiple types.
+            required: false
+            schema:
+              type: array
+              items:
+                type: string
+          - name: page
+            in: query
+            description: Page number (1-indexed).
+            required: false
+            schema:
+              type: integer
+              default: 1
+          - name: limit
+            in: query
+            description: Page size.
+            required: false
+            schema:
+              type: integer
+        security:
+          - JWT: []
+          - api_key: []
+          - JWT: []
+            AccountLinkingKey: []
+          - api_key: []
+            AccountLinkingKey: []
+        responses:
+          '200':
+            description: Successful
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/AffiliationSearchResponse'
+          '401':
+            description: Not Authorized
+          '403':
+            description: Not Authorized (missing affiliation, or invalid/expired/wrong-vendor linking key)
+          '404':
+            description: Business not found
   /auth/api/v1/orgs/{account_id}/affiliations:
       parameters:
           - name: account_id
@@ -307,9 +369,25 @@ paths:
       description: Get entity authentication to see if the entity has passcode or magic link email available.
       get:
         summary: Get affiliations for account
-        description: This is an older version (doesn't call into Names / LEAR for business information like our search endpoint that is WIP) of the affiliation endpoint that should be working.
+        description: >
+          Returns affiliations for the given account. Callers may access this endpoint
+          as a member of `{account_id}`, OR as a vendor presenting an
+          `Account-Linking-Key` issued by `{account_id}`. In the vendor case,
+          `{account_id}` in the URL must equal the source account that issued the key,
+          otherwise 403.
+
+          This is an older version (doesn't call into Names / LEAR for business
+          information like our search endpoint that is WIP) of the affiliation endpoint
+          that should be working.
         tags:
           - Affiliations
+        security:
+          - JWT: []
+          - api_key: []
+          - JWT: []
+            AccountLinkingKey: []
+          - api_key: []
+            AccountLinkingKey: []
         responses:
           '200':
             description: Successful
@@ -320,7 +398,7 @@ paths:
           '401':
             description: Not Authorized
           '403':
-            description: Not Authorized (missing affiliation)
+            description: Not Authorized (missing affiliation, or invalid/expired/wrong-vendor linking key)
           '404':
             description: Business not found
       post:
@@ -1298,6 +1376,15 @@ components:
       name: "x-apikey"
       type: "apiKey"
       in: "header"
+    AccountLinkingKey:
+      name: "Account-Linking-Key"
+      type: "apiKey"
+      in: "header"
+      description: >
+        Shared secret issued by a source account (e.g. a lawfirm) to a vendor,
+        allowing the vendor to access the source account's affiliated businesses.
+        Presented alongside the vendor's own authentication. Key lifecycle
+        (generation, binding, revocation) is managed through the UI.
 security:
 - api_key: []
 - JWT: []
