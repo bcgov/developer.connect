@@ -399,25 +399,43 @@ paths:
         notification:
           '{$request.body#/control/callBackUrl}':
             post:
-              summary: Receive single notification about a batch
+              summary: Receive completion notification with presigned download URL
+              description: >-
+                Dispatched upon completion of the batch validation job. Delivers
+                a temporary presigned URL (fileUrl) to download the complete
+                batch validation result JSON file.
               requestBody:
+                required: true
                 content:
+                  application/x-www-form-urlencoded:
+                    schema:
+                      type: object
+                      required:
+                        - fileUrl
+                      properties:
+                        fileUrl:
+                          type: string
+                          format: uri
+                          description: >-
+                            Temporary presigned URL to download the batch
+                            validation results JSON file.
+                          example: 'https://storage.googleapis.com/strr_bulk_validation_responses_prod/48ad98c4-38ce-426d-bf61-d722fa186f2b?X-Goog-Algorithm=...'
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - fileUrl
                       properties:
-                        control:
-                          type: object
-                          $ref: '#/components/schemas/control'
-                        data:
-                          type: array
-                          x-stoplight:
-                            id: u3550r8tzkckb
-                          items:
-                            $ref: '#/components/schemas/batchRecord'
+                        fileUrl:
+                          type: string
+                          format: uri
+                          description: >-
+                            Temporary presigned URL to download the batch
+                            validation results JSON file.
+                          example: 'https://storage.googleapis.com/strr_bulk_validation_responses_prod/48ad98c4-38ce-426d-bf61-d722fa186f2b?X-Goog-Algorithm=...'
               responses:
                 '200':
-                  description: Notification successfully processed
+                  description: Notification successfully processed by client endpoint
                   content:
                     text/plain:
                       examples:
