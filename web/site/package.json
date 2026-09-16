@@ -33,7 +33,7 @@
     "@vue/test-utils": "^2.4.6",
     "eslint": "^8.57.0",
     "eslint-plugin-tailwindcss": "^3.17.4",
-    "happy-dom": "^13.10.1",
+    "happy-dom": "^20.0.0",
     "nuxt": "^3.21.11",
     "nuxt-gtag": "^3.0.1",
     "playwright-core": "^1.45.1",
