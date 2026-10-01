@@ -35,7 +35,7 @@
     "eslint-plugin-tailwindcss": "^3.17.4",
     "happy-dom": "^13.10.1",
     "nuxt": "^3.21.11",
-    "nuxt-gtag": "^3.0.1",
+    "nuxt-gtag": "^5.0.0",
     "playwright-core": "^1.45.1",
     "typescript": "^5.5.3",
     "vitest": "^1.6.0",
