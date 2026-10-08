@@ -1,3 +1,3 @@
 <template>
-  <hr class="border border-bcGovGray-400">
+  <hr class="my-6 border-t border-[#ced4da] dark:border-gray-700">
 </template>

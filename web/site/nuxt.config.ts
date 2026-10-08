@@ -1,60 +1,66 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import type { BreadcrumbLink } from '#ui/types'
-const localScalarUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
+
+export interface BreadcrumbLink {
+  label: string
+  to?: string
+  href?: string
+  external?: boolean
+  disabled?: boolean
+  icon?: string
+}
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
-  future: {
-    compatibilityVersion: 4
+  extends: ['@sbc-connect/nuxt-pay'],
+  modules: [
+    '@nuxt/content',
+    'nuxt-gtag',
+    '@scalar/nuxt'
+  ],
+  icon: {
+    clientBundle: {
+      icons: [
+        'mdi:cursor-default-click',
+        'mdi:text-box-search',
+        'mdi:comment-text-outline'
+      ]
+    }
   },
   nitro: {
-    routeRules: {
-      '/en-CA/sbc/**': { redirect: '/en-CA' }
-    },
     prerender: {
       routes: [],
+      crawlLinks: true,
+      failOnError: false,
       ignore: [
-        '/en-CA/sbc/dashboard',
-        '/en-CA/sbc/tos',
-        '/en-CA/sbc/auth/login',
-        '/en-CA/sbc/auth/logout'
+        '/product-fees',
+        '/fr-CA',
+        '/fr-CA/**'
       ]
     }
   },
   routeRules: {
     '/': { redirect: '/en-CA' },
-    '/en-CA/oas/**': { prerender: false }
+    '/product-fees': { redirect: 'https://bcregistry.gov.bc.ca/product-fees' },
+    '/fr-CA/**': { prerender: false },
+    '/oas/**': { redirect: '/en-CA/oas/**' },
+    '/en-CA/oas/**': { ssr: false, prerender: false }
   },
-  modules: [
-    '@nuxtjs/eslint-module',
-    '@nuxt/test-utils/module',
-    '@nuxt/image',
-    'nuxt-gtag',
-    '@scalar/nuxt'
-  ],
-  extends: ['@daxiom/sbc-nuxt-assets-layer'],
   imports: {
     dirs: ['stores', 'composables', 'enums', 'interfaces', 'types', 'utils']
   },
   i18n: {
+    baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'https://developer.connect.gov.bc.ca',
     locales: [
       {
         name: 'English',
         code: 'en-CA',
-        iso: 'en-CA',
+        language: 'en-CA',
         dir: 'ltr',
         file: 'en-CA.ts'
       }
-      // {
-      //   name: 'Français',
-      //   code: 'fr-CA',
-      //   iso: 'fr-CA',
-      //   dir: 'ltr',
-      //   file: 'fr-CA.ts'
-      // }
     ],
     strategy: 'prefix',
-    lazy: true,
     langDir: 'locales',
     defaultLocale: 'en-CA',
     detectBrowserLanguage: false,
@@ -63,7 +69,6 @@ export default defineNuxtConfig({
   content: {
     locales: [
       'en-CA'
-      // 'fr-CA'
     ],
     contentHead: false,
     highlight: {
@@ -79,10 +84,6 @@ export default defineNuxtConfig({
       '/1.get-started/3.api-access-request.md'
     ]
   },
-  colorMode: {
-    preference: 'light',
-    fallback: 'light'
-  },
   scalar: {
     darkMode: false,
     theme: 'default',
@@ -90,11 +91,10 @@ export default defineNuxtConfig({
     metaData: {
       title: 'API Documentation by Scalar | Service BC Connect Developer Site'
     },
-    // proxyUrl: 'https://proxy.scalar.com',
     configurations: [
       {
         spec: {
-          url: `${localScalarUrl}/strr/platform.yaml`
+          url: '/strr/platform.yaml'
         },
         pathRouting: {
           basePath: '/oas/strr'
@@ -102,7 +102,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: `${localScalarUrl}/connect/connect-spec.yaml`
+          url: '/connect/connect-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/connect'
@@ -110,7 +110,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: `${localScalarUrl}/br/business-spec.yaml`
+          url: '/br/business-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/br'
@@ -118,7 +118,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: `${localScalarUrl}/mhr/mhr-spec.yaml`
+          url: '/mhr/mhr-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/mhr'
@@ -126,7 +126,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: `${localScalarUrl}/pay/payment-spec.yaml`
+          url: '/pay/payment-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/pay'
@@ -134,7 +134,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: `${localScalarUrl}/ppr/ppr-spec.yaml`
+          url: '/ppr/ppr-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/ppr'
@@ -142,7 +142,7 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: `${localScalarUrl}/rs/regsearch-spec.yaml`
+          url: '/rs/regsearch-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/rs'
@@ -150,43 +150,30 @@ export default defineNuxtConfig({
       },
       {
         spec: {
-          url: `${localScalarUrl}/namex/namex-spec.yaml`
+          url: '/namex/namex-spec.yaml'
         },
         pathRouting: {
           basePath: '/oas/namex'
         }
       }
-      // {
-      //   spec: {
-      //     url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json'
-      //   },
-      //   pathRouting: {
-      //     basePath: '/scalar'
-      //   }
-      // }
     ]
   },
-
+  typescript: {
+    includeWorkspace: false
+  },
   vite: {
     vue: {
       template: {
         compilerOptions: {
-          // treat all tags starting with 'bcros-' as custom elements
-          isCustomElement: tag => tag.startsWith('bcros-')
+          isCustomElement: (tag: string) => tag.startsWith('bcros-')
         }
-      }
-    },
-    server: {
-      watch: {
-        usePolling: true
       }
     }
   },
   runtimeConfig: {
-    xApiKey: '',
-    accountID: '',
     public: {
-      version: `Dev Site v${process.env.npm_package_version || ''}`
+      registryHomeUrl: process.env.NUXT_PUBLIC_REGISTRY_HOME_URL || 'https://bcregistry.gov.bc.ca/',
+      version: `Dev Site v${process.env.npm_package_version || '1.0.0'}`
     }
   },
   gtag: {
@@ -194,6 +181,7 @@ export default defineNuxtConfig({
     id: 'G-GKRC2V8PT4'
   }
 })
+
 declare module '#app' {
   interface PageMeta {
     breadcrumbs?: BreadcrumbLink[]

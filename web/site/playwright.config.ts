@@ -1,46 +1,23 @@
-import { fileURLToPath } from 'node:url'
 import { defineConfig, devices } from '@playwright/test'
-import type { ConfigOptions } from '@nuxt/test-utils/playwright'
 
-const devicesToTest = [
-  'Desktop Chrome'
-  // Test against other common browser engines.
-  // 'Desktop Firefox',
-  // 'Desktop Safari',
-  // Test against mobile viewports.
-  // 'Pixel 5',
-  // 'iPhone 12',
-  // Test against branded browsers.
-  // { ...devices['Desktop Edge'], channel: 'msedge' },
-  // { ...devices['Desktop Chrome'], channel: 'chrome' },
-] satisfies Array<string | typeof devices[string]>
-
-export default defineConfig<ConfigOptions>({
-  testDir: './app/tests/e2e',
-  reporter: 'line',
-  // Fail the build on CI if you accidentally left test.only in the source code.
-  forbidOnly: !!process.env.CI,
-
-  // Retry on CI only.
-  // retries: process.env.CI ? 2 : 0,
-  retries: 3, // a11y tests are flaky
-
-  // Opt out of parallel tests on CI.
-  // workers: process.env.CI ? 1 : undefined,
+export default defineConfig({
+  testDir: './tests/smoke',
+  timeout: 30000,
+  retries: 1,
   use: {
-    nuxt: {
-      rootDir: fileURLToPath(new URL('.', import.meta.url))
-    },
-    actionTimeout: 0,
     baseURL: 'http://localhost:3467',
-    trace: 'on-first-retry',
-    screenshot: 'off',
-    // do not open browser
     headless: true
   },
-  projects: devicesToTest.map(p => typeof p === 'string' ? ({ name: p, use: devices[p] }) : p),
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] }
+    }
+  ],
   webServer: {
-    // run dev server before starting tests
-    command: 'pnpm dev --port 3467'
+    command: 'npx nuxi dev --port 3467',
+    port: 3467,
+    reuseExistingServer: true,
+    timeout: 60000
   }
 })

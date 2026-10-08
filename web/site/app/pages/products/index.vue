@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'connect-auth'
+})
+
 const localePath = useLocalePath()
 const { t, locale } = useI18n()
 
@@ -18,23 +22,27 @@ const { data: products } = await useAsyncData(
     watch: [locale]
   }
 )
+
 const completedProducts = computed(() => {
-  return products.value?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
+  return (products.value as any[])?.sort((a: any, b: any) => a.name.localeCompare(b.name)) ?? []
 })
 
-setBreadcrumbs([
-  { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true },
-  { label: t('sbcBreadcrumb.sbcHome'), to: localePath('/') },
-  { label: t('sbcBreadcrumb.sbcProductslist') }
-])
+watchEffect(() => {
+  setBreadcrumbs([
+    { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true },
+    { label: t('sbcBreadcrumb.sbcHome'), to: localePath('/') },
+    { label: t('sbcBreadcrumb.sbcProductslist') }
+  ])
+})
 </script>
+
 <template>
-  <div class="mx-auto w-full max-w-[1360px] p-2 sm:p-4 lg:p-8">
-    <h1 class="mb-8 text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
+  <div class="mx-auto w-full max-w-[1360px] py-8 px-2 sm:px-4 lg:px-8">
+    <h1 class="mb-8 text-3xl font-bold text-neutral-highlighted dark:text-white">
       {{ $t('page.products.h1') }}
     </h1>
     <ul class="mx-auto flex flex-wrap justify-center gap-8">
-      <SbcDocsProductCard
+      <ProductCard
         v-for="product in completedProducts"
         :key="product._dir"
         :name="product.name"

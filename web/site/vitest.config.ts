@@ -1,24 +1,16 @@
+import { defineConfig } from 'vitest/config'
 import { fileURLToPath } from 'node:url'
-import { defineVitestConfig } from '@nuxt/test-utils/config'
 
-export default defineVitestConfig({
+export default defineConfig({
   test: {
-    environment: 'nuxt',
-    dir: 'tests',
-    // coverage: {
-    //   reportsDirectory: 'coverage',
-    // },
-    includeSource: ['../pages/index.vue'],
-    environmentOptions: {
-      nuxt: {
-        rootDir: fileURLToPath(new URL('./', import.meta.url)),
-        domEnvironment: 'happy-dom'
-        // mock: {
-        //   indexedDb: true,
-        // },
-      }
-    },
-    // setupFiles: './tests/setup/i18n.ts',
+    environment: 'happy-dom',
+    include: ['tests/unit/**/*.test.ts'],
     globals: true
+  },
+  resolve: {
+    alias: {
+      '~': fileURLToPath(new URL('./app', import.meta.url)),
+      '@': fileURLToPath(new URL('./app', import.meta.url))
+    }
   }
 })

@@ -4,7 +4,7 @@ const props = defineProps<{
   download: string
 }>()
 
-const downloadFile = () => {
+function downloadFile() {
   const a = document.createElement('a')
   a.href = props.href
   a.download = props.download
@@ -13,11 +13,13 @@ const downloadFile = () => {
   a.remove()
 }
 </script>
+
 <template>
   <UButton
-    :label="$t('btn.downloadSpec')"
+    :label="$t('btn.downloadSpec', 'Download the Specification')"
+    color="primary"
     size="lg"
-    class="h-11 w-64 tracking-wide no-underline"
+    class="h-11 w-fit px-6 tracking-wide no-underline cursor-pointer"
     icon="i-mdi-download"
     @click="downloadFile"
   />

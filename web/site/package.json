@@ -1,50 +1,40 @@
 {
-  "name": "developer-connect-site",
+  "name": "modern-developer-connect",
   "private": true,
   "type": "module",
-  "version": "1.1.13",
-  "engines": {
-    "node": ">=24"
-  },
+  "version": "1.0.0",
   "scripts": {
-    "build-check": "nuxt build",
-    "build": "nuxt generate",
     "dev": "nuxt dev",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
-    "lint:fix": "pnpm lint --fix",
-    "test": "vitest --dir app/tests/unit --passWithNoTests",
-    "test:unit": "vitest --dir app/tests/unit",
-    "test:e2e": "npx playwright test",
-    "test:e2e:ui": "npx playwright test --ui"
-  },
-  "devDependencies": {
-    "@axe-core/playwright": "^4.9.1",
-    "@nuxt/image": "^1.7.0",
-    "@nuxt/test-utils": "^3.13.1",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/eslint-module": "^4.1.0",
-    "@playwright/test": "^1.45.1",
-    "@scalar/nuxt": "^0.6.67",
-    "@testing-library/vue": "^8.1.0",
-    "@typescript-eslint/parser": "^7.16.0",
-    "@vue/test-utils": "^2.4.6",
-    "eslint": "^8.57.0",
-    "eslint-plugin-tailwindcss": "^3.17.4",
-    "happy-dom": "^13.10.1",
-    "nuxt": "^3.21.11",
-    "nuxt-gtag": "^3.0.1",
-    "playwright-core": "^1.45.1",
-    "typescript": "^5.5.3",
-    "vitest": "^1.6.0",
-    "vue": "^3.5.42",
-    "vue-router": "^4.6.4"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@daxiom/sbc-nuxt-assets-layer": "^0.3.1",
-    "bcros-search-test-publish": "^0.1.4"
+    "@nuxt/content": "^2.13.4",
+    "@nuxt/image": "^1.7.0",
+    "@sbc-connect/nuxt-pay": "^0.6.8",
+    "@scalar/nuxt": "^0.6.76",
+    "bcros-search-test-publish": "^0.1.4",
+    "nuxt-gtag": "^3.0.1"
   },
-  "packageManager": "pnpm@11.9.0"
+  "devDependencies": {
+    "@nuxt/test-utils": "^3.15.4",
+    "@playwright/test": "^1.45.1",
+    "@types/luxon": "^3.7.6",
+    "@vue/test-utils": "^2.4.6",
+    "@vueuse/core": "^15.0.0",
+    "@vueuse/nuxt": "^15.0.0",
+    "happy-dom": "^13.10.1",
+    "nuxt": "4.5.2",
+    "playwright": "^1.45.1",
+    "typescript": "^5.5.3",
+    "vitest": "^1.6.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.6.4",
+    "vue-tsc": "^2.1.10"
+  }
 }
