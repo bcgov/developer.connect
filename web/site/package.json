@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
+    "build": "nuxt prepare && nuxt build",
+    "generate": "nuxt prepare && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "test": "vitest run",
