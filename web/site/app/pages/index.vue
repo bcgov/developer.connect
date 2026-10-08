@@ -1,14 +1,18 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'connect-base',
-  breadcrumbs: [
-    { label: 'Service BC Connect', to: 'https://bcregistry.gov.bc.ca' },
-    { label: 'Service BC Connect Developer Site' }
-  ]
-})
-
 const { t } = useI18n()
 const localePath = useLocalePath()
+
+definePageMeta({
+  layout: 'connect-base'
+})
+
+watchEffect(() => {
+  setBreadcrumbs([
+    { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true },
+    { label: t('sbcBreadcrumb.sbcHome') }
+  ])
+})
+
 useHead({
   title: `${t('page.home.title')} | Service BC Connect Developer Site`
 })

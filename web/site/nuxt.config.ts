@@ -1,13 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-export interface BreadcrumbLink {
-  label: string
-  to?: string
-  href?: string
-  external?: boolean
-  disabled?: boolean
-  icon?: string
-}
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
@@ -181,9 +173,3 @@ export default defineNuxtConfig({
     id: 'G-GKRC2V8PT4'
   }
 })
-
-declare module '#app' {
-  interface PageMeta {
-    breadcrumbs?: BreadcrumbLink[]
-  }
-}
