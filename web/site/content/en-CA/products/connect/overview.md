@@ -69,7 +69,9 @@ These endpoints are used to get the affiliations on an account. An `Account-Link
 
 ---
 
-## Account Linking <span style="display:inline-block;background:#e5e7eb;color:#1a5a96;padding:2px 8px;border-radius:4px;font-size:0.85em;margin-left:6px;vertical-align:middle;">Coming soon</span>
+## Account Linking
+
+<span style="display:inline-block;background:#e5e7eb;color:#1a5a96;padding:2px 8px;border-radius:4px;font-size:0.85em;vertical-align:middle;">Coming soon</span>
 
 Account linking lets a **vendor account** (e.g. third-party software for registration submissions) submit data digitally on behalf of a **source account** (e.g. a lawfirm) using a shared **linking key**. The vendor works with the source account's affiliated businesses; billing routes to the vendor's own account.
 
