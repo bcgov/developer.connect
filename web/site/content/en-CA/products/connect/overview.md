@@ -107,7 +107,7 @@ Account linking lets that software (the **vendor**) work on the businesses in th
     https://<BC Registries account site>/vendor-linking?vendorAccountId=<your vendor account id>&returnUrl=<your registered redirect URL>
     ```
 
-    In sandbox, the account site is `sandbox.account.bcregistry.gov.bc.ca`.
+    The account site is `account.bcregistry.gov.bc.ca` in production and `sandbox.account.bcregistry.gov.bc.ca` in sandbox.
 
 2. **Firm user:** Logs in to BC Registries and selects the account to link. Only accounts where they are an administrator or coordinator are listed. They can also create a new account at this point.
 3. **BC Registries:** Creates the linking key and, after a short confirmation screen, sends the user back to your return URL with two parameters added:
@@ -139,7 +139,7 @@ A linking key only works for the vendor account it was issued to. `Account-Id` m
 - **Expiry:** A link is valid for 1 year. The firm's administrators and coordinators get email reminders 30 days and 7 days before it expires, and can renew it from their account during those last 30 days. Renewing adds one year to the current expiry date.
 - **Managing connections:** Under **Account Settings → Third-Party Connections**, the firm can see every vendor it has linked, with the date added, who added it, and the expiry date. Administrators and coordinators can remove a connection at any time, or renew it in the last 30 days before it expires. They get an email whenever a connection is added, removed, about to expire, or has expired, and these changes also appear in the account's activity log.
 - **Linking again:** If the firm user goes through the linking steps again for your vendor account, a new key replaces the old one.
-- **Invalid keys:** Requests with an expired, removed, or replaced key return `403 Forbidden`. Send the firm user through the linking steps again to get a new key.
+- **Invalid keys:** Requests with an expired, removed, or replaced key return `403 Forbidden`. Expiry and removal notices are sent to the firm, not the vendor, so a `403` is usually how you find out. Send the firm user through the linking steps again to get a new key.
 
 ---
 
