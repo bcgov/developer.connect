@@ -117,7 +117,7 @@ Account linking lets that software (the **vendor**) work on the businesses in th
 
     If the return URL is not registered, or linking fails for another reason, the user sees an error on BC Registries and is not sent back.
 
-4. **Vendor:** Store the `linkingKey` against the firm's `accountId`. Treat it like a password. If you work with several firms, you will have one key per firm.
+4. **Vendor:** Store the `linkingKey` against the firm's `accountId`. Treat it like a password. BC Registries does not show the key again, so if it is lost, the firm user must link again. If you work with several firms, you will have one key per firm.
 
 ### Calling APIs on the firm's behalf (vendor)
 
@@ -131,10 +131,12 @@ Account-Linking-Key: <linking key for that firm>
 
 With these headers you can list the firm's businesses (`GET /orgs/{firm account id}/affiliations`) and use the [Business API](/products/br/overview) for those businesses in the same way as your own. Fees are charged to your vendor account.
 
+A linking key only works for the vendor account it was issued to. `Account-Id` must be your own vendor account. Requests from any other account return `403 Forbidden`.
+
 ### After linking
 
-- **Expiry:** A link is valid for 1 year. The firm's administrators get email reminders 30 days and 7 days before it expires, and can renew it for another year from their account during that time.
-- **Removing a link:** The firm's administrators and coordinators can see and remove connections under **Account Settings → Third-Party Connections**. They get an email whenever a connection is added, removed, about to expire, or has expired.
+- **Expiry:** A link is valid for 1 year. The firm's administrators and coordinators get email reminders 30 days and 7 days before it expires, and can renew it from their account during those last 30 days. Renewing adds one year to the current expiry date.
+- **Removing a link:** The firm's administrators and coordinators can see and remove connections under **Account Settings → Third-Party Connections**. They get an email whenever a connection is added, removed, about to expire, or has expired, and these changes also appear in the account's activity log.
 - **Linking again:** If the firm user goes through the linking steps again for your vendor account, a new key replaces the old one.
 - **Invalid keys:** Requests with an expired, removed, or replaced key return `403 Forbidden`. Send the firm user through the linking steps again to get a new key.
 
@@ -204,6 +206,10 @@ Updates of note to this page are recorded here.
   <tr>
     <th>Date</th>
     <th>Description</th>
+  </tr>
+  <tr>
+    <td>2026-10-26</td>
+    <td>Rewrote Account Linking as a step-by-step guide covering setup, linking, API usage, and expiry.</td>
   </tr>
   <tr>
     <td>2026-07-15</td>
