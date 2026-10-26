@@ -82,6 +82,7 @@ Account linking lets that software (the **vendor**) work on the businesses in th
 - The vendor only sees businesses affiliated with the firm's account.
 - Fees for filings are charged to the **vendor's** account, not the firm's.
 - The firm can see and remove the connection at any time.
+- A firm can link with more than one vendor. Each vendor gets its own key, and the firm can manage each connection separately.
 
 ### Who is involved
 
@@ -136,7 +137,7 @@ A linking key only works for the vendor account it was issued to. `Account-Id` m
 ### After linking
 
 - **Expiry:** A link is valid for 1 year. The firm's administrators and coordinators get email reminders 30 days and 7 days before it expires, and can renew it from their account during those last 30 days. Renewing adds one year to the current expiry date.
-- **Removing a link:** The firm's administrators and coordinators can see and remove connections under **Account Settings → Third-Party Connections**. They get an email whenever a connection is added, removed, about to expire, or has expired, and these changes also appear in the account's activity log.
+- **Managing connections:** Under **Account Settings → Third-Party Connections**, the firm can see every vendor it has linked, with the date added, who added it, and the expiry date. Administrators and coordinators can remove a connection at any time, or renew it in the last 30 days before it expires. They get an email whenever a connection is added, removed, about to expire, or has expired, and these changes also appear in the account's activity log.
 - **Linking again:** If the firm user goes through the linking steps again for your vendor account, a new key replaces the old one.
 - **Invalid keys:** Requests with an expired, removed, or replaced key return `403 Forbidden`. Send the firm user through the linking steps again to get a new key.
 
