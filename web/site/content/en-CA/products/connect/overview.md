@@ -15,7 +15,7 @@ The SBC Connect API (formerly Auth API) exposes the account, identity, and deleg
 | ------- | -------- | ------------ |
 | [Partner Authentication](#partner-authentication) | Ministry / Partner applications | Resolve the user's BC Registries accounts after SSO |
 | [Business Affiliations](#business-affiliations) | Internal (Business Registry) | Attach businesses to a BC Registries account |
-| [Account Linking](#account-linking) | Vendor / API accounts | Act on a customer account using a shared linking key |
+| [Account Linking](#account-linking) | Vendor / API accounts | Work on a client firm's businesses using a linking key |
 
 <br>
 
@@ -65,7 +65,7 @@ Endpoints used by **Business Registry** to attach the businesses managed by a BC
 - Magic link
 - Delegation
 
-These endpoints are used to get the affiliations on an account. An `Account-Linking-Key` gives access to a source account's affiliations (see [Account Linking](#account-linking)).
+These endpoints are used to get the affiliations on an account. An `Account-Linking-Key` gives a vendor access to a linked firm's affiliations (see [Account Linking](#account-linking)).
 
 ---
 
@@ -73,49 +73,70 @@ These endpoints are used to get the affiliations on an account. An `Account-Link
 
 <span style="display:inline-block;background:#e5e7eb;color:#1a5a96;padding:2px 8px;border-radius:4px;font-size:0.85em;vertical-align:middle;">Coming soon</span>
 
-Account linking lets a **vendor account** (e.g. third-party software for registration submissions) submit data digitally on behalf of a **source account** (e.g. a lawfirm) using a shared **linking key**. The vendor works with the source account's affiliated businesses; billing routes to the vendor's own account.
+### What it is for
 
-A link is established through a browser redirect handshake that the vendor initiates. The source account's admin authenticates at BC Registries, picks the account, and confirms the link. On success, BC Registries redirects back to the vendor with the linking key.
+Many businesses are managed by a firm on their behalf. For example, a law firm manages its clients' companies in its BC Registries account. That firm may also use third-party software, such as a legal practice or filing application, to prepare and submit work for those businesses.
 
-#### Prerequisite: return URL allow-list
+Account linking lets that software (the **vendor**) work on the businesses in the firm's BC Registries account without the firm sharing logins or adding the vendor as a team member. The firm approves the connection once, and BC Registries gives the vendor a **linking key**. The vendor sends that key with its API calls to view and file for the firm's businesses.
 
-Before you can use account linking, register the return URL(s) your vendor app will use with BC Registries. The handshake will only redirect back to URLs on the allow-list configured against your vendor API account.
+- The vendor only sees businesses affiliated with the firm's account.
+- Fees for filings are charged to the **vendor's** account, not the firm's.
+- The firm can see and remove the connection at any time.
 
-#### The linking handshake
+### Who is involved
 
-1. **Vendor redirects the user's browser** to the BC Registries account linking page, passing the vendor account id and a return URL as query parameters:
+| Who | Example | What they do |
+| --- | ------- | ------------ |
+| **Vendor** | A legal software company | Registers redirect URLs, starts the link, stores the linking key, and calls BC Registries APIs. |
+| **Firm user** | An administrator or coordinator at a law firm | Logs in to BC Registries and approves the link for their firm's account. |
+| **BC Registries** | | Creates the linking key and sends the user back to the vendor. |
+
+### One-time setup (vendor)
+
+1. Make sure your vendor account has an API key under **Account Settings → Developer Access**.
+2. On the same page, add one or more **Redirect URLs**. These are the pages in your application that the firm user can return to after linking, for example one per environment or application. BC Registries only sends users back to URLs registered here.
+    - Query strings are allowed on the return URL, so `https://app.example.com/callback` also accepts `https://app.example.com/callback?ref=123`.
+    - A URL ending in `/*` accepts any path under it.
+
+### Linking a firm's account
+
+1. **Vendor:** From your application, send the firm user to the BC Registries account linking page with your vendor account ID and your return URL (URL-encoded):
 
     ```
-    GET <BC Registries account linking URL>?vendorAccountId=<vendor account id>&returnUrl=<allow-listed URL>
+    https://<BC Registries account site>/vendor-linking?vendorAccountId=<your vendor account id>&returnUrl=<your registered redirect URL>
     ```
 
-2. **The user signs in** to BC Registries and, in the account picker, selects the source account they want to link. A confirmation step names the vendor being linked so the user knows what they are authorizing through the vendor's request.
-3. **BC Registries mints and binds the linking key** in a single step, associating the selected source account with the vendor account. There is no separate bind call for the vendor to make.
-4. **BC Registries redirects the user's browser** back to the return URL with the source account id and the linking key appended as query parameters:
+    In sandbox, the account site is `sandbox.account.bcregistry.gov.bc.ca`.
+
+2. **Firm user:** Logs in to BC Registries and selects the account to link. Only accounts where they are an administrator or coordinator are listed. They can also create a new account at this point.
+3. **BC Registries:** Creates the linking key and, after a short confirmation screen, sends the user back to your return URL with two parameters added:
 
     ```
-    <returnUrl>?accountId=<source account id>&linkingKey=<secret>
+    <your return URL>?linkingKey=<linking key>&accountId=<firm's account id>
     ```
 
-5. **Vendor stores the linking key** against that source account id. When making later API calls for this customer, the vendor looks up the key by source account id.
+    If the return URL is not registered, or linking fails for another reason, the user sees an error on BC Registries and is not sent back.
 
-#### Using the linking key
+4. **Vendor:** Store the `linkingKey` against the firm's `accountId`. Treat it like a password. If you work with several firms, you will have one key per firm.
 
-On subsequent requests to any BC Registries API, include the linking key as a header alongside your normal authentication:
+### Calling APIs on the firm's behalf (vendor)
+
+Add the firm's linking key to your normal API requests:
 
 ```
-Account-Id: <vendor's own account id>
-x-apikey: <vendor's API key>
-Account-Linking-Key: <the stored key for the target source account>
+Account-Id: <your vendor account id>
+x-apikey: <your API key>
+Account-Linking-Key: <linking key for that firm>
 ```
 
-Requests are resolved against the source account's affiliated businesses. All transaction summaries are logged on the vendor account only.
+With these headers you can list the firm's businesses (`GET /orgs/{firm account id}/affiliations`) and use the [Business API](/products/br/overview) for those businesses in the same way as your own. Fees are charged to your vendor account.
 
-#### Lifecycle
+### After linking
 
-- **One active key per (source, vendor) pair.** Running the handshake again for the same pair supersedes the previous key.
-- **Expiration.** Account linking keys expire 365 days after they are issued. The source account administrator can obtain a new linking key at any time by logging in to BC Registries through the vendor system; the new key supersedes the old.
-- **Revocation.** Admins and coordinators on the source account can revoke the linking key at any time from their BC Registries account. Subsequent API calls from the vendor using a revoked key return `401 Unauthorized`.
+- **Expiry:** A link is valid for 1 year. The firm's administrators get email reminders 30 days and 7 days before it expires, and can renew it for another year from their account during that time.
+- **Removing a link:** The firm's administrators and coordinators can see and remove connections under **Account Settings → Third-Party Connections**. They get an email whenever a connection is added, removed, about to expire, or has expired.
+- **Linking again:** If the firm user goes through the linking steps again for your vendor account, a new key replaces the old one.
+- **Invalid keys:** Requests with an expired, removed, or replaced key return `403 Forbidden`. Send the firm user through the linking steps again to get a new key.
 
 ---
 
