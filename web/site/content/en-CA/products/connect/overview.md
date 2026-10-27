@@ -89,7 +89,7 @@ Account linking lets that software (the **vendor**) work on the businesses in th
 | Who | Example | What they do |
 | --- | ------- | ------------ |
 | **Vendor** | A legal software company | Registers redirect URLs, starts the link, stores the linking key, and calls BC Registries APIs. |
-| **Firm user** | An administrator or coordinator at a law firm | Logs in to BC Registries and approves the link for their firm's account. |
+| **Firm account administrator or coordinator** | An administrator or coordinator of a law firm's BC Registries account | Logs in to BC Registries and approves the link for their firm's account. |
 | **BC Registries** | | Creates the linking key and sends the user back to the vendor. |
 
 ### One-time setup (vendor)
@@ -109,7 +109,7 @@ Account linking lets that software (the **vendor**) work on the businesses in th
 
     The account site is `account.bcregistry.gov.bc.ca` in production and `sandbox.account.bcregistry.gov.bc.ca` in sandbox.
 
-2. **Firm user:** Logs in to BC Registries and selects the account to link. Only accounts where they are an administrator or coordinator are listed. They can also create a new account at this point.
+2. **Firm account administrator or coordinator:** Logs in to BC Registries and selects the account to link. Only accounts where they are an administrator or coordinator are listed. They can also create a new account at this point. If the firm has more than one BC Registries account, they need to repeat these steps from the vendor system for each account.
 3. **BC Registries:** Creates the linking key and, after a short confirmation screen, sends the user back to your return URL with two parameters added:
 
     ```
@@ -118,7 +118,7 @@ Account linking lets that software (the **vendor**) work on the businesses in th
 
     If the return URL is not registered, or linking fails for another reason, the user sees an error on BC Registries and is not sent back.
 
-4. **Vendor:** Store the `linkingKey` against the firm's `accountId`. Treat it like a password. BC Registries does not show the key again, so if it is lost, the firm user must link again. If you work with several firms, you will have one key per firm.
+4. **Vendor:** Store the `linkingKey` against the firm's `accountId`. Treat it like a password. BC Registries does not show the key again, so if it is lost, the firm account administrator or coordinator must link again. If you work with several firms, you will have one key per firm.
 
 ### Calling APIs on the firm's behalf (vendor)
 
