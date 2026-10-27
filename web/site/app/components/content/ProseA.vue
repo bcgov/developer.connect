@@ -17,9 +17,9 @@ const props = defineProps({
   }
 })
 
-// return localized route path if target !== blank and is not a download link
+// return localized route path if target !== blank, is not a download link and is not an in-page anchor
 function resolvePath () {
-  if (props.target === '_blank' || props.download !== undefined) {
+  if (props.target === '_blank' || props.download !== undefined || props.href.startsWith('#')) {
     return props.href
   } else {
     return localePath(props.href)
