@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "web/site/**"
+      - "packages/layers/base/**"
   workflow_dispatch:
     inputs:
       target:

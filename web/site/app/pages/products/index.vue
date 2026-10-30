@@ -1,48 +1,34 @@
 <script setup lang="ts">
-const localePath = useLocalePath()
-const { t, locale } = useI18n()
+definePageMeta({ layout: 'connect-base' })
 
-useHead({
-  title: `${t('page.products.title')} | Service BC Connect Developer Site`
-})
+const { locale } = useI18n()
+const { cardsKey } = useContentKeys()
+useContentPage()
 
 const { data: products } = await useAsyncData(
-  'product-cards',
-  () => {
-    return queryContent()
-      .where({ _locale: locale.value, _extension: { $eq: 'yml' } })
-      .sort({ _dir: 1 })
-      .find()
-  },
-  {
-    watch: [locale]
-  }
+  cardsKey.value,
+  () => queryCollection(cardsKey.value)
+    .all()
+    .then(cards => cards.toSorted((a, b) => a.name.localeCompare(b.name))),
+  { watch: [locale] }
 )
-const completedProducts = computed(() => {
-  return products.value?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
-})
-
-setBreadcrumbs([
-  { label: t('sbcBreadcrumb.default'), to: 'https://bcregistry.gov.bc.ca', external: true },
-  { label: t('sbcBreadcrumb.sbcHome'), to: localePath('/') },
-  { label: t('sbcBreadcrumb.sbcProductslist') }
-])
 </script>
+
 <template>
-  <div class="mx-auto w-full max-w-[1360px] p-2 sm:p-4 lg:p-8">
-    <h1 class="mb-8 text-3xl font-semibold text-bcGovColor-darkGray dark:text-white">
+  <UContainer :ui="{ base: 'grow mx-auto flex flex-col justify-center' }">
+    <h1 class="mb-8">
       {{ $t('page.products.h1') }}
     </h1>
     <ul class="mx-auto flex flex-wrap justify-center gap-8">
-      <SbcDocsProductCard
-        v-for="product in completedProducts"
-        :key="product._dir"
+      <ProductCard
+        v-for="product in products"
+        :key="product.name"
         :name="product.name"
-        :badge="product.badge"
         :description="product.description"
+        :badge="product.badge"
         :bullet-points="product.bulletPoints"
-        :directory="product._dir"
+        :dir="product.stem"
       />
     </ul>
-  </div>
+  </UContainer>
 </template>

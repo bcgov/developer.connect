@@ -1,0 +1,38 @@
+@reference "tailwindcss";
+@reference "#connect-theme";
+
+html {
+  scroll-behavior: smooth;
+}
+
+strong {
+  @apply text-neutral-highlighted;
+}
+
+li::marker {
+  @apply text-neutral-highlighted;
+}
+
+pre {
+  @apply bg-white border-shade;
+}
+
+hr {
+  @apply border border-gray-400;
+}
+
+td {
+  @apply p-4 border-none text-base;
+}
+
+th {
+  @apply whitespace-nowrap bg-brand p-4 text-left font-semibold text-white border-none text-base;
+}
+
+tr {
+  @apply bg-white text-base;
+}
+
+tbody {
+  @apply divide-y divide-shade;
+}
