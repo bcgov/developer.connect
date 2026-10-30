@@ -17,6 +17,7 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "test": "vitest run --passWithNoTests",
     "test:unit": "vitest run --passWithNoTests",
     "test:unit:watch": "vitest --passWithNoTests",
     "test:e2e": "npx playwright test || [ $? -eq 1 ]",
