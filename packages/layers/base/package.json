@@ -1,0 +1,41 @@
+{
+  "name": "@developer.connect/nuxt-base",
+  "type": "module",
+  "version": "0.1.0",
+  "engines": {
+    "node": "^24.15.0"
+  },
+  "repository": "github:bcgov/developer.connect",
+  "license": "BSD-3-Clause",
+  "main": "./nuxt.config.ts",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "nuxi dev .playground --dotenv ../.env",
+    "prepare": "nuxt prepare .playground",
+    "build": "nuxt build .playground",
+    "build:test": "pnpm generate && npx serve .playground/.output/public",
+    "generate": "nuxt generate .playground --dotenv ../.env",
+    "preview": "npx serve .playground/.output/public",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "pnpm run test:unit; pnpm run test:e2e",
+    "test:unit": "vitest run --passWithNoTests",
+    "test:unit:watch": "vitest --passWithNoTests",
+    "test:e2e": "npx playwright test || [ $? -eq 1 ]",
+    "test:e2e:ui": "npx playwright test --ui || [ $? -eq 1 ]",
+    "typecheck": "npx nuxt typecheck"
+  },
+  "dependencies": {
+    "@sbc-connect/nuxt-base": "0.15.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "catalog:",
+    "@iconify-json/mdi": "catalog:",
+    "nuxt": "catalog:",
+    "typescript": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

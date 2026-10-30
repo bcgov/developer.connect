@@ -13,11 +13,12 @@ const downloadFile = () => {
   a.remove()
 }
 </script>
+
 <template>
   <UButton
-    :label="$t('btn.downloadSpec')"
+    :label="$t('label.downloadSpec')"
     size="lg"
-    class="h-11 w-64 tracking-wide no-underline"
+    class="h-11 w-fit tracking-wide no-underline"
     icon="i-mdi-download"
     @click="downloadFile"
   />

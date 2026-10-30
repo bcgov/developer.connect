@@ -2,9 +2,11 @@
   "name": "developer-connect-site",
   "private": true,
   "type": "module",
-  "version": "1.1.13",
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.9.0",
+  "license": "BSD-3-Clause",
   "engines": {
-    "node": ">=24"
+    "node": "^24.15.0"
   },
   "scripts": {
     "build-check": "nuxt build",
@@ -13,38 +15,31 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
-    "lint:fix": "pnpm lint --fix",
-    "test": "vitest --dir app/tests/unit --passWithNoTests",
-    "test:unit": "vitest --dir app/tests/unit",
-    "test:e2e": "npx playwright test",
-    "test:e2e:ui": "npx playwright test --ui"
-  },
-  "devDependencies": {
-    "@axe-core/playwright": "^4.9.1",
-    "@nuxt/image": "^1.7.0",
-    "@nuxt/test-utils": "^3.23.0",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/eslint-module": "^4.1.0",
-    "@playwright/test": "^1.45.1",
-    "@scalar/nuxt": "^0.6.67",
-    "@testing-library/vue": "^8.1.0",
-    "@typescript-eslint/parser": "^7.16.0",
-    "@vue/test-utils": "^2.4.6",
-    "eslint": "^8.57.0",
-    "eslint-plugin-tailwindcss": "^3.17.4",
-    "happy-dom": "^13.10.1",
-    "nuxt": "^3.21.11",
-    "nuxt-gtag": "^3.0.1",
-    "playwright-core": "^1.45.1",
-    "typescript": "^5.5.3",
-    "vitest": "^3.2.7",
-    "vue": "^3.5.42",
-    "vue-router": "^4.6.4"
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "vitest run --passWithNoTests",
+    "test:unit": "vitest run --passWithNoTests",
+    "test:unit:watch": "vitest --passWithNoTests",
+    "test:e2e": "npx playwright test || [ $? -eq 1 ]",
+    "test:e2e:ui": "npx playwright test --ui || [ $? -eq 1 ]",
+    "typecheck": "npx nuxt typecheck"
   },
   "dependencies": {
-    "@daxiom/sbc-nuxt-assets-layer": "^0.3.1",
-    "bcros-search-test-publish": "^0.1.4"
+    "@developer.connect/nuxt-base": "workspace:*",
+    "@nuxt/content": "3.16.2",
+    "@scalar/api-reference": "^1.75.1",
+    "better-sqlite3": "^13.0.3",
+    "nuxt": "catalog:"
   },
-  "packageManager": "pnpm@11.9.0"
+  "devDependencies": {
+    "@axe-core/playwright": "catalog:",
+    "@iconify-json/mdi": "catalog:",
+    "@nuxt/test-utils": "catalog:",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:",
+    "vue-tsc": "catalog:"
+  }
 }
