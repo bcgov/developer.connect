@@ -13,13 +13,14 @@ The SBC Connect API (formerly Auth API) exposes the account, identity, and deleg
 
 | Section | Audience | What it does |
 | ------- | -------- | ------------ |
-| [Partner Authentication](/products/connect/overview#partner-authentication) | Ministry / Partner applications | Resolve the user's BC Registries accounts after SSO |
-| [Business Affiliations](/products/connect/overview#business-affiliations) | Internal (Business Registry) | Attach businesses to a BC Registries account |
-| [Account Linking](/products/connect/overview#account-linking-coming-soon) | Vendor / API accounts | Act on a customer account using a shared linking key |
+| [Partner Authentication](#partner-authentication) | Ministry / Partner applications | Resolve the user's BC Registries accounts after SSO |
+| [Business Affiliations](#business-affiliations) | Internal (Business Registry) | Attach businesses to a BC Registries account |
+| [Account Linking](#account-linking) | Vendor / API accounts | Work on a client firm's businesses using a linking key |
 
 <br>
 
-:ButtonDownloadSpec{href="/connect/connect-spec.yaml" download="connect-spec.yaml"}
+::ButtonDownloadSpec{href="/connect/connect-spec.yaml" download="connect-spec.yaml"}
+::
 
 ---
 
@@ -64,7 +65,7 @@ Endpoints used by **Business Registry** to attach the businesses managed by a BC
 - Magic link
 - Delegation
 
-These endpoints are used to get the affiliations on an account. An `Account-Linking-Key` gives access to a source account's affiliations (see [Account Linking](/products/connect/overview#account-linking-coming-soon)).
+These endpoints are used to get the affiliations on an account. An `Account-Linking-Key` gives a vendor access to a linked firm's affiliations (see [Account Linking](#account-linking)).
 
 ---
 
@@ -146,7 +147,7 @@ A linking key only works for the vendor account it was issued to. `Account-Id` m
 
 View the definition and select a path to try it out. To submit a request you will need an API key and an account ID, which are obtained as part of completing an access request. To set your session API key, click on the top, right AUTHORIZE button and under API Key Auth enter your key value. Click on AUTHORIZE, then OK.
 
-[> View the API](/products/connect/oas)
+<a href="/en-CA/oas/connect" target="_blank"> View the API</a>
 
 
 

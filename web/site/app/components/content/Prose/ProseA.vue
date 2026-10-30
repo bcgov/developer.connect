@@ -11,7 +11,7 @@ const {
 }>()
 
 const to = computed(() => {
-  if (target === '_blank' || download !== undefined) {
+  if (target === '_blank' || download !== undefined || href.startsWith('#')) {
     return href
   } else {
     return localePath(href)
