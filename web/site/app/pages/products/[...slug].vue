@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const localePath = useLocalePath()
+const routeWithoutLocale = useRouteWithoutLocale()
 
 definePageMeta({
   layout: 'docs'
@@ -16,7 +17,7 @@ setBreadcrumbs([
   <ContentDoc
     class="prose prose-bcGov dark:prose-invert min-w-full max-w-[94vw] sm:max-w-0"
     :query="{
-      path: $route.path.replace(/^\/[a-zA-Z]{2}-[a-zA-Z]{2}\//, '/'),
+      path: routeWithoutLocale,
       where: { _locale: $i18n.locale }
     }"
   >
