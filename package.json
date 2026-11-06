@@ -1,0 +1,29 @@
+{
+  "name": "developer.connect/web",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "test:unit": "pnpm -r test:unit",
+    "test:e2e": "pnpm -r test:e2e",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "reset:hard": "find . -type d \\( -name node_modules -o -name .nuxt -o -name .output -o -name dist -o -name test-results -o -name playwright-report \\) -prune -exec rm -rf {} + && pnpm install"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "1.17.0",
+    "@types/luxon": "^3.7.6",
+    "eslint": "10.12.0",
+    "vitest": "4.1.10"
+  },
+  "engines": {
+    "node": "^24.15.0"
+  },
+  "packageManager": "pnpm@11.9.0"
+}
