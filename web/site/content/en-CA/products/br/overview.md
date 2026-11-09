@@ -163,6 +163,10 @@ Updates of note to this page are recorded here.
   </tr>
   <tr>
     <td>2026-06-02</td>
-    <td>Update API Specification and Sandbox Postman collection, add authorizationReceived to filing header<td>
+    <td>Update API Specification and Sandbox Postman collection, add authorizationReceived to filing header</td>
+  </tr>
+  <tr>
+    <td>2026-11-04</td>
+    <td>Update Sandbox Postman collection: business block on new business filings, resolution dates as objects, continuation in authorization upload through the document service, change of officers, business search, and registration, change of registration, special resolution and firm and cooperative dissolution examples</td>
   </tr>
 </table>
