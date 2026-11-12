@@ -169,4 +169,8 @@ Updates of note to this page are recorded here.
     <td>2026-11-04</td>
     <td>Update Sandbox Postman collection: business block on new business filings, resolution dates as objects, continuation in authorization upload through the document service, change of officers, business search, and registration, change of registration, special resolution and firm and cooperative dissolution examples</td>
   </tr>
+  <tr>
+    <td>2026-11-12</td>
+    <td>Update API Specification: match the Sandbox Postman collection, two-step business creation, filing header rules for API users, resolution dates as objects, document the directors, share classes, resolutions, aliases, tasks, comments and single filing endpoints, remove business search</td>
+  </tr>
 </table>
